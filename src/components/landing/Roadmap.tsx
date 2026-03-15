@@ -11,7 +11,7 @@ export function Roadmap() {
             Integração com portais imobiliários
           </h2>
           <p className="mt-2 text-slate-600">
-            Publicar e gerenciar seus anúncios em portais como OLX e outros
+            Publique e gerencie seus anúncios em portais como OLX e outros
             diretamente pela plataforma — sem duplicar trabalho nem perder leads.
           </p>
         </AnimateIn>

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const WAITLIST_URL = "https://lista.mylarpro.com.br";
+
 const navLinks = [
   { href: "/", label: "Início" },
   { href: "/#funcionalidades", label: "Funcionalidades" },
@@ -39,22 +41,14 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <div className="hidden shrink-0 items-center gap-2 sm:flex md:gap-3">
+        <div className="hidden shrink-0 items-center sm:flex">
           <a
-            href="https://management.mylarpro.com.br/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg border-2 border-[#37B6D6] px-3 py-2 text-sm font-medium text-[#37B6D6] transition hover:bg-[#37B6D6]/10 sm:px-4"
-          >
-            Entrar
-          </a>
-          <a
-            href="https://management.mylarpro.com.br/register"
+            href={WAITLIST_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-[#37B6D6] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#2ea5c4]"
           >
-            Criar conta grátis
+            Solicitar acesso
           </a>
         </div>
         <button
@@ -108,24 +102,15 @@ export function Header() {
                   {link.label}
                 </a>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-slate-200 pt-4">
+              <div className="mt-2 border-t border-slate-200 pt-4">
                 <a
-                  href="https://management.mylarpro.com.br/"
+                  href={WAITLIST_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg border-2 border-[#37B6D6] px-4 py-3 text-center text-sm font-medium text-[#37B6D6] transition hover:bg-[#37B6D6]/10"
+                  className="flex items-center justify-center rounded-lg bg-[#37B6D6] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#2ea5c4]"
                 >
-                  Entrar
-                </a>
-                <a
-                  href="https://management.mylarpro.com.br/register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-lg bg-[#37B6D6] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#2ea5c4]"
-                >
-                  Criar conta grátis
+                  Solicitar acesso
                 </a>
               </div>
             </nav>

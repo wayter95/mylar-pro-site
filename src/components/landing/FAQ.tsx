@@ -4,39 +4,39 @@ import { useState } from "react";
 
 const faqs = [
   {
-    pergunta: "Como faço para criar minha conta?",
+    pergunta: "O que é o Mylar Pro?",
     resposta:
-      "Basta clicar em \"Criar conta grátis\" no site e preencher seus dados. O cadastro é rápido e você pode começar a usar a plataforma em poucos minutos.",
+      "O Mylar Pro é uma plataforma completa de gestão imobiliária que reúne CRM, assinatura eletrônica, cobranças com boleto e PIX, portal de imóveis e portal do cliente — tudo em um só lugar, pensado para o mercado brasileiro.",
   },
   {
-    pergunta: "A plataforma tem custo para começar?",
+    pergunta: "Quando a plataforma estará disponível?",
     resposta:
-      "Não. Você cria sua conta gratuitamente e pode explorar a plataforma. O plano e a assinatura são definidos dentro da própria plataforma, conforme sua necessidade.",
+      "Estamos em fase final de desenvolvimento. Quem entrar na lista de espera terá acesso antecipado e receberá um cupom de desconto exclusivo de lançamento por e-mail.",
   },
   {
     pergunta: "Posso gerenciar vendas e locações?",
     resposta:
-      "Sim. O Mylar Pro tem CRM completo para vendas e locações, pipeline visual, gestão de leads, histórico de interações e controle de visitas. Tudo em um só lugar.",
+      "Sim. O Mylar Pro tem CRM completo para vendas e locações, pipeline visual com Kanban, gestão de leads, histórico de interações e controle de visitas. Tudo em um só lugar.",
   },
   {
     pergunta: "Os contratos podem ser assinados digitalmente?",
     resposta:
-      "Sim. Seus clientes assinam contratos digitalmente pela plataforma, com validação segura e geração de PDF assinado. Sem papel e sem atrasos.",
+      "Sim. A plataforma possui assinatura eletrônica integrada com validade jurídica (Lei 14.063), validação de identidade e geração de PDF assinado. Sem papel, sem scanner, sem depender de plataformas externas.",
   },
   {
     pergunta: "O módulo financeiro emite boleto e PIX?",
     resposta:
-      "Sim. O módulo financeiro está integrado para cobranças com boleto e PIX, além de repasse automático. Cada imobiliária com sua própria conta.",
+      "Sim. O módulo financeiro está integrado para cobranças com boleto e PIX, com reajuste automático por IGP-M, IPCA ou índice fixo, além de repasse automático ao proprietário.",
   },
   {
     pergunta: "Meus dados ficam seguros?",
     resposta:
-      "Sim. Cada imobiliária tem seus dados isolados e protegidos. A plataforma foi desenvolvida com foco em segurança e privacidade.",
+      "Sim. Cada organização tem seus dados completamente isolados e protegidos. A plataforma foi desenvolvida com foco em segurança, privacidade e conformidade com a LGPD.",
   },
   {
-    pergunta: "Haverá integração com portais como OLX?",
+    pergunta: "Para quem é o Mylar Pro?",
     resposta:
-      "Sim. Estamos trabalhando na integração com portais imobiliários para que você possa publicar e gerenciar seus anúncios diretamente pela plataforma. Em breve você terá essa funcionalidade.",
+      "Para imobiliárias que querem profissionalizar a gestão, incorporadoras que precisam controlar empreendimentos e comissões, e corretores autônomos que buscam um CRM completo sem complexidade.",
   },
 ];
 

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "../styles/globals.css";
+
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -15,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Mylar Pro",
   },
   description:
-    "Plataforma completa para imobiliárias e incorporadoras. CRM com Kanban, assinatura eletrônica, boleto e PIX integrados, catálogo público e notificações via WhatsApp. Crie sua conta grátis.",
+    "Plataforma completa para imobiliárias e incorporadoras. CRM com Kanban, assinatura eletrônica, boleto e PIX integrados, portal do cliente e catálogo público de imóveis.",
   keywords: [
     "gestão imobiliária",
     "sistema imobiliário",
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "Mylar Pro",
     title: "Mylar Pro — Gerencie Imóveis, Contratos e Cobranças em Um Só Lugar",
     description:
-      "CRM, assinatura eletrônica, boleto/PIX e catálogo para imobiliárias e incorporadoras. Crie sua conta grátis.",
+      "CRM, assinatura eletrônica, boleto/PIX, portal do cliente e catálogo para imobiliárias e incorporadoras.",
   },
   robots: {
     index: true,
@@ -55,6 +58,39 @@ export default function RootLayout({
         className={`${jakarta.variable} overflow-x-hidden font-sans antialiased`}
         suppressHydrationWarning
       >
+        {/* Meta Pixel Code */}
+        {META_PIXEL_ID && (
+          <>
+            <Script
+              id="meta-pixel"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  !function(f,b,e,v,n,t,s)
+                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(window, document,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  fbq('init', '${META_PIXEL_ID}');
+                  fbq('track', 'PageView');
+                `,
+              }}
+            />
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+                alt=""
+              />
+            </noscript>
+          </>
+        )}
+        {/* End Meta Pixel Code */}
         {children}
       </body>
     </html>

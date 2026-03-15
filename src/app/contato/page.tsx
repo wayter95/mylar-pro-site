@@ -79,12 +79,12 @@ export default function ContatoPage() {
                 </p>
                 <div className="mt-10">
                   <Link
-                    href="https://management.mylarpro.com.br/"
+                    href="https://lista.mylarpro.com.br"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 font-medium text-[#37B6D6] hover:text-[#2ea5c4]"
                   >
-                    Já tem conta? Acessar plataforma
+                    Solicitar acesso antecipado
                     <svg
                       className="h-4 w-4"
                       fill="none"

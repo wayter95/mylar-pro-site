@@ -1,3 +1,5 @@
+const WAITLIST_URL = "https://lista.mylarpro.com.br";
+
 export function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-900 py-8 sm:py-12">
@@ -21,7 +23,7 @@ export function Footer() {
               href="/#personas"
               className="text-sm text-slate-400 transition hover:text-white"
             >
-              Para Incorporadoras
+              Para quem
             </a>
             <a
               href="/contato"
@@ -29,22 +31,14 @@ export function Footer() {
             >
               Contato
             </a>
-            <a
-              href="https://management.mylarpro.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-slate-400 transition hover:text-white"
-            >
-              Acessar Plataforma
-            </a>
           </nav>
           <a
-            href="https://management.mylarpro.com.br/register"
+            href={WAITLIST_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-[#37B6D6] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#2ea5c4]"
           >
-            Criar conta grátis
+            Solicitar acesso
           </a>
         </div>
         <div className="mt-6 border-t border-slate-800 pt-6 text-center text-xs text-slate-500 sm:mt-8 sm:pt-8 sm:text-sm">

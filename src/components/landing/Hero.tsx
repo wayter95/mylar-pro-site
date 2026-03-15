@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+
+const WAITLIST_URL = "https://lista.mylarpro.com.br";
 
 export function Hero() {
   return (
@@ -45,9 +48,9 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-4 text-base text-white/90 sm:mt-6 sm:text-lg"
             >
-              CRM completo, assinatura eletrônica, boleto e PIX integrados e
-              catálogo público para seus imóveis. Tudo com dados isolados por
-              empresa e sem depender de sistemas legados.
+              CRM completo, assinatura eletrônica, boleto e PIX integrados,
+              portal do cliente e catálogo de imóveis. Tudo em uma única
+              plataforma pensada para o mercado imobiliário brasileiro.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -56,19 +59,19 @@ export function Hero() {
               className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
               <a
-                href="https://management.mylarpro.com.br/register"
+                href={WAITLIST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full justify-center rounded-xl bg-white px-8 py-4 text-base font-bold text-[#37B6D6] shadow-xl transition hover:scale-[1.02] hover:bg-white/95 sm:w-auto"
               >
-                Criar conta grátis
+                Solicitar acesso
               </a>
-              <a
+              <Link
                 href="/contato"
                 className="inline-flex w-full justify-center rounded-xl border-2 border-white bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 sm:w-auto"
               >
                 Falar com especialista
-              </a>
+              </Link>
             </motion.div>
             <motion.p
               initial={{ opacity: 0 }}
@@ -76,7 +79,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="mt-6 text-sm text-white/80"
             >
-              Sem cartão de crédito • Setup em 5 minutos • Cancele quando quiser
+              Em breve disponível. Cadastre-se para ser avisado no lançamento.
             </motion.p>
           </div>
 

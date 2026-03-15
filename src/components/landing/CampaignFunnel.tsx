@@ -25,7 +25,7 @@ export function CampaignFunnel() {
               <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/40 ring-1 ring-slate-900/5">
                 <Image
                   src="/images/FUNIL.png"
-                  alt="Funil de campanhas — Mylar Pro"
+                  alt="Pipeline visual de vendas — Mylar Pro"
                   width={1200}
                   height={750}
                   className="w-full object-cover"
@@ -49,18 +49,18 @@ export function CampaignFunnel() {
                 Integração via API
               </motion.span>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                Campanhas e projetos integrados ao seu sistema
+                Campanhas e empreendimentos integrados
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-slate-600">
                 Gerencie campanhas de captação e vendas direto na plataforma.
-                Integre seus empreendimentos e projetos via API — dados
+                Integre empreendimentos e projetos via API — dados
                 sincronizados, sem retrabalho e sem planilhas entre sistemas.
               </p>
               <ul className="mt-8 space-y-4">
                 {[
                   "Gestão de campanhas em um único painel",
                   "Integração direta via API REST",
-                  "Projetos e unidades sincronizados em tempo real",
+                  "Empreendimentos e unidades sincronizados em tempo real",
                 ].map((item, i) => (
                   <motion.li
                     key={i}

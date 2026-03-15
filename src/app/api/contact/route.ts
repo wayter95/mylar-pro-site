@@ -7,6 +7,7 @@ import {
   getContactConfirmationHtml,
   getContactConfirmationText,
 } from "@/lib/email-templates/contact";
+import { sendLeadEvent } from "@/lib/meta-conversions";
 
 // Tempo mínimo para preenchimento (anti-bot)
 const MIN_FORM_TIME_MS = 3000;
@@ -213,6 +214,18 @@ export async function POST(request: Request) {
     };
 
     await sgMail.send([msgToYou, msgToClient]);
+
+    // Meta Conversions API (server-side) — não bloqueia a resposta
+    const userAgent = request.headers.get("user-agent") ?? undefined;
+    const eventSourceUrl = request.headers.get("referer") ?? undefined;
+    sendLeadEvent({
+      email: contactData.email,
+      nome: contactData.nome,
+      telefone: contactData.telefone,
+      eventSourceUrl,
+      userAgent,
+      clientIp: ip,
+    }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch (err) {

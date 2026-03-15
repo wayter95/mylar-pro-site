@@ -14,15 +14,15 @@ const personas = [
     title: "Incorporadoras",
     description:
       "Controle de empreendimentos, vendas por unidade e CRM para equipes de lançamento — em uma plataforma pensada para quem constrói.",
-    cta: "Conhecer a plataforma",
-    href: "https://management.mylarpro.com.br/register",
+    cta: "Ver funcionalidades",
+    href: "/#funcionalidades",
   },
   {
     title: "Corretores Autônomos",
     description:
-      "CRM pessoal com pipeline visual, assinatura de contratos e portal de imóveis para captar clientes — sem mensalidade alta.",
-    cta: "Criar conta grátis",
-    href: "https://management.mylarpro.com.br/register",
+      "CRM pessoal com pipeline visual, assinatura de contratos e portal de imóveis para captar clientes — sem complexidade.",
+    cta: "Ver funcionalidades",
+    href: "/#funcionalidades",
   },
 ];
 
@@ -46,8 +46,6 @@ export function Personas() {
             <AnimateInItem key={i}>
               <a
                 href={p.href}
-                target={p.href.startsWith("http") ? "_blank" : undefined}
-                rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#37B6D6] hover:shadow-lg sm:p-8"
               >
                 <h3 className="text-xl font-bold text-slate-900">{p.title}</h3>

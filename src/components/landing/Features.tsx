@@ -6,9 +6,29 @@ import { AnimateIn, AnimateInStagger, AnimateInItem } from "./AnimateIn";
 export function Features() {
   const features = [
     {
+      title: "CRM Completo com Kanban",
+      description:
+        "Pipeline visual de vendas e locações. Gerencie leads, agende visitas e acompanhe cada negociação do primeiro contato ao fechamento.",
+      icon: (
+        <svg
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+          />
+        </svg>
+      ),
+    },
+    {
       title: "Assinatura Eletrônica",
       description:
-        "Assine contratos direto na plataforma — com validação de identidade, código de confirmação e captura de assinatura. Sem precisar de terceiros.",
+        "Assine contratos direto na plataforma — com validação de identidade, código de confirmação e validade jurídica (Lei 14.063). Sem depender de terceiros.",
       badge: "Diferencial",
       icon: (
         <svg
@@ -27,29 +47,9 @@ export function Features() {
       ),
     },
     {
-      title: "Gestão de Imóveis, Clientes e Agentes",
-      description:
-        "Cadastre imóveis, proprietários e inquilinos. Inclua corretores e vendedores como parceiros, com comissões e acessos controlados. Tudo em um só lugar.",
-      icon: (
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-          />
-        </svg>
-      ),
-    },
-    {
       title: "Cobranças com Reajuste Automático",
       description:
-        "Boleto e PIX integrados, com reajuste automático por IGPM ou IPCA. Controle vencimentos, repasses e receita extra por cobrança.",
+        "Boleto e PIX integrados, com reajuste automático por IGP-M, IPCA ou índice fixo. Controle vencimentos, repasses e comissões por cobrança.",
       icon: (
         <svg
           className="h-6 w-6"
@@ -69,7 +69,7 @@ export function Features() {
     {
       title: "Portal Público de Imóveis",
       description:
-        "Seu catálogo online com busca por mapa interativo. Cada imobiliária tem seu portal próprio, integrado ao CRM.",
+        "Seu catálogo online com busca por mapa interativo. Cada imobiliária tem seu portal próprio, integrado ao CRM e à captação de leads.",
       badge: "Diferencial",
       icon: (
         <svg
@@ -94,9 +94,9 @@ export function Features() {
       ),
     },
     {
-      title: "CRM Completo com Kanban",
+      title: "Gestão de Imóveis, Clientes e Agentes",
       description:
-        "Pipeline visual de vendas e locações. Gerencie leads, agende visitas e acompanhe cada negociação do primeiro contato ao fechamento.",
+        "Cadastre imóveis, proprietários e inquilinos. Inclua corretores como parceiros, com comissões e acessos controlados. Tudo em um só lugar.",
       icon: (
         <svg
           className="h-6 w-6"
@@ -108,15 +108,16 @@ export function Features() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
           />
         </svg>
       ),
     },
     {
-      title: "Notificações via WhatsApp",
+      title: "Portal do Cliente",
       description:
-        "Notificações de cobrança, lembretes de visita e atualizações — enviadas direto pelo WhatsApp, sem intervenção manual.",
+        "Inquilino e proprietário com acesso próprio para faturas, contratos, chamados e manutenção. Menos WhatsApp, mais autonomia.",
+      badge: "Diferencial",
       icon: (
         <svg
           className="h-6 w-6"
@@ -128,7 +129,7 @@ export function Features() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
           />
         </svg>
       ),
@@ -140,11 +141,11 @@ export function Features() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimateIn className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            Funcionalidades que fazem a diferença
+            Tudo que sua imobiliária precisa em um só lugar
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            Tecnologia moderna, diferenciais competitivos e tudo que sua
-            imobiliária precisa em uma única plataforma.
+            Tecnologia moderna, diferenciais competitivos e zero dependência de
+            sistemas legados ou integrações de terceiros.
           </p>
         </AnimateIn>
         <AnimateInStagger
