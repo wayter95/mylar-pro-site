@@ -1,14 +1,15 @@
+import { AntiChaosSection } from "@/components/landing/AntiChaosSection";
+import { CampaignFunnel } from "@/components/landing/CampaignFunnel";
+import { CTA } from "@/components/landing/CTA";
+import { DashboardPreview } from "@/components/landing/DashboardPreview";
+import { Features } from "@/components/landing/Features";
+import { Footer } from "@/components/landing/Footer";
+import { GettingStarted } from "@/components/landing/GettingStarted";
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
-import { DashboardPreview } from "@/components/landing/DashboardPreview";
-import { CampaignFunnel } from "@/components/landing/CampaignFunnel";
-import { Trust } from "@/components/landing/Trust";
-import { Features } from "@/components/landing/Features";
 import { Personas } from "@/components/landing/Personas";
-import { Stats } from "@/components/landing/Stats";
-import { Roadmap } from "@/components/landing/Roadmap";
-import { CTA } from "@/components/landing/CTA";
-import { Footer } from "@/components/landing/Footer";
+import { Newsletter } from "@/components/landing/Newsletter";
+import { Trust } from "@/components/landing/Trust";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -30,13 +31,14 @@ export default function Home() {
       <Header />
       <Hero />
       <DashboardPreview />
+      <Features />
+      <AntiChaosSection />
       <CampaignFunnel />
       <Trust />
-      <Features />
       <Personas />
-      <Stats />
-      <Roadmap />
+      <GettingStarted />
       <CTA />
+      <Newsletter />
       <Footer />
     </main>
   );

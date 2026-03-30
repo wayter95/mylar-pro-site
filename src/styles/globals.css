@@ -3,10 +3,19 @@
 :root {
   --background: #fafafa;
   --foreground: #0f172a;
-  --mylar-blue: #37B6D6;
-  --mylar-blue-dark: #2ea5c4;
+  --mylar-blue: #2facde;
+  --mylar-blue-dark: #2599bb;
+  --mylar-blue-soft: #e7f8fc;
+  --mylar-blue-soft-strong: #d5f2f9;
+  --mylar-blue-rgb: 47, 172, 222;
   --mylar-muted: #64748b;
   --mylar-border: #e2e8f0;
+  --mylar-surface: #f8fafc;
+  --mylar-surface-soft: #eff6ff;
+  --mylar-success: #10b981;
+  --mylar-success-rgb: 16, 185, 129;
+  --mylar-success-soft: #ecfdf5;
+  --mylar-warning: #f7c948;
 }
 
 @theme inline {
@@ -19,10 +28,16 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
+/* Selection color */
+::selection {
+  background: rgba(47, 172, 222, 0.2);
+  color: inherit;
+}

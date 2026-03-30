@@ -1,55 +1,91 @@
-const WAITLIST_URL = "https://lista.mylarpro.com.br";
+import Image from "next/image";
+
+const REGISTER_URL = "https://app.mylarpro.com.br/register";
+
+const navGroups = [
+  {
+    title: "Plataforma",
+    links: [
+      { label: "Funcionalidades", href: "/#funcionalidades" },
+      { label: "Para quem", href: "/#personas" },
+    ],
+  },
+  {
+    title: "Empresa",
+    links: [
+      { label: "Contato", href: "/contato" },
+    ],
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-900 py-8 sm:py-12">
+    <footer className="border-t border-slate-800 bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-          <div className="flex items-center gap-2">
-            <img
+        <div className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr_auto] lg:gap-8">
+          {/* Brand */}
+          <div className="max-w-xs">
+            <Image
               src="/images/logo-white.svg"
               alt="Mylar Pro"
+              width={120}
+              height={32}
               className="h-8 w-auto"
             />
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+              Plataforma completa de gestao imobiliaria para imobiliarias,
+              construtoras e incorporadoras.
+            </p>
           </div>
-          <nav className="flex flex-wrap justify-center gap-6">
+
+          {/* Nav groups */}
+          {navGroups.map((group) => (
+            <div key={group.title}>
+              <h4 className="text-xs font-semibold tracking-[0.15em] text-slate-500 uppercase">
+                {group.title}
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-slate-400 transition hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* CTA */}
+          <div className="flex flex-col items-start gap-4">
             <a
-              href="/#funcionalidades"
-              className="text-sm text-slate-400 transition hover:text-white"
+              href={REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl bg-[#2facde] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2599bb]"
             >
-              Funcionalidades
+              Criar conta gratis
             </a>
             <a
-              href="/#personas"
+              href="https://app.mylarpro.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-slate-400 transition hover:text-white"
             >
-              Para quem
+              Acessar plataforma
             </a>
-            <a
-              href="/contato"
-              className="text-sm text-slate-400 transition hover:text-white"
-            >
-              Contato
-            </a>
-          </nav>
-          <a
-            href={WAITLIST_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg bg-[#37B6D6] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#2ea5c4]"
-          >
-            Solicitar acesso
-          </a>
+          </div>
         </div>
-        <div className="mt-6 border-t border-slate-800 pt-6 text-center text-xs text-slate-500 sm:mt-8 sm:pt-8 sm:text-sm">
-          <p>
-            © {new Date().getFullYear()} Mylar Pro. Todos os direitos reservados.
+
+        {/* Bottom bar */}
+        <div className="border-t border-slate-800/80 py-6 text-center">
+          <p className="text-xs text-slate-500">
+            &copy; {new Date().getFullYear()} Mylar Pro. Todos os direitos
+            reservados. CNPJ: 54.865.990/0001-50
           </p>
-          <p className="mt-1">
-            Plataforma de Gestão Imobiliária — Imobiliárias, Construtoras e
-            Incorporadoras
-          </p>
-          <p className="mt-1">CNPJ: 54.865.990/0001-50</p>
         </div>
       </div>
     </footer>

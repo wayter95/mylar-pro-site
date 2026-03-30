@@ -1,132 +1,125 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import { DashboardMockup } from "./DashboardMockup";
 
-const WAITLIST_URL = "https://lista.mylarpro.com.br";
+const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-      {/* BACKGROUND.png como fundo de toda a seção — sem overlay */}
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/images/BACKGROUND.png"
-          alt=""
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
+    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28">
+      {/* Background gradient mesh */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+        <div className="absolute -top-1/4 right-0 h-[600px] w-[800px] rounded-full bg-[#2facde]/8 blur-[120px]" />
+        <div className="absolute -bottom-1/4 left-0 h-[400px] w-[600px] rounded-full bg-[#2facde]/5 blur-[100px]" />
+        <div className="absolute top-1/3 left-1/4 h-[300px] w-[300px] rounded-full bg-indigo-600/5 blur-[80px]" />
+        {/* Dot grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[55%_45%] lg:gap-16">
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:items-center">
+          {/* Text */}
           <div>
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-4 inline-block rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm sm:px-4 sm:text-sm"
+              transition={{ duration: 0.45 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold tracking-[0.14em] text-white/70 uppercase backdrop-blur-sm sm:text-xs"
             >
-              Plataforma para imobiliárias e incorporadoras
+              <span className="size-1.5 animate-pulse rounded-full bg-[#2facde]" />
+              Plataforma all-in-one
             </motion.span>
+
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl"
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="mt-6 text-4xl leading-[1.05] font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
             >
-              Gerencie imóveis, contratos e cobranças em um só lugar — e feche
-              negócios{" "}
-              <span className="text-[#37B6D6]">mais rápido</span>
+              Tudo que sua
+              <br />
+              imobiliária precisa.
+              <br />
+              <span className="bg-gradient-to-r from-[#2facde] to-[#37d6c0] bg-clip-text text-transparent">
+                Em uma só plataforma.
+              </span>
             </motion.h1>
+
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 text-base text-white/90 sm:mt-6 sm:text-lg"
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
             >
-              CRM completo, assinatura eletrônica, boleto e PIX integrados,
-              portal do cliente e catálogo de imóveis. Tudo em uma única
-              plataforma pensada para o mercado imobiliário brasileiro.
+              Chega de gerenciar o caos de ferramentas desconectadas. CRM,
+              assinatura eletrônica, cobranças, portal do cliente e catálogo
+              de imóveis em uma janela única.
             </motion.p>
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-10 flex flex-col gap-4 sm:flex-row"
+              transition={{ duration: 0.55, delay: 0.3 }}
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
               <a
-                href={WAITLIST_URL}
+                href={REGISTER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full justify-center rounded-xl bg-white px-8 py-4 text-base font-bold text-[#37B6D6] shadow-xl transition hover:scale-[1.02] hover:bg-white/95 sm:w-auto"
+                className="group inline-flex w-full justify-center rounded-xl bg-[#2facde] px-7 py-3.5 text-base font-semibold text-white shadow-[0_14px_28px_-12px_rgba(47,172,222,0.4)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_36px_-12px_rgba(47,172,222,0.5)] sm:w-auto"
               >
-                Solicitar acesso
+                Criar conta gratis
+                <svg viewBox="0 0 20 20" fill="currentColor" className="ml-2 size-5 transition-transform group-hover:translate-x-0.5">
+                  <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                </svg>
               </a>
               <Link
                 href="/contato"
-                className="inline-flex w-full justify-center rounded-xl border-2 border-white bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 sm:w-auto"
+                className="inline-flex w-full justify-center rounded-xl border border-slate-600 bg-white/5 px-7 py-3.5 text-base font-semibold text-slate-300 backdrop-blur-sm transition hover:border-slate-500 hover:bg-white/10 sm:w-auto"
               >
                 Falar com especialista
               </Link>
             </motion.div>
-            <motion.p
+
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-6 text-sm text-white/80"
+              className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500"
             >
-              Em breve disponível. Cadastre-se para ser avisado no lançamento.
-            </motion.p>
+              {["Sem taxa de adesao", "Setup em minutos", "Suporte humano"].map((item) => (
+                <span key={item} className="flex items-center gap-1.5">
+                  <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5 text-[#2facde]/60">
+                    <path fillRule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm3.44-8.56a.75.75 0 00-1.06-1.06L7 8.76 5.53 7.28a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  {item}
+                </span>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Espaço reservado para imagens — apenas em telas grandes */}
-          <div className="hidden min-h-0 lg:block lg:min-h-[400px]" aria-hidden />
+          {/* Dashboard preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative"
+          >
+            {/* Glow behind the mockup */}
+            <div className="pointer-events-none absolute -inset-8 rounded-3xl bg-[#2facde]/10 blur-3xl" />
+            <DashboardMockup className="relative" />
+          </motion.div>
         </div>
       </div>
-      {/* Imagens no bottom da section — visíveis apenas em telas grandes */}
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute bottom-0 right-0 left-0 z-10 hidden justify-end px-4 sm:px-6 lg:flex lg:px-8"
-      >
-        <div className="relative mx-auto flex w-full max-w-7xl justify-end">
-          <div className="relative flex items-end justify-end">
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-              className="relative z-0"
-            >
-              <Image
-                src="/images/plan.png"
-                alt="Plataforma de gestão imobiliária"
-                width={500}
-                height={380}
-                className="h-auto w-full max-w-[320px] object-contain object-bottom drop-shadow-xl md:max-w-[400px] lg:max-w-[460px]"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.85 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
-              className="absolute bottom-0 right-0 z-10"
-            >
-              <Image
-                src="/images/modelo.png"
-                alt="Profissional utilizando a plataforma"
-                width={340}
-                height={420}
-                className="h-auto w-[200px] object-contain object-bottom drop-shadow-2xl md:w-[260px] lg:w-[300px]"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }
