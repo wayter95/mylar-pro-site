@@ -42,6 +42,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Origin check (skip em dev)
+    const siteUrl = process.env.SITE_URL;
+    const isDev = process.env.NODE_ENV === "development";
+    if (siteUrl && !isDev) {
+      const origin = req.headers.get("origin") || req.headers.get("referer");
+      if (!origin) {
+        return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+      }
+      try {
+        const reqHost = new URL(origin).hostname.replace(/^www\./, "");
+        const allowedHost = new URL(siteUrl).hostname.replace(/^www\./, "");
+        if (reqHost !== allowedHost) {
+          return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+        }
+      } catch {
+        return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+      }
+    }
+
     const body = await req.json();
 
     const { Email, Nome, Sobrenome, _honeypot, _t } = body as {
