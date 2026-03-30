@@ -47,7 +47,7 @@ const plans = [
       "API completa",
     ],
     cta: "Falar com vendas",
-    href: "/contato",
+    href: "/contact",
     external: false,
   },
   {
@@ -62,7 +62,7 @@ const plans = [
       "Ambiente dedicado",
     ],
     cta: "Contato comercial",
-    href: "/contato",
+    href: "/contact",
     external: false,
   },
 ];

@@ -51,7 +51,7 @@ export function CTA() {
                 </svg>
               </a>
               <a
-                href="/contato"
+                href="/contact"
                 className="inline-flex w-full justify-center rounded-xl border border-slate-600 bg-white/5 px-8 py-4 text-base font-semibold text-slate-300 backdrop-blur-sm transition hover:border-slate-500 hover:bg-white/10 sm:w-auto"
               >
                 Falar com especialista

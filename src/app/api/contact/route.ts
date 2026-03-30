@@ -81,9 +81,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Origin/Referer: request deve vir do próprio site
+    // Origin/Referer: request deve vir do próprio site (skip em dev)
     const siteUrl = process.env.SITE_URL;
-    if (siteUrl) {
+    const isDev = process.env.NODE_ENV === "development";
+    if (siteUrl && !isDev) {
       const origin = request.headers.get("origin") || request.headers.get("referer");
       if (!origin) {
         return NextResponse.json(
@@ -92,9 +93,9 @@ export async function POST(request: Request) {
         );
       }
       try {
-        const reqOrigin = new URL(origin).origin;
-        const allowedOrigin = new URL(siteUrl).origin;
-        if (reqOrigin !== allowedOrigin) {
+        const reqHost = new URL(origin).hostname.replace(/^www\./, "");
+        const allowedHost = new URL(siteUrl).hostname.replace(/^www\./, "");
+        if (reqHost !== allowedHost) {
           return NextResponse.json(
             { error: "Requisição inválida." },
             { status: 400 }

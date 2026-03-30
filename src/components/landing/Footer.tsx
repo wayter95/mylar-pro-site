@@ -13,7 +13,7 @@ const navGroups = [
   {
     title: "Empresa",
     links: [
-      { label: "Contato", href: "/contato" },
+      { label: "Contato", href: "/contact" },
     ],
   },
 ];
