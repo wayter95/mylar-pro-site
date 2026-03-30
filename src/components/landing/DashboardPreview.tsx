@@ -8,9 +8,9 @@ import { SectionHeader } from "./SectionHeader";
 const steps = [
   {
     title: "Lead Unificado",
-    description: "Captacao automatica sem digitar de novo.",
+    description: "Captação automática sem digitar de novo.",
     statusDetail:
-      "Leads de portais, site e campanhas entram na base unica, sem planilhas.",
+      "Leads de portais, site e campanhas entram na base única, sem planilhas.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <circle cx="14" cy="14" r="11" fill="currentColor" opacity="0.1" />
@@ -23,7 +23,7 @@ const steps = [
     title: "Omnichannel",
     description: "WhatsApp nativo sem limites.",
     statusDetail:
-      "Atendimento e historico no mesmo CRM: sem integracoes frageis nem custo extra.",
+      "Atendimento e histórico no mesmo CRM: sem integrações frágeis nem custo extra.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <path d="M14 24c5.5 0 10-4.5 10-10S19.5 4 14 4 4 8.5 4 14c0 2 .6 3.9 1.6 5.4L4 24l4.6-1.6c1.5 1 3.4 1.6 5.4 1.6z" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="1.5" />
@@ -35,7 +35,7 @@ const steps = [
     title: "Fechamento",
     description: "Assinatura digital sem taxas extras.",
     statusDetail:
-      "Contrato com assinatura nativa: sem surpresa de terceiros nem cobranca por envio.",
+      "Contrato com assinatura nativa: sem surpresa de terceiros nem cobrança por envio.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <rect x="5" y="3" width="18" height="22" rx="2" fill="currentColor" opacity="0.1" />
@@ -45,10 +45,10 @@ const steps = [
     ),
   },
   {
-    title: "Conciliacao",
-    description: "Adeus a conferencia manual.",
+    title: "Conciliação",
+    description: "Adeus à conferência manual.",
     statusDetail:
-      "Cobrancas, baixas e conciliacao acompanham o fluxo real — sem conferencia linha a linha.",
+      "Cobranças, baixas e conciliação acompanham o fluxo real — sem conferência linha a linha.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <rect x="3" y="6" width="22" height="16" rx="2" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="1.5" />
@@ -60,9 +60,9 @@ const steps = [
   },
   {
     title: "Repasse",
-    description: "Dinheiro na conta da imobiliaria.",
+    description: "Dinheiro na conta da imobiliária.",
     statusDetail:
-      "Repasse automatico ao proprietario com demonstrativo. Caixa visivel em tempo real.",
+      "Repasse automático ao proprietário com demonstrativo. Caixa visível em tempo real.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <circle cx="14" cy="14" r="11" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="1.5" />
@@ -120,9 +120,9 @@ export function DashboardPreview() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Workflow Anti-Caos"
-          title="A Solucao para o"
+          title="A Solução para o"
           highlight="Fluxo Fragmentado."
-          description="Nao aceite mais sistemas que fingem integracao. Um ciclo perfeito, centralizado e transparente."
+          description="Não aceite mais sistemas que fingem integração. Um ciclo perfeito, centralizado e transparente."
         />
 
         <div
@@ -376,7 +376,7 @@ export function DashboardPreview() {
                       </svg>
                     </motion.div>
                     <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-emerald-600">
-                      Repasse concluido
+                      Repasse concluído
                     </p>
                   </div>
 
@@ -407,7 +407,7 @@ export function DashboardPreview() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
                   >
-                    Depositado na conta da imobiliaria
+                    Depositado na conta da imobiliária
                   </motion.p>
 
                   {/* Mini receipt lines */}
@@ -427,7 +427,7 @@ export function DashboardPreview() {
                       <svg viewBox="0 0 12 12" fill="currentColor" className="size-2.5">
                         <circle cx="6" cy="6" r="5" />
                       </svg>
-                      3 proprietarios
+                      3 proprietários
                     </span>
                     <span className="flex items-center gap-1">
                       <svg viewBox="0 0 12 12" fill="currentColor" className="size-2.5">

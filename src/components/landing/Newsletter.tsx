@@ -23,7 +23,7 @@ export function Newsletter() {
               Fique por dentro das novidades
             </h3>
             <p className="mt-3 max-w-lg text-base leading-relaxed text-slate-600">
-              Receba conteudos exclusivos, dicas para sua imobiliaria e
+              Receba conteúdos exclusivos, dicas para sua imobiliária e
               novidades da plataforma direto no seu e-mail.
             </p>
           </AnimateIn>

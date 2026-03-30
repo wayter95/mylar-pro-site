@@ -9,7 +9,7 @@ const APP_URL = "https://app.mylarpro.com.br";
 const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
 const navLinks = [
-  { href: "/", label: "Inicio", exact: true },
+  { href: "/", label: "Início", exact: true },
   { href: "/#funcionalidades", label: "Funcionalidades" },
   { href: "/#personas", label: "Para quem" },
   { href: "/contact", label: "Contato" },
@@ -261,7 +261,7 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#2facde] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#2599bb]"
                 >
-                  Criar conta gratis
+                  Criar conta grátis
                   <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5">
                     <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
                   </svg>

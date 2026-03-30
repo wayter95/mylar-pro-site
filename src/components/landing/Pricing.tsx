@@ -8,27 +8,27 @@ const plans = [
   {
     name: "Starter",
     price: "179",
-    description: "Para pequenas imobiliarias e profissionais autonomos",
+    description: "Para pequenas imobiliárias e profissionais autônomos",
     features: [
-      "Ate 50 imoveis",
-      "Ate 3 usuarios",
-      "Todos os modulos basicos",
-      "Portal de imoveis",
+      "Até 50 imóveis",
+      "Até 3 usuários",
+      "Todos os módulos básicos",
+      "Portal de imóveis",
     ],
-    cta: "Comecar agora",
+    cta: "Começar agora",
     href: "https://app.mylarpro.com.br/register",
     external: true,
   },
   {
     name: "Professional",
     price: "449",
-    description: "Para imobiliarias em crescimento",
+    description: "Para imobiliárias em crescimento",
     features: [
-      "Ate 200 imoveis",
-      "Ate 10 usuarios",
-      "Suporte prioritario",
-      "Integracao completa",
-      "Assinatura eletronica",
+      "Até 200 imóveis",
+      "Até 10 usuários",
+      "Suporte prioritário",
+      "Integração completa",
+      "Assinatura eletrônica",
     ],
     cta: "Mais popular",
     href: "https://app.mylarpro.com.br/register",
@@ -38,11 +38,11 @@ const plans = [
   {
     name: "Business",
     price: "899",
-    description: "Para redes de imobiliarias",
+    description: "Para redes de imobiliárias",
     features: [
-      "Ate 600 imoveis",
-      "Ate 30 usuarios",
-      "Integracoes avancadas",
+      "Até 600 imóveis",
+      "Até 30 usuários",
+      "Integrações avançadas",
       "Onboarding dedicado",
       "API completa",
     ],
@@ -55,8 +55,8 @@ const plans = [
     price: "2.200+",
     description: "Para construtoras e incorporadoras",
     features: [
-      "Imoveis ilimitados",
-      "Usuarios ilimitados",
+      "Imóveis ilimitados",
+      "Usuários ilimitados",
       "SLA garantido",
       "Suporte 24/7",
       "Ambiente dedicado",
@@ -76,9 +76,9 @@ export function Pricing() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Planos"
-          title="Para cada estagio"
-          highlight="do seu negocio."
-          description="Sem taxa de adesao. Cancele quando quiser. Comece pequeno e escale."
+          title="Para cada estágio"
+          highlight="do seu negócio."
+          description="Sem taxa de adesão. Cancele quando quiser. Comece pequeno e escale."
         />
 
         <AnimateInStagger
@@ -116,7 +116,7 @@ export function Pricing() {
                   <span className="ml-1 text-4xl font-extrabold tracking-tight text-slate-900">
                     {plan.price}
                   </span>
-                  <span className="ml-1.5 text-sm text-slate-400">/mes</span>
+                  <span className="ml-1.5 text-sm text-slate-400">/mês</span>
                 </div>
 
                 <ul className="mt-6 flex-1 space-y-3">
@@ -148,7 +148,7 @@ export function Pricing() {
         </AnimateInStagger>
 
         <p className="mt-8 text-center text-sm text-slate-400">
-          Receita adicional: R$ 1,50 por cobranca emitida no modulo financeiro
+          Receita adicional: R$ 1,50 por cobrança emitida no módulo financeiro
         </p>
       </div>
     </section>

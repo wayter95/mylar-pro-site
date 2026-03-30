@@ -179,7 +179,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
             <div>
               <p className="font-bold text-slate-900">Tudo certo!</p>
               <p className="text-sm text-slate-500">
-                Voce recebera novidades e conteudos exclusivos no seu e-mail.
+                Você receberá novidades e conteúdos exclusivos no seu e-mail.
               </p>
             </div>
           </motion.div>

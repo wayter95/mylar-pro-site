@@ -23,7 +23,7 @@ const contactInfo = [
   },
   {
     label: "Resposta",
-    value: "Ate 24 horas uteis",
+    value: "Até 24 horas úteis",
     icon: (
       <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clipRule="evenodd" />
@@ -31,7 +31,7 @@ const contactInfo = [
     ),
   },
   {
-    label: "Localizacao",
+    label: "Localização",
     value: "Brasil — 100% remoto",
     icon: (
       <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
@@ -122,12 +122,12 @@ export default function ContatoPage() {
               Como podemos
               <br />
               <span className="bg-gradient-to-r from-[#2facde] to-[#37d6c0] bg-clip-text text-transparent">
-                ajudar voce?
+                ajudar você?
               </span>
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-400">
-              Tire duvidas, solicite uma demonstracao ou fale sobre parcerias.
-              Nossa equipe responde em ate 24 horas.
+              Tire dúvidas, solicite uma demonstração ou fale sobre parcerias.
+              Nossa equipe responde em até 24 horas.
             </p>
           </motion.div>
         </div>
@@ -147,9 +147,9 @@ export default function ContatoPage() {
                 Vamos conversar
               </h2>
               <p className="mt-3 leading-relaxed text-slate-600">
-                Seja para conhecer a plataforma, tirar duvidas tecnicas ou
+                Seja para conhecer a plataforma, tirar dúvidas técnicas ou
                 discutir uma parceria — estamos aqui para ajudar sua
-                imobiliaria a dar o proximo passo.
+                imobiliária a dar o próximo passo.
               </p>
 
               {/* Contact details */}
@@ -186,7 +186,7 @@ export default function ContatoPage() {
                   Quer conhecer a plataforma agora?
                 </p>
                 <p className="mt-1 text-sm text-slate-500">
-                  Crie sua conta gratuita e explore todos os modulos sem
+                  Crie sua conta gratuita e explore todos os módulos sem
                   compromisso.
                 </p>
                 <a
@@ -195,7 +195,7 @@ export default function ContatoPage() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#2facde] transition hover:gap-3"
                 >
-                  Criar conta gratis
+                  Criar conta grátis
                   <svg viewBox="0 0 16 16" fill="currentColor" className="size-4">
                     <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
                   </svg>
@@ -241,8 +241,8 @@ export default function ContatoPage() {
                       Mensagem enviada!
                     </h3>
                     <p className="mt-2 max-w-sm text-sm text-slate-500">
-                      Recebemos sua mensagem e retornaremos em ate 24 horas
-                      uteis. Fique de olho no seu e-mail.
+                      Recebemos sua mensagem e retornaremos em até 24 horas
+                      úteis. Fique de olho no seu e-mail.
                     </p>
                     <button
                       type="button"
@@ -322,7 +322,7 @@ export default function ContatoPage() {
                             type="text"
                             id="ct-empresa"
                             name="empresa"
-                            placeholder="Nome da imobiliaria"
+                            placeholder="Nome da imobiliária"
                             className={`mt-1.5 ${inputBase}`}
                           />
                         </div>
@@ -354,7 +354,7 @@ export default function ContatoPage() {
                           className={`mt-1.5 resize-none ${inputBase}`}
                         />
                         <p className="mt-1 text-[11px] text-slate-400">
-                          Max. 2.000 caracteres. Nao inclua links.
+                          Max. 2.000 caracteres. Não inclua links.
                         </p>
                       </div>
 
@@ -422,7 +422,7 @@ export default function ContatoPage() {
                 Perguntas frequentes
               </h2>
               <p className="mt-3 text-slate-600">
-                Respostas rapidas para as duvidas mais comuns.
+                Respostas rápidas para as dúvidas mais comuns.
               </p>
             </motion.div>
             <FAQ />

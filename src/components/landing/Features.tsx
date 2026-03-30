@@ -8,7 +8,7 @@ const features = [
   {
     title: "CRM com Kanban",
     description:
-      "Pipeline visual de vendas e locacoes. Gerencie leads, agende visitas e acompanhe cada negociacao do primeiro contato ao fechamento.",
+      "Pipeline visual de vendas e locações. Gerencie leads, agende visitas e acompanhe cada negociação do primeiro contato ao fechamento.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <rect x="2" y="4" width="7" height="20" rx="1.5" fill="currentColor" opacity="0.3" />
@@ -18,9 +18,9 @@ const features = [
     ),
   },
   {
-    title: "Assinatura Eletronica",
+    title: "Assinatura Eletrônica",
     description:
-      "Assine contratos direto na plataforma com validacao de identidade, codigo de confirmacao e validade juridica (Lei 14.063).",
+      "Assine contratos direto na plataforma com validação de identidade, código de confirmação e validade jurídica (Lei 14.063).",
     badge: "Diferencial",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
@@ -31,9 +31,9 @@ const features = [
     ),
   },
   {
-    title: "Cobrancas Integradas",
+    title: "Cobranças Integradas",
     description:
-      "Boleto e PIX integrados com reajuste automatico por IGP-M, IPCA ou indice fixo. Repasses e comissoes por cobranca.",
+      "Boleto e PIX integrados com reajuste automático por IGP-M, IPCA ou índice fixo. Repasses e comissões por cobrança.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <rect x="2" y="7" width="24" height="16" rx="3" fill="currentColor" opacity="0.15" />
@@ -45,9 +45,9 @@ const features = [
     ),
   },
   {
-    title: "Portal de Imoveis",
+    title: "Portal de Imóveis",
     description:
-      "Catalogo online com busca por mapa interativo. Cada imobiliaria tem seu portal proprio, integrado ao CRM e captacao de leads.",
+      "Catálogo online com busca por mapa interativo. Cada imobiliária tem seu portal próprio, integrado ao CRM e captação de leads.",
     badge: "Diferencial",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
@@ -59,9 +59,9 @@ const features = [
     ),
   },
   {
-    title: "Gestao Completa",
+    title: "Gestão Completa",
     description:
-      "Cadastre imoveis, proprietarios e inquilinos. Inclua corretores como parceiros, com comissoes e acessos controlados.",
+      "Cadastre imóveis, proprietários e inquilinos. Inclua corretores como parceiros, com comissões e acessos controlados.",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
         <rect x="4" y="2" width="20" height="24" rx="2" fill="currentColor" opacity="0.1" />
@@ -74,7 +74,7 @@ const features = [
   {
     title: "Portal do Cliente",
     description:
-      "Inquilino e proprietario com acesso proprio para faturas, contratos, chamados e manutencao. Menos WhatsApp, mais autonomia.",
+      "Inquilino e proprietário com acesso próprio para faturas, contratos, chamados e manutenção. Menos WhatsApp, mais autonomia.",
     badge: "Diferencial",
     icon: (
       <svg viewBox="0 0 28 28" fill="none" className="size-7">
@@ -91,14 +91,14 @@ export function Features() {
   return (
     <section
       id="funcionalidades"
-      className="border-t border-slate-200 bg-white py-16 lg:py-24"
+      className="relative border-t border-slate-100 bg-gradient-to-b from-slate-50/80 to-white py-16 lg:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Funcionalidades"
-          title="Tudo que sua imobiliaria precisa"
-          highlight="em um so lugar."
-          description="Tecnologia moderna, diferenciais competitivos e zero dependencia de sistemas legados ou integracoes frageis."
+          title="Tudo que sua imobiliária precisa"
+          highlight="em um só lugar."
+          description="Tecnologia moderna, diferenciais competitivos e zero dependência de sistemas legados ou integrações frágeis."
         />
 
         <AnimateInStagger

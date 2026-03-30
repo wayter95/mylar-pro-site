@@ -6,9 +6,9 @@ import { SectionHeader } from "./SectionHeader";
 
 const personas = [
   {
-    title: "Imobiliarias",
+    title: "Imobiliárias",
     description:
-      "Gestao completa da sua carteira de vendas e locacoes com CRM, contratos, cobrancas e catalogo online — tudo integrado.",
+      "Gestão completa da sua carteira de vendas e locações com CRM, contratos, cobranças e catálogo online — tudo integrado.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" className="size-8">
         <rect x="4" y="8" width="24" height="20" rx="2" fill="currentColor" opacity="0.15" />
@@ -17,14 +17,14 @@ const personas = [
         <path d="M16 2l-12 6h24l-12-6z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     ),
-    features: ["CRM + Kanban", "Assinatura digital", "Portal de imoveis"],
+    features: ["CRM + Kanban", "Assinatura digital", "Portal de imóveis"],
     gradient: "from-blue-500/10 to-cyan-500/10",
     borderHover: "hover:border-blue-400/40",
   },
   {
     title: "Incorporadoras",
     description:
-      "Controle de empreendimentos, vendas por unidade e CRM para equipes de lancamento em uma plataforma pensada para quem constroi.",
+      "Controle de empreendimentos, vendas por unidade e CRM para equipes de lançamento em uma plataforma pensada para quem constrói.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" className="size-8">
         <rect x="6" y="4" width="10" height="24" rx="1" fill="currentColor" opacity="0.15" />
@@ -34,14 +34,14 @@ const personas = [
         <path d="M8 8h2v2H8zM12 8h2v2h-2zM8 13h2v2H8zM12 13h2v2h-2zM19 14h2v2h-2zM23 14h2v2h-2zM19 19h2v2h-2z" fill="currentColor" opacity="0.4" />
       </svg>
     ),
-    features: ["Gestao por unidade", "Comissoes automaticas", "API de integracao"],
+    features: ["Gestão por unidade", "Comissões automáticas", "API de integração"],
     gradient: "from-purple-500/10 to-pink-500/10",
     borderHover: "hover:border-purple-400/40",
   },
   {
-    title: "Corretores Autonomos",
+    title: "Corretores Autônomos",
     description:
-      "CRM pessoal com pipeline visual, assinatura de contratos e portal de imoveis para captar clientes sem complexidade.",
+      "CRM pessoal com pipeline visual, assinatura de contratos e portal de imóveis para captar clientes sem complexidade.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" className="size-8">
         <circle cx="16" cy="12" r="6" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" />
@@ -49,7 +49,7 @@ const personas = [
         <path d="M22 10l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    features: ["Pipeline pessoal", "Sem complexidade", "Catalogo proprio"],
+    features: ["Pipeline pessoal", "Sem complexidade", "Catálogo próprio"],
     gradient: "from-emerald-500/10 to-teal-500/10",
     borderHover: "hover:border-emerald-400/40",
   },
@@ -63,9 +63,9 @@ export function Personas() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Para quem e"
+          title="Para quem é"
           highlight="o Mylar Pro?"
-          description="Uma plataforma que se adapta a cada perfil do mercado imobiliario."
+          description="Uma plataforma que se adapta a cada perfil do mercado imobiliário."
         />
 
         <AnimateInStagger

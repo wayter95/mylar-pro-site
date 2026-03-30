@@ -6,7 +6,7 @@ import { SectionHeader } from "./SectionHeader";
 const highlights = [
   {
     label: "Dados isolados por empresa",
-    description: "Multi-tenant com isolamento total entre organizacoes",
+    description: "Multi-tenant com isolamento total entre organizações",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="size-6">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -27,7 +27,7 @@ const highlights = [
   },
   {
     label: "Servidores no Brasil",
-    description: "Baixa latencia e conformidade com legislacao local",
+    description: "Baixa latência e conformidade com legislação local",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="size-6">
         <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="1.5" />
@@ -36,7 +36,7 @@ const highlights = [
     ),
   },
   {
-    label: "Stack moderna e rapida",
+    label: "Stack moderna e rápida",
     description: "NestJS, React, PostgreSQL e infraestrutura cloud",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="size-6">
@@ -57,9 +57,9 @@ export function Trust() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Construido com seguranca"
+          title="Construído com segurança"
           highlight="e performance."
-          description="Infraestrutura pensada para proteger seus dados e acelerar sua operacao."
+          description="Infraestrutura pensada para proteger seus dados e acelerar sua operação."
           dark
         />
 

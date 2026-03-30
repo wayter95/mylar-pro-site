@@ -77,7 +77,7 @@ export function Hero() {
                 rel="noopener noreferrer"
                 className="group inline-flex w-full justify-center rounded-xl bg-[#2facde] px-7 py-3.5 text-base font-semibold text-white shadow-[0_14px_28px_-12px_rgba(47,172,222,0.4)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_36px_-12px_rgba(47,172,222,0.5)] sm:w-auto"
               >
-                Criar conta gratis
+                Criar conta grátis
                 <svg viewBox="0 0 20 20" fill="currentColor" className="ml-2 size-5 transition-transform group-hover:translate-x-0.5">
                   <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
@@ -96,7 +96,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500"
             >
-              {["Sem taxa de adesao", "Setup em minutos", "Suporte humano"].map((item) => (
+              {["Sem taxa de adesão", "Setup em minutos", "Suporte humano"].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5 text-[#2facde]/60">
                     <path fillRule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm3.44-8.56a.75.75 0 00-1.06-1.06L7 8.76 5.53 7.28a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4-4z" clipRule="evenodd" />

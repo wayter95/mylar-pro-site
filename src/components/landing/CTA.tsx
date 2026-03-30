@@ -8,7 +8,7 @@ const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden border-t border-slate-200 bg-slate-950 py-20 sm:py-28">
+    <section className="relative overflow-hidden border-t border-white/[0.04] bg-slate-950 py-20 sm:py-28">
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-1/2 left-1/4 h-[600px] w-[600px] rounded-full bg-[#2facde]/8 blur-[120px]" />
@@ -30,7 +30,7 @@ export function CTA() {
               Pronto para modernizar
               <br />
               <span className="bg-gradient-to-r from-[#2facde] to-[#37d6c0] bg-clip-text text-transparent">
-                sua operacao imobiliaria?
+                sua operação imobiliária?
               </span>
             </h2>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-slate-400">
@@ -45,7 +45,7 @@ export function CTA() {
                 rel="noopener noreferrer"
                 className="group inline-flex w-full justify-center rounded-xl bg-[#2facde] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_28px_-12px_rgba(47,172,222,0.4)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_36px_-12px_rgba(47,172,222,0.5)] sm:w-auto"
               >
-                Criar conta gratis
+                Criar conta grátis
                 <svg viewBox="0 0 20 20" fill="currentColor" className="ml-2 size-5 transition-transform group-hover:translate-x-0.5">
                   <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
@@ -58,7 +58,7 @@ export function CTA() {
               </a>
             </div>
             <p className="mt-5 text-sm text-slate-500">
-              Demonstracao personalizada: veja como substituimos seus 5 sistemas atuais.
+              Demonstração personalizada: veja como substituímos seus 5 sistemas atuais.
             </p>
           </AnimateIn>
 

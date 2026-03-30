@@ -33,7 +33,7 @@ export function Footer() {
               className="h-8 w-auto"
             />
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              Plataforma completa de gestao imobiliaria para imobiliarias,
+              Plataforma completa de gestão imobiliária para imobiliárias,
               construtoras e incorporadoras.
             </p>
           </div>
@@ -67,7 +67,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="rounded-xl bg-[#2facde] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2599bb]"
             >
-              Criar conta gratis
+              Criar conta grátis
             </a>
             <a
               href="https://app.mylarpro.com.br"
