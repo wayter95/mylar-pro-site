@@ -16,13 +16,23 @@ const navGroups = [
       { label: "Contato", href: "/contact" },
     ],
   },
+  {
+    title: "Legal",
+    links: [
+      {
+        label: "Política de Privacidade (App)",
+        href: "/brokers/privacy-policy",
+      },
+      { label: "Termos de Uso (App)", href: "/brokers/terms-of-use" },
+    ],
+  },
 ];
 
 export function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr_auto] lg:gap-8">
+        <div className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr_1fr_auto] lg:gap-8">
           {/* Brand */}
           <div className="max-w-xs">
             <Image
