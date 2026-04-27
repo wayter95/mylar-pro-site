@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const FORM_URL =
-  "https://flow-campaings-production.up.railway.app/api/forms/cmmwuob6u000a01p0ytotbgcj/submit";
+  "https://api.conversaai.tech/api/public/forms/newsletter-mylar-pro/submit";
 
 // Rate limit: IP -> { count, resetAt }
 const rateMap = new Map<string, { count: number; resetAt: number }>();
@@ -48,16 +48,25 @@ export async function POST(req: NextRequest) {
     if (siteUrl && !isDev) {
       const origin = req.headers.get("origin") || req.headers.get("referer");
       if (!origin) {
-        return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+        return NextResponse.json(
+          { error: "Requisição inválida." },
+          { status: 400 },
+        );
       }
       try {
         const reqHost = new URL(origin).hostname.replace(/^www\./, "");
         const allowedHost = new URL(siteUrl).hostname.replace(/^www\./, "");
         if (reqHost !== allowedHost) {
-          return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+          return NextResponse.json(
+            { error: "Requisição inválida." },
+            { status: 400 },
+          );
         }
       } catch {
-        return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
+        return NextResponse.json(
+          { error: "Requisição inválida." },
+          { status: 400 },
+        );
       }
     }
 
@@ -92,17 +101,20 @@ export async function POST(req: NextRequest) {
     // Validacao de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(Email)) {
-      return NextResponse.json(
-        { error: "E-mail inválido." },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "E-mail inválido." }, { status: 400 });
     }
 
     // Rejeita emails descartaveis comuns
     const disposable = [
-      "mailinator.com", "guerrillamail.com", "tempmail.com",
-      "throwaway.email", "yopmail.com", "sharklasers.com",
-      "guerrillamailblock.com", "grr.la", "dispostable.com",
+      "mailinator.com",
+      "guerrillamail.com",
+      "tempmail.com",
+      "throwaway.email",
+      "yopmail.com",
+      "sharklasers.com",
+      "guerrillamailblock.com",
+      "grr.la",
+      "dispostable.com",
     ];
     const domain = Email.split("@")[1]?.toLowerCase();
     if (domain && disposable.includes(domain)) {
@@ -123,7 +135,12 @@ export async function POST(req: NextRequest) {
     const res = await fetch(FORM_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Email, Nome, Sobrenome }),
+      body: JSON.stringify({
+        email: Email,
+        nome: Nome,
+        sobrenome: Sobrenome,
+        _hp: _honeypot ?? "",
+      }),
     });
 
     if (!res.ok) {
@@ -138,9 +155,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[newsletter] error:", err);
-    return NextResponse.json(
-      { error: "Erro interno." },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Erro interno." }, { status: 500 });
   }
 }

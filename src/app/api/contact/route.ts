@@ -1,13 +1,14 @@
-import { NextResponse } from "next/server";
-import sgMail from "@sendgrid/mail";
 import { MOTIVOS_VALIDOS, getMotivoLabel } from "@/lib/contact";
 import {
   getContactEmailHtml,
   getContactEmailText,
-  getContactConfirmationHtml,
-  getContactConfirmationText,
 } from "@/lib/email-templates/contact";
 import { sendLeadEvent } from "@/lib/meta-conversions";
+import sgMail from "@sendgrid/mail";
+import { NextResponse } from "next/server";
+
+const CONVERSA_CONTACT_FORM_URL =
+  "https://api.conversaai.tech/api/public/forms/mylar-pro-site-contact-form/submit";
 
 // Tempo mínimo para preenchimento (anti-bot)
 const MIN_FORM_TIME_MS = 3000;
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
       console.error("SENDGRID_API_KEY não configurada");
       return NextResponse.json(
         { error: "Serviço de e-mail não configurado" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -61,12 +62,21 @@ export async function POST(request: Request) {
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: "Muitos envios. Tente novamente em alguns minutos." },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
     const body = await request.json();
-    const { nome, email, motivo, empresa, telefone, mensagem, _honeypot, _formLoadTime } = body;
+    const {
+      nome,
+      email,
+      motivo,
+      empresa,
+      telefone,
+      mensagem,
+      _honeypot,
+      _formLoadTime,
+    } = body;
 
     // Honeypot: campo preenchido = bot
     if (_honeypot) {
@@ -74,10 +84,13 @@ export async function POST(request: Request) {
     }
 
     // Tempo mínimo: envio muito rápido = provável bot
-    if (typeof _formLoadTime === "number" && Date.now() - _formLoadTime < MIN_FORM_TIME_MS) {
+    if (
+      typeof _formLoadTime === "number" &&
+      Date.now() - _formLoadTime < MIN_FORM_TIME_MS
+    ) {
       return NextResponse.json(
         { error: "Por favor, aguarde alguns segundos antes de enviar." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -85,11 +98,12 @@ export async function POST(request: Request) {
     const siteUrl = process.env.SITE_URL;
     const isDev = process.env.NODE_ENV === "development";
     if (siteUrl && !isDev) {
-      const origin = request.headers.get("origin") || request.headers.get("referer");
+      const origin =
+        request.headers.get("origin") || request.headers.get("referer");
       if (!origin) {
         return NextResponse.json(
           { error: "Requisição inválida." },
-          { status: 400 }
+          { status: 400 },
         );
       }
       try {
@@ -98,13 +112,13 @@ export async function POST(request: Request) {
         if (reqHost !== allowedHost) {
           return NextResponse.json(
             { error: "Requisição inválida." },
-            { status: 400 }
+            { status: 400 },
           );
         }
       } catch {
         return NextResponse.json(
           { error: "Requisição inválida." },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -112,14 +126,14 @@ export async function POST(request: Request) {
     if (!nome || typeof nome !== "string" || nome.trim().length < 2) {
       return NextResponse.json(
         { error: "Nome é obrigatório (mín. 2 caracteres)" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!email || typeof email !== "string") {
       return NextResponse.json(
         { error: "E-mail é obrigatório" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -130,41 +144,38 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         { error: "Selecione um motivo de contato válido" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "E-mail inválido" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "E-mail inválido" }, { status: 400 });
     }
 
     if (!mensagem || typeof mensagem !== "string") {
       return NextResponse.json(
         { error: "Mensagem é obrigatória" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     const mensagemTrimmed = mensagem.trim();
     if (mensagemTrimmed.length < 10) {
       return NextResponse.json(
         { error: "Mensagem deve ter no mínimo 10 caracteres" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (mensagemTrimmed.length > 2000) {
       return NextResponse.json(
         { error: "Mensagem muito longa (máx. 2000 caracteres)" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (/https?:\/\//i.test(mensagemTrimmed)) {
       return NextResponse.json(
         { error: "Não é permitido incluir links na mensagem." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -173,7 +184,7 @@ export async function POST(request: Request) {
       console.error("CONTACT_EMAIL não configurado");
       return NextResponse.json(
         { error: "E-mail de destino não configurado" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -182,7 +193,7 @@ export async function POST(request: Request) {
       console.error("NO_REPLY_EMAIL não configurado");
       return NextResponse.json(
         { error: "Remetente não configurado" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -196,6 +207,33 @@ export async function POST(request: Request) {
     };
 
     const motivoLabel = getMotivoLabel(motivo);
+    const nameParts = contactData.nome.split(/\s+/).filter(Boolean);
+    const nomeConversa = nameParts[0] ?? "";
+    const sobrenomeConversa = nameParts.slice(1).join(" ") || "";
+
+    const conversaRes = await fetch(CONVERSA_CONTACT_FORM_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: contactData.email,
+        nome: nomeConversa,
+        sobrenome: sobrenomeConversa,
+        motivo: motivoLabel,
+        empresa: contactData.empresa ?? "",
+        mensagem: contactData.mensagem,
+        telefone: contactData.telefone ?? "",
+        _hp: _honeypot ?? "",
+      }),
+    });
+
+    if (!conversaRes.ok) {
+      const text = await conversaRes.text().catch(() => "");
+      console.error("[contact] conversa upstream error:", conversaRes.status, text);
+      return NextResponse.json(
+        { error: "Erro ao registrar. Tente novamente." },
+        { status: 502 },
+      );
+    }
 
     const msgToYou = {
       to: toEmail,
@@ -206,15 +244,7 @@ export async function POST(request: Request) {
       html: getContactEmailHtml(contactData),
     };
 
-    const msgToClient = {
-      to: email.trim(),
-      from: { email: fromEmail, name: "Mylar Pro" },
-      subject: "Recebemos seu contato — Mylar Pro",
-      text: getContactConfirmationText(nome.trim()),
-      html: getContactConfirmationHtml(nome.trim()),
-    };
-
-    await sgMail.send([msgToYou, msgToClient]);
+    await sgMail.send(msgToYou);
 
     // Meta Conversions API (server-side) — não bloqueia a resposta
     const userAgent = request.headers.get("user-agent") ?? undefined;
@@ -233,7 +263,7 @@ export async function POST(request: Request) {
     console.error("Erro ao enviar contato:", err);
     return NextResponse.json(
       { error: "Erro ao enviar mensagem. Tente novamente." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
