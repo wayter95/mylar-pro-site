@@ -44,7 +44,7 @@ export function Footer() {
             />
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
               Plataforma completa de gestão imobiliária para imobiliárias,
-              construtoras e incorporadoras.
+              construtoras, incorporadoras e loteadoras.
             </p>
           </div>
 

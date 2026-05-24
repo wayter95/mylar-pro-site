@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Icons } from "@/lib/icons";
 
 const faqs = [
   {
@@ -36,7 +37,7 @@ const faqs = [
   {
     pergunta: "Para quem é o Mylar Pro?",
     resposta:
-      "Para imobiliárias que querem profissionalizar a gestão, incorporadoras que precisam controlar empreendimentos e comissões, e corretores autônomos que buscam um CRM completo sem complexidade.",
+      "Para imobiliárias que querem profissionalizar a gestão, incorporadoras, construtoras e loteadoras que precisam controlar empreendimentos e comissões, e corretores autônomos que buscam um CRM completo sem complexidade.",
   },
 ];
 
@@ -53,21 +54,11 @@ export function FAQ() {
             className="flex w-full items-start justify-between gap-4 text-left"
           >
             <span className="font-medium text-slate-900">{faq.pergunta}</span>
-            <svg
+            <Icons.chevronDown
               className={`h-5 w-5 shrink-0 text-slate-500 transition-transform ${
                 openIndex === i ? "rotate-180" : ""
               }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            />
           </button>
           {openIndex === i && (
             <p className="mt-3 text-slate-600">{faq.resposta}</p>

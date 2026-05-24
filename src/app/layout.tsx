@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Mylar Pro",
   },
   description:
-    "Plataforma completa para imobiliárias e incorporadoras. CRM com Kanban, assinatura eletrônica, boleto e PIX integrados, portal do cliente e catálogo público de imóveis.",
+    "Plataforma completa para imobiliárias, incorporadoras, construtoras e loteadoras. CRM com Kanban, assinatura eletrônica, boleto e PIX integrados, portal do cliente e catálogo público de imóveis.",
   keywords: [
     "gestão imobiliária",
     "sistema imobiliário",
@@ -30,6 +30,8 @@ export const metadata: Metadata = {
     "boleto aluguel",
     "plataforma imobiliária",
     "incorporadora software",
+    "construtora software",
+    "loteadora software",
     "gestão locação",
     "contratos digitais imobiliária",
   ],
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "Mylar Pro",
     title: "Mylar Pro — Gerencie Imóveis, Contratos e Cobranças em Um Só Lugar",
     description:
-      "CRM, assinatura eletrônica, boleto/PIX, portal do cliente e catálogo para imobiliárias e incorporadoras.",
+      "CRM, assinatura eletrônica, boleto/PIX, portal do cliente e catálogo para imobiliárias, incorporadoras, construtoras e loteadoras.",
   },
   robots: {
     index: true,

@@ -4,22 +4,19 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/lib/icons";
-import { REGISTER_URL } from "@/lib/personas";
-import type { PersonaContent } from "@/lib/personas/types";
+import { REGISTER_URL } from "@/lib/features";
+import type { FeatureContent } from "@/lib/features/types";
 
 type Props = {
-  persona: PersonaContent;
+  feature: FeatureContent;
 };
 
-export function PersonaCta({ persona }: Props) {
-  const closingQuote = persona.testimonials.find((t) => t.featured) ?? persona.testimonials[0];
-
+export function FeatureCta({ feature }: Props) {
   return (
     <section
       className="relative overflow-hidden border-t border-slate-200 bg-[#F8F9FB] py-24 lg:py-32"
-      style={{ "--persona-accent": persona.accent } as CSSProperties}
+      style={{ "--feature-accent": feature.accent } as CSSProperties}
     >
-      {/* Editorial grid lines */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="absolute inset-0 opacity-[0.6]"
@@ -32,7 +29,7 @@ export function PersonaCta({ persona }: Props) {
         <div
           className="absolute inset-x-0 bottom-0 h-px"
           style={{
-            background: `linear-gradient(to right, transparent, ${persona.accent}55, transparent)`,
+            background: `linear-gradient(to right, transparent, ${feature.accent}55, transparent)`,
           }}
         />
       </div>
@@ -42,9 +39,9 @@ export function PersonaCta({ persona }: Props) {
           <span className="h-px w-8 bg-slate-300" />
           <span
             className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
-            style={{ color: persona.accent }}
+            style={{ color: feature.accent }}
           >
-            Próximo passo
+            Experimente sem compromisso
           </span>
         </div>
 
@@ -53,11 +50,11 @@ export function PersonaCta({ persona }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55 }}
-          className="mt-6 max-w-4xl text-4xl leading-[1.02] font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.5rem]"
+          className="mt-6 max-w-4xl text-3xl leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[3rem]"
         >
-          Comece como {persona.shortLabel.toLowerCase()} hoje.{" "}
+          30 dias grátis com {feature.label.toLowerCase()}{" "}
           <span className="text-slate-400">
-            Decida o plano depois de 30 dias usando de verdade.
+            e tudo mais que o Mylar Pro oferece.
           </span>
         </motion.h2>
 
@@ -68,8 +65,8 @@ export function PersonaCta({ persona }: Props) {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600"
         >
-          Acesso completo a todas as funcionalidades — inclusive recursos do plano mais avançado.
-          Sem cartão, sem letra miúda. Migração dos seus dados incluída.
+          Sem cartão de crédito, sem letra miúda. Cancele quando quiser. Migração
+          de dados inclusa.
         </motion.p>
 
         <motion.div
@@ -85,11 +82,11 @@ export function PersonaCta({ persona }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-base font-semibold text-white transition hover:-translate-y-0.5"
             style={{
-              backgroundColor: persona.accent,
-              boxShadow: `0 14px 24px -14px ${persona.accent}aa`,
+              backgroundColor: feature.accent,
+              boxShadow: `0 14px 24px -14px ${feature.accent}aa`,
             }}
           >
-            {persona.hero.ctaPrimary}
+            {feature.hero.ctaPrimary}
             <Icons.arrowRight className="size-4" />
           </a>
           <Link
@@ -98,42 +95,13 @@ export function PersonaCta({ persona }: Props) {
           >
             <span
               className="border-b border-dotted pb-0.5"
-              style={{ borderColor: persona.accent }}
+              style={{ borderColor: feature.accent }}
             >
-              Prefiro conversar com a equipe primeiro
+              Prefiro conversar com a equipe
             </span>
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </Link>
         </motion.div>
-
-        {closingQuote && (
-          <motion.figure
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.55, delay: 0.25 }}
-            className="mt-16 max-w-3xl border-l-2 pl-6 lg:mt-20"
-            style={{ borderColor: persona.accent }}
-          >
-            <blockquote>
-              <p className="text-lg leading-[1.5] font-medium text-slate-700 lg:text-xl">
-                “{closingQuote.quote}”
-              </p>
-            </blockquote>
-            <figcaption className="mt-4 flex items-center gap-3">
-              <span
-                className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                style={{ backgroundColor: persona.accent }}
-              >
-                {closingQuote.avatar}
-              </span>
-              <div>
-                <p className="text-sm font-bold text-slate-900">{closingQuote.name}</p>
-                <p className="text-xs text-slate-500">{closingQuote.role}</p>
-              </div>
-            </figcaption>
-          </motion.figure>
-        )}
       </div>
     </section>
   );

@@ -61,12 +61,12 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
   },
   {
     slug: "development",
-    label: "Incorporadora",
+    label: "Lançamentos & Empreendimentos",
     description:
-      "Lançamentos na planta, múltiplas torres, Meta Ads e BI executivo — em uma única stack.",
+      "Para incorporadoras, construtoras e loteadoras. Espelho de vendas vertical e horizontal, Meta Ads e BI executivo em uma stack só.",
     fromPrice: 897,
     highlights: [
-      "Módulo de empreendimentos",
+      "Torres, unidades e loteamentos",
       "Meta Ads + atribuição lead-to-deal",
       "SSO/SAML · LGPD certificado",
     ],

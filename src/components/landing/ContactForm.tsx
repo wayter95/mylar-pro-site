@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Icons } from "@/lib/icons";
 import { AnimateIn } from "./AnimateIn";
 
 export function ContactForm() {
@@ -67,19 +68,7 @@ export function ContactForm() {
                 className="inline-flex items-center gap-2 font-medium text-[#37B6D6] hover:text-[#2ea5c4]"
               >
                 Solicitar acesso antecipado
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
+                <Icons.arrowUpRight className="h-4 w-4" />
               </a>
             </div>
           </div>

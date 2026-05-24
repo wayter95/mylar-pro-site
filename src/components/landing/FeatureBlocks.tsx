@@ -31,7 +31,7 @@ const blocks = [
   },
   {
     id: "imoveis",
-    badge: "Para incorporadoras",
+    badge: "Para empreendimentos",
     title: "Gestão de Imóveis e Unidades",
     highlight: "Múltiplas unidades por empreendimento",
     description:

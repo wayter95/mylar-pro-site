@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 import type { PersonaTestimonial } from "@/lib/personas/types";
 
 type Props = {
@@ -47,15 +48,11 @@ export function PersonaTestimonials({ testimonials, accent }: Props) {
           className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-16"
         >
           <div>
-            <svg
-              viewBox="0 0 32 24"
+            <Icons.quote
               aria-hidden
               className="size-7"
-              fill={accent}
-              style={{ opacity: 0.25 }}
-            >
-              <path d="M0 24V14C0 6.3 5.6 0.3 12 0v4c-4 0.4-7 3.6-7 7v1h7v12H0zm20 0V14c0-7.7 5.6-13.7 12-14v4c-4 0.4-7 3.6-7 7v1h7v12H20z" />
-            </svg>
+              style={{ color: accent, opacity: 0.25 }}
+            />
             <blockquote className="mt-4">
               <p className="text-2xl leading-[1.25] font-medium tracking-tight text-slate-900 sm:text-[1.65rem] lg:text-[1.85rem]">
                 “{featured.quote}”

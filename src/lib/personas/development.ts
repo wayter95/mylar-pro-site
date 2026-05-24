@@ -2,19 +2,19 @@ import type { PersonaContent } from "./types";
 
 export const development: PersonaContent = {
   slug: "development",
-  label: "Incorporadora",
-  shortLabel: "Incorporadora",
+  label: "Lançamentos & Empreendimentos",
+  shortLabel: "Empreendimentos",
   accent: "#0E2849",
   href: "/personas/development",
   hero: {
-    tag: "Para incorporadoras",
+    tag: "Para incorporadoras, construtoras e loteadoras",
     title: [
-      "Venda na planta com a ",
+      "Venda empreendimentos com a ",
       "precisão",
       " de quem opera VGV bilionário.",
     ],
     subtitle:
-      "Espelho de vendas em tempo real, tabela de preços dinâmica, Meta Ads integrado e BI executivo. A plataforma que escala do primeiro lançamento ao décimo.",
+      "Espelho de vendas em tempo real, tabela de preços dinâmica, Meta Ads integrado e BI executivo. Para incorporadoras verticais, construtoras e loteadoras — do primeiro lançamento ao décimo.",
     ctaPrimary: "Testar 30 dias grátis",
     ctaSecondary: "Agendar conversa executiva",
     trust: [
@@ -26,7 +26,7 @@ export const development: PersonaContent = {
   pains: [
     {
       title: "Espelho de vendas em PDF, defasado",
-      body: "Corretor envia proposta de unidade que já foi reservada ontem. Cliente assina, conflito. Diretoria descobre só no fechamento.",
+      body: "Corretor envia proposta de unidade ou lote que já foi reservado ontem. Cliente assina, conflito. Diretoria descobre só no fechamento.",
       resolved: "Espelho em tempo real, sincronizado entre todos.",
     },
     {
@@ -41,26 +41,28 @@ export const development: PersonaContent = {
     },
     {
       title: "Múltiplos empreendimentos, um caos",
-      body: "Cada torre tem CRM separado, financeiro separado, relatório separado. Diretoria pede consolidado, leva 1 semana.",
+      body: "Cada torre, condomínio ou loteamento tem CRM separado, financeiro separado, relatório separado. Diretoria pede consolidado, leva 1 semana.",
       resolved: "Multi-empreendimento nativo + BI consolidado.",
     },
   ],
   featureBlocks: [
     {
       eyebrow: "Espelho de vendas",
-      title: "Tabela viva. Toda equipe vê a mesma unidade, no mesmo segundo.",
-      body: "Torres, blocos, unidades, vagas, fração ideal e memorial em um espelho que atualiza em tempo real. Tabela de preços com workflow de aprovação de desconto. Reserva, proposta e contrato amarrados à unidade — nunca mais duas propostas na mesma vaga.",
+      title:
+        "Tabela viva. Toda equipe vê a mesma unidade ou lote, no mesmo segundo.",
+      body: "Torres, blocos, quadras, lotes, unidades, vagas, fração ideal e memorial em um espelho que atualiza em tempo real. Tabela de preços com workflow de aprovação de desconto. Reserva, proposta e contrato amarrados — nunca mais duas propostas na mesma unidade.",
       bullets: [
         "Espelho em tempo real sincronizado",
+        "Vertical (torres) e horizontal (loteamentos)",
         "Workflow de desconto com aprovação",
         "Reserva → proposta → contrato amarrados",
-        "Memorial e fração ideal por unidade",
       ],
       visual: "development-mirror",
     },
     {
       eyebrow: "Meta Ads + Atribuição",
-      title: "Veja qual criativo virou contrato assinado — não apenas formulário preenchido.",
+      title:
+        "Veja qual criativo virou contrato assinado — não apenas formulário preenchido.",
       body: "Conecte sua Business Manager via OAuth oficial. Leads dos Lead Ads entram com UTM, campanha, criativo e custo. Atribuição lead-to-deal vai até a venda — você sabe CAC real por criativo e mata o que não converte.",
       bullets: [
         "OAuth oficial Meta Business Manager",
@@ -72,7 +74,8 @@ export const development: PersonaContent = {
     },
     {
       eyebrow: "BI executivo",
-      title: "VSO, velocidade de vendas e projeção de receita — em telas que vão pro comitê.",
+      title:
+        "VSO, velocidade de vendas e projeção de receita — em telas que vão pro comitê.",
       body: "Dashboards de diretoria por empreendimento e consolidado. VSO, velocidade, mix por tipologia, ticket médio, projeção de receita. A reunião de comitê comercial deixa de ser planilha — vira a tela do Mylar projetada.",
       bullets: [
         "VSO e velocidade por empreendimento",
@@ -87,7 +90,7 @@ export const development: PersonaContent = {
     {
       hero: true,
       title: "Módulo de Empreendimentos",
-      body: "Gestão de torres, blocos, unidades, vagas, fração ideal e memorial. Tabela de preços com workflow de aprovação. Espelho de vendas vivo. Distribuição automática de leads entre stand e corretores parceiros.",
+      body: "Gestão de torres, blocos, quadras, lotes, unidades, vagas, fração ideal e memorial. Tabela de preços com workflow de aprovação. Espelho de vendas vivo. Distribuição automática de leads entre stand e corretores parceiros.",
     },
     {
       title: "Meta Ads integrado",
@@ -95,7 +98,7 @@ export const development: PersonaContent = {
     },
     {
       title: "Multi-empreendimento",
-      body: "Quantos lançamentos você precisar. Carteira de corretores parceiros, comissão por unidade, regras por torre.",
+      body: "Quantos lançamentos você precisar — verticais ou loteamentos. Carteira de corretores parceiros, comissão por unidade, regras por torre ou quadra.",
     },
     {
       title: "BI executivo",
@@ -113,7 +116,7 @@ export const development: PersonaContent = {
   featuresHeadline: {
     title: "A plataforma que cresce do lançamento à entrega das chaves.",
     subtitle:
-      "Tudo que CRM, ERP e BI faziam separados — agora numa stack pensada para incorporação.",
+      "Tudo que CRM, ERP e BI faziam separados — agora numa stack pensada para incorporação, construção e loteamento.",
   },
   steps: [
     {
@@ -139,7 +142,8 @@ export const development: PersonaContent = {
   ],
   stepsHeadline: {
     title: "Implantação executiva guiada por Customer Success.",
-    subtitle: "Sem perda de dados. Sem trauma. Equipe operando com confiança.",
+    subtitle:
+      "Para incorporadora, construtora ou loteadora. Sem perda de dados. Sem trauma. Equipe operando com confiança.",
   },
   testimonials: [
     {
@@ -175,7 +179,8 @@ export const development: PersonaContent = {
       price: 897,
       priceAnnual: 762,
       tagline: "Plataforma completa + módulo de Empreendimentos.",
-      idealFor: "Construtora com 1-3 empreendimentos ativos, vendendo do stand próprio.",
+      idealFor:
+        "Construtora, incorporadora ou loteadora com 1-3 empreendimentos ativos, vendendo do stand próprio.",
       limits: [
         { v: "2.000", l: "Imóveis" },
         { v: "10", l: "Agentes" },
@@ -196,7 +201,8 @@ export const development: PersonaContent = {
       price: 997,
       priceAnnual: 847,
       tagline: "Vendas com performance de marketing digital.",
-      idealFor: "Incorporadora investindo em Meta Ads/Google que precisa medir CAC real.",
+      idealFor:
+        "Lançadora (vertical ou loteamento) investindo em Meta Ads/Google que precisa medir CAC real.",
       featured: true,
       badge: "Mais popular",
       limits: [
@@ -218,8 +224,9 @@ export const development: PersonaContent = {
       name: "Avançado",
       price: 1297,
       priceAnnual: 1102,
-      tagline: "Sem limites. Sua incorporadora opera em escala.",
-      idealFor: "Incorporadora de portfólio multi-projeto que exige SSO, SLA e API.",
+      tagline: "Sem limites. Sua operação roda em escala enterprise.",
+      idealFor:
+        "Grupo com portfólio multi-projeto (verticais + loteamentos) que exige SSO, SLA e API.",
       limits: [
         { v: "∞", l: "Imóveis" },
         { v: "∞", l: "Agentes" },
@@ -251,10 +258,10 @@ export const development: PersonaContent = {
       {
         name: "Empreendimentos",
         rows: [
-          ["Gestão de torres e unidades", true, true, true],
+          ["Torres, unidades e loteamentos", true, true, true],
           ["Espelho de vendas em tempo real", true, true, true],
           ["Tabela de preços com workflow", true, true, true],
-          ["Comissão por unidade", true, true, true],
+          ["Comissão por unidade ou lote", true, true, true],
         ],
       },
       {

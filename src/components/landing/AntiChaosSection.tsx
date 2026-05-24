@@ -1,74 +1,62 @@
 "use client";
 
+import { Icons, type IconType } from "@/lib/icons";
 import { AnimateInItem, AnimateInStagger } from "./AnimateIn";
 import { SectionHeader } from "./SectionHeader";
 
-const comparisons = [
+type Comparison = {
+  pain: string;
+  old: string;
+  modern: string;
+  modernDesc: string;
+  icon: IconType;
+};
+
+const comparisons: Comparison[] = [
   {
     pain: "Instalação demorada",
     old: "Semanas de setup e treinamento",
     modern: "Setup em minutos",
     modernDesc: "Onboarding guiado. Sua equipe opera no mesmo dia.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-6">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor" opacity="0.15" />
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: Icons.zap,
   },
   {
     pain: "Interface confusa",
     old: "Menus infinitos e sobrecarga visual",
     modern: "Navegação fluida",
     modernDesc: "Design limpo e intuitivo. Zero curva de aprendizado.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-6">
-        <rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor" opacity="0.15" />
-        <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M3 9h18M9 9v12" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
+    icon: Icons.dashboard,
   },
   {
     pain: "Dados espalhados",
     old: "5 sistemas, 5 logins, zero visão unificada",
     modern: "Inteligência centralizada",
     modernDesc: "Uma fonte de verdade para leads, imóveis, contratos e financeiro.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-6">
-        <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.15" />
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="12" cy="12" r="3" fill="currentColor" />
-        <path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
+    icon: Icons.database,
   },
 ];
 
-const highlights = [
+type Highlight = {
+  title: string;
+  description: string;
+  features: string[];
+  icon: IconType;
+};
+
+const highlights: Highlight[] = [
   {
     title: "CRM & WhatsApp Nativo",
     description:
       "Pare de alternar entre abas. Enquanto seus concorrentes colam links do WhatsApp no CRM, sua equipe fecha negócios em uma plataforma onde tudo já está conectado.",
     features: ["Multiatendimento integrado", "Fluxo visual de vendas com dados"],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-7">
-        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: Icons.whatsapp,
   },
   {
     title: "Automação Financeira Real",
     description:
       "Administrar aluguéis não precisa ser pesadelo de conciliação. Cobrança, baixa e repasse automático que devolve seu tempo.",
     features: ["Conciliação bancária automática", "Repasse com demonstrativo PDF"],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-7">
-        <rect x="2" y="6" width="20" height="14" rx="2" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M2 10h20" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 14h4M6 17h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
+    icon: Icons.wallet,
   },
 ];
 
@@ -103,11 +91,13 @@ export function AntiChaosSection() {
             className="mt-12 grid grid-cols-1 gap-5 lg:mt-16 lg:grid-cols-3"
             stagger={0.08}
           >
-            {comparisons.map((item) => (
+            {comparisons.map((item) => {
+              const Icon = item.icon;
+              return (
               <AnimateInItem key={item.pain} className="flex">
                 <div className="group flex h-full flex-col rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-[#2facde]/20 hover:bg-white/[0.06]">
                   <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde] transition-all group-hover:bg-[#2facde]/20 group-hover:scale-110">
-                    {item.icon}
+                    <Icon className="size-6" strokeWidth={1.6} />
                   </div>
                   <p className="text-sm font-medium text-slate-500 line-through decoration-slate-600">
                     {item.old}
@@ -120,7 +110,8 @@ export function AntiChaosSection() {
                   </p>
                 </div>
               </AnimateInItem>
-            ))}
+              );
+            })}
           </AnimateInStagger>
 
           {/* Highlight cards */}
@@ -128,11 +119,13 @@ export function AntiChaosSection() {
             className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2"
             stagger={0.08}
           >
-            {highlights.map((item) => (
+            {highlights.map((item) => {
+              const Icon = item.icon;
+              return (
               <AnimateInItem key={item.title} className="flex">
                 <div className="flex h-full flex-col rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.02] p-7 backdrop-blur-sm">
                   <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde]">
-                    {item.icon}
+                    <Icon className="size-7" strokeWidth={1.6} />
                   </div>
                   <h3 className="text-xl font-bold tracking-tight text-white">
                     {item.title}
@@ -141,16 +134,15 @@ export function AntiChaosSection() {
                   <ul className="mt-4 space-y-2">
                     {item.features.map((f) => (
                       <li key={f} className="flex items-center gap-2 text-sm text-slate-300">
-                        <svg viewBox="0 0 16 16" fill="currentColor" className="size-4 shrink-0 text-[#2facde]">
-                          <path fillRule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm3.44-8.56a.75.75 0 00-1.06-1.06L7 8.76 5.53 7.28a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4-4z" clipRule="evenodd" />
-                        </svg>
+                        <Icons.checkCircle className="size-4 shrink-0 text-[#2facde]" />
                         {f}
                       </li>
                     ))}
                   </ul>
                 </div>
               </AnimateInItem>
-            ))}
+              );
+            })}
           </AnimateInStagger>
         </div>
       </section>

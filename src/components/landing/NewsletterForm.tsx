@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Icons } from "@/lib/icons";
 
 const PARTICLES = new Set(["de", "da", "do", "das", "dos", "e", "del", "van", "von", "di", "le", "la", "el"]);
 
@@ -159,10 +160,12 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
               }}
               className="flex size-11 shrink-0 items-center justify-center rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/25"
             >
+              {/* Check animado com pathLength (mantido inline pela animação custom). */}
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 className="size-5 text-white"
+                aria-hidden
               >
                 <motion.path
                   d="M20 6L9 17l-5-5"
@@ -239,13 +242,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
                           : "text-slate-300 group-focus-within:text-[#2facde]",
                       ].join(" ")}
                     >
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="size-[18px]"
-                      >
-                        <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
-                      </svg>
+                      <Icons.user className="size-[18px]" />
                     </span>
                     <input
                       type="text"
@@ -268,17 +265,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
                       transition={{ duration: 0.15 }}
                       className="mt-1.5 flex items-center gap-1 text-xs font-medium text-red-500"
                     >
-                      <svg
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                        className="size-3.5 shrink-0"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8 15A7 7 0 108 1a7 7 0 000 14zm-.25-3a.75.75 0 101.5 0 .75.75 0 00-1.5 0zM8 4.5a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0v-4A.75.75 0 018 4.5z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <Icons.alert className="size-3.5 shrink-0" />
                       {nameErr}
                     </motion.p>
                   )}
@@ -316,14 +303,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
                           : "text-slate-300 group-focus-within:text-[#2facde]",
                       ].join(" ")}
                     >
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="size-[18px]"
-                      >
-                        <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                        <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-                      </svg>
+                      <Icons.mail className="size-[18px]" />
                     </span>
                     <input
                       type="email"
@@ -345,17 +325,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
                       transition={{ duration: 0.15 }}
                       className="mt-1.5 flex items-center gap-1 text-xs font-medium text-red-500"
                     >
-                      <svg
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                        className="size-3.5 shrink-0"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8 15A7 7 0 108 1a7 7 0 000 14zm-.25-3a.75.75 0 101.5 0 .75.75 0 00-1.5 0zM8 4.5a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0v-4A.75.75 0 018 4.5z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <Icons.alert className="size-3.5 shrink-0" />
                       {emailErr}
                     </motion.p>
                   )}
@@ -374,43 +344,13 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
                 <span className="relative flex items-center justify-center gap-2">
                   {status === "sending" ? (
                     <>
-                      <svg
-                        className="size-4 animate-spin"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          className="opacity-25"
-                        />
-                        <path
-                          d="M4 12a8 8 0 018-8"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          className="opacity-75"
-                        />
-                      </svg>
+                      <Icons.loader className="size-4 animate-spin" />
                       Enviando...
                     </>
                   ) : (
                     <>
                       Inscrever-se
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="size-4 transition-transform group-hover:translate-x-0.5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <Icons.arrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                     </>
                   )}
                 </span>

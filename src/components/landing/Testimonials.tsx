@@ -1,5 +1,6 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { AnimateIn, AnimateInStagger, AnimateInItem } from "./AnimateIn";
 
 const testimonials = [
@@ -10,8 +11,8 @@ const testimonials = [
   },
   {
     quote:
-      "Por fim uma plataforma que entende incorporadoras. O suporte a múltiplas unidades por empreendimento é essencial para nós.",
-    author: "Incorporadora",
+      "Por fim uma plataforma que entende quem lança empreendimento. O suporte a múltiplas unidades, torres e quadras é essencial para nós.",
+    author: "Incorporadora · Construtora · Loteadora",
   },
   {
     quote:
@@ -36,13 +37,7 @@ export function Testimonials() {
           {testimonials.map((t, i) => (
             <AnimateInItem key={i}>
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <svg
-                  className="h-10 w-10 text-[#37B6D6]/30"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
+                <Icons.quote className="h-10 w-10 text-[#37B6D6]/30" />
                 <p className="mt-4 text-slate-700">{t.quote}</p>
                 <p className="mt-4 text-sm font-medium text-slate-500">
                   — {t.author}

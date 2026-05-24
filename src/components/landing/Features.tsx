@@ -1,89 +1,62 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { BrokerMobileMockup } from "@/components/persona/mockups";
+import { GooglePlayLogo } from "@/components/ui/GooglePlayLogo";
+import { BROKER_APP_URLS } from "@/lib/features";
+import { Icons, type IconType } from "@/lib/icons";
 import { AnimateInStagger, AnimateInItem } from "./AnimateIn";
 import { SectionHeader } from "./SectionHeader";
 
-const features = [
+const BROKER_APP_ACCENT = "#1FB3D6";
+
+type Feature = {
+  title: string;
+  description: string;
+  badge?: string;
+  icon: IconType;
+};
+
+const features: Feature[] = [
   {
     title: "CRM com Kanban",
     description:
       "Pipeline visual de vendas e locações. Gerencie leads, agende visitas e acompanhe cada negociação do primeiro contato ao fechamento.",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <rect x="2" y="4" width="7" height="20" rx="1.5" fill="currentColor" opacity="0.3" />
-        <rect x="10.5" y="4" width="7" height="14" rx="1.5" fill="currentColor" opacity="0.5" />
-        <rect x="19" y="4" width="7" height="18" rx="1.5" fill="currentColor" />
-      </svg>
-    ),
+    icon: Icons.chart,
   },
   {
     title: "Assinatura Eletrônica",
     description:
       "Assine contratos direto na plataforma com validação de identidade, código de confirmação e validade jurídica (Lei 14.063).",
     badge: "Diferencial",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <path d="M6 22c2-3 4-8 6-8s3 5 5 5 3-12 5-12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="22" cy="7" r="4" fill="currentColor" opacity="0.2" />
-        <path d="M20.5 7l1 1 2.5-2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: Icons.fileSign,
   },
   {
     title: "Cobranças Integradas",
     description:
       "Boleto e PIX integrados com reajuste automático por IGP-M, IPCA ou índice fixo. Repasses e comissões por cobrança.",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <rect x="2" y="7" width="24" height="16" rx="3" fill="currentColor" opacity="0.15" />
-        <rect x="2" y="7" width="24" height="16" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M2 12h24" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="20" cy="19" r="2.5" fill="currentColor" opacity="0.4" />
-        <circle cx="16.5" cy="19" r="2.5" fill="currentColor" opacity="0.25" />
-      </svg>
-    ),
+    icon: Icons.wallet,
   },
   {
     title: "Portal de Imóveis",
     description:
       "Catálogo online com busca por mapa interativo. Cada imobiliária tem seu portal próprio, integrado ao CRM e captação de leads.",
     badge: "Diferencial",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <circle cx="14" cy="12" r="10" fill="currentColor" opacity="0.1" />
-        <path d="M14 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 018 8c0 4-3.5 7.5-8 12-4.5-4.5-8-8-8-12a8 8 0 018-8z" fill="currentColor" opacity="0.3" />
-        <circle cx="14" cy="12" r="3" fill="currentColor" />
-        <path d="M14 25l-1-1.2c-4-4.8-7-7.8-7-10.8a8 8 0 0116 0c0 3-3 6-7 10.8L14 25z" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
+    icon: Icons.mapPin,
   },
   {
     title: "Gestão Completa",
     description:
       "Cadastre imóveis, proprietários e inquilinos. Inclua corretores como parceiros, com comissões e acessos controlados.",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <rect x="4" y="2" width="20" height="24" rx="2" fill="currentColor" opacity="0.1" />
-        <path d="M4 2h20a2 2 0 012 2v20a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M8 8h6M8 12h12M8 16h8M8 20h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-        <rect x="18" y="5" width="5" height="5" rx="1" fill="currentColor" opacity="0.3" />
-      </svg>
-    ),
+    icon: Icons.briefcase,
   },
   {
     title: "Portal do Cliente",
     description:
       "Inquilino e proprietário com acesso próprio para faturas, contratos, chamados e manutenção. Menos WhatsApp, mais autonomia.",
     badge: "Diferencial",
-    icon: (
-      <svg viewBox="0 0 28 28" fill="none" className="size-7">
-        <circle cx="14" cy="10" r="5" fill="currentColor" opacity="0.2" />
-        <circle cx="14" cy="10" r="5" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M4 25c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M18 20l2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-      </svg>
-    ),
+    icon: Icons.userCheck,
   },
 ];
 
@@ -105,7 +78,9 @@ export function Features() {
           className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6"
           stagger={0.08}
         >
-          {features.map((feature, i) => (
+          {features.map((feature, i) => {
+            const FeatureIcon = feature.icon;
+            return (
             <AnimateInItem key={i} className="flex">
               <div className="group relative flex h-full w-full flex-col">
                 <motion.div
@@ -134,7 +109,7 @@ export function Features() {
                   )}
 
                   <div className="mb-5 flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde] transition-all duration-300 group-hover:bg-[#2facde] group-hover:text-white group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#2facde]/25">
-                    {feature.icon}
+                    <FeatureIcon className="size-6" strokeWidth={1.8} />
                   </div>
 
                   <h3 className="shrink-0 text-lg font-bold text-slate-900">
@@ -146,9 +121,131 @@ export function Features() {
                 </motion.div>
               </div>
             </AnimateInItem>
-          ))}
+            );
+          })}
         </AnimateInStagger>
+
+        {/* App do Corretor — card full-width destacado */}
+        <BrokerAppSpotlight />
       </div>
     </section>
+  );
+}
+
+function BrokerAppSpotlight() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative mt-16 overflow-hidden rounded-3xl border border-slate-900/95 bg-slate-950 lg:mt-20"
+    >
+      {/* Background subtle accent */}
+      <div className="pointer-events-none absolute inset-0 -z-0">
+        <div
+          className="absolute -top-1/3 -right-1/4 h-[500px] w-[500px] rounded-full blur-[120px]"
+          style={{ backgroundColor: `${BROKER_APP_ACCENT}18` }}
+        />
+        <div
+          className="absolute -bottom-1/3 -left-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
+          style={{ backgroundColor: `${BROKER_APP_ACCENT}10` }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, white 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+      </div>
+
+      <div className="relative grid gap-10 p-8 sm:p-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16 lg:p-14">
+        {/* Text */}
+        <div>
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-white/20" />
+            <span
+              className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
+              style={{ color: BROKER_APP_ACCENT }}
+            >
+              Recurso · App nativo iOS & Android
+            </span>
+          </div>
+
+          <h3 className="mt-5 text-3xl leading-[1.05] font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.5rem]">
+            O escritório do corretor{" "}
+            <span className="text-slate-400">no bolso, em campo.</span>
+          </h3>
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 lg:text-lg">
+            Carteira completa, WhatsApp, agenda, pipeline e captação de imóvel
+            pelo celular — funcionando offline em visitas. Toda equipe sincroniza
+            em tempo real com o painel web.
+          </p>
+
+          <ul className="mt-7 space-y-2.5">
+            {[
+              "Funciona offline · sincroniza ao voltar online",
+              "App nativo iOS e Android, sem custo por agente",
+              "Notificação push de novos leads e propostas",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-3 text-sm text-slate-300"
+              >
+                <span
+                  aria-hidden
+                  className="mt-1.5 size-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: BROKER_APP_ACCENT }}
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Link
+              href="/features/broker-app"
+              className="inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+              style={{
+                backgroundColor: BROKER_APP_ACCENT,
+                boxShadow: `0 14px 24px -14px ${BROKER_APP_ACCENT}aa`,
+              }}
+            >
+              Conhecer o app
+              <Icons.arrowRight className="size-4" />
+            </Link>
+
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <a
+                href={BROKER_APP_URLS.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/10"
+              >
+                <Icons.apple className="size-4" />
+                App Store
+              </a>
+              <a
+                href={BROKER_APP_URLS.playStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/10"
+              >
+                <GooglePlayLogo className="size-4" />
+                Google Play
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Mockup */}
+        <div className="relative">
+          <BrokerMobileMockup accent={BROKER_APP_ACCENT} />
+        </div>
+      </div>
+    </motion.div>
   );
 }

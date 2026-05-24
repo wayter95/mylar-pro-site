@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 import type { PersonaPain } from "@/lib/personas/types";
 
 type Props = {
@@ -113,12 +114,7 @@ function PainRow({
             style={{ backgroundColor: accent }}
             aria-hidden
           >
-            <svg viewBox="0 0 12 12" fill="currentColor" className="size-2.5">
-              <path
-                fillRule="evenodd"
-                d="M10.4 3.2L4.6 9 1.6 6l.8-.8 2.2 2.2 5-5z"
-              />
-            </svg>
+            <Icons.check className="size-2.5" />
           </span>
         </div>
         <p className="mt-3 text-[15px] leading-relaxed font-medium text-slate-800">

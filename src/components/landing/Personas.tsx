@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 import { PERSONA_HUB_CARDS, personasRecord } from "@/lib/personas";
 
 export function Personas() {
@@ -26,7 +27,7 @@ export function Personas() {
             </h2>
           </div>
           <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
-            O Mylar Pro vai do corretor solo à incorporadora bilionária. Mesmo
+            O Mylar Pro vai do corretor solo à incorporadora, construtora e loteadora. Mesmo
             CRM, mesmo catálogo, mesmo motor financeiro — o que muda são os
             módulos e a capacidade.
           </p>
@@ -102,17 +103,7 @@ export function Personas() {
                       style={{ color: card.accent }}
                     >
                       Ver detalhes
-                      <svg
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                        className="size-3.5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <Icons.arrowRight className="size-3.5" />
                     </span>
                   </div>
                 </Link>

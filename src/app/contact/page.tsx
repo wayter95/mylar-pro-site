@@ -5,39 +5,34 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { FAQ } from "@/components/landing/FAQ";
+import { Icons, type IconType } from "@/lib/icons";
 import { MOTIVOS_CONTATO } from "@/lib/contact";
 
 const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
-const contactInfo = [
+type ContactInfo = {
+  label: string;
+  value: string;
+  href?: string;
+  icon: IconType;
+};
+
+const contactInfo: ContactInfo[] = [
   {
     label: "E-mail",
     value: "contato@mylarapp.com",
     href: "mailto:contato@mylarapp.com",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
-        <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-        <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-      </svg>
-    ),
+    icon: Icons.mail,
   },
   {
     label: "Resposta",
     value: "Até 24 horas úteis",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
-        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clipRule="evenodd" />
-      </svg>
-    ),
+    icon: Icons.clock,
   },
   {
     label: "Localização",
     value: "Brasil — 100% remoto",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
-        <path fillRule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433a19.695 19.695 0 002.605-1.899C15.723 14.893 18 12.006 18 8.5 18 4.358 14.86 1 10 1S2 4.358 2 8.5c0 3.506 2.277 6.393 4.023 7.95a19.695 19.695 0 002.605 1.9c.311.192.571.336.757.432.093.048.173.085.236.11l.047.022.015.006.006.003zM10 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clipRule="evenodd" />
-      </svg>
-    ),
+    icon: Icons.mapPin,
   },
 ];
 
@@ -154,10 +149,12 @@ export default function ContatoPage() {
 
               {/* Contact details */}
               <div className="mt-8 space-y-4">
-                {contactInfo.map((item) => (
+                {contactInfo.map((item) => {
+                  const Icon = item.icon;
+                  return (
                   <div key={item.label} className="flex items-center gap-3">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde]">
-                      {item.icon}
+                      <Icon className="size-5" strokeWidth={1.8} />
                     </div>
                     <div>
                       <p className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
@@ -177,7 +174,8 @@ export default function ContatoPage() {
                       )}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Quick CTA */}
@@ -196,9 +194,7 @@ export default function ContatoPage() {
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#2facde] transition hover:gap-3"
                 >
                   Criar conta grátis
-                  <svg viewBox="0 0 16 16" fill="currentColor" className="size-4">
-                    <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
-                  </svg>
+                  <Icons.arrowRight className="size-4" />
                 </a>
               </div>
             </motion.div>
@@ -391,9 +387,7 @@ export default function ContatoPage() {
                           ) : (
                             <>
                               Enviar mensagem
-                              <svg viewBox="0 0 20 20" fill="currentColor" className="size-4 transition-transform group-hover:translate-x-0.5">
-                                <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25H10a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.897 28.897 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
-                              </svg>
+                              <Icons.send className="size-4 transition-transform group-hover:translate-x-0.5" />
                             </>
                           )}
                         </span>

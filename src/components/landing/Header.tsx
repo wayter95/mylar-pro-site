@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { Icons } from "@/lib/icons";
 
 const APP_URL = "https://app.mylarpro.com.br";
 const REGISTER_URL = "https://app.mylarpro.com.br/register";
@@ -24,7 +25,36 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Início", exact: true },
-  { href: "/#funcionalidades", label: "Funcionalidades" },
+  {
+    href: "/features",
+    label: "Recursos",
+    children: [
+      {
+        href: "/features/broker-app",
+        label: "App do Corretor",
+        description: "App nativo iOS e Android para o corretor em campo.",
+        accent: "#1FB3D6",
+      },
+      {
+        href: "/features/property-catalog",
+        label: "Catálogo Público",
+        description: "Site de imóveis com SEO e domínio próprio.",
+        accent: "#2D6BE0",
+      },
+      {
+        href: "/features/client-portal",
+        label: "Portal do Cliente",
+        description: "Inquilino paga, proprietário acompanha repasses.",
+        accent: "#7C3AED",
+      },
+      {
+        href: "/features/digital-signature",
+        label: "Assinatura Digital",
+        description: "Contrato assinado em minutos, com validade jurídica.",
+        accent: "#0E2849",
+      },
+    ],
+  },
   {
     href: "/personas",
     label: "Para quem",
@@ -43,8 +73,9 @@ const navLinks: NavLink[] = [
       },
       {
         href: "/personas/development",
-        label: "Incorporadora",
-        description: "Espelho de vendas, Meta Ads e BI executivo em escala.",
+        label: "Lançamentos & Empreendimentos",
+        description:
+          "Incorporadoras, construtoras e loteadoras — espelho de vendas, Meta Ads e BI executivo.",
         accent: "#0E2849",
       },
     ],
@@ -202,9 +233,7 @@ export function Header() {
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
               <span className="relative flex items-center gap-1.5">
                 Criar conta
-                <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5 transition-transform group-hover:translate-x-0.5">
-                  <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
-                </svg>
+                <Icons.arrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </a>
           </div>
@@ -219,33 +248,27 @@ export function Header() {
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen ? (
-                <motion.svg
+                <motion.span
                   key="close"
-                  className="size-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   initial={{ opacity: 0, rotate: -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
                   exit={{ opacity: 0, rotate: 90 }}
                   transition={{ duration: 0.15 }}
+                  className="inline-flex"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </motion.svg>
+                  <Icons.close className="size-5" />
+                </motion.span>
               ) : (
-                <motion.svg
+                <motion.span
                   key="menu"
-                  className="size-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   initial={{ opacity: 0, rotate: 90 }}
                   animate={{ opacity: 1, rotate: 0 }}
                   exit={{ opacity: 0, rotate: -90 }}
                   transition={{ duration: 0.15 }}
+                  className="inline-flex"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </motion.svg>
+                  <Icons.menu className="size-5" />
+                </motion.span>
               )}
             </AnimatePresence>
           </button>
@@ -333,9 +356,7 @@ export function Header() {
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#2facde] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#2599bb]"
                 >
                   Criar conta grátis
-                  <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5">
-                    <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
-                  </svg>
+                  <Icons.arrowRight className="size-3.5" />
                 </a>
               </motion.div>
             </nav>
@@ -388,14 +409,10 @@ function NavItemWithChildren({
         ].join(" ")}
       >
         {link.label}
-        <svg
-          viewBox="0 0 12 12"
-          fill="currentColor"
-          className={`size-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
+        <Icons.chevronDown
           aria-hidden
-        >
-          <path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+          className={`size-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
+        />
         {active && (
           <motion.span
             layoutId="nav-active"
@@ -435,18 +452,10 @@ function NavItemWithChildren({
                     {child.description}
                   </span>
                 </span>
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="mt-1.5 size-3 shrink-0 text-slate-500 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                <Icons.arrowRight
                   aria-hidden
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                  className="mt-1.5 size-3 shrink-0 text-slate-500 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                />
               </a>
             ))}
 
@@ -456,7 +465,11 @@ function NavItemWithChildren({
                 role="menuitem"
                 className="flex items-center justify-between rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white"
               >
-                <span>Comparar as três versões</span>
+                <span>
+                  {link.href === "/personas"
+                    ? "Comparar as três versões"
+                    : "Ver todos os recursos"}
+                </span>
                 <span className="text-slate-500">→</span>
               </a>
             </div>

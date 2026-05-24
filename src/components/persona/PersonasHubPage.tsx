@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 import {
   PERSONA_HUB_CARDS,
   PERSONA_ORDER,
@@ -19,7 +20,7 @@ const discoveryQuestions: { question: string; slug: PersonaSlug }[] = [
     slug: "real-estate",
   },
   {
-    question: "Lança empreendimentos na planta?",
+    question: "Lança empreendimentos, condomínios ou loteamentos?",
     slug: "development",
   },
 ];
@@ -131,13 +132,7 @@ function HubDiscovery() {
                     style={{ color: persona.accent }}
                   >
                     Sim → Mylar para {persona.shortLabel.toLowerCase()}
-                    <svg viewBox="0 0 20 20" fill="currentColor" className="size-4">
-                      <path
-                        fillRule="evenodd"
-                        d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <Icons.arrowRight className="size-4" />
                   </span>
                 </Link>
               </motion.li>
@@ -240,13 +235,7 @@ function HubPersonaCard({ card, index }: { card: PersonaHubCard; index: number }
             }}
           >
             Ver Mylar para {persona.shortLabel.toLowerCase()}
-            <svg viewBox="0 0 20 20" fill="currentColor" className="size-4">
-              <path
-                fillRule="evenodd"
-                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <Icons.arrowRight className="size-4" />
           </Link>
           <div className="text-[13px] text-slate-500">
             <span className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
@@ -264,15 +253,11 @@ function HubPersonaCard({ card, index }: { card: PersonaHubCard; index: number }
           className="rounded-2xl bg-[#F8F9FB] p-7 lg:border-l-2"
           style={{ borderColor: `${card.accent}40` }}
         >
-          <svg
-            viewBox="0 0 32 24"
+          <Icons.quote
             aria-hidden
             className="size-5"
-            fill={card.accent}
-            style={{ opacity: 0.4 }}
-          >
-            <path d="M0 24V14C0 6.3 5.6 0.3 12 0v4c-4 0.4-7 3.6-7 7v1h7v12H0zm20 0V14c0-7.7 5.6-13.7 12-14v4c-4 0.4-7 3.6-7 7v1h7v12H20z" />
-          </svg>
+            style={{ color: card.accent, opacity: 0.4 }}
+          />
           <blockquote className="mt-3">
             <p className="text-[15px] leading-[1.45] font-medium text-slate-800">
               “{quote.quote}”
@@ -324,23 +309,23 @@ function HubComparisonTable() {
       values: [
         "Captação e fechamento solo",
         "Locação e vendas com equipe",
-        "Lançamento e VGV em escala",
+        "Lançamentos verticais e loteamentos",
       ],
     },
     {
       label: "Tamanho típico",
-      values: ["1 corretor", "5-40 agentes", "30+ corretores e equipe"],
+      values: ["1 corretor", "5-40 agentes", "Incorporadora, construtora ou loteadora"],
     },
     {
       label: "Carteira recomendada",
-      values: ["Até 200 imóveis", "300 a 1.000 imóveis", "Múltiplos empreendimentos"],
+      values: ["Até 200 imóveis", "300 a 1.000 imóveis", "Múltiplos empreendimentos e quadras"],
     },
     {
       label: "Destaques exclusivos",
       values: [
         "App mobile + WhatsApp + catálogo próprio",
         "Vistoria digital, DRE, DIMOB, conciliação",
-        "Meta Ads, espelho de vendas, BI executivo",
+        "Meta Ads, espelho vertical/horizontal, BI",
       ],
     },
     {
@@ -434,13 +419,7 @@ function HubComparisonTable() {
                         style={{ color: persona.accent }}
                       >
                         Ver plano completo
-                        <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5">
-                          <path
-                            fillRule="evenodd"
-                            d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                        <Icons.arrowRight className="size-3.5" />
                       </Link>
                     </td>
                   );
@@ -495,13 +474,7 @@ function HubCta() {
             style={{ boxShadow: "0 14px 24px -14px rgba(47, 172, 222, 0.7)" }}
           >
             Agendar conversa
-            <svg viewBox="0 0 20 20" fill="currentColor" className="size-4">
-              <path
-                fillRule="evenodd"
-                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <Icons.arrowRight className="size-4" />
           </Link>
         </div>
       </div>

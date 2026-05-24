@@ -1,5 +1,6 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { SectionHeader } from "./SectionHeader";
 import { KanbanMockup } from "./KanbanMockup";
 import { AnimateIn } from "./AnimateIn";
@@ -36,9 +37,7 @@ export function CampaignFunnel() {
               ].map((item) => (
                 <li key={item.text} className="flex items-start gap-3">
                   <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-lg bg-[#2facde]/10">
-                    <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5 text-[#2facde]">
-                      <path fillRule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm3.44-8.56a.75.75 0 00-1.06-1.06L7 8.76 5.53 7.28a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <Icons.checkCircle className="size-3.5 text-[#2facde]" />
                   </span>
                   <span className="text-slate-700">{item.text}</span>
                 </li>

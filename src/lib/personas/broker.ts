@@ -293,7 +293,7 @@ export const broker: PersonaContent = {
     },
     {
       q: "E se eu crescer e virar imobiliária?",
-      a: "Você muda de plano sem perder nenhum dado. O Mylar Pro foi desenhado pra crescer com você do corretor solo até a incorporadora.",
+      a: "Você muda de plano sem perder nenhum dado. O Mylar Pro foi desenhado pra crescer com você — do corretor solo à incorporadora, construtora ou loteadora.",
     },
   ],
 };

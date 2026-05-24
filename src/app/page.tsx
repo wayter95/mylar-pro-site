@@ -18,7 +18,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "Plataforma de gestão imobiliária com CRM, assinatura eletrônica, portal de catálogo e módulo financeiro integrado para imobiliárias, construtoras e incorporadoras.",
+    "Plataforma de gestão imobiliária com CRM, assinatura eletrônica, portal de catálogo e módulo financeiro integrado para imobiliárias, construtoras, incorporadoras e loteadoras.",
 };
 
 export default function Home() {

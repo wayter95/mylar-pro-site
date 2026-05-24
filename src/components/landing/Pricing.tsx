@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 import { AnimateInStagger, AnimateInItem } from "./AnimateIn";
 import { SectionHeader } from "./SectionHeader";
 
@@ -53,7 +54,7 @@ const plans = [
   {
     name: "Enterprise",
     price: "2.200+",
-    description: "Para construtoras e incorporadoras",
+    description: "Para incorporadoras, construtoras e loteadoras",
     features: [
       "Imóveis ilimitados",
       "Usuários ilimitados",
@@ -122,9 +123,7 @@ export function Pricing() {
                 <ul className="mt-6 flex-1 space-y-3">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-sm text-slate-600">
-                      <svg viewBox="0 0 16 16" fill="currentColor" className="size-4 shrink-0 text-[#2facde]">
-                        <path fillRule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm3.44-8.56a.75.75 0 00-1.06-1.06L7 8.76 5.53 7.28a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4-4z" clipRule="evenodd" />
-                      </svg>
+                      <Icons.checkCircle className="size-4 shrink-0 text-[#2facde]" />
                       {f}
                     </li>
                   ))}

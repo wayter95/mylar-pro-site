@@ -1,5 +1,6 @@
 "use client";
 
+import { Icons } from "@/lib/icons";
 import { AnimateIn } from "./AnimateIn";
 
 export function Roadmap() {
@@ -18,19 +19,7 @@ export function Roadmap() {
         <AnimateIn className="mt-8">
           <div className="mx-auto max-w-2xl rounded-2xl border border-[#37B6D6]/30 bg-white p-6 shadow-sm sm:p-8">
             <div className="flex flex-col items-center justify-center gap-3 text-center text-[#37B6D6] sm:flex-row sm:text-left">
-              <svg
-                className="h-6 w-6 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+              <Icons.check className="h-6 w-6 shrink-0" strokeWidth={2} />
               <p className="font-medium">
                 Mais alcance, menos retrabalho. Seus imóveis onde seus clientes
                 estão.
