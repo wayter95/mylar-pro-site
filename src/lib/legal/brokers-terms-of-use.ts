@@ -16,8 +16,12 @@ export const brokersTermsOfUse: LegalContent = {
   intro: {
     pt: `Estes Termos de Uso ("Termos") regem o acesso e a utilização do aplicativo móvel Mylar Pro Brokers (o "Aplicativo"), disponibilizado pela My Lar, CNPJ 54.865.990/0001-50 ("Mylar Pro", "nós").
 
+A plataforma Mylar Pro é um serviço empresarial (B2B) destinado exclusivamente a pessoas jurídicas. A contratação é feita pela imobiliária ou corretor constituído como pessoa jurídica mediante apresentação de identificação empresarial válida (CNPJ no Brasil ou equivalente em outros países). Não oferecemos a Plataforma a pessoas físicas, consumidores finais ou para uso familiar. O Aplicativo é uma ferramenta profissional disponibilizada por uma imobiliária cliente aos seus corretores.
+
 Ao instalar, acessar ou utilizar o Aplicativo, você ("usuário", "corretor") declara ter lido, compreendido e aceito integralmente estes Termos e a nossa Política de Privacidade. Caso não concorde com qualquer disposição, não utilize o Aplicativo.`,
     en: `These Terms of Use ("Terms") govern access to and use of the Mylar Pro Brokers mobile application (the "App"), provided by My Lar, CNPJ 54.865.990/0001-50 ("Mylar Pro", "we").
+
+The Mylar Pro platform is an enterprise (B2B) service intended exclusively for legal entities. Subscriptions are contracted by the agency or by a real estate broker incorporated as a legal entity, upon presentation of a valid business registration ID (CNPJ in Brazil or its equivalent in other countries). The Platform is not offered to individual consumers, private users, or for family use. The App is a professional tool provided by a contracting agency to its agents.
 
 By installing, accessing, or using the App, you ("user", "broker") declare that you have read, understood, and fully accepted these Terms and our Privacy Policy. If you do not agree with any provision, do not use the App.`,
   },

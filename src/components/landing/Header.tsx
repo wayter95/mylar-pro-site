@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -8,10 +8,47 @@ import Image from "next/image";
 const APP_URL = "https://app.mylarpro.com.br";
 const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
-const navLinks = [
+type NavChild = {
+  href: string;
+  label: string;
+  description: string;
+  accent: string;
+};
+
+type NavLink = {
+  href: string;
+  label: string;
+  exact?: boolean;
+  children?: NavChild[];
+};
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Início", exact: true },
   { href: "/#funcionalidades", label: "Funcionalidades" },
-  { href: "/#personas", label: "Para quem" },
+  {
+    href: "/personas",
+    label: "Para quem",
+    children: [
+      {
+        href: "/personas/broker",
+        label: "Corretor autônomo",
+        description: "CRM, catálogo no seu domínio e WhatsApp num só lugar.",
+        accent: "#1FB3D6",
+      },
+      {
+        href: "/personas/real-estate",
+        label: "Imobiliária",
+        description: "Locação, vendas, cobrança e financeiro com equipe.",
+        accent: "#2D6BE0",
+      },
+      {
+        href: "/personas/development",
+        label: "Incorporadora",
+        description: "Espelho de vendas, Meta Ads e BI executivo em escala.",
+        accent: "#0E2849",
+      },
+    ],
+  },
   { href: "/contact", label: "Contato" },
 ];
 
@@ -110,12 +147,24 @@ export function Header() {
           <nav className="hidden flex-1 items-center gap-0.5 md:flex">
             {navLinks.map((link) => {
               const active = isActive(link);
+              const hasChildren = link.children && link.children.length > 0;
+
+              if (hasChildren) {
+                return (
+                  <NavItemWithChildren
+                    key={link.href}
+                    link={link}
+                    active={active}
+                  />
+                );
+              }
+
               return (
                 <a
                   key={link.href}
                   href={link.href}
                   className={[
-                    "relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
+                    "relative whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
                     active
                       ? "text-white"
                       : "text-slate-400 hover:bg-white/5 hover:text-slate-200",
@@ -217,25 +266,47 @@ export function Header() {
               {navLinks.map((link, i) => {
                 const active = isActive(link);
                 return (
-                  <motion.a
+                  <motion.div
                     key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * i, duration: 0.25 }}
-                    className={[
-                      "flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition",
-                      active
-                        ? "bg-white/[0.06] text-white"
-                        : "text-slate-400 hover:bg-white/5 hover:text-white",
-                    ].join(" ")}
                   >
-                    {active && (
-                      <span className="size-1.5 rounded-full bg-[#2facde]" />
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={[
+                        "flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition",
+                        active
+                          ? "bg-white/[0.06] text-white"
+                          : "text-slate-400 hover:bg-white/5 hover:text-white",
+                      ].join(" ")}
+                    >
+                      {active && (
+                        <span className="size-1.5 rounded-full bg-[#2facde]" />
+                      )}
+                      {link.label}
+                    </a>
+
+                    {link.children && link.children.length > 0 && (
+                      <div className="ml-4 mt-1 mb-1 flex flex-col gap-0.5 border-l border-white/10 pl-3">
+                        {link.children.map((child) => (
+                          <a
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white"
+                          >
+                            <span
+                              className="size-1 rounded-full"
+                              style={{ backgroundColor: child.accent }}
+                            />
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
                     )}
-                    {link.label}
-                  </motion.a>
+                  </motion.div>
                 );
               })}
 
@@ -272,5 +343,126 @@ export function Header() {
         )}
       </AnimatePresence>
     </motion.header>
+  );
+}
+
+function NavItemWithChildren({
+  link,
+  active,
+}: {
+  link: NavLink;
+  active: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function handleEnter() {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpen(true);
+  }
+
+  function handleLeave() {
+    closeTimeoutRef.current = setTimeout(() => setOpen(false), 120);
+  }
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      onFocus={handleEnter}
+      onBlur={handleLeave}
+    >
+      <a
+        href={link.href}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className={[
+          "relative flex items-center gap-1 whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
+          active
+            ? "text-white"
+            : "text-slate-400 hover:bg-white/5 hover:text-slate-200",
+        ].join(" ")}
+      >
+        {link.label}
+        <svg
+          viewBox="0 0 12 12"
+          fill="currentColor"
+          className={`size-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden
+        >
+          <path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        {active && (
+          <motion.span
+            layoutId="nav-active"
+            className="absolute inset-0 -z-10 rounded-lg bg-white/[0.08]"
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+          />
+        )}
+      </a>
+
+      <AnimatePresence>
+        {open && link.children && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            role="menu"
+            className="absolute left-1/2 top-full z-50 mt-2 w-[320px] -translate-x-1/2 overflow-hidden rounded-xl border border-white/10 bg-slate-950/98 p-2 shadow-2xl backdrop-blur-xl"
+          >
+            {link.children.map((child) => (
+              <a
+                key={child.href}
+                href={child.href}
+                role="menuitem"
+                className="group flex gap-3 rounded-lg px-3 py-2.5 transition hover:bg-white/[0.06]"
+              >
+                <span
+                  aria-hidden
+                  className="mt-1.5 size-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: child.accent }}
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold text-white">
+                    {child.label}
+                  </span>
+                  <span className="mt-0.5 block text-[12px] leading-snug text-slate-400">
+                    {child.description}
+                  </span>
+                </span>
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="mt-1.5 size-3 shrink-0 text-slate-500 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  aria-hidden
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+            ))}
+
+            <div className="mt-1 border-t border-white/5 pt-1">
+              <a
+                href={link.href}
+                role="menuitem"
+                className="flex items-center justify-between rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                <span>Comparar as três versões</span>
+                <span className="text-slate-500">→</span>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

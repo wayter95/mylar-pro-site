@@ -1,111 +1,138 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { AnimateInStagger, AnimateInItem } from "./AnimateIn";
-import { SectionHeader } from "./SectionHeader";
-
-const personas = [
-  {
-    title: "Imobiliárias",
-    description:
-      "Gestão completa da sua carteira de vendas e locações com CRM, contratos, cobranças e catálogo online — tudo integrado.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" className="size-8">
-        <rect x="4" y="8" width="24" height="20" rx="2" fill="currentColor" opacity="0.15" />
-        <path d="M4 8h24a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V10a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M10 15h4v4h-4zM18 15h4v4h-4zM10 22h4v6h-4z" fill="currentColor" opacity="0.3" />
-        <path d="M16 2l-12 6h24l-12-6z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-    features: ["CRM + Kanban", "Assinatura digital", "Portal de imóveis"],
-    gradient: "from-blue-500/10 to-cyan-500/10",
-    borderHover: "hover:border-blue-400/40",
-  },
-  {
-    title: "Incorporadoras",
-    description:
-      "Controle de empreendimentos, vendas por unidade e CRM para equipes de lançamento em uma plataforma pensada para quem constrói.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" className="size-8">
-        <rect x="6" y="4" width="10" height="24" rx="1" fill="currentColor" opacity="0.15" />
-        <rect x="16" y="10" width="10" height="18" rx="1" fill="currentColor" opacity="0.1" />
-        <path d="M6 4h10a1 1 0 011 1v22a1 1 0 01-1 1H6a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M16 10h10a1 1 0 011 1v16a1 1 0 01-1 1H16" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M8 8h2v2H8zM12 8h2v2h-2zM8 13h2v2H8zM12 13h2v2h-2zM19 14h2v2h-2zM23 14h2v2h-2zM19 19h2v2h-2z" fill="currentColor" opacity="0.4" />
-      </svg>
-    ),
-    features: ["Gestão por unidade", "Comissões automáticas", "API de integração"],
-    gradient: "from-purple-500/10 to-pink-500/10",
-    borderHover: "hover:border-purple-400/40",
-  },
-  {
-    title: "Corretores Autônomos",
-    description:
-      "CRM pessoal com pipeline visual, assinatura de contratos e portal de imóveis para captar clientes sem complexidade.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" className="size-8">
-        <circle cx="16" cy="12" r="6" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M22 10l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    features: ["Pipeline pessoal", "Sem complexidade", "Catálogo próprio"],
-    gradient: "from-emerald-500/10 to-teal-500/10",
-    borderHover: "hover:border-emerald-400/40",
-  },
-];
+import { PERSONA_HUB_CARDS, personasRecord } from "@/lib/personas";
 
 export function Personas() {
   return (
     <section
       id="personas"
-      className="border-t border-slate-200 bg-slate-50 py-16 lg:py-24"
+      className="relative overflow-hidden border-t border-slate-200 bg-[#F8F9FB] py-20 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title="Para quem é"
-          highlight="o Mylar Pro?"
-          description="Uma plataforma que se adapta a cada perfil do mercado imobiliário."
-        />
+        {/* Editorial header */}
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-slate-300" />
+              <span className="font-mono text-[11px] font-semibold tracking-[0.18em] text-[#2facde] uppercase">
+                Para quem
+              </span>
+            </div>
+            <h2 className="mt-5 text-3xl leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.75rem]">
+              Três versões.{" "}
+              <span className="text-slate-400">Uma plataforma.</span>
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
+            O Mylar Pro vai do corretor solo à incorporadora bilionária. Mesmo
+            CRM, mesmo catálogo, mesmo motor financeiro — o que muda são os
+            módulos e a capacidade.
+          </p>
+        </div>
 
-        <AnimateInStagger
-          className="mt-12 grid gap-5 md:grid-cols-3 lg:mt-16 lg:gap-6"
-          stagger={0.12}
-        >
-          {personas.map((p) => (
-            <AnimateInItem key={p.title} className="flex">
-              <motion.a
-                href="/#funcionalidades"
-                className={`group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 transition-all ${p.borderHover} hover:shadow-xl`}
-                whileHover={{ y: -4, transition: { duration: 0.25 } }}
+        {/* Persona cards — editorial, sem ícone genérico nem gradient pastel */}
+        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:mt-20 lg:grid-cols-3">
+          {PERSONA_HUB_CARDS.map((card, i) => {
+            const persona = personasRecord[card.slug];
+            return (
+              <motion.div
+                key={card.slug}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: 0.08 * i }}
+                className="flex flex-col bg-white"
               >
-                <div className={`mb-5 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br ${p.gradient} text-slate-700`}>
-                  {p.icon}
-                </div>
-                <h3 className="text-xl font-bold text-slate-900">{p.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-                  {p.description}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {p.features.map((f) => (
-                    <span
-                      key={f}
-                      className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-600"
-                    >
-                      {f}
+                <Link
+                  href={persona.href}
+                  className="group flex h-full flex-col p-7 transition hover:bg-slate-50/60 lg:p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-slate-400">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                  ))}
-                </div>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2facde] transition-all group-hover:gap-2.5">
-                  Ver funcionalidades
-                  <svg viewBox="0 0 16 16" fill="currentColor" className="size-4">
-                    <path fillRule="evenodd" d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z" clipRule="evenodd" />
-                  </svg>
-                </span>
-              </motion.a>
-            </AnimateInItem>
-          ))}
-        </AnimateInStagger>
+                    <span className="h-px w-6 bg-slate-300" />
+                    <span
+                      className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
+                      style={{ color: card.accent }}
+                    >
+                      {persona.shortLabel}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-5 text-xl leading-tight font-extrabold tracking-tight text-slate-900 lg:text-[1.35rem]">
+                    {card.label}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    {card.description}
+                  </p>
+
+                  <ul className="mt-5 space-y-2">
+                    {card.highlights.slice(0, 3).map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2 text-[13px] text-slate-700"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-1.5 size-1.5 shrink-0 rounded-full"
+                          style={{ backgroundColor: card.accent }}
+                        />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto flex items-center justify-between pt-7">
+                    <div>
+                      <p className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
+                        A partir de
+                      </p>
+                      <p className="mt-0.5 text-base font-bold text-slate-900">
+                        R$ {card.fromPrice.toLocaleString("pt-BR")}
+                        <span className="text-xs font-medium text-slate-500">
+                          /mês
+                        </span>
+                      </p>
+                    </div>
+                    <span
+                      className="inline-flex items-center gap-1 text-[13px] font-semibold transition group-hover:gap-2"
+                      style={{ color: card.accent }}
+                    >
+                      Ver detalhes
+                      <svg
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        className="size-3.5"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M2 8a.75.75 0 01.75-.75h8.69L8.22 4.03a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.22H2.75A.75.75 0 012 8z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Link para hub */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/personas"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition hover:text-slate-900"
+          >
+            <span className="border-b border-dotted border-slate-400 pb-px group-hover:border-slate-600">
+              Comparar as três lado a lado
+            </span>
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

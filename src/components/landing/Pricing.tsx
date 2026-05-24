@@ -146,10 +146,6 @@ export function Pricing() {
             </AnimateInItem>
           ))}
         </AnimateInStagger>
-
-        <p className="mt-8 text-center text-sm text-slate-400">
-          Receita adicional: R$ 1,50 por cobrança emitida no módulo financeiro
-        </p>
       </div>
     </section>
   );
