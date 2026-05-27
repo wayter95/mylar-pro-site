@@ -68,9 +68,9 @@ function HubHero() {
           transition={{ duration: 0.55 }}
           className="mt-8 max-w-4xl text-[2.5rem] leading-[0.98] font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem]"
         >
-          Três versões da mesma plataforma —{" "}
-          <span className="text-slate-400">
-            uma cresce com você até a incorporadora.
+          Do corretor solo à incorporadora.{" "}
+          <span className="text-[#2facde]">
+            A mesma plataforma cresce com você.
           </span>
         </motion.h1>
 

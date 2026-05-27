@@ -51,7 +51,7 @@ const navLinks: NavLink[] = [
         href: "/features/digital-signature",
         label: "Assinatura Digital",
         description: "Contrato assinado em minutos, com validade jurídica.",
-        accent: "#0E2849",
+        accent: "#F59E0B",
       },
     ],
   },
@@ -76,7 +76,7 @@ const navLinks: NavLink[] = [
         label: "Lançamentos & Empreendimentos",
         description:
           "Incorporadoras, construtoras e loteadoras — espelho de vendas, Meta Ads e BI executivo.",
-        accent: "#0E2849",
+        accent: "#10B981",
       },
     ],
   },

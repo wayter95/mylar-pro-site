@@ -4,7 +4,7 @@ export const development: PersonaContent = {
   slug: "development",
   label: "Lançamentos & Empreendimentos",
   shortLabel: "Empreendimentos",
-  accent: "#0E2849",
+  accent: "#10B981",
   href: "/personas/development",
   hero: {
     tag: "Para incorporadoras, construtoras e loteadoras",

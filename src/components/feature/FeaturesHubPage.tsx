@@ -45,7 +45,7 @@ function HubHero() {
           className="mt-8 max-w-4xl text-[2rem] leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-[2.5rem] sm:leading-[1] md:text-5xl lg:text-[3.75rem] lg:leading-[0.98]"
         >
           Quatro recursos.{" "}
-          <span className="text-slate-400">
+          <span className="text-[#2facde]">
             Uma plataforma que cresce com você.
           </span>
         </motion.h1>

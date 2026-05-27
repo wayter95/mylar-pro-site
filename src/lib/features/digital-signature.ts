@@ -6,7 +6,7 @@ export const digitalSignature: FeatureContent = {
   label: "Assinatura Digital",
   shortLabel: "Assinatura Digital",
   href: "/features/digital-signature",
-  accent: "#0E2849",
+  accent: "#F59E0B",
   eyebrow: "Recurso · Contratos",
   hero: {
     title: "Assinatura digital ",
