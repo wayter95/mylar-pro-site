@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const FORM_URL =
-  "https://api.conversaai.tech/api/public/forms/newsletter-mylar-pro/submit";
+  "https://api.cognizy.ai/api/public/forms/newsletter-mylar-pro/submit";
 
 // Rate limit: IP -> { count, resetAt }
 const rateMap = new Map<string, { count: number; resetAt: number }>();

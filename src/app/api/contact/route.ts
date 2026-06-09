@@ -8,7 +8,7 @@ import sgMail from "@sendgrid/mail";
 import { NextResponse } from "next/server";
 
 const CONVERSA_CONTACT_FORM_URL =
-  "https://api.conversaai.tech/api/public/forms/mylar-pro-site-contact-form/submit";
+  "https://api.cognizy.ai/api/public/forms/mylar-pro-site-contact-form/submit";
 
 // Tempo mínimo para preenchimento (anti-bot)
 const MIN_FORM_TIME_MS = 3000;
