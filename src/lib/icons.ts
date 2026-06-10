@@ -68,11 +68,13 @@ import {
 } from "react-icons/lu";
 import {
   SiApple,
+  SiFacebook,
   SiGoogleplay,
   SiInstagram,
   SiMeta,
   SiWhatsapp,
 } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 
 /**
  * Mapping semântico — use estes nomes nos componentes, não as classes da lib.
@@ -159,6 +161,8 @@ export const Icons = {
   whatsapp: SiWhatsapp,
   meta: SiMeta,
   instagram: SiInstagram,
+  linkedin: FaLinkedin,
+  facebook: SiFacebook,
 } as const;
 
 export type IconName = keyof typeof Icons;
