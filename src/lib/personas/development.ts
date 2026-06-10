@@ -3,7 +3,7 @@ import type { PersonaContent } from "./types";
 export const development: PersonaContent = {
   slug: "development",
   label: "Lançamentos & Empreendimentos",
-  shortLabel: "Empreendimentos",
+  shortLabel: "Incorporadora",
   accent: "#10B981",
   href: "/personas/development",
   hero: {

@@ -80,6 +80,7 @@ const navLinks: NavLink[] = [
       },
     ],
   },
+  { href: "/plans", label: "Planos" },
   { href: "/contact", label: "Contato" },
 ];
 

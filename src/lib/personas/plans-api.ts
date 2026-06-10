@@ -12,6 +12,8 @@ type ApiPlan = {
   name: string;
   price: number;
   priceAnnual?: number;
+  priceYearlyTotal?: number;
+  annualDiscountPercent?: number;
   tagline: string;
   idealFor?: string | null;
   badge?: string | null;
@@ -44,6 +46,14 @@ function toPersonaPlan(plan: ApiPlan): PersonaPlan {
     name: plan.name,
     price: plan.price,
     priceAnnual,
+    priceYearlyTotal:
+      typeof plan.priceYearlyTotal === "number"
+        ? plan.priceYearlyTotal
+        : priceAnnual * 12,
+    annualDiscountPercent:
+      typeof plan.annualDiscountPercent === "number"
+        ? plan.annualDiscountPercent
+        : undefined,
     tagline: plan.tagline ?? "",
     idealFor: plan.idealFor ?? undefined,
     limits: plan.limits,

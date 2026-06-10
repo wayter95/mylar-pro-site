@@ -59,6 +59,8 @@ export type PersonaPlan = {
   name: string;
   price: number;
   priceAnnual: number;
+  priceYearlyTotal?: number;
+  annualDiscountPercent?: number;
   tagline: string;
   idealFor?: string;
   limits: { v: string; l: string }[];
