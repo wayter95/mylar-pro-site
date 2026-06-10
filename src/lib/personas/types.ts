@@ -102,7 +102,7 @@ export type PersonaContent = {
   steps: PersonaStep[];
   stepsHeadline: { title: string; subtitle: string };
   testimonials: PersonaTestimonial[];
-  plans: PersonaPlan[];
+  plans?: PersonaPlan[];
   comparison: PersonaComparison;
   faq: PersonaFaq[];
 };

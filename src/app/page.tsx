@@ -10,6 +10,7 @@ import { Hero } from "@/components/landing/Hero";
 import { Personas } from "@/components/landing/Personas";
 import { Newsletter } from "@/components/landing/Newsletter";
 import { Trust } from "@/components/landing/Trust";
+import { fetchPersonaFromPrices } from "@/lib/personas/plans-api";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -21,7 +22,9 @@ const jsonLd = {
     "Plataforma de gestão imobiliária com CRM, assinatura eletrônica, portal de catálogo e módulo financeiro integrado para imobiliárias, construtoras, incorporadoras e loteadoras.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const fromPrices = await fetchPersonaFromPrices();
+
   return (
     <main>
       <script
@@ -35,7 +38,7 @@ export default function Home() {
       <AntiChaosSection />
       <CampaignFunnel />
       <Trust />
-      <Personas />
+      <Personas fromPrices={fromPrices} />
       <GettingStarted />
       <CTA />
       <Newsletter />

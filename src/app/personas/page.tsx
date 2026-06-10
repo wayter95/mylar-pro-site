@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/landing/Footer";
 import { Header } from "@/components/landing/Header";
 import { PersonasHubPage } from "@/components/persona/PersonasHubPage";
+import { fetchPersonaFromPrices } from "@/lib/personas/plans-api";
 
 export const metadata: Metadata = {
   title:
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PersonasHub() {
+export default async function PersonasHub() {
+  const fromPrices = await fetchPersonaFromPrices();
+
   return (
     <main className="pt-14 sm:pt-16">
       <Header />
-      <PersonasHubPage />
+      <PersonasHubPage fromPrices={fromPrices} />
       <Footer />
     </main>
   );

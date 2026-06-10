@@ -9,16 +9,24 @@ import { REGISTER_URL } from "@/lib/personas";
 import type { PersonaPlan } from "@/lib/personas/types";
 
 type Props = {
-  plans: PersonaPlan[];
+  plans?: PersonaPlan[];
   personaLabel: string;
   accent: string;
 };
 
 function formatMonthly(price: number) {
-  return price.toLocaleString("pt-BR");
+  const hasCents = !Number.isInteger(price);
+  return price.toLocaleString("pt-BR", {
+    minimumFractionDigits: hasCents ? 2 : 0,
+    maximumFractionDigits: 2,
+  });
 }
 
 export function PersonaPricing({ plans, personaLabel, accent }: Props) {
+  if (!plans || plans.length === 0) {
+    return null;
+  }
+
   return (
     <section
       id="planos"
@@ -92,7 +100,13 @@ function PlanColumn({
   accent: string;
   index: string;
 }) {
-  const monthlyPrice = formatMonthly(plan.priceAnnual);
+  const annualMonthlyValue =
+    plan.priceAnnual && plan.priceAnnual > 0 ? plan.priceAnnual : plan.price;
+  const monthlyPrice = formatMonthly(annualMonthlyValue);
+  const discountPercent =
+    plan.price > 0 && annualMonthlyValue < plan.price
+      ? Math.round((1 - annualMonthlyValue / plan.price) * 100)
+      : 0;
 
   return (
     <motion.div
@@ -149,17 +163,27 @@ function PlanColumn({
             {monthlyPrice}
           </span>
           <span className="ml-1 text-sm text-slate-400">/mês</span>
+          {discountPercent > 0 && (
+            <span
+              className="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wide"
+              style={{ backgroundColor: `${accent}1a`, color: accent }}
+            >
+              -{discountPercent}%
+            </span>
+          )}
         </div>
         <p className="mt-1.5 text-[11px] text-slate-500">
-          ou R$ {formatMonthly(plan.price)}/mês no mensal
+          {discountPercent > 0
+            ? `no plano anual · ou R$ ${formatMonthly(plan.price)}/mês no mensal`
+            : `cobrança mensal`}
         </p>
       </div>
 
       {/* CTA */}
       <a
-        href={REGISTER_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={plan.contactSales ? "/contact" : REGISTER_URL}
+        target={plan.contactSales ? undefined : "_blank"}
+        rel={plan.contactSales ? undefined : "noopener noreferrer"}
         className={`mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-lg py-3 text-sm font-semibold transition ${
           plan.featured
             ? "text-white hover:-translate-y-0.5"
@@ -171,7 +195,7 @@ function PlanColumn({
             : undefined
         }
       >
-        Testar 30 dias
+        {plan.cta}
         <Icons.arrowRight className="size-4" />
       </a>
 

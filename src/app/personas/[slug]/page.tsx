@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PersonaLanding } from "@/components/persona/PersonaLanding";
 import { allPersonaSlugs, getPersona, isPersonaSlug } from "@/lib/personas";
+import { fetchPersonaPlans } from "@/lib/personas/plans-api";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -42,5 +43,8 @@ export default async function PersonaPage({ params }: Props) {
     notFound();
   }
 
-  return <PersonaLanding persona={persona} />;
+  const apiPlans = await fetchPersonaPlans(slug);
+  const personaWithPlans = { ...persona, plans: apiPlans };
+
+  return <PersonaLanding persona={personaWithPlans} />;
 }

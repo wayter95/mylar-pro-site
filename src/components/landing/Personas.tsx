@@ -4,8 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/lib/icons";
 import { PERSONA_HUB_CARDS, personasRecord } from "@/lib/personas";
+import type { PersonaSlug } from "@/lib/personas/types";
 
-export function Personas() {
+type Props = {
+  fromPrices?: Partial<Record<PersonaSlug, number>>;
+};
+
+export function Personas({ fromPrices }: Props) {
   return (
     <section
       id="personas"
@@ -37,6 +42,7 @@ export function Personas() {
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:mt-20 lg:grid-cols-3">
           {PERSONA_HUB_CARDS.map((card, i) => {
             const persona = personasRecord[card.slug];
+            const fromPrice = fromPrices?.[card.slug] ?? card.fromPrice;
             return (
               <motion.div
                 key={card.slug}
@@ -92,7 +98,7 @@ export function Personas() {
                         A partir de
                       </p>
                       <p className="mt-0.5 text-base font-bold text-slate-900">
-                        R$ {card.fromPrice.toLocaleString("pt-BR")}
+                        R$ {fromPrice.toLocaleString("pt-BR")}
                         <span className="text-xs font-medium text-slate-500">
                           /mês
                         </span>

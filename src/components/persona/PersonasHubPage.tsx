@@ -25,12 +25,16 @@ const discoveryQuestions: { question: string; slug: PersonaSlug }[] = [
   },
 ];
 
-export function PersonasHubPage() {
+export function PersonasHubPage({
+  fromPrices,
+}: {
+  fromPrices?: Partial<Record<PersonaSlug, number>>;
+}) {
   return (
     <>
       <HubHero />
       <HubDiscovery />
-      <HubPersonaCards />
+      <HubPersonaCards fromPrices={fromPrices} />
       <HubComparisonTable />
       <HubCta />
     </>
@@ -144,7 +148,11 @@ function HubDiscovery() {
   );
 }
 
-function HubPersonaCards() {
+function HubPersonaCards({
+  fromPrices,
+}: {
+  fromPrices?: Partial<Record<PersonaSlug, number>>;
+}) {
   return (
     <section className="border-t border-slate-200 bg-[#F8F9FB] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -168,7 +176,12 @@ function HubPersonaCards() {
 
         <div className="mt-16 grid gap-8 lg:mt-20 lg:gap-10">
           {PERSONA_HUB_CARDS.map((card, i) => (
-            <HubPersonaCard key={card.slug} card={card} index={i} />
+            <HubPersonaCard
+              key={card.slug}
+              card={card}
+              index={i}
+              fromPrice={fromPrices?.[card.slug] ?? card.fromPrice}
+            />
           ))}
         </div>
       </div>
@@ -176,7 +189,15 @@ function HubPersonaCards() {
   );
 }
 
-function HubPersonaCard({ card, index }: { card: PersonaHubCard; index: number }) {
+function HubPersonaCard({
+  card,
+  index,
+  fromPrice,
+}: {
+  card: PersonaHubCard;
+  index: number;
+  fromPrice: number;
+}) {
   const persona = personasRecord[card.slug];
   const quote = persona.testimonials.find((t) => t.featured) ?? persona.testimonials[0];
 
@@ -242,7 +263,7 @@ function HubPersonaCard({ card, index }: { card: PersonaHubCard; index: number }
               A partir de
             </span>{" "}
             <span className="font-semibold text-slate-800">
-              R$ {card.fromPrice.toLocaleString("pt-BR")}/mês
+              R$ {fromPrice.toLocaleString("pt-BR")}/mês
             </span>
           </div>
         </div>
