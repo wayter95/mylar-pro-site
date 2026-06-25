@@ -25,6 +25,7 @@ type Props = {
   alternateHref: string;
   alternateLabel: { pt: string; en: string };
   content: LegalContent;
+  appLabel?: string;
 };
 
 const L = {
@@ -59,6 +60,7 @@ export function LegalDocument({
   alternateHref,
   alternateLabel,
   content,
+  appLabel = "Mylar Pro Brokers",
 }: Props) {
   const [locale, setLocale] = useState<LegalLocale>(defaultLocale);
   const t = L[locale];
@@ -85,7 +87,7 @@ export function LegalDocument({
 
       <header className="mb-10 border-b border-slate-200 pb-8">
         <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-blue-600">
-          Mylar Pro Brokers
+          {appLabel}
         </p>
         <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
           {content.title[locale]}

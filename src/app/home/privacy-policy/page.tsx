@@ -28,6 +28,7 @@ export default function HomePrivacyPolicyPage() {
           alternateHref="/home/terms-of-use"
           alternateLabel={{ pt: "Termos de Uso", en: "Terms of Use" }}
           content={homePrivacyPolicy}
+          appLabel="Mylar Pro Home"
         />
       </main>
       <Footer />
