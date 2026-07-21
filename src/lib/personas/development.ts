@@ -20,7 +20,7 @@ export const development: PersonaContent = {
     trust: [
       "30 dias grátis · todas as funcionalidades",
       "Onboarding com Customer Success",
-      "SLA enterprise · LGPD certificado",
+      "Suporte prioritário · conforme a LGPD",
     ],
   },
   pains: [
@@ -109,8 +109,8 @@ export const development: PersonaContent = {
       body: "CCV, distrato, aditivos. Templates por empreendimento. Assinatura digital com fluxo customizado.",
     },
     {
-      title: "Compliance & LGPD",
-      body: "SSO/SAML, auditoria granular, retenção configurável. Certificações ISO 27001 e LGPD.",
+      title: "Suporte enterprise dedicado",
+      body: "Gerente de conta dedicado, SLA prioritário de resposta e integração nativa com o ERP Sienge. Proteção de dados alinhada à LGPD.",
     },
   ],
   featuresHeadline: {
@@ -204,10 +204,10 @@ export const development: PersonaContent = {
       {
         name: "Enterprise",
         rows: [
-          ["Customer Success dedicado", false, false, true],
-          ["SLA 99.9%", false, false, true],
-          ["SSO/SAML", false, false, true],
-          ["API & webhooks", false, false, true],
+          ["Gerente de conta dedicado", false, false, true],
+          ["Suporte prioritário (SLA < 2h)", false, false, true],
+          ["Integração ERP Sienge", false, false, true],
+          ["Relatórios avançados de empreendimentos", false, false, true],
         ],
       },
     ],
@@ -222,8 +222,8 @@ export const development: PersonaContent = {
       a: "Selecionamos 1 empreendimento (geralmente o próximo lançamento) e rodamos a plataforma por 60-90 dias com Customer Success dedicado. Sucesso comprovado vira contrato corporativo para o portfólio inteiro.",
     },
     {
-      q: "Vocês integram com nosso ERP atual (TOTVS, Sienge, UAU)?",
-      a: "Sim. Temos integrações nativas com Sienge, TOTVS Construção, UAU, Globaltec e outros. APIs e webhooks bidirecionais para sincronização contábil e de obra.",
+      q: "Vocês integram com o Sienge?",
+      a: "Sim, temos integração nativa com o Sienge no plano Avançado. Outras integrações podem ser avaliadas sob demanda.",
     },
     {
       q: "Como funciona a integração com Meta Ads?",
@@ -235,11 +235,7 @@ export const development: PersonaContent = {
     },
     {
       q: "É compatível com LGPD?",
-      a: "Sim. Mylar Pro é certificado LGPD com Data Protection Officer dedicado. Retenção configurável, base legal por finalidade, exportação e exclusão sob demanda, DPA disponível.",
-    },
-    {
-      q: "Tem SSO corporativo?",
-      a: "Sim, plano Avançado. Suportamos SAML 2.0 (Okta, Azure AD, Google Workspace) e OIDC. Provisionamento SCIM disponível.",
+      a: "Sim. O tratamento de dados no Mylar Pro é conduzido em conformidade com a LGPD, com Encarregado (DPO) designado, base legal por finalidade e exportação e exclusão de dados sob demanda.",
     },
     {
       q: "E se precisarmos de customização para um lançamento específico?",

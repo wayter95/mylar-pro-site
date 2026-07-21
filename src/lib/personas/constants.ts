@@ -68,7 +68,7 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
     highlights: [
       "Torres, unidades e loteamentos",
       "Meta Ads + atribuição lead-to-deal",
-      "SSO/SAML · LGPD certificado",
+      "Integração Sienge · Gerente de conta dedicado",
     ],
     accent: "#0f2847",
   },
