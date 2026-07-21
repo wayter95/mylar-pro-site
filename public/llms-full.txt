@@ -1,0 +1,117 @@
+# Mylar Pro — Guia completo
+
+> Plataforma completa de gestão imobiliária para imobiliárias, incorporadoras, construtoras, loteadoras e corretores autônomos. Reúne CRM com Kanban, assinatura eletrônica com validade jurídica, cobrança por boleto e PIX, portal do cliente, catálogo público de imóveis e módulo financeiro — tudo integrado em uma só plataforma.
+
+Operado pela My Lar (CNPJ 54.865.990/0001-50). Site: https://mylarpro.com.br · Plataforma: https://app.mylarpro.com.br · Contato: contato@mylarapp.com · WhatsApp: +55 61 98189-6419.
+
+Diferenciais gerais: teste grátis de 30 dias com todas as funcionalidades liberadas, sem cartão de crédito e sem multa de fidelidade; pagamento mensal cancelável a qualquer momento (planos anuais com desconto); migração de dados incluída; o mesmo produto escala do corretor solo à incorporadora.
+
+---
+
+## Personas
+
+### Corretor Autônomo — https://mylarpro.com.br/personas/broker
+Sua carteira de imóveis organizada e gerando comissão todo mês. O Mylar Pro reúne CRM, catálogo, WhatsApp e contratos digitais num só lugar — para você fechar mais sem perder lead na planilha. Ideal para quem trabalha sozinho e quer profissionalizar a operação sem virar refém de portal.
+
+FAQ:
+- Como funciona o teste grátis? 30 dias com acesso a TODAS as funcionalidades — independente do plano. Você testa tudo (CRM, catálogo, WhatsApp, contratos, domínio próprio, assinatura digital) e só depois escolhe o plano que faz sentido pra você. Sem cartão de crédito, sem letras miúdas.
+- Posso migrar minha planilha de imóveis? Sim. Aceitamos CSV, Excel e importação direta de Imovelweb, ZAP, Viva Real e OLX. Nosso time faz a primeira carga junto com você na onboarding.
+- O catálogo conta como site oficial pro CRECI? Sim. O catálogo customizado já vem com os campos obrigatórios (CRECI, endereço de regional) que o COFECI exige em sites de corretor.
+- Vocês integram com meu WhatsApp pessoal? Trabalhamos com WhatsApp Business via API oficial. Recomendamos um número dedicado — orientamos a configuração no onboarding.
+- E se eu crescer e virar imobiliária? Você muda de plano sem perder nenhum dado. O Mylar Pro foi desenhado pra crescer com você — do corretor solo à incorporadora, construtora ou loteadora.
+
+### Imobiliária — https://mylarpro.com.br/personas/real-estate
+Toda sua imobiliária sob controle — da captação ao repasse. Vendas, locação, cobrança, vistoria e financeiro num só sistema. Equipe alinhada, proprietário pago em dia, inadimplência sob controle. Ideal para equipes administrando locação, vendas, cobrança, vistoria e financeiro sob um sistema só.
+
+FAQ:
+- Como funciona o teste grátis? 30 dias com TODAS as funcionalidades liberadas — inclusive os recursos do plano Avançado (DRE, DIMOB, vistoria digital, BI). Você opera com a equipe, valida na prática e só depois escolhe o plano. Sem cartão de crédito.
+- Como funciona a migração do meu sistema atual? Nosso time de implantação importa contratos, imóveis, histórico financeiro, vistorias e clientes. Trabalhamos com saídas dos principais sistemas (Superlógica, Imobzi, Vista, Console, Universal e outros). Migração é incluída em todos os planos.
+- Os boletos e PIX são emitidos pelo Mylar ou pelo meu banco? Integramos com Itaú, Bradesco, Santander, Banco do Brasil, Inter, Sicoob, BTG e outras instituições. Você mantém sua conta — emitimos via API do seu banco com seus convênios.
+- A DIMOB é gerada automaticamente? Sim. No plano Avançado, geramos DIMOB e Informe de Rendimentos com base nos contratos e pagamentos do ano. Você baixa o arquivo TXT pronto para envio à Receita.
+- Vocês fazem vistoria no aplicativo offline? Sim. O vistoriador faz tudo no app, mesmo sem internet. Sincroniza ao voltar ao sinal. Fotos georeferenciadas, áudios e laudo PDF assinado digitalmente.
+- Posso ter perfis diferentes para corretores e financeiro? Sim. Cada usuário tem perfil de permissões granular: o que vê, o que edita, quais relatórios acessa. Auditoria completa por usuário.
+- Como funciona o reajuste anual? O sistema calcula automaticamente com base no índice contratado (IGP-M, IPCA, INPC). Avisa o inquilino com 30 dias de antecedência, gera o adendo, atualiza o boleto.
+- Tem multa de fidelidade? Não. Pagamento mensal, cancele quando quiser. Planos anuais têm desconto mas mantêm flexibilidade.
+
+### Lançamentos & Empreendimentos — https://mylarpro.com.br/personas/development
+Venda empreendimentos com a precisão de quem opera VGV bilionário. Espelho de vendas em tempo real, tabela de preços dinâmica, Meta Ads integrado e BI executivo. Para incorporadoras verticais, construtoras e loteadoras — do primeiro lançamento ao décimo.
+
+FAQ:
+- Posso testar antes de fechar contrato? Sim. Oferecemos 30 dias de trial com TODAS as funcionalidades liberadas — incluindo módulo de empreendimentos, Meta Ads e BI executivo. Ótimo para validar internamente antes do contrato corporativo. Para pilotos formais em lançamentos específicos, veja a pergunta abaixo.
+- Como funciona o piloto antes do contrato completo? Selecionamos 1 empreendimento (geralmente o próximo lançamento) e rodamos a plataforma por 60-90 dias com Customer Success dedicado. Sucesso comprovado vira contrato corporativo para o portfólio inteiro.
+- Vocês integram com o Sienge? Sim, temos integração nativa com o Sienge no plano Avançado. Outras integrações podem ser avaliadas sob demanda.
+- Como funciona a integração com Meta Ads? Conectamos sua conta de Business Manager via OAuth oficial. Leads dos Lead Ads entram automaticamente com UTMs, ID de campanha, criativo e custo. Atribuição vai até a venda assinada, calculando CAC real por anúncio.
+- Quem é o ponto focal no nosso onboarding? Você tem um Customer Success Manager dedicado no plano Avançado, com SLA de resposta em 2h em horário comercial. Reuniões mensais de QBR (Quarterly Business Review).
+- É compatível com LGPD? Sim. O tratamento de dados no Mylar Pro é conduzido em conformidade com a LGPD, com Encarregado (DPO) designado, base legal por finalidade e exportação e exclusão de dados sob demanda.
+- E se precisarmos de customização para um lançamento específico? Plano Avançado inclui sessões de produto customizadas. Para roadmap dedicado, oferecemos contrato Enterprise sob medida — fale com nosso time comercial.
+
+---
+
+## Recursos
+
+### App do Corretor — https://mylarpro.com.br/features/broker-app
+O app do corretor que vem com o Mylar Pro. Acesse sua carteira, atenda no WhatsApp, agende visitas e feche negócios direto do celular — onde você estiver. iOS e Android, sem custo adicional por agente. App Store: https://apps.apple.com/us/app/mylar-pro-brokers/id6762925131 · Google Play: https://play.google.com/store/apps/details?id=com.mylarprobrokers.app
+
+FAQ:
+- Preciso de internet para usar? Não. O app funciona offline — você consulta imóveis, registra visitas e atualiza dados, e tudo sincroniza assim que voltar a ter conexão.
+- Funciona em iPhone e Android? Sim. Disponível na App Store e Google Play. A versão é a mesma — apenas adaptada ao sistema operacional.
+- Os dados ficam sincronizados com o sistema web? Sim, em tempo real. Tudo o que você faz no app aparece no painel administrativo na hora, e vice-versa.
+- Preciso de licença separada por corretor? Não. Cada agente cadastrado no seu plano Mylar Pro tem acesso ao app sem custo adicional.
+- E se eu cancelar o teste? Sem multa, sem fidelidade. Seus dados ficam disponíveis por 30 dias para exportação.
+
+### Catálogo Público — https://mylarpro.com.br/features/property-catalog
+Catálogo público no seu domínio. Site profissional com SEO técnico, integração com portais e captação direta no CRM. Use o subdomínio Mylar ou conecte o seu próprio domínio.
+
+FAQ:
+- Posso usar meu domínio próprio? Sim. Basta apontar o DNS para o Mylar Pro e configuramos o SSL automaticamente. Você também pode começar no subdomínio mylarpro.com.br e migrar quando quiser.
+- Os imóveis atualizam sozinhos? Sim. Cadastrou, editou ou removeu no painel? Está no site em segundos. Sem republicação, sem cache para limpar.
+- Como funciona a integração com ZAP e Viva Real? Geramos um XML padrão que esses portais consomem. Você cadastra uma vez no Mylar e mantém sincronizado sem trabalho manual em cada portal.
+- Tem limite de imóveis no catálogo? O limite é o do seu plano (50 a ilimitado, conforme o tier). Sem limite de visitantes em nenhum plano.
+- Posso ter mais de um site (matriz e filial, ou hotsite por empreendimento)? Sim. Cada organização tem seu catálogo, e incorporadoras podem ter um site dedicado por empreendimento — com tabela de preços e espelho integrados.
+- O SEO funciona mesmo? Sim. Sitemap, schema.org, meta tags, OG tags, performance Core Web Vitals — tudo nativo. Vários clientes ranqueiam na primeira página em poucos meses.
+
+### Portal do Cliente — https://mylarpro.com.br/features/client-portal
+O portal que seus clientes esperam ter. Inquilinos pagam aluguel, baixam comprovantes e abrem chamados. Proprietários acompanham repasses, contratos e relatórios — tudo em área logada com a sua marca.
+
+FAQ:
+- Como o cliente acessa o portal? Por CPF/CNPJ + código OTP enviado por e-mail ou WhatsApp. Sem senha para lembrar, sem reset de senha, sem chamado de suporte.
+- O portal funciona no celular? Sim, é 100% responsivo. Funciona em qualquer navegador, computador, tablet ou celular — sem precisar instalar app.
+- Posso personalizar com a marca da minha imobiliária? Sim. Logo, cores, domínio próprio (portal.suaimobiliaria.com.br) e textos são totalmente customizáveis.
+- Quantos clientes posso cadastrar? Ilimitado em qualquer plano que inclua o módulo Portal. Cada inquilino e proprietário tem seu acesso individual.
+- E a segurança dos dados? Acesso por OTP a cada login, dados criptografados, conformidade com LGPD e isolamento total entre organizações.
+- Inquilino e proprietário compartilham a mesma tela? Não. Cada perfil tem visualização própria: inquilino vê faturas e chamados; proprietário vê repasses, demonstrativos e relatórios.
+
+### Assinatura Digital — https://mylarpro.com.br/features/digital-signature
+Assinatura digital integrada ao CRM. Envie contratos de locação, venda, intermediação e parcerias para assinatura digital. Sem impressora, sem cartório, sem deslocamento — com plena validade jurídica.
+
+FAQ:
+- A assinatura digital tem validade jurídica? Sim. A assinatura atende à MP 2.200-2/2001 e à Lei 14.063/2020, garantindo plena validade em todo território nacional — aceita em qualquer tribunal brasileiro.
+- O cliente precisa ter certificado digital? Não. A assinatura pode ser feita por autenticação via SMS, e-mail ou selfie — todas reconhecidas legalmente conforme a legislação brasileira.
+- Quantos contratos posso enviar? Depende do seu plano Mylar Pro. Planos com módulo de contratos incluem assinaturas ilimitadas — sem custo por documento.
+- Posso usar meus próprios modelos? Sim. Você pode subir seus templates ou criar novos com variáveis dinâmicas (nome, CPF, valor, endereço, fiador, etc.).
+- E se o cliente recusar assinar? Você é notificado na hora e pode cancelar, renegociar ou reenviar o documento. O CRM mantém o histórico de todas as tentativas.
+- O contrato fica armazenado por quanto tempo? Permanentemente, enquanto sua conta estiver ativa. Você pode baixar PDF assinado com trilha de auditoria a qualquer momento.
+
+---
+
+## Planos e preços — https://mylarpro.com.br/plans
+
+Três linhas de planos, cada uma com tiers Essencial, Intermediário e Avançado:
+- Corretor: para o corretor autônomo.
+- Imobiliária: para equipes de locação e vendas.
+- Lançamentos: para incorporadoras, construtoras e loteadoras (inclui módulo de empreendimentos).
+
+Cobrança mensal ou anual (anual com desconto). 30 dias grátis com todas as funcionalidades, sem cartão de crédito e sem multa de fidelidade.
+
+---
+
+## Ações e contato
+
+- Criar conta grátis: https://app.mylarpro.com.br/register
+- Acessar a plataforma: https://app.mylarpro.com.br
+- Agendar demonstração: https://cognizy.ai/book/comercial-mylar-pro-erp
+- WhatsApp: https://wa.me/5561981896419
+- E-mail: contato@mylarapp.com
+- Instagram: https://www.instagram.com/mylar.app/
+- LinkedIn: https://www.linkedin.com/company/mylar-pro
+- Facebook: https://www.facebook.com/mylarapp
