@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PersonaLanding } from "@/components/persona/PersonaLanding";
+import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 import { allPersonaSlugs, getPersona, isPersonaSlug } from "@/lib/personas";
 import { fetchPersonaPlans } from "@/lib/personas/plans-api";
 
@@ -46,5 +47,10 @@ export default async function PersonaPage({ params }: Props) {
   const apiPlans = await fetchPersonaPlans(slug);
   const personaWithPlans = { ...persona, plans: apiPlans };
 
-  return <PersonaLanding persona={personaWithPlans} />;
+  return (
+    <>
+      <FaqJsonLd items={persona.faq} />
+      <PersonaLanding persona={personaWithPlans} />
+    </>
+  );
 }

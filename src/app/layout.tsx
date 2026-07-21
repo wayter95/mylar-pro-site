@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import "../styles/globals.css";
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -37,18 +39,38 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Mylar Pro" }],
   creator: "Mylar Pro",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: "Mylar Pro",
+    url: "https://mylarpro.com.br",
     title: "Mylar Pro — Gerencie Imóveis, Contratos e Cobranças em Um Só Lugar",
     description:
       "CRM, assinatura eletrônica, boleto/PIX, portal do cliente e catálogo para imobiliárias, incorporadoras, construtoras e loteadoras.",
+    images: [
+      {
+        url: "/images/logo-full-color.svg",
+        alt: "Mylar Pro",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mylar Pro — Gestão Imobiliária Completa",
+    description:
+      "CRM, assinatura eletrônica, boleto/PIX, portal do cliente e catálogo para imobiliárias, incorporadoras, construtoras e loteadoras.",
+    images: ["/images/logo-full-color.svg"],
   },
   robots: {
     index: true,
     follow: true,
   },
+  ...(GSC_VERIFICATION
+    ? { verification: { google: GSC_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -62,6 +84,7 @@ export default function RootLayout({
         className={`${jakarta.variable} overflow-x-hidden font-sans antialiased`}
         suppressHydrationWarning
       >
+        <OrganizationJsonLd />
         {/* Google Tag Manager */}
         {GTM_ID && (
           <>

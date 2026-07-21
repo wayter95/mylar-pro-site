@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FeatureLanding } from "@/components/feature/FeatureLanding";
+import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 import { allFeatureSlugs, getFeature, isFeatureSlug } from "@/lib/features";
 
 type Props = {
@@ -42,5 +43,10 @@ export default async function FeaturePage({ params }: Props) {
     notFound();
   }
 
-  return <FeatureLanding feature={feature} />;
+  return (
+    <>
+      <FaqJsonLd items={feature.faq} />
+      <FeatureLanding feature={feature} />
+    </>
+  );
 }
