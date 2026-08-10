@@ -106,7 +106,7 @@ export type FaqBlock = {
 export type VideoBlock = {
   _key: string;
   _type: "videoBlock";
-  title: string;
+  title?: string;
   url: string;
 };
 

@@ -6,6 +6,7 @@ import { ArticleHeader } from "@/components/blog/ArticleHeader";
 import { ArticleLayout } from "@/components/blog/ArticleLayout";
 import { ArticleBlockRenderer } from "@/components/blog/blocks/ArticleBlockRenderer";
 import { ArticleJsonLd } from "@/components/seo/ArticleJsonLd";
+import { isSanityConfigured } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
 import type { Post } from "@/sanity/types/content";
@@ -15,9 +16,17 @@ const SITE_URL = "https://mylarpro.com.br";
 type PageProps = { params: Promise<{ slug: string }> };
 
 async function findPost(slug: string): Promise<Post | null> {
+  if (!isSanityConfigured) {
+    console.error(
+      "[blog/slug] Sanity não configurado: defina NEXT_PUBLIC_SANITY_PROJECT_ID e NEXT_PUBLIC_SANITY_DATASET no build.",
+    );
+    return null;
+  }
+
   try {
     return await getPostBySlug(slug);
-  } catch {
+  } catch (error) {
+    console.error(`[blog/slug] falha ao carregar "${slug}":`, error);
     return null;
   }
 }
@@ -40,10 +49,15 @@ function socialImageUrl(post: Post) {
 }
 
 export async function generateStaticParams() {
+  if (!isSanityConfigured) {
+    return [];
+  }
+
   try {
     const posts = await getAllPosts();
     return posts.map((post) => ({ slug: post.slug }));
-  } catch {
+  } catch (error) {
+    console.error("[blog/slug] generateStaticParams falhou:", error);
     return [];
   }
 }

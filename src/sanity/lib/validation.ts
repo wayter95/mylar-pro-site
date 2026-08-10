@@ -10,24 +10,26 @@ const safeUrlSchema = z
     message: "Use an internal path or an HTTP(S) URL.",
   });
 
+const optionalText = z
+  .string()
+  .trim()
+  .min(1)
+  .nullish()
+  .transform((value) => value ?? undefined);
+
 const imageSchema = z.object({
   asset: z.object({
     _ref: z.string().min(1),
   }),
   alt: z.string().trim().min(1),
-  caption: z.string().trim().min(1).optional(),
+  caption: optionalText,
 });
 
 const categorySchema = z.object({
   _id: z.string().min(1).optional(),
   title: z.string().trim().min(1),
   slug: z.string().trim().min(1),
-  description: z
-    .string()
-    .trim()
-    .min(1)
-    .nullish()
-    .transform((description) => description ?? undefined),
+  description: optionalText,
 });
 
 const portableTextSpanSchema = z.object({
@@ -103,7 +105,7 @@ const articleBlockSchema = z.discriminatedUnion("_type", [
   z.object({
     _key: z.string().min(1),
     _type: z.literal("tableBlock"),
-    title: z.string().trim().min(1).optional(),
+    title: optionalText,
     rows: z
       .array(z.object({ cells: z.array(z.string().trim().min(1)).min(1) }))
       .min(1),
@@ -112,12 +114,7 @@ const articleBlockSchema = z.discriminatedUnion("_type", [
     _key: z.string().min(1),
     _type: z.literal("comparisonBlock"),
     title: z.string().trim().min(1),
-    intro: z
-      .string()
-      .trim()
-      .min(1)
-      .nullish()
-      .transform((intro) => intro ?? undefined),
+    intro: optionalText,
     columns: z.array(z.string().trim().min(1)).min(2).max(4),
     rows: z
       .array(
@@ -131,7 +128,7 @@ const articleBlockSchema = z.discriminatedUnion("_type", [
   z.object({
     _key: z.string().min(1),
     _type: z.literal("faqBlock"),
-    title: z.string().trim().min(1).optional(),
+    title: optionalText,
     items: z
       .array(
         z.object({
@@ -144,13 +141,13 @@ const articleBlockSchema = z.discriminatedUnion("_type", [
   z.object({
     _key: z.string().min(1),
     _type: z.literal("videoBlock"),
-    title: z.string().trim().min(1),
+    title: optionalText,
     url: z.url(),
   }),
   z.object({
     _key: z.string().min(1),
     _type: z.literal("relatedPostsBlock"),
-    title: z.string().trim().min(1).optional(),
+    title: optionalText,
     posts: z.array(z.string().min(1)).min(1),
   }),
 ]);
@@ -170,14 +167,15 @@ export const postSchema = postPreviewSchema.extend({
   author: z.object({
     name: z.string().trim().min(1),
     photo: imageSchema.nullish().transform((image) => image ?? undefined),
-    bio: z.string().trim().min(1).optional(),
+    bio: optionalText,
   }),
   seo: z
     .object({
-      title: z.string().trim().min(1).optional(),
-      description: z.string().trim().min(1).optional(),
+      title: optionalText,
+      description: optionalText,
     })
-    .optional(),
+    .nullish()
+    .transform((seo) => seo ?? undefined),
   content: z.array(articleBlockSchema),
 });
 

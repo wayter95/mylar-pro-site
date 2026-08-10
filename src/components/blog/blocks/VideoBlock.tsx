@@ -36,7 +36,9 @@ export function VideoBlock({ title, url }: VideoBlockData) {
   if (!embedUrl) {
     return (
       <div className="my-10 rounded-2xl border border-slate-200 bg-[#F8F9FB] p-6">
-        <p className="text-[15px] font-bold text-slate-900">{title}</p>
+        {title && (
+          <p className="text-[15px] font-bold text-slate-900">{title}</p>
+        )}
         <a
           href={href}
           target="_blank"
@@ -54,14 +56,18 @@ export function VideoBlock({ title, url }: VideoBlockData) {
       <div className="aspect-video overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
         <iframe
           src={embedUrl}
-          title={title}
+          title={title ?? "Vídeo do artigo"}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           referrerPolicy="strict-origin-when-cross-origin"
           className="h-full w-full"
         />
       </div>
-      <figcaption className="mt-3 text-[13px] text-slate-500">{title}</figcaption>
+      {title && (
+        <figcaption className="mt-3 text-[13px] text-slate-500">
+          {title}
+        </figcaption>
+      )}
     </figure>
   );
 }
