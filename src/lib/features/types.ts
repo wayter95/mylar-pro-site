@@ -1,4 +1,17 @@
 export type FeatureSlug =
+  | "crm"
+  | "channels"
+  | "financial"
+  | "ai"
+  | "ai-attendance"
+  | "meta-ads"
+  | "schedule"
+  | "billing"
+  | "properties"
+  | "inspections"
+  | "keys"
+  | "mylar-score"
+  | "ai-media"
   | "broker-app"
   | "property-catalog"
   | "client-portal"
@@ -33,6 +46,17 @@ export type FeatureMode = {
   example: string;
 };
 
+export type FeatureModule = {
+  title: string;
+  body: string;
+};
+
+export type FeatureConnection = {
+  label: string;
+  description: string;
+  href: string;
+};
+
 export type FeatureContent = {
   slug: FeatureSlug;
   label: string;
@@ -50,6 +74,16 @@ export type FeatureContent = {
   };
   externalLinks?: FeatureExternalLink[];
   modes?: FeatureMode[];
+  modules?: FeatureModule[];
+  modulesHeadline?: {
+    title: string;
+    subtitle: string;
+  };
+  connectsWith?: FeatureConnection[];
+  connectsWithHeadline?: {
+    title: string;
+    subtitle: string;
+  };
   keyPoints: FeatureKeyPoint[];
   keyPointsHeadline: {
     title: string;

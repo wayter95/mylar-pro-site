@@ -51,6 +51,18 @@ export const linkItems: LinkItem[] = [
     variant: "secondary",
   },
   {
+    label: "App do cliente (iPhone)",
+    href: "https://apps.apple.com/br/app/mylar-pro-home/id6784389538",
+    icon: "apple",
+    variant: "secondary",
+  },
+  {
+    label: "App do cliente (Android)",
+    href: "https://play.google.com/store/apps/details?id=com.mylarprohome.app",
+    icon: "googlePlay",
+    variant: "secondary",
+  },
+  {
     label: "Funcionalidades",
     href: "/features",
     icon: "sparkles",

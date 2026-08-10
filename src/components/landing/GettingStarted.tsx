@@ -15,23 +15,23 @@ type Step = {
 const steps: Step[] = [
   {
     number: "01",
-    title: "Crie sua conta grátis",
+    title: "Crie a conta",
     description:
-      "Cadastro em segundos. Sem cartão de crédito, sem compromisso. Acesso imediato à plataforma completa.",
+      "Sem cartão de crédito e sem falar com vendedor. Você entra na plataforma com todas as funcionalidades liberadas.",
     icon: Icons.userCheck,
   },
   {
     number: "02",
-    title: "Configure sua imobiliária",
+    title: "Traga a sua carteira",
     description:
-      "Onboarding guiado passo a passo. Importe seus imóveis, cadastre sua equipe e personalize seu portal.",
-    icon: Icons.settings,
+      "Imóveis, clientes e corretores entram por planilha, com mapeamento de colunas e prévia validada. Nossa equipe ajuda na migração do sistema antigo.",
+    icon: Icons.database,
   },
   {
     number: "03",
-    title: "Explore no seu ritmo",
+    title: "Decida depois de usar",
     description:
-      "Use todos os módulos sem limite de tempo. Quando estiver pronto, escolha o plano ideal para escalar.",
+      "Trinta dias operando com os seus contratos e a sua equipe. Só então você escolhe o plano — e cancela quando quiser, levando seus dados.",
     icon: Icons.sparkles,
   },
 ];
@@ -54,10 +54,10 @@ export function GettingStarted() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Comece agora"
-          title="Três passos para sair"
-          highlight="do caos operacional."
-          description="Crie sua conta gratuita e explore a plataforma completa. Sem pressão, sem prazo."
+          badge="Como começar"
+          title="Trinta dias para testar"
+          highlight="com a sua operação real."
+          description="Não é ambiente de demonstração com dados de exemplo: são os seus imóveis, os seus contratos e a sua equipe."
           dark
         />
 

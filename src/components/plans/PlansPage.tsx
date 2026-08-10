@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { PersonaComparison } from "@/components/persona/PersonaComparison";
 import { PersonaFaq } from "@/components/persona/PersonaFaq";
 import { PlanCard } from "@/components/plans/PlanCard";
@@ -182,6 +183,34 @@ export function PlansPage({ plansBySlug }: Props) {
               Falar com vendas
               <Icons.arrowRight className="size-4" />
             </a>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <span
+                className="mt-0.5 inline-flex size-11 shrink-0 items-center justify-center rounded-xl"
+                style={{ backgroundColor: `${accent}14`, color: accent }}
+              >
+                <Icons.grid className="size-6" />
+              </span>
+              <div>
+                <p className="text-base font-bold text-slate-900">
+                  Um preço por porte de operação, com todos os módulos inclusos.
+                </p>
+                <p className="mt-1 max-w-xl text-sm leading-relaxed text-slate-500">
+                  Sem cobrança por módulo e sem cobrança por corretor no
+                  aplicativo. Você paga pelo tamanho da operação, não por quantas
+                  partes do sistema usa.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/features"
+              className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+            >
+              Ver os módulos
+              <Icons.arrowRight className="size-4" />
+            </Link>
           </div>
 
           <p className="mt-8 max-w-2xl text-sm text-slate-500">

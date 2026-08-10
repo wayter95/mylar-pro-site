@@ -4,13 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/lib/icons";
 import { PERSONA_HUB_CARDS, personasRecord } from "@/lib/personas";
-import type { PersonaSlug } from "@/lib/personas/types";
 
-type Props = {
-  fromPrices?: Partial<Record<PersonaSlug, number>>;
-};
-
-export function Personas({ fromPrices }: Props) {
+export function Personas() {
   return (
     <section
       id="personas"
@@ -42,7 +37,6 @@ export function Personas({ fromPrices }: Props) {
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:mt-20 lg:grid-cols-3">
           {PERSONA_HUB_CARDS.map((card, i) => {
             const persona = personasRecord[card.slug];
-            const fromPrice = fromPrices?.[card.slug] ?? card.fromPrice;
             return (
               <motion.div
                 key={card.slug}
@@ -93,17 +87,9 @@ export function Personas({ fromPrices }: Props) {
                   </ul>
 
                   <div className="mt-auto flex items-center justify-between pt-7">
-                    <div>
-                      <p className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
-                        A partir de
-                      </p>
-                      <p className="mt-0.5 text-base font-bold text-slate-900">
-                        R$ {fromPrice.toLocaleString("pt-BR")}
-                        <span className="text-xs font-medium text-slate-500">
-                          /mês
-                        </span>
-                      </p>
-                    </div>
+                    <span className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
+                      30 dias grátis
+                    </span>
                     <span
                       className="inline-flex items-center gap-1 text-[13px] font-semibold transition group-hover:gap-2"
                       style={{ color: card.accent }}

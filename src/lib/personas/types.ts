@@ -85,7 +85,6 @@ export type PersonaHubCard = {
   slug: PersonaSlug;
   label: string;
   description: string;
-  fromPrice: number;
   highlights: string[];
   accent: string;
 };

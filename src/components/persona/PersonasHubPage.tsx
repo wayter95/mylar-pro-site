@@ -35,7 +35,7 @@ export function PersonasHubPage({
       <HubHero />
       <HubDiscovery />
       <HubPersonaCards fromPrices={fromPrices} />
-      <HubComparisonTable />
+      <HubComparisonTable fromPrices={fromPrices} />
       <HubCta />
     </>
   );
@@ -180,7 +180,7 @@ function HubPersonaCards({
               key={card.slug}
               card={card}
               index={i}
-              fromPrice={fromPrices?.[card.slug] ?? card.fromPrice}
+              fromPrice={fromPrices?.[card.slug]}
             />
           ))}
         </div>
@@ -196,7 +196,7 @@ function HubPersonaCard({
 }: {
   card: PersonaHubCard;
   index: number;
-  fromPrice: number;
+  fromPrice?: number;
 }) {
   const persona = personasRecord[card.slug];
   const quote = persona.testimonials.find((t) => t.featured) ?? persona.testimonials[0];
@@ -258,14 +258,25 @@ function HubPersonaCard({
             Ver Mylar para {persona.shortLabel.toLowerCase()}
             <Icons.arrowRight className="size-4" />
           </Link>
-          <div className="text-[13px] text-slate-500">
-            <span className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
-              A partir de
-            </span>{" "}
-            <span className="font-semibold text-slate-800">
-              R$ {fromPrice.toLocaleString("pt-BR")}/mês
-            </span>
-          </div>
+          {typeof fromPrice === "number" ? (
+            <div className="text-[13px] text-slate-500">
+              <span className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
+                A partir de
+              </span>{" "}
+              <span className="font-semibold text-slate-800">
+                R$ {fromPrice.toLocaleString("pt-BR")}/mês
+              </span>
+            </div>
+          ) : (
+            <Link
+              href="/plans"
+              className="text-[13px] font-semibold text-slate-600 transition hover:text-slate-900"
+            >
+              <span className="border-b border-dotted border-slate-400 pb-px">
+                Ver planos e valores
+              </span>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -320,7 +331,16 @@ function HubPersonaCard({
   );
 }
 
-function HubComparisonTable() {
+function HubComparisonTable({
+  fromPrices,
+}: {
+  fromPrices?: Partial<Record<PersonaSlug, number>>;
+}) {
+  const priceValues = PERSONA_ORDER.map((slug) => fromPrices?.[slug]);
+  const hasAllPrices = priceValues.every(
+    (price): price is number => typeof price === "number",
+  );
+
   const rows: {
     label: string;
     values: [string, string, string];
@@ -349,11 +369,16 @@ function HubComparisonTable() {
         "Meta Ads, espelho vertical/horizontal, BI",
       ],
     },
-    {
-      label: "A partir de",
-      values: ["R$ 197/mês", "R$ 497/mês", "R$ 897/mês"],
-    },
   ];
+
+  if (hasAllPrices) {
+    rows.push({
+      label: "A partir de",
+      values: priceValues.map(
+        (price) => `R$ ${(price as number).toLocaleString("pt-BR")}/mês`,
+      ) as [string, string, string],
+    });
+  }
 
   return (
     <section className="border-t border-slate-200 bg-white py-20 lg:py-28">

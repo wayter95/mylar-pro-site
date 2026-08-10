@@ -12,24 +12,24 @@ type Highlight = {
 
 const highlights: Highlight[] = [
   {
-    label: "Dados isolados por empresa",
-    description: "Multi-tenant com isolamento total entre organizações",
+    label: "Sua carteira é só sua",
+    description: "Cada organização em base isolada, sem cruzamento de dados",
     icon: Icons.shieldCheck,
   },
   {
-    label: "Conformidade LGPD",
-    description: "Privacidade e consentimento desde a arquitetura",
+    label: "Permissão por função",
+    description: "O corretor vê a carteira dele; o gestor vê a operação inteira",
     icon: Icons.lock,
   },
   {
-    label: "Servidores no Brasil",
-    description: "Baixa latência e conformidade com legislação local",
+    label: "Dados hospedados no Brasil",
+    description: "LGPD, registro de quem acessou o quê e contrato de tratamento",
     icon: Icons.globe,
   },
   {
-    label: "Stack moderna e rápida",
-    description: "NestJS, React, PostgreSQL e infraestrutura cloud",
-    icon: Icons.zap,
+    label: "Você leva seus dados embora",
+    description: "Sem fidelidade e com exportação da base se decidir sair",
+    icon: Icons.database,
   },
 ];
 
@@ -44,9 +44,9 @@ export function Trust() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Construído com segurança"
-          highlight="e performance."
-          description="Infraestrutura pensada para proteger seus dados e acelerar sua operação."
+          title="A carteira da sua imobiliária"
+          highlight="continua sendo sua."
+          description="Dados no Brasil, acesso controlado por função e nenhuma amarra contratual para sair levando a base."
           dark
         />
 

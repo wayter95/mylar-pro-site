@@ -3,20 +3,22 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/lib/icons";
-import { FEATURE_ORDER, featuresRecord, REGISTER_URL } from "@/lib/features";
+import { FEATURE_GROUPS, featuresRecord, REGISTER_URL } from "@/lib/features";
 import type { FeatureContent } from "@/lib/features/types";
 
 export function FeaturesHubPage() {
   return (
     <>
       <HubHero />
-      <HubFeatureList />
+      <HubGroups />
       <HubCta />
     </>
   );
 }
 
 function HubHero() {
+  const total = FEATURE_GROUPS.reduce((sum, g) => sum + g.slugs.length, 0);
+
   return (
     <section className="relative overflow-hidden bg-[#FAFAF7] pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -34,7 +36,7 @@ function HubHero() {
         <div className="flex items-center gap-3">
           <span className="h-px w-8 bg-slate-300" />
           <span className="font-mono text-[11px] font-semibold tracking-[0.18em] text-[#2facde] uppercase">
-            Recursos · Tudo em uma plataforma
+            Recursos
           </span>
         </div>
 
@@ -44,10 +46,8 @@ function HubHero() {
           transition={{ duration: 0.55 }}
           className="mt-8 max-w-4xl text-[2rem] leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-[2.5rem] sm:leading-[1] md:text-5xl lg:text-[3.75rem] lg:leading-[0.98]"
         >
-          Quatro recursos.{" "}
-          <span className="text-[#2facde]">
-            Uma plataforma que cresce com você.
-          </span>
+          Cada peça da operação imobiliária,{" "}
+          <span className="text-[#2facde]">no mesmo lugar.</span>
         </motion.h1>
 
         <motion.p
@@ -56,48 +56,73 @@ function HubHero() {
           transition={{ duration: 0.55, delay: 0.1 }}
           className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg lg:text-[1.125rem]"
         >
-          App nativo, site público de imóveis, portal do cliente e assinatura
-          digital. Não são produtos vendidos separadamente — são partes do mesmo
-          Mylar Pro, integradas desde o primeiro dia.
+          {total} módulos que dividem os mesmos imóveis, clientes, contratos e
+          lançamentos financeiros. Nada de exportar de um para importar no outro.
         </motion.p>
+
+        <motion.nav
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mt-10 flex flex-wrap gap-2"
+        >
+          {FEATURE_GROUPS.map((group) => (
+            <a
+              key={group.title}
+              href={`#${slugifyGroup(group.title)}`}
+              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+            >
+              {group.title}
+            </a>
+          ))}
+        </motion.nav>
       </div>
     </section>
   );
 }
 
-function HubFeatureList() {
+function HubGroups() {
   return (
-    <section className="border-t border-slate-200 bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-slate-300" />
-              <span className="font-mono text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
-                Os quatro recursos
-              </span>
+    <>
+      {FEATURE_GROUPS.map((group, groupIndex) => (
+        <section
+          key={group.title}
+          id={slugifyGroup(group.title)}
+          className={`scroll-mt-20 border-t border-slate-200 py-16 lg:py-20 ${
+            groupIndex % 2 === 0 ? "bg-white" : "bg-[#F8F9FB]"
+          }`}
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-slate-300" />
+                  <span className="font-mono text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+                    {String(groupIndex + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h2 className="mt-4 text-2xl leading-tight font-extrabold tracking-tight text-slate-900 sm:text-3xl lg:text-[2.25rem]">
+                  {group.title}
+                </h2>
+              </div>
+              <p className="text-base leading-relaxed text-slate-600">
+                {group.description}
+              </p>
             </div>
-            <h2 className="mt-5 text-3xl leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.75rem]">
-              Conheça cada um por dentro.
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
-            Cada recurso tem uma página dedicada com detalhes de funcionamento,
-            casos de uso e perguntas frequentes. Tudo libera junto no teste
-            grátis.
-          </p>
-        </div>
 
-        <div className="mt-14 grid gap-8 lg:mt-20 lg:gap-10">
-          {FEATURE_ORDER.map((slug, i) => {
-            const feature = featuresRecord[slug];
-            return (
-              <HubFeatureCard key={slug} feature={feature} index={i} />
-            );
-          })}
-        </div>
-      </div>
-    </section>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
+              {group.slugs.map((slug, i) => (
+                <HubFeatureCard
+                  key={slug}
+                  feature={featuresRecord[slug]}
+                  index={i}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
   );
 }
 
@@ -109,89 +134,62 @@ function HubFeatureCard({
   index: number;
 }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 18 }}
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay: 0.05 * index }}
-      className="grid gap-8 rounded-2xl border border-slate-200 bg-white p-7 transition hover:border-slate-300 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-12 lg:p-10"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, delay: 0.04 * index }}
     >
-      <div>
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-slate-400">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <span className="h-px w-6 bg-slate-300" />
-          <span
-            className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
-            style={{ color: feature.accent }}
-          >
-            {feature.shortLabel}
-          </span>
-        </div>
+      <Link
+        href={feature.href}
+        className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-sm"
+      >
+        <span
+          className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase"
+          style={{ color: feature.accent }}
+        >
+          {feature.shortLabel}
+        </span>
 
-        <h3 className="mt-5 text-2xl leading-tight font-extrabold tracking-tight text-slate-900 sm:text-[1.75rem]">
+        <h3 className="mt-3 text-[17px] leading-snug font-bold text-slate-900">
           {feature.label}
         </h3>
-        <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">
           {feature.hubCard.description}
         </p>
 
-        <ul className="mt-6 space-y-2.5">
-          {feature.hubCard.highlights.map((h) => (
+        <ul className="mt-4 space-y-2">
+          {feature.hubCard.highlights.map((highlight) => (
             <li
-              key={h}
-              className="flex items-start gap-2.5 text-sm text-slate-700"
+              key={highlight}
+              className="flex items-start gap-2 text-[13px] leading-snug text-slate-700"
             >
               <span
                 aria-hidden
-                className="mt-1.5 size-1.5 shrink-0 rounded-full"
+                className="mt-1.5 size-1 shrink-0 rounded-full"
                 style={{ backgroundColor: feature.accent }}
               />
-              {h}
+              {highlight}
             </li>
           ))}
         </ul>
 
-        <div className="mt-7 flex flex-wrap items-center gap-4">
-          <Link
-            href={feature.href}
-            className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-            style={{
-              backgroundColor: feature.accent,
-              boxShadow: `0 12px 24px -14px ${feature.accent}aa`,
-            }}
-          >
-            Ver detalhes de {feature.shortLabel.toLowerCase()}
-            <Icons.arrowRight className="size-4" />
-          </Link>
-        </div>
-      </div>
-
-      {/* Highlight side */}
-      <div
-        className="rounded-2xl bg-[#F8F9FB] p-7 lg:border-l-2"
-        style={{ borderColor: `${feature.accent}40` }}
-      >
-        <p className="font-mono text-[10px] font-semibold tracking-wide text-slate-500 uppercase">
-          O que você ganha
-        </p>
-        <p className="mt-3 text-base leading-snug font-medium text-slate-800 lg:text-lg">
-          {feature.benefits[0]}
-        </p>
-        {feature.benefits[1] && (
-          <p className="mt-3 border-t border-slate-200 pt-3 text-sm leading-relaxed text-slate-600">
-            {feature.benefits[1]}
-          </p>
-        )}
-      </div>
-    </motion.article>
+        <span
+          className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-semibold transition-transform group-hover:translate-x-0.5"
+          style={{ color: feature.accent }}
+        >
+          Ver a página
+          <Icons.arrowRight aria-hidden className="size-3.5" />
+        </span>
+      </Link>
+    </motion.div>
   );
 }
 
 function HubCta() {
   return (
-    <section className="relative overflow-hidden border-t border-slate-200 bg-[#F8F9FB] py-20 lg:py-24">
+    <section className="relative overflow-hidden border-t border-slate-200 bg-[#FAFAF7] py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="absolute inset-0 opacity-[0.6]"
@@ -212,14 +210,13 @@ function HubCta() {
         </div>
 
         <h2 className="mt-5 text-3xl leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.5rem]">
-          Os quatro recursos liberados.{" "}
-          <span className="text-slate-400">Sem cartão, sem fidelidade.</span>
+          Comece pelo módulo que dói mais hoje.{" "}
+          <span className="text-slate-400">Você não precisa ligar tudo de uma vez.</span>
         </h2>
 
         <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 lg:text-lg">
-          30 dias para testar tudo de verdade — App do Corretor, Catálogo,
-          Portal do Cliente e Assinatura Digital — com sua operação real e seus
-          dados migrados.
+          Trinta dias com todas as funcionalidades liberadas, sem cartão e sem
+          fidelidade. A gente ajuda a priorizar e a migrar os seus dados.
         </p>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -230,7 +227,7 @@ function HubCta() {
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2facde] px-7 py-3.5 text-base font-semibold text-white transition hover:-translate-y-0.5"
             style={{ boxShadow: "0 14px 24px -14px rgba(47, 172, 222, 0.7)" }}
           >
-            Começar 30 dias grátis
+            Criar conta grátis
             <Icons.arrowRight className="size-4" />
           </a>
           <Link
@@ -238,7 +235,7 @@ function HubCta() {
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition hover:text-slate-900"
           >
             <span className="border-b border-dotted border-slate-400 pb-px">
-              Conversar com a equipe primeiro
+              Falar com especialista
             </span>
             <span>→</span>
           </Link>
@@ -246,4 +243,13 @@ function HubCta() {
       </div>
     </section>
   );
+}
+
+function slugifyGroup(title: string) {
+  return title
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }

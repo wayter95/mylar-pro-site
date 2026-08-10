@@ -38,7 +38,6 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
     label: "Corretor autônomo",
     description:
       "Você trabalha sozinho e quer profissionalizar a operação sem virar refém de portal.",
-    fromPrice: 197,
     highlights: [
       "CRM com pipeline de negociações",
       "Catálogo no seu domínio",
@@ -51,7 +50,6 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
     label: "Imobiliária",
     description:
       "Equipe administrando locação, vendas, cobrança, vistoria e financeiro — sob um sistema só.",
-    fromPrice: 497,
     highlights: [
       "Cobrança automática + portal do cliente",
       "Vistoria digital + chamados",
@@ -64,7 +62,6 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
     label: "Lançamentos & Empreendimentos",
     description:
       "Para incorporadoras, construtoras e loteadoras. Espelho de vendas vertical e horizontal, Meta Ads e BI executivo em uma stack só.",
-    fromPrice: 897,
     highlights: [
       "Torres, unidades e loteamentos",
       "Meta Ads + atribuição lead-to-deal",

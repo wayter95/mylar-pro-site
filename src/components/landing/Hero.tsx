@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Icons } from "@/lib/icons";
-import { DashboardMockup } from "./DashboardMockup";
+import { ModuleOrbit } from "./ModuleOrbit";
 
 const REGISTER_URL = "https://app.mylarpro.com.br/register";
 
@@ -30,28 +30,18 @@ export function Hero() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:items-center">
           {/* Text */}
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold tracking-[0.14em] text-white/70 uppercase backdrop-blur-sm sm:text-xs"
-            >
-              <span className="size-1.5 animate-pulse rounded-full bg-[#2facde]" />
-              Plataforma all-in-one
-            </motion.span>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="mt-6 text-4xl leading-[1.05] font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
+              className="text-4xl leading-[1.05] font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
             >
-              Tudo que sua
+              A imobiliária inteira
               <br />
-              imobiliária precisa.
+              em uma operação só.
               <br />
               <span className="bg-gradient-to-r from-[#2facde] to-[#37d6c0] bg-clip-text text-transparent">
-                Em uma só plataforma.
+                Do lead ao repasse.
               </span>
             </motion.h1>
 
@@ -61,9 +51,9 @@ export function Hero() {
               transition={{ duration: 0.55, delay: 0.2 }}
               className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
             >
-              Chega de gerenciar o caos de ferramentas desconectadas. CRM,
-              assinatura eletrônica, cobranças, portal do cliente e catálogo
-              de imóveis em uma janela única.
+              Seu contrato está em uma ferramenta, a cobrança em outra e o lead
+              no WhatsApp de alguém. Aqui o CRM, o atendimento, o contrato
+              assinado, a cobrança e o financeiro dividem os mesmos dados.
             </motion.p>
 
             <motion.div
@@ -95,7 +85,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500"
             >
-              {["30 dias grátis", "Sem cartão de crédito", "Setup em minutos"].map((item) => (
+              {["30 dias grátis", "Sem cartão de crédito", "Migração dos seus dados"].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <Icons.checkCircle className="size-3.5 text-[#2facde]/60" />
                   {item}
@@ -104,16 +94,14 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Dashboard preview */}
+          {/* Module orbit */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="relative"
+            className="relative flex min-h-[420px] items-center justify-center px-2 sm:px-8"
           >
-            {/* Glow behind the mockup */}
-            <div className="pointer-events-none absolute -inset-8 rounded-3xl bg-[#2facde]/10 blur-3xl" />
-            <DashboardMockup className="relative" />
+            <ModuleOrbit />
           </motion.div>
         </div>
       </div>

@@ -1,27 +1,37 @@
-import { CUSTOMER_PORTAL_URL } from "./constants";
+import { CUSTOMER_PORTAL_URL, HOME_APP_URLS } from "./constants";
 import type { FeatureContent } from "./types";
 
 export const clientPortal: FeatureContent = {
   slug: "client-portal",
-  label: "Portal do Cliente",
-  shortLabel: "Portal do Cliente",
+  label: "MyLar Pro Home",
+  shortLabel: "App do Cliente",
   href: "/features/client-portal",
   accent: "#7C3AED",
-  eyebrow: "Recurso · Área logada",
+  eyebrow: "Recurso · Aplicativo e área logada",
   hero: {
-    title: "O portal que seus clientes ",
-    titleHighlight: "esperam ter",
+    title: "Os dois lados do contrato ",
+    titleHighlight: "se resolvem sozinhos",
     subtitle:
-      "Inquilinos pagam aluguel, baixam comprovantes e abrem chamados. Proprietários acompanham repasses, contratos e relatórios — tudo em área logada com a sua marca.",
+      "Inquilinos pagam aluguel, enviam comprovante e abrem chamado de manutenção. Proprietários acompanham o repasse, baixam o demonstrativo e o informe de rendimentos. Pelo aplicativo ou pelo navegador.",
     ctaPrimary: "Começar 30 dias grátis",
     ctaSecondary: "Acessar portal",
     trust: [
-      "Acesso por CPF/CNPJ + OTP",
-      "Portal personalizado com sua marca",
-      "100% responsivo, sem app para instalar",
+      "Aplicativo nativo de iOS e Android",
+      "Acesso por CPF/CNPJ + código de verificação",
+      "Também pelo navegador, sem instalar nada",
     ],
   },
   externalLinks: [
+    {
+      label: "App Store",
+      href: HOME_APP_URLS.appStore,
+      kind: "app-store",
+    },
+    {
+      label: "Google Play",
+      href: HOME_APP_URLS.playStore,
+      kind: "play-store",
+    },
     {
       label: "Acessar portal",
       href: CUSTOMER_PORTAL_URL,
@@ -99,8 +109,8 @@ export const clientPortal: FeatureContent = {
       a: "Por CPF/CNPJ + código OTP enviado por e-mail ou WhatsApp. Sem senha para lembrar, sem reset de senha, sem chamado de suporte.",
     },
     {
-      q: "O portal funciona no celular?",
-      a: "Sim, é 100% responsivo. Funciona em qualquer navegador, computador, tablet ou celular — sem precisar instalar app.",
+      q: "O cliente precisa instalar o aplicativo?",
+      a: "Não é obrigatório. Existe o MyLar Pro Home, aplicativo nativo de iOS e Android, com notificação de fatura e de repasse. Quem preferir não instalar acessa tudo pelo navegador, no computador ou no celular.",
     },
     {
       q: "Posso personalizar com a marca da minha imobiliária?",
@@ -121,11 +131,11 @@ export const clientPortal: FeatureContent = {
   ],
   hubCard: {
     description:
-      "Área logada onde inquilino paga aluguel e abre chamados, e proprietário acompanha repasses em tempo real.",
+      "Aplicativo e área logada onde o inquilino paga o aluguel e abre chamados, e o proprietário acompanha o repasse.",
     highlights: [
-      "Pagamento de boleto/PIX/cartão",
-      "Demonstrativo de repasse e DIMOB",
-      "Sua marca, seu domínio próprio",
+      "App nativo de iOS e Android",
+      "Pagamento por boleto, PIX ou cartão",
+      "Demonstrativo de repasse e informe de rendimentos",
     ],
   },
 };

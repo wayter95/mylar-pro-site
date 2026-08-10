@@ -1,151 +1,98 @@
 "use client";
 
-import { Icons, type IconType } from "@/lib/icons";
-import { AnimateInItem, AnimateInStagger } from "./AnimateIn";
-import { SectionHeader } from "./SectionHeader";
+import { motion } from "framer-motion";
+import { Icons } from "@/lib/icons";
 
-type Comparison = {
-  pain: string;
-  old: string;
-  modern: string;
-  modernDesc: string;
-  icon: IconType;
-};
-
-const comparisons: Comparison[] = [
-  {
-    pain: "Instalação demorada",
-    old: "Semanas de setup e treinamento",
-    modern: "Setup em minutos",
-    modernDesc: "Onboarding guiado. Sua equipe opera no mesmo dia.",
-    icon: Icons.zap,
-  },
-  {
-    pain: "Interface confusa",
-    old: "Menus infinitos e sobrecarga visual",
-    modern: "Navegação fluida",
-    modernDesc: "Design limpo e intuitivo. Zero curva de aprendizado.",
-    icon: Icons.dashboard,
-  },
-  {
-    pain: "Dados espalhados",
-    old: "5 sistemas, 5 logins, zero visão unificada",
-    modern: "Inteligência centralizada",
-    modernDesc: "Uma fonte de verdade para leads, imóveis, contratos e financeiro.",
-    icon: Icons.database,
-  },
+const withoutMylar = [
+  "Lead chega no Instagram, é copiado à mão para a planilha e esfria antes do primeiro contato.",
+  "Contrato vai e volta por e-mail até alguém imprimir, assinar e digitalizar.",
+  "Reajuste de IGP-M calculado na calculadora, cobrança gerada uma a uma.",
+  "Proprietário liga perguntando do repasse porque não tem onde consultar.",
+  "Fechamento do mês reconstruído no Excel, sem saber a margem real.",
 ];
 
-type Highlight = {
-  title: string;
-  description: string;
-  features: string[];
-  icon: IconType;
-};
-
-const highlights: Highlight[] = [
-  {
-    title: "CRM & WhatsApp Nativo",
-    description:
-      "Pare de alternar entre abas. Enquanto seus concorrentes colam links do WhatsApp no CRM, sua equipe fecha negócios em uma plataforma onde tudo já está conectado.",
-    features: ["Multiatendimento integrado", "Fluxo visual de vendas com dados"],
-    icon: Icons.whatsapp,
-  },
-  {
-    title: "Automação Financeira Real",
-    description:
-      "Administrar aluguéis não precisa ser pesadelo de conciliação. Cobrança, baixa e repasse automático que devolve seu tempo.",
-    features: ["Conciliação bancária automática", "Repasse com demonstrativo PDF"],
-    icon: Icons.wallet,
-  },
+const withMylar = [
+  "O anúncio no Meta cria o lead no funil, distribui para um corretor e dispara o primeiro atendimento.",
+  "Contrato sai do template, é assinado com validade jurídica e fica arquivado no imóvel.",
+  "Reajuste por IGP-M, IPCA ou INPC aplicado em lote, com aprovação antes de valer.",
+  "Proprietário abre o portal e vê o demonstrativo de repasse em PDF sozinho.",
+  "Receita, despesa, margem e DIMOB prontos, conciliados com o extrato do banco.",
 ];
 
 export function AntiChaosSection() {
   return (
-    <div className="relative overflow-hidden bg-slate-950">
-      {/* Background effects */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-0 left-1/4 h-[400px] w-[500px] rounded-full bg-[#2facde]/6 blur-[120px]" />
-        <div className="absolute right-1/4 bottom-0 h-[300px] w-[400px] rounded-full bg-indigo-500/5 blur-[100px]" />
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-      </div>
-
-      {/* Comparison cards */}
-      <section className="relative border-t border-white/5 py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            badge="Elimine o caos"
-            title="Pare de pagar 5 boletos"
-            highlight="para ter 5 problemas."
-            description="O MyLar Pro substitui custo e desordem por uma plataforma que funciona de verdade."
-            dark
-          />
-
-          <AnimateInStagger
-            className="mt-12 grid grid-cols-1 gap-5 lg:mt-16 lg:grid-cols-3"
-            stagger={0.08}
-          >
-            {comparisons.map((item) => {
-              const Icon = item.icon;
-              return (
-              <AnimateInItem key={item.pain} className="flex">
-                <div className="group flex h-full flex-col rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-[#2facde]/20 hover:bg-white/[0.06]">
-                  <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde] transition-all group-hover:bg-[#2facde]/20 group-hover:scale-110">
-                    <Icon className="size-6" strokeWidth={1.6} />
-                  </div>
-                  <p className="text-sm font-medium text-slate-500 line-through decoration-slate-600">
-                    {item.old}
-                  </p>
-                  <h3 className="mt-2 text-xl font-bold text-white">
-                    {item.modern}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
-                    {item.modernDesc}
-                  </p>
-                </div>
-              </AnimateInItem>
-              );
-            })}
-          </AnimateInStagger>
-
-          {/* Highlight cards */}
-          <AnimateInStagger
-            className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2"
-            stagger={0.08}
-          >
-            {highlights.map((item) => {
-              const Icon = item.icon;
-              return (
-              <AnimateInItem key={item.title} className="flex">
-                <div className="flex h-full flex-col rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.02] p-7 backdrop-blur-sm">
-                  <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-[#2facde]/10 text-[#2facde]">
-                    <Icon className="size-7" strokeWidth={1.6} />
-                  </div>
-                  <h3 className="text-xl font-bold tracking-tight text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-slate-400">{item.description}</p>
-                  <ul className="mt-4 space-y-2">
-                    {item.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-slate-300">
-                        <Icons.checkCircle className="size-4 shrink-0 text-[#2facde]" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </AnimateInItem>
-              );
-            })}
-          </AnimateInStagger>
+    <section className="border-t border-slate-200 bg-[#FAFAF7] py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-slate-300" />
+              <span className="font-mono text-[11px] font-semibold tracking-[0.18em] text-[#2facde] uppercase">
+                O problema
+              </span>
+            </div>
+            <h2 className="mt-5 text-3xl leading-[1.05] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.5rem]">
+              Seu contrato está em uma ferramenta. A cobrança em outra. O lead,
+              no WhatsApp de alguém.
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
+            Cada sistema resolve um pedaço e nenhum conversa com o outro. O custo
+            aparece no retrabalho, no repasse atrasado e no lead que ninguém
+            respondeu.
+          </p>
         </div>
-      </section>
-    </div>
+
+        <div className="mt-14 grid gap-5 lg:mt-20 lg:grid-cols-2 lg:gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-7 lg:p-8"
+          >
+            <p className="text-[15px] font-bold text-slate-500">
+              Sem MyLar Pro
+            </p>
+            <ul className="mt-6 space-y-4">
+              {withoutMylar.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Icons.close
+                    aria-hidden
+                    className="mt-0.5 size-4 shrink-0 text-slate-400"
+                  />
+                  <span className="text-sm leading-relaxed text-slate-500">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="rounded-2xl border-2 border-[#2facde]/25 bg-white p-7 shadow-[0_20px_40px_-28px_rgba(47,172,222,0.45)] lg:p-8"
+          >
+            <p className="text-[15px] font-bold text-[#2facde]">Com MyLar Pro</p>
+            <ul className="mt-6 space-y-4">
+              {withMylar.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Icons.check
+                    aria-hidden
+                    className="mt-0.5 size-4 shrink-0 text-[#2facde]"
+                  />
+                  <span className="text-sm leading-relaxed text-slate-700">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }

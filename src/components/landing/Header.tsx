@@ -5,82 +5,28 @@ import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Icons } from "@/lib/icons";
-
-const APP_URL = "https://app.mylarpro.com.br";
-const REGISTER_URL = "https://app.mylarpro.com.br/register";
-
-type NavChild = {
-  href: string;
-  label: string;
-  description: string;
-  accent: string;
-};
+import { MegaMenu } from "@/components/landing/MegaMenu";
+import {
+  APP_URL,
+  REGISTER_URL,
+  badgeLabels,
+  featureCategories,
+  personaNavItems,
+} from "@/lib/navigation";
 
 type NavLink = {
   href: string;
   label: string;
   exact?: boolean;
-  children?: NavChild[];
+  menu?: "features" | "personas";
 };
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Início", exact: true },
-  {
-    href: "/features",
-    label: "Recursos",
-    children: [
-      {
-        href: "/features/broker-app",
-        label: "App do Corretor",
-        description: "App nativo iOS e Android para o corretor em campo.",
-        accent: "#1FB3D6",
-      },
-      {
-        href: "/features/property-catalog",
-        label: "Catálogo Público",
-        description: "Site de imóveis com SEO e domínio próprio.",
-        accent: "#2D6BE0",
-      },
-      {
-        href: "/features/client-portal",
-        label: "Portal do Cliente",
-        description: "Inquilino paga, proprietário acompanha repasses.",
-        accent: "#7C3AED",
-      },
-      {
-        href: "/features/digital-signature",
-        label: "Assinatura Digital",
-        description: "Contrato assinado em minutos, com validade jurídica.",
-        accent: "#F59E0B",
-      },
-    ],
-  },
-  {
-    href: "/personas",
-    label: "Para quem",
-    children: [
-      {
-        href: "/personas/broker",
-        label: "Corretor autônomo",
-        description: "CRM, catálogo no seu domínio e WhatsApp num só lugar.",
-        accent: "#1FB3D6",
-      },
-      {
-        href: "/personas/real-estate",
-        label: "Imobiliária",
-        description: "Locação, vendas, cobrança e financeiro com equipe.",
-        accent: "#2D6BE0",
-      },
-      {
-        href: "/personas/development",
-        label: "Lançamentos & Empreendimentos",
-        description:
-          "Incorporadoras, construtoras e loteadoras — espelho de vendas, Meta Ads e BI executivo.",
-        accent: "#10B981",
-      },
-    ],
-  },
-  { href: "/plans", label: "Planos" },
+  { href: "/features", label: "Recursos", menu: "features" },
+  { href: "/personas", label: "Para quem", menu: "personas" },
+  { href: "/plans", label: "Preços" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contato" },
 ];
 
@@ -88,8 +34,22 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState("");
+  const [openMenu, setOpenMenu] = useState<NavLink["menu"] | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const { scrollY } = useScroll();
+
+  function openMenuNow(menu: NavLink["menu"]) {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpenMenu(menu ?? null);
+  }
+
+  function scheduleClose() {
+    closeTimeoutRef.current = setTimeout(() => setOpenMenu(null), 140);
+  }
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 20);
@@ -122,20 +82,30 @@ export function Header() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  function isActive(link: { href: string; exact?: boolean }) {
+  function isActive(link: NavLink) {
     if (link.exact) {
       return pathname === "/" && !activeHash;
     }
-    if (link.href.startsWith("/#")) {
-      return pathname === "/" && activeHash === link.href.slice(1);
-    }
-    return pathname === link.href;
+    return pathname === link.href || pathname.startsWith(`${link.href}/`);
   }
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
     setMobileOpen(false);
+    setOpenMenu(null);
   }, [pathname]);
+
+  // Close the mega menu with Escape
+  useEffect(() => {
+    if (!openMenu) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpenMenu(null);
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [openMenu]);
 
   return (
     <motion.header
@@ -179,15 +149,41 @@ export function Header() {
           <nav className="hidden flex-1 items-center gap-0.5 md:flex">
             {navLinks.map((link) => {
               const active = isActive(link);
-              const hasChildren = link.children && link.children.length > 0;
 
-              if (hasChildren) {
+              if (link.menu) {
+                const isOpen = openMenu === link.menu;
                 return (
-                  <NavItemWithChildren
+                  <div
                     key={link.href}
-                    link={link}
-                    active={active}
-                  />
+                    onMouseEnter={() => openMenuNow(link.menu)}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <a
+                      href={link.href}
+                      aria-haspopup="menu"
+                      aria-expanded={isOpen}
+                      onFocus={() => openMenuNow(link.menu)}
+                      className={[
+                        "relative flex items-center gap-1 whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
+                        active || isOpen
+                          ? "text-white"
+                          : "text-slate-400 hover:bg-white/5 hover:text-slate-200",
+                      ].join(" ")}
+                    >
+                      {link.label}
+                      <Icons.chevronDown
+                        aria-hidden
+                        className={`size-3 opacity-60 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                      />
+                      {active && (
+                        <motion.span
+                          layoutId="nav-active"
+                          className="absolute inset-0 -z-10 rounded-lg bg-white/[0.08]"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </a>
+                  </div>
                 );
               }
 
@@ -276,6 +272,29 @@ export function Header() {
         </div>
       </motion.div>
 
+      {/* Desktop mega menu panel */}
+      <AnimatePresence>
+        {openMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            onMouseEnter={() => openMenuNow(openMenu)}
+            onMouseLeave={scheduleClose}
+            className="absolute inset-x-0 top-full hidden px-4 pt-2 md:block sm:px-6 lg:px-8"
+          >
+            <div className="mx-auto max-w-7xl">
+              {openMenu === "features" ? (
+                <MegaMenu onNavigate={() => setOpenMenu(null)} />
+              ) : (
+                <PersonaMenu onNavigate={() => setOpenMenu(null)} />
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -312,20 +331,59 @@ export function Header() {
                       {link.label}
                     </a>
 
-                    {link.children && link.children.length > 0 && (
-                      <div className="ml-4 mt-1 mb-1 flex flex-col gap-0.5 border-l border-white/10 pl-3">
-                        {link.children.map((child) => (
+                    {link.menu === "features" && (
+                      <div className="mt-1 mb-1 ml-4 flex flex-col gap-2 border-l border-white/10 pl-3">
+                        {featureCategories.map((category) => (
+                          <div key={category.key}>
+                            <p className="px-3 pt-1 pb-1 text-[11px] font-semibold tracking-wider text-slate-500 uppercase">
+                              {category.label}
+                            </p>
+                            {category.groups
+                              .flatMap((group) => group.items)
+                              .map((item) => {
+                                const ItemIcon = Icons[item.icon];
+                                return (
+                                  <a
+                                    key={item.href}
+                                    href={item.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white"
+                                  >
+                                    <ItemIcon
+                                      aria-hidden
+                                      className="size-3.5 shrink-0 opacity-60"
+                                    />
+                                    <span className="min-w-0 flex-1">
+                                      {item.label}
+                                    </span>
+                                    {item.badge && (
+                                      <span className="shrink-0 rounded-full border border-[#2facde]/30 bg-[#2facde]/10 px-1.5 py-px text-[10px] font-semibold text-[#5ac4e6]">
+                                        {badgeLabels[item.badge]}
+                                      </span>
+                                    )}
+                                  </a>
+                                );
+                              })}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {link.menu === "personas" && (
+                      <div className="mt-1 mb-1 ml-4 flex flex-col gap-0.5 border-l border-white/10 pl-3">
+                        {personaNavItems.map((item) => (
                           <a
-                            key={child.href}
-                            href={child.href}
+                            key={item.href}
+                            href={item.href}
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white"
                           >
                             <span
-                              className="size-1 rounded-full"
-                              style={{ backgroundColor: child.accent }}
+                              aria-hidden
+                              className="size-1 shrink-0 rounded-full"
+                              style={{ backgroundColor: item.accent }}
                             />
-                            {child.label}
+                            {item.label}
                           </a>
                         ))}
                       </div>
@@ -368,115 +426,61 @@ export function Header() {
   );
 }
 
-function NavItemWithChildren({
-  link,
-  active,
-}: {
-  link: NavLink;
-  active: boolean;
-}) {
-  const [open, setOpen] = useState(false);
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  function handleEnter() {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-    setOpen(true);
-  }
-
-  function handleLeave() {
-    closeTimeoutRef.current = setTimeout(() => setOpen(false), 120);
-  }
-
+function PersonaMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
-    <div
-      className="relative"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onFocus={handleEnter}
-      onBlur={handleLeave}
-    >
-      <a
-        href={link.href}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        className={[
-          "relative flex items-center gap-1 whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
-          active
-            ? "text-white"
-            : "text-slate-400 hover:bg-white/5 hover:text-slate-200",
-        ].join(" ")}
-      >
-        {link.label}
-        <Icons.chevronDown
-          aria-hidden
-          className={`size-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
-        />
-        {active && (
-          <motion.span
-            layoutId="nav-active"
-            className="absolute inset-0 -z-10 rounded-lg bg-white/[0.08]"
-            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-          />
-        )}
-      </a>
-
-      <AnimatePresence>
-        {open && link.children && (
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.15 }}
-            role="menu"
-            className="absolute left-1/2 top-full z-50 mt-2 w-[320px] -translate-x-1/2 overflow-hidden rounded-xl border border-white/10 bg-slate-950/98 p-2 shadow-2xl backdrop-blur-xl"
-          >
-            {link.children.map((child) => (
-              <a
-                key={child.href}
-                href={child.href}
-                role="menuitem"
-                className="group flex gap-3 rounded-lg px-3 py-2.5 transition hover:bg-white/[0.06]"
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/98 p-3 shadow-2xl backdrop-blur-xl">
+      <div className="grid grid-cols-3 gap-2" role="menu">
+        {personaNavItems.map((item) => {
+          const ItemIcon = Icons[item.icon];
+          return (
+            <a
+              key={item.href}
+              href={item.href}
+              role="menuitem"
+              onClick={onNavigate}
+              className="group flex flex-col gap-2 rounded-xl border border-white/5 p-4 transition hover:border-white/15 hover:bg-white/[0.06]"
+            >
+              <span
+                className="flex size-9 items-center justify-center rounded-lg"
+                style={{ backgroundColor: `${item.accent}1a` }}
               >
-                <span
+                <ItemIcon
                   aria-hidden
-                  className="mt-1.5 size-1.5 shrink-0 rounded-full"
-                  style={{ backgroundColor: child.accent }}
+                  className="size-4"
+                  style={{ color: item.accent }}
                 />
-                <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-semibold text-white">
-                    {child.label}
-                  </span>
-                  <span className="mt-0.5 block text-[12px] leading-snug text-slate-400">
-                    {child.description}
-                  </span>
-                </span>
+              </span>
+              <span className="text-sm font-semibold text-white">
+                {item.label}
+              </span>
+              <span className="text-[12px] leading-snug text-slate-400">
+                {item.description}
+              </span>
+              <span className="mt-auto inline-flex items-center gap-1 pt-1 text-[12px] font-semibold text-slate-300 transition group-hover:text-white">
+                Ver a plataforma
                 <Icons.arrowRight
                   aria-hidden
-                  className="mt-1.5 size-3 shrink-0 text-slate-500 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  className="size-3 transition-transform group-hover:translate-x-0.5"
                 />
-              </a>
-            ))}
+              </span>
+            </a>
+          );
+        })}
+      </div>
 
-            <div className="mt-1 border-t border-white/5 pt-1">
-              <a
-                href={link.href}
-                role="menuitem"
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white"
-              >
-                <span>
-                  {link.href === "/personas"
-                    ? "Comparar as três versões"
-                    : "Ver todos os recursos"}
-                </span>
-                <span className="text-slate-500">→</span>
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="mt-1 border-t border-white/5 pt-1">
+        <a
+          href="/personas"
+          role="menuitem"
+          onClick={onNavigate}
+          className="flex items-center justify-between rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white"
+        >
+          <span>Comparar as três versões</span>
+          <span aria-hidden className="text-slate-500">
+            →
+          </span>
+        </a>
+      </div>
     </div>
   );
 }

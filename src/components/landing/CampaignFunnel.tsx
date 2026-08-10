@@ -22,10 +22,10 @@ export function CampaignFunnel() {
           {/* Text */}
           <AnimateIn delay={0.15} className="order-1 lg:order-2">
             <SectionHeader
-              badge="CRM Integrado"
-              title="Pipeline visual que converte"
-              highlight="leads em contratos."
-              description="Gerencie campanhas de captação e vendas direto na plataforma. Dados sincronizados, sem retrabalho e sem planilhas entre sistemas."
+              badge="CRM e negociações"
+              title="O funil inteiro em uma tela —"
+              highlight="e nenhum lead esquecido nela."
+              description="Kanban com os seus estágios, distribuição automática por corretor e redistribuição quando o prazo de resposta estoura. Venda e locação com caminhos separados."
               align="left"
             />
 
