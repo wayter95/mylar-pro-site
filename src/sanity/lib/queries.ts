@@ -13,7 +13,7 @@ const postPreviewFields = `
   title,
   "slug": slug.current,
   excerpt,
-  coverImage { asset { _ref }, alt, caption },
+  coverImage { "asset": { "_ref": asset.asset._ref }, alt, caption },
   publishedAt,
   "readingTime": math::max([1, round((
     coalesce(math::sum(content[_type == "richTextBlock"]{ "n": length(pt::text(content)) }.n), 0) +
@@ -27,13 +27,13 @@ const postPreviewFields = `
 
 const postFields = `
   ${postPreviewFields},
-  "author": author->{ name, photo { asset { _ref }, alt, caption }, bio },
+  "author": author->{ name, photo { "asset": { "_ref": asset.asset._ref }, alt, caption }, bio },
   seo { title, description },
   content[] {
     _key,
     _type,
     _type == "richTextBlock" => { content },
-    _type == "imageBlock" => { image { asset { _ref }, alt, caption } },
+    _type == "imageBlock" => { image { "asset": { "_ref": asset.asset._ref }, alt, caption } },
     _type == "calloutBlock" => { title, message, tone },
     _type == "ctaBlock" => { label, destination },
     _type == "featureBlock" => { title, features },

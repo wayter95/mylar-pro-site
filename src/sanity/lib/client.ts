@@ -4,6 +4,11 @@ import { createClient } from "next-sanity";
 
 export const apiVersion = "2026-08-10";
 
+export const isSanityConfigured = Boolean(
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
+    process.env.NEXT_PUBLIC_SANITY_DATASET,
+);
+
 export function getSanityClient() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;

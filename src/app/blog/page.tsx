@@ -6,6 +6,7 @@ import { BlogEmptyState } from "@/components/blog/BlogEmptyState";
 import { BlogHero } from "@/components/blog/BlogHero";
 import { CategoryFilter } from "@/components/blog/CategoryFilter";
 import { FeaturedArticle } from "@/components/blog/FeaturedArticle";
+import { isSanityConfigured } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { getAllPosts, getCategories } from "@/sanity/lib/queries";
 import type {
@@ -35,6 +36,13 @@ type BlogData = {
 };
 
 async function getBlogData(): Promise<BlogData> {
+  if (!isSanityConfigured) {
+    console.error(
+      "[blog] Sanity não configurado: defina NEXT_PUBLIC_SANITY_PROJECT_ID e NEXT_PUBLIC_SANITY_DATASET no build.",
+    );
+    return { posts: [], categories: [] };
+  }
+
   try {
     const [posts, categories] = await Promise.all([
       getAllPosts(),
@@ -42,7 +50,8 @@ async function getBlogData(): Promise<BlogData> {
     ]);
 
     return { posts, categories };
-  } catch {
+  } catch (error) {
+    console.error("[blog] falha ao buscar posts:", error);
     return { posts: [], categories: [] };
   }
 }

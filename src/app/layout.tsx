@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { CognizyWidget } from "@/components/layout/CognizyWidget";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import "../styles/globals.css";
 
@@ -163,46 +164,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         {children}
 
-        {/* Cognizy Widget */}
-        <Script id="cognizy-widget" strategy="afterInteractive">
-          {`(function(){
-  var d=document,f=d.createElement('iframe');
-  f.src="https://cognizy.ai/widget?org=cmnnt9j2j00013smq9tyin6ct";
-  f.allow="microphone";
-  f.style.cssText="position:fixed;bottom:0;right:0;border:none;z-index:9999;width:100px;height:100px;background:transparent;pointer-events:none;max-width:100vw;max-height:100vh;";
-  f.setAttribute("allowtransparency","true");
-  d.body.appendChild(f);
-  f.onload=function(){f.style.pointerEvents="auto";};
-  var isOpen=false;
-  function applySize(){
-    if(isOpen){
-      var isMobile=window.innerWidth<480;
-      if(isMobile){
-        f.style.width="100vw";
-        f.style.height="100dvh";
-        f.style.bottom="0";
-        f.style.right="0";
-      }else{
-        f.style.width="440px";
-        f.style.height="620px";
-        f.style.bottom="0";
-        f.style.right="0";
-      }
-    }else{
-      f.style.width="100px";
-      f.style.height="100px";
-    }
-  }
-  window.addEventListener("message",function(e){
-    if(e.data&&e.data.type==="conversa-widget-resize"){
-      isOpen=!!e.data.isOpen;
-      applySize();
-    }
-  });
-  window.addEventListener("resize",applySize);
-})();`}
-        </Script>
-        {/* End Cognizy Widget */}
+        <CognizyWidget />
       </body>
     </html>
   );

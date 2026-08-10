@@ -1,14 +1,23 @@
 import Link from "next/link";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Icons } from "@/lib/icons";
+import { isSanityConfigured } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { getRecentPosts } from "@/sanity/lib/queries";
 import type { PostPreview } from "@/sanity/types/content";
 
 async function loadPosts(): Promise<PostPreview[]> {
+  if (!isSanityConfigured) {
+    console.error(
+      "[HomeBlog] Sanity não configurado: defina NEXT_PUBLIC_SANITY_PROJECT_ID e NEXT_PUBLIC_SANITY_DATASET no build.",
+    );
+    return [];
+  }
+
   try {
     return await getRecentPosts(3);
-  } catch {
+  } catch (error) {
+    console.error("[HomeBlog] falha ao buscar posts:", error);
     return [];
   }
 }
