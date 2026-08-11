@@ -65,7 +65,7 @@ export const featureCategories: MegaMenuCategory[] = [
           {
             href: "/features/channels",
             label: "Canais de atendimento",
-            description: "WhatsApp e e-mail no mesmo inbox, em tempo real.",
+            description: "WhatsApp, Instagram, Messenger e e-mail num inbox só.",
             icon: "message",
           },
           {

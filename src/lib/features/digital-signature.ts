@@ -12,12 +12,12 @@ export const digitalSignature: FeatureContent = {
     title: "Assinatura digital ",
     titleHighlight: "integrada ao CRM",
     subtitle:
-      "Envie contratos de locação, venda, intermediação e parcerias para assinatura digital. Sem impressora, sem cartório, sem deslocamento — com plena validade jurídica.",
+      "Envie contratos de locação, venda, intermediação e parcerias para assinatura digital. Sem impressora, sem cartório, sem deslocamento — com identidade confirmada por código e trilha de auditoria anexada ao documento.",
     ctaPrimary: "Começar 30 dias grátis",
     ctaSecondary: "Ver portal de assinatura",
     trust: [
-      "MP 2.200-2/2001 · Lei 14.063/2020",
-      "Trilha de auditoria com IP e geolocalização",
+      "Assinatura eletrônica · Lei 14.063/2020",
+      "Verificação pública por QR e hash",
       "Cliente assina pelo celular, sem app",
     ],
   },
@@ -34,16 +34,20 @@ export const digitalSignature: FeatureContent = {
       body: "Templates de locação, compra e venda, intermediação e administração — ou crie os seus com variáveis dinâmicas que preenchem dados do imóvel, cliente e negociação automaticamente.",
     },
     {
-      title: "Validade jurídica garantida",
-      body: "Cada documento é assinado com certificado ICP-Brasil ou autenticação por SMS/e-mail + selo de tempo, garantindo plena validade jurídica em todo território nacional.",
+      title: "Identidade confirmada por código",
+      body: "Cada signatário recebe o contrato por e-mail e confirma a assinatura com um código de verificação enviado para ele. A assinatura eletrônica segue a Lei 14.063/2020 para contratos entre partes que aceitam esse meio.",
+    },
+    {
+      title: "Verificação pública por QR e hash",
+      body: "O PDF assinado sai com um QR Code e o hash SHA-256 do documento. Qualquer pessoa confere a autenticidade sem depender de você — se um byte do arquivo mudar, a verificação acusa.",
     },
     {
       title: "Múltiplos signatários",
-      body: "Envie para inquilino, proprietário, fiador, testemunhas e corretor de uma só vez. Cada um assina pelo celular, na ordem que você definir.",
+      body: "Inquilino, proprietário, fiador, testemunha e procurador no mesmo contrato, cada um com o seu papel registrado.",
     },
     {
       title: "Trilha de auditoria",
-      body: "Cada contrato registra IP, geolocalização, dispositivo, data e hora de cada assinatura — pronto para qualquer disputa judicial.",
+      body: "Cada assinatura registra IP, dispositivo, data e hora, além do consentimento LGPD com versão do termo aceito. Fica tudo anexado ao documento.",
     },
     {
       title: "Integrado ao CRM",
@@ -60,11 +64,11 @@ export const digitalSignature: FeatureContent = {
       "O fluxo de assinatura vem amarrado ao contrato — sem ferramenta paralela.",
   },
   benefits: [
-    "De 7 dias para 7 minutos: tempo médio de fechamento de contrato",
+    "Contrato assinado no mesmo dia, sem imprimir nem despachar",
     "Zero papel: economia de impressão, cartório e correio",
     "Zero fricção: cliente assina de qualquer lugar, sem cadastro",
-    "100% rastreável: auditoria completa anexada ao documento",
-    "Validade total: aceito em qualquer tribunal brasileiro",
+    "Autenticidade conferível por QR e hash, por qualquer parte",
+    "Trilha de IP, dispositivo, data e consentimento LGPD anexada",
   ],
   benefitsHeadline: {
     title: "Por que a assinatura digital muda o jogo.",
@@ -94,12 +98,16 @@ export const digitalSignature: FeatureContent = {
   },
   faq: [
     {
-      q: "A assinatura digital tem validade jurídica?",
-      a: "Sim. A assinatura atende à MP 2.200-2/2001 e à Lei 14.063/2020, garantindo plena validade em todo território nacional — aceita em qualquer tribunal brasileiro.",
+      q: "Que tipo de assinatura é essa?",
+      a: "É assinatura eletrônica na modalidade simples, prevista na Lei 14.063/2020: o signatário é identificado, confirma por código enviado ao e-mail dele e a plataforma registra IP, dispositivo e data. Vale entre partes que aceitam esse meio, o que cobre contrato de locação, intermediação e parceria. Não é assinatura qualificada com certificado ICP-Brasil — se o seu caso exigir isso, o contrato pode ser assinado por fora e anexado ao imóvel.",
     },
     {
       q: "O cliente precisa ter certificado digital?",
-      a: "Não. A assinatura pode ser feita por autenticação via SMS, e-mail ou selfie — todas reconhecidas legalmente conforme a legislação brasileira.",
+      a: "Não. Ele recebe o link por e-mail, confere o documento e confirma com o código de verificação. Não precisa instalar aplicativo, criar conta nem ter certificado.",
+    },
+    {
+      q: "Como eu provo que o documento não foi alterado?",
+      a: "O PDF assinado traz um QR Code e o hash SHA-256 do arquivo. Pela página pública de verificação, qualquer parte confirma que aquele documento é o mesmo que foi assinado — sem precisar pedir nada para a imobiliária.",
     },
     {
       q: "Quantos contratos posso enviar?",
@@ -120,11 +128,11 @@ export const digitalSignature: FeatureContent = {
   ],
   hubCard: {
     description:
-      "Contrato gerado do CRM, enviado por WhatsApp e assinado pelo cliente em minutos, com validade jurídica.",
+      "Contrato gerado do CRM, enviado por WhatsApp e assinado pelo cliente em minutos, com verificação por QR e hash.",
     highlights: [
-      "MP 2.200-2/2001 · Lei 14.063/2020",
+      "Assinatura eletrônica · Lei 14.063/2020",
       "Múltiplos signatários + trilha de auditoria",
-      "Assinatura por SMS/e-mail/selfie",
+      "Código de verificação por e-mail",
     ],
   },
 };

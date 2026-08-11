@@ -39,11 +39,11 @@ export const propertyCatalog: FeatureContent = {
     },
     {
       title: "SEO técnico nativo",
-      body: "Páginas com schema.org de imóvel, sitemap automático, meta tags personalizáveis, Google Analytics, GTM e integração com Search Console. Pronto para ranquear.",
+      body: "Título, descrição e palavras-chave configuráveis por página, imagem de compartilhamento, URL canônica, controle de robots, Google Analytics e GTM. O domínio é seu, com certificado SSL emitido automaticamente.",
     },
     {
       title: "Distribuição automática",
-      body: "Sincronize com ZAP Imóveis, Viva Real, OLX, Imovelweb e XML Feed genérico. Cadastra uma vez, publica em todos os portais sem trabalho manual.",
+      body: "Integração direta com a OLX e XML feed no padrão que ZAP Imóveis, Viva Real, Imovelweb e Chaves na Mão consomem. Você cadastra uma vez e marca em quais portais o imóvel entra.",
     },
     {
       title: "Captação direto no CRM",
@@ -51,7 +51,7 @@ export const propertyCatalog: FeatureContent = {
     },
     {
       title: "Chat e integrações",
-      body: "Plug-and-play com WhatsApp Business, chat ao vivo, RD Station, Facebook Pixel e o que mais sua operação de marketing precisar.",
+      body: "WhatsApp para contato direto, pixel do Meta, Google Analytics e GTM. Marca d'água automática nas fotos e campo para incorporar scripts próprios quando a sua operação precisar.",
     },
     {
       title: "Personalização visual",
@@ -68,12 +68,12 @@ export const propertyCatalog: FeatureContent = {
     "Mais leads orgânicos com SEO nativo (não plugin)",
     "Sem mensalidade extra — incluído no plano Mylar Pro",
     "Atualização em tempo real: alterou o imóvel, já está no site",
-    "Lead que entra já chega no CRM com score e atribuição automática",
+    "Lead que entra já chega no CRM atribuído a um corretor e atribuição automática",
   ],
   benefitsHeadline: {
     title: "Por que clientes profissionalizam com o Catálogo.",
     subtitle:
-      "Pare de depender só de ZAP e Viva Real — tenha sua própria casa digital.",
+      "Pare de depender só de portal de terceiro — tenha a sua própria casa digital.",
   },
   audience: [
     {
@@ -120,7 +120,7 @@ export const propertyCatalog: FeatureContent = {
     },
     {
       q: "O SEO funciona mesmo?",
-      a: "Sim. Sitemap, schema.org, meta tags, OG tags, performance Core Web Vitals — tudo nativo. Vários clientes ranqueiam na primeira página em poucos meses.",
+      a: "O catálogo entrega o que está sob o seu controle: domínio próprio, meta tags e palavras-chave por página, OG tags para compartilhamento, URL canônica e robots configurável, além de Analytics e GTM para medir. Resultado de busca depende de concorrência e conteúdo, então não prometemos posição.",
     },
   ],
   hubCard: {
@@ -128,7 +128,7 @@ export const propertyCatalog: FeatureContent = {
       "Site profissional no seu domínio, com SEO técnico, integração com portais e captação direta no CRM.",
     highlights: [
       "Subdomínio Mylar ou domínio próprio",
-      "SEO nativo + integração ZAP/Viva Real",
+      "SEO configurável + XML feed para os portais",
       "Lead cai direto no CRM com origem rastreada",
     ],
   },

@@ -31,7 +31,7 @@ export const ai: FeatureContent = {
     },
     {
       title: "Resposta ao lead escrita antes de você digitar",
-      body: "Dentro do inbox, a Mila lê o fio da conversa e sugere o texto. Você lê, ajusta o que quiser e envia — o disparo é sempre seu.",
+      body: "A IA de atendimento responde o lead dentro do inbox e, quando o assunto sai do que ela pode resolver, transfere para o corretor com o motivo registrado.",
     },
     {
       title: "Resumo de conversa longa em poucas linhas",
@@ -78,7 +78,7 @@ export const ai: FeatureContent = {
     },
     {
       title: "Foto do imóvel",
-      body: "Mobiliar ambiente vazio e corrigir iluminação ruim, em lote.",
+      body: "Mobiliar ambiente vazio e corrigir iluminação ruim.",
     },
     {
       title: "Legenda para social",
@@ -92,7 +92,7 @@ export const ai: FeatureContent = {
   },
   benefits: [
     "Sabe o que fazer em cada negociação sem reler o histórico inteiro",
-    "Resposta ao lead escrita em segundos, revisada por você antes de sair",
+    "Primeira resposta ao lead em segundos, a qualquer hora do dia",
     "Atendimento assumido no meio sem pedir para o cliente repetir",
     "Imóvel sugerido com o motivo do encaixe, critério por critério",
     "Template de contrato pronto para preencher sem mapear variável à mão",
@@ -147,7 +147,7 @@ export const ai: FeatureContent = {
     },
     {
       label: "MyLar Score",
-      description: "O risco do cliente entra na análise da negociação.",
+      description: "Consulta de crédito registrada no cadastro do cliente.",
       href: "/features/mylar-score",
     },
     {

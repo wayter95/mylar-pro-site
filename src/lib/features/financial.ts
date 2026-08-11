@@ -16,7 +16,7 @@ export const financial: FeatureContent = {
     ctaSecondary: "Falar com especialista",
     trust: [
       "Conciliação por OFX e CSV",
-      "DIMOB por proprietário",
+      "Informe de rendimentos por proprietário",
       "Centros de custo",
     ],
   },
@@ -34,7 +34,7 @@ export const financial: FeatureContent = {
       body: "Centros de custo, categorias e tags cruzam a mesma movimentação por departamento, por projeto e por natureza. Dá para responder quanto custou a operação de locação sem abrir planilha.",
     },
     {
-      title: "DIMOB sem corrida em fevereiro",
+      title: "O informe do proprietário sem corrida em fevereiro",
       body: "O informe de rendimentos anual por proprietário sai com o detalhamento mês a mês e o PDF pronto para enviar. Os dados já estavam lá o ano inteiro.",
     },
     {
@@ -43,7 +43,7 @@ export const financial: FeatureContent = {
     },
     {
       title: "Contas separadas, saldo real",
-      body: "Contas correntes, poupança e carteiras com saldo próprio, extrato filtrável e exportação em CSV. O caixa da operação não fica misturado com o da empresa.",
+      body: "Conta corrente, poupança, investimento, carteira e conta de pagamento, cada uma com saldo e extrato filtrável. O caixa da operação não fica misturado com o da empresa.",
     },
   ],
   keyPointsHeadline: {
@@ -58,7 +58,7 @@ export const financial: FeatureContent = {
     },
     {
       title: "Conciliação bancária",
-      body: "Importa OFX e CSV, casa automaticamente e marca cada transação como conciliada, manual ou ignorada.",
+      body: "Importa OFX e CSV, casa automaticamente por valor e data e deixa cada transação como pendente, conciliada, confirmada ou ignorada.",
     },
     {
       title: "Repasses",
@@ -70,19 +70,19 @@ export const financial: FeatureContent = {
     },
     {
       title: "Contas e movimentações",
-      body: "Contas correntes, poupança e carteiras com saldo, extrato filtrável e exportação em CSV.",
+      body: "Conta corrente, poupança, investimento e carteira, com saldo e extrato filtrável.",
     },
     {
       title: "Centros de custo e categorias",
-      body: "Vinte e quatro categorias prontas, mais as suas, e centros de custo por departamento ou projeto.",
+      body: "Categorias de sistema já criadas para comissão, repasse e cobrança, mais as suas, e centros de custo por departamento ou projeto.",
     },
     {
       title: "Metas",
       body: "Meta orçamentária por categoria e acompanhamento do mês contra o alvo.",
     },
     {
-      title: "DIMOB",
-      body: "Informe de rendimentos anual por proprietário, com breakdown mensal e PDF.",
+      title: "Informe de rendimentos",
+      body: "Relatório anual por proprietário, com detalhamento mês a mês e PDF pronto para enviar — a base que o contador usa para a DIMOB.",
     },
     {
       title: "Analytics",
@@ -99,7 +99,7 @@ export const financial: FeatureContent = {
     "Extrato do banco conciliado com matching automático por valor e data",
     "Margem real por centro de custo, categoria e tag, não só por mês",
     "Repasse ao proprietário com demonstrativo em PDF e comprovante anexado",
-    "DIMOB pronto no começo do ano, sem mutirão em fevereiro",
+    "Informe de rendimentos do proprietário pronto no começo do ano",
   ],
   benefitsHeadline: {
     title: "O que muda na operação.",
@@ -115,7 +115,7 @@ export const financial: FeatureContent = {
     {
       label: "Imobiliária de locação",
       description:
-        "Repasse ao proprietário, taxa de administração e DIMOB, tudo saindo da mesma base de faturas pagas.",
+        "Repasse ao proprietário, taxa de administração e informe de rendimentos, tudo saindo da mesma base de faturas pagas.",
     },
     {
       label: "Incorporadora e loteadora",
@@ -163,11 +163,11 @@ export const financial: FeatureContent = {
   faq: [
     {
       q: "Substitui o meu sistema contábil?",
-      a: "Não substitui a contabilidade, mas resolve a gestão financeira da operação: DRE gerencial, conciliação, centros de custo, repasses, comissões e DIMOB. O contador recebe dados organizados em vez de planilha remontada.",
+      a: "Não substitui a contabilidade, mas resolve a gestão financeira da operação: DRE gerencial, conciliação, centros de custo, repasses, comissões e o informe de rendimentos por proprietário. O contador recebe os dados organizados para a DIMOB em vez de planilha remontada.",
     },
     {
       q: "Quais bancos são aceitos na conciliação?",
-      a: "Qualquer banco que exporte extrato em OFX ou CSV. O cadastro de contas traz mais de 60 bancos brasileiros com logo, e o matching automático usa valor com tolerância de centavos e data com tolerância de alguns dias.",
+      a: "Qualquer banco que exporte extrato em OFX ou CSV. O matching automático casa por valor com tolerância de um centavo e data com tolerância de três dias, e deixa para você só o que precisa de decisão.",
     },
     {
       q: "Como funciona o repasse ao proprietário?",
@@ -188,11 +188,11 @@ export const financial: FeatureContent = {
   ],
   hubCard: {
     description:
-      "DRE gerencial com lançamento que nasce da operação, conciliação bancária por OFX e CSV, repasses, comissões e DIMOB por proprietário.",
+      "DRE gerencial com lançamento que nasce da operação, conciliação bancária por OFX e CSV, repasses, comissões e Informe de rendimentos por proprietário.",
     highlights: [
       "Conciliação com matching automático",
       "Margem por centro de custo e categoria",
-      "DIMOB anual com PDF pronto",
+      "Informe anual do proprietário com PDF pronto",
     ],
   },
 };

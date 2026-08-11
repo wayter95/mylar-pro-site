@@ -34,7 +34,7 @@ const primaryCards: PrimaryCard[] = [
   {
     title: "Canais de atendimento",
     description:
-      "Inbox único com WhatsApp e e-mail no mesmo histórico, em tempo real. Templates de mensagem, broadcast, chamados do inquilino e a régua de cobrança falando pelos mesmos canais.",
+      "WhatsApp, Instagram e Messenger pelas APIs oficiais da Meta, mais e-mail, num inbox só. O histórico é mesclado por cliente, em tempo real, com templates, broadcast e chamados do inquilino no mesmo fluxo.",
     linkLabel: "Ver atendimento",
     href: "/features/channels",
     icon: "message",

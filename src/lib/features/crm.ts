@@ -127,7 +127,7 @@ export const crm: FeatureContent = {
   connectsWith: [
     {
       label: "Canais de atendimento",
-      description: "A conversa do WhatsApp vive dentro do lead.",
+      description: "WhatsApp, Instagram e Messenger vivem dentro do lead.",
       href: "/features/channels",
     },
     {

@@ -39,7 +39,7 @@ export const properties: FeatureContent = {
     },
     {
       title: "Importação por planilha, endereço opcional",
-      body: "A carteira que você já tem entra por CSV ou XLSX, com mapeamento de colunas e prévia validada. Imóvel sem endereço completo não bloqueia a importação.",
+      body: "Planilha de imóveis importada com sugestão automática de mapeamento das colunas e relatório do que entrou, linha por linha, no fim do processo.",
     },
     {
       title: "Captação pelo app, dentro do imóvel",
@@ -71,7 +71,7 @@ export const properties: FeatureContent = {
     },
     {
       title: "Proprietários",
-      body: "Um ou vários donos, com o papel de cada um, inclusive procurador.",
+      body: "Um ou vários donos, com o papel de cada um.",
     },
     {
       title: "Espelho de vendas",
@@ -157,7 +157,7 @@ export const properties: FeatureContent = {
   faq: [
     {
       q: "Consigo importar os imóveis que já tenho em planilha?",
-      a: "Sim. A importação aceita CSV e XLSX, com mapeamento de colunas e prévia validada antes de gravar. O endereço é opcional, então imóvel com cadastro incompleto na planilha antiga não trava o processo.",
+      a: "Sim. A importação aceita CSV e XLSX, com sugestão automática de mapeamento das colunas antes de gravar. O endereço é opcional, então imóvel com cadastro incompleto na planilha antiga não trava o processo.",
     },
     {
       q: "Como funciona o cadastro de loteamento ou condomínio?",
@@ -173,7 +173,7 @@ export const properties: FeatureContent = {
     },
     {
       q: "Imóvel com mais de um proprietário é suportado?",
-      a: "Sim. O imóvel aceita vários donos, cada um com o seu papel, incluindo o caso do procurador que representa os demais.",
+      a: "Sim. O imóvel aceita vários donos, com cada vínculo registrado separadamente. No contrato, quem assina em nome dos demais entra com o papel de procurador.",
     },
     {
       q: "O histórico de preço serve para quê?",

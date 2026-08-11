@@ -16,7 +16,7 @@ export const aiMedia: FeatureContent = {
     ctaSecondary: "Falar com especialista",
     trust: [
       "Mobiliar ambiente vazio",
-      "Lote de imagens",
+      "Uma foto por vez, em segundos",
       "Salva no cadastro do imóvel",
     ],
   },
@@ -39,7 +39,7 @@ export const aiMedia: FeatureContent = {
     },
     {
       title: "Lote de imagens de uma vez",
-      body: "Não é uma foto por vez. Você envia o conjunto de fotos do imóvel e processa em lote, o que faz diferença quando a carteira inteira precisa de tratamento.",
+      body: "Você escolhe a foto, o resultado volta em segundos e você aprova antes de salvar no imóvel. Nada é publicado sem a sua conferência.",
     },
     {
       title: "Resultado salvo de volta no imóvel",
@@ -55,7 +55,7 @@ export const aiMedia: FeatureContent = {
   benefits: [
     "Imóvel anunciado no dia da captação, sem esperar por fotógrafo",
     "Ambiente vazio que passa a comunicar tamanho e uso",
-    "Fotos do imóvel tratadas em lote, não uma por uma",
+    "Foto ruim de imóvel tratada em segundos, sem editor nem fotógrafo",
     "Descrição e legenda prontas para revisar em vez de escrever do zero",
     "Imagem e texto gravados no cadastro do imóvel, prontos para o catálogo",
   ],
@@ -73,7 +73,7 @@ export const aiMedia: FeatureContent = {
     {
       label: "Imobiliária com equipe",
       description:
-        "Padrão visual parecido em toda a carteira, com lote de imagens processado por captação em vez de foto a foto.",
+        "Padrão visual parecido em toda a carteira, sem depender de agenda de fotógrafo para cada captação.",
     },
     {
       label: "Lançamentos e incorporadoras",
@@ -129,7 +129,7 @@ export const aiMedia: FeatureContent = {
     },
     {
       q: "Consigo tratar todas as fotos do imóvel de uma vez?",
-      a: "Sim. O processamento em lote aceita o conjunto de fotos, o que faz diferença quando é a carteira inteira que precisa de tratamento e não um imóvel isolado.",
+      a: "Quantas você quiser, uma por vez. Cada execução consome saldo da carteira de IA, então você trata só as fotos que realmente precisam.",
     },
     {
       q: "A imagem gerada fica salva no sistema?",
@@ -146,10 +146,10 @@ export const aiMedia: FeatureContent = {
   ],
   hubCard: {
     description:
-      "Mobiliar digitalmente um ambiente vazio, corrigir a iluminação da foto, gerar a descrição do anúncio e a legenda para redes sociais, em lote.",
+      "Mobiliar digitalmente um ambiente vazio, corrigir a iluminação da foto e gerar a descrição do anúncio, com legenda para redes sociais.",
     highlights: [
       "Ambiente vazio mobiliado digitalmente",
-      "Lote de fotos tratado de uma vez",
+      "Foto tratada e salva de volta no imóvel",
       "Imagem salva de volta no imóvel",
     ],
   },

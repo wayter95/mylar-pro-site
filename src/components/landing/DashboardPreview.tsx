@@ -21,7 +21,7 @@ const steps = [
   },
   {
     title: "A conversa acontece",
-    description: "WhatsApp e e-mail no mesmo inbox.",
+    description: "WhatsApp, Instagram e Messenger no mesmo inbox.",
     statusDetail:
       "O histórico fica no lead, não no celular do corretor. Quem sai do time não leva a conversa.",
     icon: (

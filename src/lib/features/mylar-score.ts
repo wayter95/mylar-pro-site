@@ -11,7 +11,7 @@ export const mylarScore: FeatureContent = {
     title: "Aprovar a locação deixa de depender de ",
     titleHighlight: "quem leu o relatório",
     subtitle:
-      "Consulta integrada ao Serasa e a outras bases, lida por IA e resumida em um score único de risco para aquele cliente — com o motivo de cada ponto tirado ou somado.",
+      "Consulta ao Serasa, lida por IA e resumida em um score único de risco para aquele cliente — com o motivo de cada ponto tirado ou somado.",
     ctaPrimary: "Testar 30 dias grátis",
     ctaSecondary: "Falar com especialista",
     trust: [
@@ -38,8 +38,8 @@ export const mylarScore: FeatureContent = {
       body: "Duas pessoas lendo o mesmo relatório chegam a decisões diferentes. O score aplica o mesmo critério em todos os candidatos, então a aprovação não depende de quem estava de plantão.",
     },
     {
-      title: "Preso ao cliente e à negociação",
-      body: "A análise fica registrada no cadastro do cliente e na negociação, com data e autor. Seis meses depois, dá para mostrar em que base a locação foi aprovada.",
+      title: "Preso ao cliente",
+      body: "A análise fica registrada no cadastro do cliente, com data e autor. Seis meses depois, dá para mostrar em que base a locação foi aprovada.",
     },
     {
       title: "Entra na conversa da Mila",
@@ -56,7 +56,7 @@ export const mylarScore: FeatureContent = {
     "Relatório longo resumido em um score com faixa de risco",
     "Decisão explicável ao proprietário, com o motivo de cada ponto",
     "Mesmo critério aplicado a todos os candidatos, independente de quem analisa",
-    "Histórico da análise guardado junto do cliente e do contrato",
+    "Histórico da análise guardado junto do cliente e do imóvel",
   ],
   benefitsHeadline: {
     title: "O que muda na aprovação.",
@@ -115,7 +115,7 @@ export const mylarScore: FeatureContent = {
   connectsWithHeadline: {
     title: "A análise não é um anexo solto.",
     subtitle:
-      "O score fica ligado ao cliente e à negociação, e acompanha o caminho até o contrato assinado.",
+      "O score fica ligado ao cliente, e acompanha o caminho até o contrato assinado.",
   },
   faq: [
     {
@@ -140,12 +140,12 @@ export const mylarScore: FeatureContent = {
     },
     {
       q: "A análise fica guardada por quanto tempo?",
-      a: "Ela fica registrada no cadastro do cliente e na negociação, com data e autor, para consulta posterior. É o que permite mostrar depois em que base a decisão foi tomada.",
+      a: "Ela fica registrada no cadastro do cliente, com data e autor, para consulta posterior. É o que permite mostrar depois em que base a decisão foi tomada.",
     },
   ],
   hubCard: {
     description:
-      "Consulta integrada ao Serasa e a outras bases, lida por IA e resumida em um score único de risco, com a justificativa de cada ponto.",
+      "Consulta ao Serasa, lida por IA e resumida em um score único de risco, com a justificativa de cada ponto.",
     highlights: [
       "Consulta de dentro da negociação",
       "Score com motivo, não só número",

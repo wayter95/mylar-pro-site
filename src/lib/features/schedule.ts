@@ -11,19 +11,19 @@ export const schedule: FeatureContent = {
     title: "A visita marcada aparece na agenda ",
     titleHighlight: "e no celular do corretor",
     subtitle:
-      "Calendário em dia, semana, mês e ano com as visitas de cada imóvel. Quadros kanban de tarefas para a equipe, ligados aos leads e às negociações que estão andando.",
+      "Calendário em dia, semana e mês com as visitas de cada imóvel, e quadros kanban para organizar as tarefas da equipe no mesmo sistema do funil.",
     ctaPrimary: "Testar 30 dias grátis",
     ctaSecondary: "Falar com especialista",
     trust: [
-      "Dia, semana, mês e ano",
+      "Dia, semana e mês",
       "Kanban de tarefas da equipe",
       "Visita no app do corretor",
     ],
   },
   keyPoints: [
     {
-      title: "Quatro visões do mesmo calendário",
-      body: "Dia para executar, semana para se organizar, mês e ano para enxergar carga e sazonalidade. É a mesma agenda vista de quatro distâncias diferentes.",
+      title: "Três visões do mesmo calendário. Dia para executar, semana para organizar a rota de visitas e mês para enxergar a carga do período.",
+      body: "Dia para executar, semana para organizar a rota de visitas e mês para enxergar a carga do período. É a mesma agenda vista de três distâncias.",
     },
     {
       title: "A visita nasce presa ao imóvel",
@@ -35,7 +35,7 @@ export const schedule: FeatureContent = {
     },
     {
       title: "Tarefa ligada ao lead e à negociação",
-      body: "A tarefa não vive solta: ela aponta para o lead ou a negociação de origem. Abrir a tarefa é chegar ao contexto, e abrir a negociação é ver o que ficou pendente nela.",
+      body: "O quadro fica ao lado do funil, então a pendência da semana e a negociação em andamento vivem no mesmo sistema — sem uma lista de tarefas paralela em outro aplicativo.",
     },
     {
       title: "O corretor vê a agenda no celular",
@@ -43,7 +43,7 @@ export const schedule: FeatureContent = {
     },
     {
       title: "A agenda da equipe em um lugar",
-      body: "O gestor enxerga o que está marcado para cada corretor no período. Distribuir uma visita nova deixa de exigir uma rodada de perguntas.",
+      body: "Cada pessoa enxerga a própria agenda e os compromissos em que foi incluída como participante. Distribuir uma visita nova deixa de exigir uma rodada de perguntas.",
     },
   ],
   keyPointsHeadline: {
@@ -56,8 +56,8 @@ export const schedule: FeatureContent = {
     "Visitas do dia na mão do corretor antes de ele sair do escritório",
     "Histórico de visitas por imóvel, útil na conversa com o proprietário",
     "Tarefa da equipe em kanban, com o travamento visível",
-    "Pendência ligada à negociação que a originou, sem contexto perdido",
-    "Visão do gestor sobre a agenda de cada corretor no período",
+    "Pendência da equipe no mesmo sistema do funil e da carteira, sem contexto perdido",
+    "Compromisso compartilhado aparece na agenda de todos os participantes no período",
   ],
   benefitsHeadline: {
     title: "O que muda na operação.",
@@ -124,16 +124,16 @@ export const schedule: FeatureContent = {
       a: "Sim. O compromisso aparece na agenda dele dentro do aplicativo do corretor, com o imóvel e o horário, para que ele saia com o dia já organizado.",
     },
     {
-      q: "Consigo ver a agenda de toda a equipe?",
-      a: "Sim. O calendário mostra os compromissos do período por corretor, o que evita marcar duas visitas no mesmo horário para a mesma pessoa.",
+      q: "Como funciona a agenda compartilhada?",
+      a: "Cada usuário vê os compromissos que criou e aqueles em que foi incluído como participante. Ao marcar uma visita com o corretor responsável, o evento aparece na agenda dele também.",
     },
     {
       q: "Qual a diferença entre agenda e quadro de tarefas?",
       a: "A agenda guarda o que tem hora marcada, como a visita ao imóvel. O quadro de tarefas guarda o que precisa ser feito mas não tem horário, e avança por colunas até ser concluído.",
     },
     {
-      q: "A tarefa fica ligada ao lead?",
-      a: "Fica. A tarefa aponta para o lead ou a negociação que a originou, então quem a executa chega ao contexto sem procurar, e a negociação mostra o que está pendente nela.",
+      q: "O quadro de tarefas é separado do funil de leads?",
+      a: "São dois quadros com propósitos diferentes: o funil move o lead entre estágios de negociação, e o quadro de tarefas organiza o trabalho da equipe. Os dois ficam no mesmo sistema, com as mesmas permissões.",
     },
     {
       q: "Dá para ver quantas visitas um imóvel recebeu?",
@@ -146,10 +146,10 @@ export const schedule: FeatureContent = {
   ],
   hubCard: {
     description:
-      "Calendário em dia, semana, mês e ano com as visitas de cada imóvel, e quadros kanban de tarefas da equipe ligados aos leads e às negociações.",
+      "Calendário em dia, semana e mês com as visitas de cada imóvel, e quadros kanban de tarefas para a equipe.",
     highlights: [
       "Visita presa ao imóvel, com histórico",
-      "Tarefa em kanban ligada à negociação",
+      "Quadro de tarefas em kanban para a equipe",
       "Agenda do dia no celular do corretor",
     ],
   },

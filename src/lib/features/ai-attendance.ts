@@ -88,7 +88,7 @@ export const aiAttendance: FeatureContent = {
   connectsWith: [
     {
       label: "Canais de atendimento",
-      description: "A IA atende dentro do mesmo inbox de WhatsApp e e-mail.",
+      description: "A IA atende no mesmo inbox dos canais da Meta e do e-mail.",
       href: "/features/channels",
     },
     {

@@ -11,31 +11,35 @@ export const channels: FeatureContent = {
     title: "Quando o corretor sai do time, ",
     titleHighlight: "a conversa não sai com ele",
     subtitle:
-      "WhatsApp e e-mail no mesmo inbox, com o histórico mesclado por cliente e sincronizado em tempo real. O número é da imobiliária, não do aparelho de quem atendeu.",
+      "WhatsApp, Instagram e Messenger no mesmo inbox, com o histórico mesclado por cliente e sincronizado em tempo real. As contas são da imobiliária, não do aparelho de quem atendeu.",
     ctaPrimary: "Testar 30 dias grátis",
     ctaSecondary: "Falar com especialista",
     trust: [
-      "WhatsApp oficial",
+      "Instagram e Messenger oficiais",
       "Histórico que fica na empresa",
       "Tempo real por WebSocket",
     ],
   },
   keyPoints: [
     {
-      title: "Um inbox, dois canais",
-      body: "WhatsApp e e-mail aparecem no mesmo fio de conversa, na ordem em que aconteceram. Ninguém precisa abrir três telas para entender o que já foi combinado.",
+      title: "Um inbox, três canais",
+      body: "WhatsApp, Instagram e Messenger aparecem no mesmo fio de conversa, na ordem em que aconteceram. O cliente que mandou DM no Instagram e depois chamou no WhatsApp é a mesma pessoa, com um histórico só.",
+    },
+    {
+      title: "Instagram e Messenger oficiais da Meta",
+      body: "As DMs do Instagram e do Messenger entram pela Graph API oficial, com a conta conectada por autorização da própria Meta. No WhatsApp você escolhe: conexão rápida por QR Code para começar hoje, ou a API oficial do WhatsApp Business quando quiser template aprovado e estabilidade de sessão.",
     },
     {
       title: "A conversa é da imobiliária",
-      body: "O número é conectado à organização, não ao celular do corretor. Se alguém sai do time, o histórico continua ligado ao lead, ao contrato e ao imóvel.",
+      body: "As contas são conectadas à organização, não ao celular do corretor. Se alguém sai do time, o histórico continua ligado ao lead, ao contrato e ao imóvel.",
     },
     {
       title: "Templates para o que se repete",
-      body: "Mensagens padrão de WhatsApp e e-mail para os momentos previsíveis: confirmação de visita, envio de ficha, cobrança de documento. Sempre com o mesmo texto aprovado.",
+      body: "Mensagens padrão para os momentos previsíveis: confirmação de visita, envio de ficha, cobrança de documento. Sempre com o mesmo texto aprovado.",
     },
     {
       title: "Broadcast para a carteira inteira",
-      body: "Envio em massa por WhatsApp ou e-mail usando os templates cadastrados. É o caminho para avisar de um lançamento, de um reajuste ou de uma mudança de política sem mandar mensagem uma por uma.",
+      body: "Envio em massa pelos templates cadastrados, para avisar de um lançamento, de um reajuste ou de uma mudança de política sem mandar mensagem uma por uma.",
     },
     {
       title: "Chamados categorizados e priorizados",
@@ -43,7 +47,7 @@ export const channels: FeatureContent = {
     },
     {
       title: "Régua de cobrança de 15 disparos",
-      body: "Avisos automáticos de 30 dias antes do vencimento até 15 dias depois. Você liga e desliga cada disparo por canal, e ninguém precisa lembrar de nenhum.",
+      body: "Avisos automáticos de 7 dias antes do vencimento até 60 dias depois. Você liga e desliga cada disparo por canal, e ninguém precisa lembrar de nenhum.",
     },
   ],
   keyPointsHeadline: {
@@ -52,7 +56,7 @@ export const channels: FeatureContent = {
       "O que foi combinado com o cliente precisa sobreviver a férias, troca de corretor e desligamento — sem depender de alguém repassar print.",
   },
   benefits: [
-    "WhatsApp e e-mail no mesmo histórico, sem trocar de tela para reconstruir o combinado",
+    "WhatsApp, Instagram e Messenger no mesmo histórico, sem trocar de tela",
     "Conversa presa ao cliente e ao imóvel, não ao aparelho de quem atendeu",
     "Comunicado para uma carteira inteira em um envio, com template aprovado",
     "Chamado do inquilino entra categorizado, com prioridade e status visíveis",
@@ -72,7 +76,7 @@ export const channels: FeatureContent = {
     {
       label: "Imobiliária com equipe",
       description:
-        "O gestor vê o tempo de resposta, quem está atendendo o quê e quais conversas ficaram paradas.",
+        "O gestor vê quem está atendendo cada conversa e o histórico completo de qualquer cliente, sem pedir print para ninguém.",
     },
     {
       label: "Administradora de locação",
@@ -83,7 +87,7 @@ export const channels: FeatureContent = {
   audienceHeadline: {
     title: "Cada perfil usa de um jeito.",
     subtitle:
-      "O mesmo inbox serve para quem atende sozinho e para quem precisa medir o tempo de resposta de um time.",
+      "O mesmo inbox serve para quem atende sozinho e para quem precisa enxergar o atendimento de um time inteiro.",
   },
   connectsWith: [
     {
@@ -108,7 +112,7 @@ export const channels: FeatureContent = {
     },
     {
       label: "Mila e ferramentas de IA",
-      description: "Resposta sugerida e resumo da conversa no próprio inbox.",
+      description: "A IA responde no inbox e resume a conversa antes do handoff.",
       href: "/features/ai",
     },
     {
@@ -128,6 +132,14 @@ export const channels: FeatureContent = {
       a: "Não. A conexão é feita com o número que você já usa. A partir daí as mensagens passam a ser gravadas na plataforma e ficam ligadas ao cliente, ao imóvel e à negociação.",
     },
     {
+      q: "O Instagram e o Messenger também entram no inbox?",
+      a: "Entram. Você conecta a conta do Instagram e a página do Facebook da imobiliária, e as DMs passam a chegar no mesmo inbox do WhatsApp. A conexão do Instagram e do Messenger usa a Graph API oficial da Meta, por autorização da conta — sem aparelho ligado nem leitura de QR Code.",
+    },
+    {
+      q: "O cliente que fala em dois canais vira dois cadastros?",
+      a: "Não. O histórico é mesclado por cliente: quem mandou DM no Instagram e depois chamou no WhatsApp aparece como uma pessoa só, com a conversa em ordem cronológica.",
+    },
+    {
       q: "O corretor continua respondendo pelo celular dele?",
       a: "Continua, pelo app MyLar Pro Brokers ou pelo painel web. A diferença é que a conversa não fica só no aparelho: o histórico é da organização e o gestor consegue acompanhar.",
     },
@@ -137,7 +149,7 @@ export const channels: FeatureContent = {
     },
     {
       q: "Dá para enviar comunicado para uma lista inteira?",
-      a: "Dá, pelo módulo de broadcast, por WhatsApp ou e-mail, usando os templates de mensagem cadastrados. É o caminho para avisar de reajuste, lançamento ou mudança de política.",
+      a: "Dá, pelo módulo de broadcast, usando os templates de mensagem cadastrados. É o caminho para avisar de reajuste, lançamento ou mudança de política.",
     },
     {
       q: "Como os chamados do inquilino entram no inbox?",
@@ -145,12 +157,12 @@ export const channels: FeatureContent = {
     },
     {
       q: "A régua de cobrança é obrigatória do jeito que vem?",
-      a: "Não. São 15 disparos possíveis, de 30 dias antes do vencimento até 15 dias depois, e você liga ou desliga cada um por canal. Dá para usar só o aviso de vencimento, ou a régua completa.",
+      a: "Não. São 15 disparos possíveis, de 7 dias antes do vencimento até 60 dias depois, e você liga ou desliga cada um por canal. Dá para usar só o aviso de vencimento, ou a régua completa.",
     },
   ],
   hubCard: {
     description:
-      "Inbox único com WhatsApp e e-mail no mesmo histórico, em tempo real. Templates, broadcast, chamados do inquilino e a régua de cobrança falando pelos mesmos canais.",
+      "Inbox único com WhatsApp, Instagram e Messenger no mesmo histórico, em tempo real. Templates, broadcast, chamados do inquilino e a régua de cobrança falando pelos mesmos canais.",
     highlights: [
       "Histórico que fica na empresa, não no aparelho",
       "Templates e envio em massa",

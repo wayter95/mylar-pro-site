@@ -11,7 +11,7 @@ export const metaAds: FeatureContent = {
     title: "O anúncio no Facebook e no Instagram ",
     titleHighlight: "cria o lead direto no funil",
     subtitle:
-      "Campanha criada de dentro da plataforma, com segmentação geográfica, público por interesse e formulário de cadastro que cai no CRM. O lead entra classificado pela origem, no funil daquela campanha, com o custo por lead visível.",
+      "Campanha criada de dentro da plataforma, com segmentação geográfica, segmentação por região e formulário de cadastro que cai no CRM. O lead entra classificado pela origem, no funil daquela campanha, com o custo por lead visível.",
     ctaPrimary: "Testar 30 dias grátis",
     ctaSecondary: "Falar com especialista",
     trust: [
@@ -34,8 +34,8 @@ export const metaAds: FeatureContent = {
       body: "Cada campanha pode ter o seu funil, com as etapas que fazem sentido para aquele público. Lead de lançamento não segue o mesmo caminho do lead de locação.",
     },
     {
-      title: "Segmentação por região e por interesse",
-      body: "Você escolhe cidades e raio de alcance e cruza com públicos por interesse. Anunciar um imóvel para quem está a três bairros dele é diferente de anunciar para a cidade inteira.",
+      title: "Segmentação por região: país, cidades e raio em quilômetros a partir do imóvel. Anúncio de imóvel entra na categoria especial de habitação da Meta, que restringe segmentação fina — então o público é montado por geografia e otimizado pelo Advantage+.",
+      body: "Você escolhe as cidades e o raio de alcance a partir do imóvel, e a plataforma estima o público antes de publicar. Anunciar para a região do imóvel é diferente de anunciar para o estado inteiro.",
     },
     {
       title: "Anúncio gerado a partir do cadastro do imóvel",
@@ -134,7 +134,7 @@ export const metaAds: FeatureContent = {
     },
     {
       q: "Consigo anunciar para uma região específica?",
-      a: "Sim. A segmentação geográfica permite escolher cidades e o raio de alcance, e você combina isso com públicos por interesse. É o que separa anunciar para o bairro do imóvel de anunciar para o estado.",
+      a: "Sim. A segmentação geográfica permite escolher cidades e o raio de alcance, e você combina isso com a otimização automática do Advantage+. É o que separa anunciar para o bairro do imóvel de anunciar para o estado.",
     },
     {
       q: "Dá para medir o retorno de campanha de locação?",
@@ -154,7 +154,7 @@ export const metaAds: FeatureContent = {
       "Campanha do Facebook e Instagram criada de dentro da plataforma, com formulário de cadastro que entrega o lead direto no funil e retorno medido por campanha.",
     highlights: [
       "Lead classificado pela origem, sem planilha",
-      "Segmentação geográfica e por interesse",
+      "Segmentação geográfica",
       "ROI por campanha, incluindo locação",
     ],
   },
