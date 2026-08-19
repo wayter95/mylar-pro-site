@@ -13,8 +13,10 @@ export function buildTrackedHref(
   params: TrackingParams,
   utmContent?: string,
 ): string {
-  if (!acceptsQuery(href)) {
-    return href;
+  const trimmedHref = href.trim();
+
+  if (!acceptsQuery(trimmedHref)) {
+    return trimmedHref;
   }
 
   const merged: TrackingParams = {
@@ -26,11 +28,11 @@ export function buildTrackedHref(
     merged.utm_content = utmContent;
   }
 
-  const isAbsolute = /^https?:\/\//i.test(href);
+  const isAbsolute = /^https?:\/\//i.test(trimmedHref);
   const base = isAbsolute ? undefined : "https://mylarpro.com.br";
 
   try {
-    const url = new URL(href, base);
+    const url = new URL(trimmedHref, base);
 
     for (const [key, value] of Object.entries(merged)) {
       url.searchParams.set(key, value);
