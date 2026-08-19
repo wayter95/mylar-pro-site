@@ -4,6 +4,7 @@ import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import {
   categoryListSchema,
   footerGroupSchema,
+  footerLinkSchema,
   linkButtonSchema,
   linksPageSchema,
   postPreviewSchema,
@@ -15,6 +16,7 @@ import {
 import type {
   Category,
   FooterGroup,
+  FooterLinkItem,
   LinkButtonItem,
   LinksPageContent,
   Post,
@@ -173,7 +175,11 @@ async function fetchContent<T>(
 }
 
 function keepValid<T>(
-  schema: { safeParse: (value: unknown) => { success: boolean; data?: T } },
+  schema: {
+    safeParse: (
+      value: unknown,
+    ) => { success: true; data: T } | { success: false };
+  },
   items: unknown,
   context: string,
 ): T[] {
@@ -185,7 +191,7 @@ function keepValid<T>(
 
   items.forEach((item, index) => {
     const result = schema.safeParse(item);
-    if (result.success && result.data !== undefined) {
+    if (result.success) {
       valid.push(result.data);
     } else {
       console.error(`[Sanity] Dropped invalid ${context} at index ${index}.`);
@@ -226,11 +232,36 @@ export async function getSiteFooter(): Promise<SiteFooterContent | null> {
   }
 
   const raw = data as { brandDescription?: unknown; groups?: unknown };
-  const groups = keepValid<FooterGroup>(
-    footerGroupSchema,
-    raw.groups,
-    "footer group",
-  ).filter((group) => group.links.length > 0);
+  const rawGroups = Array.isArray(raw.groups) ? raw.groups : [];
+  const groups = rawGroups
+    .map((rawGroup, groupIndex) => {
+      const candidate =
+        rawGroup && typeof rawGroup === "object"
+          ? (rawGroup as { title?: unknown; links?: unknown })
+          : { title: undefined, links: undefined };
+
+      const links = keepValid<FooterLinkItem>(
+        footerLinkSchema,
+        candidate.links,
+        `footer group ${groupIndex} link`,
+      );
+
+      const result = footerGroupSchema.safeParse({
+        title: candidate.title,
+        links,
+      });
+
+      if (!result.success) {
+        console.error(
+          `[Sanity] Dropped invalid footer group at index ${groupIndex}.`,
+        );
+        return null;
+      }
+
+      return result.data;
+    })
+    .filter((group): group is FooterGroup => group !== null)
+    .filter((group) => group.links.length > 0);
   const parsed = siteFooterSchema.safeParse({
     brandDescription: raw.brandDescription,
     groups,
