@@ -10,8 +10,13 @@ import { tableBlock } from "@/sanity/schemaTypes/blocks/tableBlock";
 import { videoBlock } from "@/sanity/schemaTypes/blocks/videoBlock";
 import { author } from "@/sanity/schemaTypes/documents/author";
 import { category } from "@/sanity/schemaTypes/documents/category";
+import { linksPage } from "@/sanity/schemaTypes/documents/linksPage";
 import { post } from "@/sanity/schemaTypes/documents/post";
+import { siteFooter } from "@/sanity/schemaTypes/documents/siteFooter";
+import { socialLinks } from "@/sanity/schemaTypes/documents/socialLinks";
+import { footerLink } from "@/sanity/schemaTypes/objects/footerLink";
 import { imageWithAlt } from "@/sanity/schemaTypes/objects/image";
+import { linkButton } from "@/sanity/schemaTypes/objects/linkButton";
 import { seo } from "@/sanity/schemaTypes/objects/seo";
 
 export const schemaTypes = [
@@ -30,4 +35,9 @@ export const schemaTypes = [
   faqBlock,
   videoBlock,
   relatedPostsBlock,
+  linksPage,
+  siteFooter,
+  socialLinks,
+  linkButton,
+  footerLink,
 ];
