@@ -13,6 +13,9 @@ Duas entregas ligadas:
 2. **Rastreio de ponta a ponta** — propagar UTM e click ids da entrada até o
    destino, contar o clique em GTM/GA4, Meta Pixel e Conversions API, e expor
    redirects curtos `/go/*` cujo destino também vem do Sanity.
+3. **Consentimento de cookies** — banner opt-in com Consent Mode v2 e três
+   categorias, que o site não tem hoje. Condição para o rastreio acima ser
+   legítimo, inclusive no envio server-side.
 
 O design visual atual não muda em nada. As redes sociais, hoje presentes apenas
 em `/links`, passam a aparecer também no rodapé, lidas do mesmo documento.
@@ -248,21 +251,100 @@ Slug não encontrado → 307 para a `/links` (nunca 404 numa URL que já pode es
 impressa ou publicada). O evento server-side é enviado antes do redirect, sem
 `await` bloqueando a resposta.
 
-### Consentimento (LGPD) — pendência declarada
-
-**O site não tem banner de consentimento de cookies.** GTM, Meta Pixel e GA4 já
-carregam sem consentimento hoje; este trabalho não cria essa exposição, mas a
-amplia ao adicionar envio server-side, que não passa por bloqueio do navegador.
-
-O evento de clique **não** envia e-mail nem telefone — só IP, user-agent e click
-ids, o mínimo para correspondência. Ainda assim, banner de consentimento com
-Consent Mode v2 do GTM é decisão jurídica e fica **fora deste escopo**,
-registrada aqui como pendência a decidir.
-
 ### Fora de escopo, anotado
 
 **Google Ads Enhanced Conversions** — o equivalente do Google à Conversions API.
 Exige configuração no painel do Google Ads, não só código. Não implementado aqui.
+
+## Consentimento de cookies (LGPD)
+
+Hoje o site **não tem banner algum**: GTM, Meta Pixel e GA4 carregam e rastreiam
+desde o primeiro acesso. Entra no escopo um banner **opt-in com Consent Mode v2**
+e três categorias.
+
+### Categorias
+
+| Categoria | O que controla | Padrão |
+|---|---|---|
+| Necessários | nada de rastreio; o próprio cookie de consentimento | sempre ativo, sem toggle |
+| Analíticos | GA4 (`analytics_storage`) | negado |
+| Marketing | Meta Pixel, Conversions API, Google Ads (`ad_storage`, `ad_user_data`, `ad_personalization`) | negado |
+
+O **CognizyWidget** (chat de atendimento) é classificado como **funcional/necessário**
+e não é bloqueado. É uma ferramenta de suporte que o próprio visitante aciona, não
+rastreio publicitário; bloqueá-la deixaria o atendimento indisponível para quem
+recusa marketing. **Classificação a validar juridicamente.**
+
+### Ordem de carregamento (o ponto crítico)
+
+O Consent Mode exige que o estado default seja declarado **antes** de o GTM
+carregar. Fora de ordem, o Consent Mode não tem efeito — é o erro mais comum
+nessa implementação.
+
+```
+1. gtag('consent','default', { analytics_storage:'denied',
+                               ad_storage:'denied',
+                               ad_user_data:'denied',
+                               ad_personalization:'denied',
+                               wait_for_update: 500 })
+   ← inline, síncrono, ANTES de qualquer outro script
+2. GTM / GA4 / Pixel carregam (e respeitam o estado negado)
+3. Visitante aceita → gtag('consent','update', {...'granted'})
+                    → fbq('consent','grant')
+```
+
+Em `layout.tsx` isso significa um `<Script id="consent-default" strategy="beforeInteractive">`
+posicionado acima dos blocos de GTM, Pixel e GA4 que já existem. O Pixel recebe
+`fbq('consent','revoke')` imediatamente após o `init`, e `grant` só no aceite.
+
+### O evento server-side também respeita o consentimento
+
+Ponto que não pode ser esquecido: a **Conversions API não passa pelo navegador**,
+portanto não vê o banner. Se o `/go/*` disparar o evento para quem recusou, o
+banner é decorativo.
+
+A rota `/go/[slug]` lê o cookie de consentimento via `cookies()` do Next e só
+chama o `sendLeadEvent` se a categoria **marketing** estiver aceita. O redirect
+acontece de qualquer forma — recusar rastreio não pode quebrar a navegação.
+
+### Persistência
+
+Cookie `mylar-consent`, 6 meses, `SameSite=Lax`, sem `httpOnly` (o cliente precisa
+ler para decidir se dispara os eventos), legível no servidor pela rota `/go/*`.
+Valor: JSON compacto com versão, categorias e timestamp — a versão permite
+re-solicitar consentimento se as categorias mudarem no futuro.
+
+Registrar o timestamp e a versão é o que dá evidência de consentimento, exigível
+pela LGPD; sem isso não há como demonstrar quando e a quê a pessoa consentiu.
+
+### Componentes
+
+| Arquivo | Papel |
+|---|---|
+| `src/lib/consent/types.ts` | categorias, versão, formato do cookie |
+| `src/lib/consent/cookie.ts` | ler/gravar, isomórfico (cliente e servidor) |
+| `src/components/consent/ConsentProvider.tsx` | contexto client-side; aplica `consent update` |
+| `src/components/consent/CookieBanner.tsx` | banner + tela de preferências |
+| `src/app/api/consent/route.ts` | grava o cookie server-side (opcional; ver abaixo) |
+
+O banner segue a identidade do site (`bg-slate-950`, primária `#2facde`), fixo na
+base, sem bloquear a página com overlay modal — recusar deve ser tão fácil quanto
+aceitar, e um overlay que obriga a escolher para ver o conteúdo é prática que a
+ANPD critica.
+
+A rota `/api/consent` existe porque o cookie precisa ser legível no servidor pelo
+`/go/*`; gravar via `document.cookie` no cliente funciona, mas a rota garante os
+atributos corretos (`Max-Age`, `SameSite`, `Path`) de forma consistente.
+
+### Pendência: política de privacidade não menciona cookies
+
+Os arquivos legais (`src/lib/legal/brokers-privacy-policy.ts` e afins) **não têm
+nenhuma menção a cookies**. Um banner que aponta para uma política silenciosa a
+respeito é inconsistente na prática e perante a ANPD.
+
+Redigir a seção de cookies da política é **trabalho jurídico, fora deste escopo**.
+O banner linkará para a política existente; a seção precisa ser escrita antes de
+o banner ir para produção.
 
 ## Revalidação (ISR)
 
@@ -349,6 +431,18 @@ A verificação de deduplicação é a que não pode ser pulada: é o erro que p
 despercebido em desenvolvimento e só aparece como CPA inflado no relatório da
 campanha.
 
+Consentimento — as três checagens que provam que o banner não é decorativo:
+
+| O que checar | Como |
+|---|---|
+| `consent default` roda **antes** do GTM | GTM Preview → o primeiro evento deve ser o `consent` negado, não `gtm.js` |
+| Recusar impede o Pixel | recusar → clicar num botão → Pixel Helper **não** deve mostrar evento |
+| Recusar impede o **server-side** | recusar → `curl` no `/go/demo` com o cookie de recusa → Events Manager sem evento, mas resposta `307` normal |
+
+A terceira é a que costuma falhar: o evento server-side não passa pelo navegador,
+então um banner implementado só no cliente continua enviando dados de quem
+recusou.
+
 Se um runner de testes for desejado, é tarefa separada — os candidatos naturais
 seriam `safeLinkHref` (schemes aceitos/rejeitados), o builder de UTM (propaga,
 aplica default, não sobrescreve), as funções de query (dado válido, inválido,
@@ -356,7 +450,7 @@ Sanity não configurado) e `getIcon`.
 
 ## Arquivos
 
-**Novos (11):**
+**Novos (16):**
 
 ```
 src/sanity/schemaTypes/documents/linksPage.ts
@@ -370,9 +464,14 @@ src/lib/tracking/utm.ts              lê/propaga utm_* + fbclid/gclid; monta hre
 src/lib/tracking/events.ts           dataLayer + fbq no clique, com event_id
 src/components/tracking/TrackedLink.tsx   client component que dispara no clique
 src/app/go/[slug]/route.ts           redirect curto + evento server-side
+src/lib/consent/types.ts             categorias, versão, formato do cookie
+src/lib/consent/cookie.ts            ler/gravar, isomórfico
+src/components/consent/ConsentProvider.tsx   contexto + consent update
+src/components/consent/CookieBanner.tsx      banner + preferências
+src/app/api/consent/route.ts         grava o cookie com atributos corretos
 ```
 
-**Alterados (12):**
+**Alterados (13):**
 
 ```
 sanity.config.ts                     structure customizada (singletons)
@@ -387,6 +486,7 @@ src/components/links/LinkButton.tsx  usa TrackedLink
 src/components/links/SocialRow.tsx   recebe items por prop
 src/components/landing/Footer.tsx    async + Sanity + SocialRow
 src/app/links/page.tsx               async + Sanity + lê searchParams
+src/app/layout.tsx                   consent default ANTES do GTM + Provider + Banner
 ```
 
 O `meta-conversions.ts` é o único arquivo pré-existente com lógica de negócio
