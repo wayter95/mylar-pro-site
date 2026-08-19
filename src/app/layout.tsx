@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { CognizyWidget } from "@/components/layout/CognizyWidget";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { ConsentProvider } from "@/components/consent/ConsentProvider";
+import { CookieBanner } from "@/components/consent/CookieBanner";
 import "../styles/globals.css";
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -86,6 +88,17 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <OrganizationJsonLd />
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{
+  analytics_storage:'denied',
+  ad_storage:'denied',
+  ad_user_data:'denied',
+  ad_personalization:'denied',
+  wait_for_update: 500
+});`}
+        </Script>
         {/* Google Tag Manager */}
         {GTM_ID && (
           <>
@@ -126,6 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   s.parentNode.insertBefore(t,s)}(window, document,'script',
                   'https://connect.facebook.net/en_US/fbevents.js');
                   fbq('init', '${META_PIXEL_ID}');
+                  fbq('consent', 'revoke');
                   fbq('track', 'PageView');
                 `,
               }}
@@ -162,7 +176,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         )}
         {/* End Google tag */}
 
-        {children}
+        <ConsentProvider>
+          {children}
+          <CookieBanner />
+        </ConsentProvider>
 
         <CognizyWidget />
       </body>
