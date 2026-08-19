@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { APP_URL, REGISTER_URL } from "@/lib/navigation";
+import { socialItems, type SocialItem } from "@/lib/links";
+import { SocialRow } from "@/components/links/SocialRow";
+import { getSiteFooter, getSocialLinks } from "@/sanity/lib/queries";
+import type { FooterGroup } from "@/sanity/types/content";
 
-const navGroups = [
+const navGroups: FooterGroup[] = [
   {
     title: "Produto",
     links: [
@@ -43,7 +47,24 @@ const navGroups = [
   },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const [content, socials] = await Promise.all([
+    getSiteFooter(),
+    getSocialLinks(),
+  ]);
+
+  const brandDescription =
+    content?.brandDescription ??
+    "A plataforma que reúne CRM, atendimento, contratos, cobrança e financeiro do mercado imobiliário em uma operação só.";
+  const groups = content?.groups ?? navGroups;
+  const socialRow: SocialItem[] = socials
+    ? socials.map((social) => ({
+        label: social.label,
+        href: social.href,
+        icon: social.icon as SocialItem["icon"],
+      }))
+    : socialItems;
+
   return (
     <footer className="border-t border-slate-800 bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -58,8 +79,7 @@ export function Footer() {
               className="h-8 w-auto"
             />
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              A plataforma que reúne CRM, atendimento, contratos, cobrança e
-              financeiro do mercado imobiliário em uma operação só.
+              {brandDescription}
             </p>
             <div className="mt-6 flex flex-col items-start gap-3">
               <a
@@ -82,14 +102,14 @@ export function Footer() {
           </div>
 
           {/* Nav groups */}
-          {navGroups.map((group) => (
+          {groups.map((group) => (
             <div key={group.title}>
               <h4 className="text-xs font-semibold tracking-[0.15em] text-slate-500 uppercase">
                 {group.title}
               </h4>
               <ul className="mt-4 space-y-3">
                 {group.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={`${group.title}-${link.label}`}>
                     <Link
                       href={link.href}
                       className="text-sm text-slate-400 transition hover:text-white"
@@ -104,11 +124,12 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center gap-2 border-t border-slate-800/80 py-6 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-4 border-t border-slate-800/80 py-6 sm:flex-row sm:justify-between">
           <p className="text-xs text-slate-500">
             &copy; {new Date().getFullYear()} MyLar Pro. Todos os direitos
             reservados. CNPJ 54.865.990/0001-50
           </p>
+          <SocialRow items={socialRow} />
           <p className="text-xs text-slate-500">Feito no Brasil</p>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { linkItems, profile } from "@/lib/links";
+import { linkItems, profile, socialItems, type LinkItem, type SocialItem } from "@/lib/links";
 import { LinkButton } from "@/components/links/LinkButton";
 import { SocialRow } from "@/components/links/SocialRow";
 import { AnimateIn, AnimateInStagger } from "@/components/landing/AnimateIn";
+import { getLinksPage, getSocialLinks } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Links",
@@ -16,7 +17,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LinksPage() {
+export default async function LinksPage() {
+  const [content, socials] = await Promise.all([
+    getLinksPage(),
+    getSocialLinks(),
+  ]);
+
+  const tagline = content?.tagline ?? profile.tagline;
+  const links: LinkItem[] = content
+    ? content.links.map((link) => ({
+        label: link.label,
+        href: link.href,
+        icon: link.icon as LinkItem["icon"],
+        variant: link.variant,
+      }))
+    : linkItems;
+  const socialRow: SocialItem[] = socials
+    ? socials.map((social) => ({
+        label: social.label,
+        href: social.href,
+        icon: social.icon as SocialItem["icon"],
+      }))
+    : socialItems;
+
   return (
     <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-slate-950 px-4 py-16">
       <div className="pointer-events-none absolute inset-0">
@@ -36,18 +59,18 @@ export default function LinksPage() {
             priority
           />
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
-            {profile.tagline}
+            {tagline}
           </p>
         </AnimateIn>
 
         <AnimateInStagger className="mt-10 flex flex-col gap-3">
-          {linkItems.map((item) => (
+          {links.map((item) => (
             <LinkButton key={item.label} {...item} />
           ))}
         </AnimateInStagger>
 
         <div className="mt-10">
-          <SocialRow />
+          <SocialRow items={socialRow} />
         </div>
 
         <p className="mt-10 text-center text-xs text-slate-500">
