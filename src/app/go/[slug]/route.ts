@@ -3,6 +3,7 @@ import { NextResponse, after, type NextRequest } from "next/server";
 import { buildTrackedHref } from "@/lib/tracking/build-href";
 import { extractTrackingParams } from "@/lib/tracking/params";
 import { sendConversionEvent } from "@/lib/meta-conversions";
+import { hasMarketingConsent } from "@/lib/consent/server";
 import { getLinkByShortSlug } from "@/sanity/lib/queries";
 
 function clientIpFrom(request: NextRequest): string | null {
@@ -55,7 +56,9 @@ export async function GET(
     customData: { link_label: link.label, short_slug: slug },
   };
 
-  after(() => sendConversionEvent(eventPayload));
+  if (hasMarketingConsent(request)) {
+    after(() => sendConversionEvent(eventPayload));
+  }
 
   return NextResponse.redirect(destination, 307);
 }

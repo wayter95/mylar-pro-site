@@ -1,3 +1,5 @@
+import { hasMarketingConsentInBrowser } from "@/components/consent/ConsentProvider";
+
 type DataLayerWindow = Window & {
   dataLayer?: Array<Record<string, unknown>>;
   fbq?: (...args: unknown[]) => void;
@@ -18,6 +20,10 @@ export type TrackClickInput = {
 
 export function trackLinkClick(input: TrackClickInput): void {
   if (typeof window === "undefined") {
+    return;
+  }
+
+  if (!hasMarketingConsentInBrowser()) {
     return;
   }
 
