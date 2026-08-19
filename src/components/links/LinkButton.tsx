@@ -16,6 +16,8 @@ const variantClasses = {
     "border border-slate-700 bg-white/5 text-slate-200 backdrop-blur-sm hover:-translate-y-0.5 hover:border-slate-500 hover:bg-white/10",
 } as const;
 
+const ArrowIcon = getIcon("arrowRight");
+
 type Props = LinkItem & {
   utmContent?: string;
   trackingEvent?: string;
@@ -32,7 +34,6 @@ export function LinkButton({
   entryParams,
 }: Props) {
   const Icon = getIcon(icon);
-  const ArrowIcon = getIcon("arrowRight");
 
   return (
     <AnimateInItem>
