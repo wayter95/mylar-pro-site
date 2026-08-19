@@ -195,11 +195,18 @@ export const linkButtonSchema = z.object({
   href: safeLinkHrefSchema,
   icon: z.string().trim().min(1),
   variant: z.enum(["primary", "secondary"]),
+  utmContent: optionalText,
+  trackingEvent: z
+    .enum(["ClickLink", "ClickDemo", "ClickTrial"])
+    .nullish()
+    .transform((value) => value ?? undefined),
+  shortSlug: optionalText,
 });
 
 export const footerLinkSchema = z.object({
   label: z.string().trim().min(1),
   href: safeLinkHrefSchema,
+  utmContent: optionalText,
 });
 
 export const socialLinkItemSchema = z.object({

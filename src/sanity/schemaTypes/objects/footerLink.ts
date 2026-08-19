@@ -28,6 +28,16 @@ export const footerLink = defineType({
             : "Use um caminho interno ou https://.",
         ),
     }),
+    defineField({
+      name: "utmContent",
+      title: "Identificador de campanha",
+      description: "Uma palavra, sem espaços. Vira utm_content no destino. Opcional.",
+      type: "string",
+      validation: (Rule) =>
+        Rule.regex(/^[a-z0-9-]+$/, { name: "identificador" }).warning(
+          "Use apenas letras minúsculas, números e hífen.",
+        ),
+    }),
   ],
   preview: {
     select: { title: "label", subtitle: "href" },

@@ -151,11 +151,15 @@ export interface LinkButtonItem {
   href: string;
   icon: string;
   variant: "primary" | "secondary";
+  utmContent?: string;
+  trackingEvent?: string;
+  shortSlug?: string;
 }
 
 export interface FooterLinkItem {
   label: string;
   href: string;
+  utmContent?: string;
 }
 
 export interface FooterGroup {

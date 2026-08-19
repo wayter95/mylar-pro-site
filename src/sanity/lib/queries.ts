@@ -142,32 +142,35 @@ const CONTENT_REVALIDATE_SECONDS = 600;
 
 const linksPageQuery = `*[_type == "linksPage"][0] {
   tagline,
-  links[] { label, href, icon, variant }
+  links[] { label, href, icon, variant, utmContent, trackingEvent, shortSlug }
 }`;
 
 const siteFooterQuery = `*[_type == "siteFooter"][0] {
   brandDescription,
-  groups[] { title, links[] { label, href } }
+  groups[] { title, links[] { label, href, utmContent } }
 }`;
 
 const socialLinksQuery = `*[_type == "socialLinks"][0] {
   items[] { label, href, icon }
 }`;
 
+const linkByShortSlugQuery = `*[_type == "linksPage"][0].links[shortSlug == $slug][0] {
+  label, href, icon, variant, utmContent, trackingEvent, shortSlug
+}`;
+
 async function fetchContent<T>(
   query: string,
   context: string,
+  params: Record<string, string> = {},
 ): Promise<T | null> {
   if (!isSanityConfigured) {
     return null;
   }
 
   try {
-    return await getSanityClient().fetch<T>(
-      query,
-      {},
-      { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
-    );
+    return await getSanityClient().fetch<T>(query, params, {
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
+    });
   } catch (error) {
     console.error(`[Sanity] Failed to fetch ${context}:`, error);
     return null;
@@ -234,7 +237,7 @@ export async function getSiteFooter(): Promise<SiteFooterContent | null> {
   const raw = data as { brandDescription?: unknown; groups?: unknown };
   const rawGroups = Array.isArray(raw.groups) ? raw.groups : [];
   const groups = rawGroups
-    .map((rawGroup, groupIndex) => {
+    .map((rawGroup, groupIndex): FooterGroup | null => {
       const candidate =
         rawGroup && typeof rawGroup === "object"
           ? (rawGroup as { title?: unknown; links?: unknown })
@@ -295,4 +298,27 @@ export async function getSocialLinks(): Promise<SocialLinkItem[] | null> {
   }
 
   return parsed.data.items;
+}
+
+export async function getLinkByShortSlug(
+  slug: string,
+): Promise<LinkButtonItem | null> {
+  const data = await fetchContent<unknown>(
+    linkByShortSlugQuery,
+    `link for slug "${slug}"`,
+    { slug },
+  );
+
+  if (!data) {
+    return null;
+  }
+
+  const parsed = linkButtonSchema.safeParse(data);
+
+  if (!parsed.success) {
+    console.error(`[Sanity] Link for slug "${slug}" is invalid.`);
+    return null;
+  }
+
+  return parsed.data;
 }
