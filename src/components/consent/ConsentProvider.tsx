@@ -71,13 +71,18 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     applyToTools(analytics, marketing);
 
     try {
-      await fetch("/api/consent", {
+      const response = await fetch("/api/consent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analytics, marketing }),
       });
+
+      if (!response.ok) {
+        throw new Error(`Consent endpoint returned ${response.status}`);
+      }
     } catch (error) {
       console.error("[Consent] Falha ao registrar a escolha:", error);
+      return;
     }
 
     setConsent(readConsentFromDocument());
