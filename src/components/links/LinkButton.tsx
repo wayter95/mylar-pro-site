@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { Icons } from "@/lib/icons";
-import { isExternalHref, type LinkItem } from "@/lib/links";
+import { getIcon } from "@/lib/icons";
+import type { LinkItem } from "@/lib/links";
 import { AnimateInItem } from "@/components/landing/AnimateIn";
+import { TrackedLink } from "@/components/tracking/TrackedLink";
+import type { TrackingParams } from "@/lib/tracking/params";
 
 const baseClasses =
   "group flex w-full items-center gap-3 rounded-xl px-5 py-4 text-base font-semibold transition";
@@ -15,35 +16,38 @@ const variantClasses = {
     "border border-slate-700 bg-white/5 text-slate-200 backdrop-blur-sm hover:-translate-y-0.5 hover:border-slate-500 hover:bg-white/10",
 } as const;
 
-export function LinkButton({ label, href, icon, variant }: LinkItem) {
-  const Icon = Icons[icon];
-  const external = isExternalHref(href);
-  const className = `${baseClasses} ${variantClasses[variant]}`;
+type Props = LinkItem & {
+  utmContent?: string;
+  trackingEvent?: string;
+  entryParams?: TrackingParams;
+};
 
-  const content = (
-    <>
-      <Icon className="size-5 shrink-0" />
-      <span className="flex-1 text-left">{label}</span>
-      <Icons.arrowRight className="size-4 shrink-0 opacity-50 transition-transform group-hover:translate-x-0.5" />
-    </>
-  );
+export function LinkButton({
+  label,
+  href,
+  icon,
+  variant,
+  utmContent,
+  trackingEvent,
+  entryParams,
+}: Props) {
+  const Icon = getIcon(icon);
+  const ArrowIcon = getIcon("arrowRight");
 
   return (
     <AnimateInItem>
-      {external ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={className}
-        >
-          {content}
-        </a>
-      ) : (
-        <Link href={href} className={className}>
-          {content}
-        </Link>
-      )}
+      <TrackedLink
+        href={href}
+        label={label}
+        className={`${baseClasses} ${variantClasses[variant]}`}
+        utmContent={utmContent}
+        trackingEvent={trackingEvent}
+        entryParams={entryParams}
+      >
+        <Icon className="size-5 shrink-0" />
+        <span className="flex-1 text-left">{label}</span>
+        <ArrowIcon className="size-4 shrink-0 opacity-50 transition-transform group-hover:translate-x-0.5" />
+      </TrackedLink>
     </AnimateInItem>
   );
 }
