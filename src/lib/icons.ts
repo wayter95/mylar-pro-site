@@ -72,7 +72,9 @@ import {
   SiGoogleplay,
   SiInstagram,
   SiMeta,
+  SiTiktok,
   SiWhatsapp,
+  SiYoutube,
 } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 
@@ -163,7 +165,15 @@ export const Icons = {
   instagram: SiInstagram,
   linkedin: FaLinkedin,
   facebook: SiFacebook,
+  youtube: SiYoutube,
+  tiktok: SiTiktok,
 } as const;
 
 export type IconName = keyof typeof Icons;
 export type { IconType };
+
+export const iconNames = Object.keys(Icons).sort() as readonly IconName[];
+
+export function getIcon(name: string): IconType {
+  return Icons[name as IconName] ?? Icons.arrowRight;
+}
