@@ -40,6 +40,6 @@ export function buildTrackedHref(
 
     return isAbsolute ? url.toString() : `${url.pathname}${url.search}${url.hash}`;
   } catch {
-    return href;
+    return trimmedHref;
   }
 }
