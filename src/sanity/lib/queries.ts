@@ -1,12 +1,27 @@
 import "server-only";
 
-import { getSanityClient } from "@/sanity/lib/client";
+import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import {
   categoryListSchema,
+  footerGroupSchema,
+  linkButtonSchema,
+  linksPageSchema,
   postPreviewSchema,
   postSchema,
+  siteFooterSchema,
+  socialLinkItemSchema,
+  socialLinksSchema,
 } from "@/sanity/lib/validation";
-import type { Category, Post, PostPreview } from "@/sanity/types/content";
+import type {
+  Category,
+  FooterGroup,
+  LinkButtonItem,
+  LinksPageContent,
+  Post,
+  PostPreview,
+  SiteFooterContent,
+  SocialLinkItem,
+} from "@/sanity/types/content";
 
 const postPreviewFields = `
   _id,
@@ -119,4 +134,134 @@ export async function getRelatedPosts(ids: string[]): Promise<PostPreview[]> {
     ids,
   });
   return parseCmsData(postPreviewSchema.array(), data, "related posts");
+}
+
+const CONTENT_REVALIDATE_SECONDS = 600;
+
+const linksPageQuery = `*[_type == "linksPage"][0] {
+  tagline,
+  links[] { label, href, icon, variant }
+}`;
+
+const siteFooterQuery = `*[_type == "siteFooter"][0] {
+  brandDescription,
+  groups[] { title, links[] { label, href } }
+}`;
+
+const socialLinksQuery = `*[_type == "socialLinks"][0] {
+  items[] { label, href, icon }
+}`;
+
+async function fetchContent<T>(
+  query: string,
+  context: string,
+): Promise<T | null> {
+  if (!isSanityConfigured) {
+    return null;
+  }
+
+  try {
+    return await getSanityClient().fetch<T>(
+      query,
+      {},
+      { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
+    );
+  } catch (error) {
+    console.error(`[Sanity] Failed to fetch ${context}:`, error);
+    return null;
+  }
+}
+
+function keepValid<T>(
+  schema: { safeParse: (value: unknown) => { success: boolean; data?: T } },
+  items: unknown,
+  context: string,
+): T[] {
+  if (!Array.isArray(items)) {
+    return [];
+  }
+
+  const valid: T[] = [];
+
+  items.forEach((item, index) => {
+    const result = schema.safeParse(item);
+    if (result.success && result.data !== undefined) {
+      valid.push(result.data);
+    } else {
+      console.error(`[Sanity] Dropped invalid ${context} at index ${index}.`);
+    }
+  });
+
+  return valid;
+}
+
+export async function getLinksPage(): Promise<LinksPageContent | null> {
+  const data = await fetchContent<unknown>(linksPageQuery, "links page");
+
+  if (!data || typeof data !== "object") {
+    return null;
+  }
+
+  const raw = data as { tagline?: unknown; links?: unknown };
+  const links = keepValid<LinkButtonItem>(
+    linkButtonSchema,
+    raw.links,
+    "link button",
+  );
+  const parsed = linksPageSchema.safeParse({ tagline: raw.tagline, links });
+
+  if (!parsed.success || parsed.data.links.length === 0) {
+    console.error("[Sanity] Links page unusable; falling back to code list.");
+    return null;
+  }
+
+  return parsed.data;
+}
+
+export async function getSiteFooter(): Promise<SiteFooterContent | null> {
+  const data = await fetchContent<unknown>(siteFooterQuery, "site footer");
+
+  if (!data || typeof data !== "object") {
+    return null;
+  }
+
+  const raw = data as { brandDescription?: unknown; groups?: unknown };
+  const groups = keepValid<FooterGroup>(
+    footerGroupSchema,
+    raw.groups,
+    "footer group",
+  ).filter((group) => group.links.length > 0);
+  const parsed = siteFooterSchema.safeParse({
+    brandDescription: raw.brandDescription,
+    groups,
+  });
+
+  if (!parsed.success || parsed.data.groups.length === 0) {
+    console.error("[Sanity] Site footer unusable; falling back to code list.");
+    return null;
+  }
+
+  return parsed.data;
+}
+
+export async function getSocialLinks(): Promise<SocialLinkItem[] | null> {
+  const data = await fetchContent<unknown>(socialLinksQuery, "social links");
+
+  if (!data || typeof data !== "object") {
+    return null;
+  }
+
+  const items = keepValid<SocialLinkItem>(
+    socialLinkItemSchema,
+    (data as { items?: unknown }).items,
+    "social link",
+  );
+  const parsed = socialLinksSchema.safeParse({ items });
+
+  if (!parsed.success || parsed.data.items.length === 0) {
+    console.error("[Sanity] Social links unusable; falling back to code list.");
+    return null;
+  }
+
+  return parsed.data.items;
 }
