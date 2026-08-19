@@ -68,8 +68,6 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const save = useCallback(async (analytics: boolean, marketing: boolean) => {
-    applyToTools(analytics, marketing);
-
     try {
       const response = await fetch("/api/consent", {
         method: "POST",
@@ -85,6 +83,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    applyToTools(analytics, marketing);
     setConsent(readConsentFromDocument());
     setDecided(true);
   }, []);
