@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { APP_URL, REGISTER_URL } from "@/lib/navigation";
 import { socialItems, type SocialItem } from "@/lib/links";
 import { SocialRow } from "@/components/links/SocialRow";
+import { TrackedLink } from "@/components/tracking/TrackedLink";
 import { getSiteFooter, getSocialLinks } from "@/sanity/lib/queries";
 import type { FooterGroup } from "@/sanity/types/content";
 
@@ -110,12 +110,14 @@ export async function Footer() {
               <ul className="mt-4 space-y-3">
                 {group.links.map((link) => (
                   <li key={`${group.title}-${link.label}`}>
-                    <Link
+                    <TrackedLink
                       href={link.href}
+                      label={link.label}
+                      utmContent={link.utmContent}
                       className="text-sm text-slate-400 transition hover:text-white"
                     >
                       {link.label}
-                    </Link>
+                    </TrackedLink>
                   </li>
                 ))}
               </ul>

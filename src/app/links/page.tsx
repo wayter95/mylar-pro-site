@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/links/LinkButton";
 import { SocialRow } from "@/components/links/SocialRow";
 import { AnimateIn, AnimateInStagger } from "@/components/landing/AnimateIn";
 import { getLinksPage, getSocialLinks } from "@/sanity/lib/queries";
+import { extractTrackingParams } from "@/lib/tracking/params";
 
 export const metadata: Metadata = {
   title: "Links",
@@ -17,21 +18,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function LinksPage() {
-  const [content, socials] = await Promise.all([
+export default async function LinksPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [content, socials, resolvedSearchParams] = await Promise.all([
     getLinksPage(),
     getSocialLinks(),
+    searchParams,
   ]);
 
+  const entryParams = extractTrackingParams(resolvedSearchParams);
+
   const tagline = content?.tagline ?? profile.tagline;
-  const links: LinkItem[] = content
-    ? content.links.map((link) => ({
-        label: link.label,
-        href: link.href,
-        icon: link.icon as LinkItem["icon"],
-        variant: link.variant,
-      }))
-    : linkItems;
+  const links = content
+    ? content.links
+    : linkItems.map((item) => ({
+        label: item.label,
+        href: item.href,
+        icon: item.icon as string,
+        variant: item.variant,
+        utmContent: undefined,
+        trackingEvent: undefined,
+        shortSlug: undefined,
+      }));
   const socialRow: SocialItem[] = socials
     ? socials.map((social) => ({
         label: social.label,
@@ -65,7 +76,16 @@ export default async function LinksPage() {
 
         <AnimateInStagger className="mt-10 flex flex-col gap-3">
           {links.map((item) => (
-            <LinkButton key={item.label} {...item} />
+            <LinkButton
+              key={item.label}
+              label={item.label}
+              href={item.href}
+              icon={item.icon as LinkItem["icon"]}
+              variant={item.variant}
+              utmContent={item.utmContent}
+              trackingEvent={item.trackingEvent}
+              entryParams={entryParams}
+            />
           ))}
         </AnimateInStagger>
 
