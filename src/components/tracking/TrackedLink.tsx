@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { isExternalHref } from "@/lib/links";
 import { buildTrackedHref } from "@/lib/tracking/build-href";
@@ -29,15 +29,15 @@ export function TrackedLink({
   entryParams,
   ariaLabel,
 }: Props) {
-  const resolveHref = useCallback(() => {
-    const params =
-      entryParams ??
-      (typeof window === "undefined"
-        ? {}
-        : extractTrackingParams(new URLSearchParams(window.location.search)));
+  const [clientParams, setClientParams] = useState<TrackingParams | null>(null);
 
-    return buildTrackedHref(href, params, utmContent);
-  }, [entryParams, href, utmContent]);
+  useEffect(() => {
+    if (entryParams) {
+      return;
+    }
+
+    setClientParams(extractTrackingParams(new URLSearchParams(window.location.search)));
+  }, [entryParams]);
 
   const handleClick = useCallback(() => {
     trackLinkClick({
@@ -48,7 +48,11 @@ export function TrackedLink({
     });
   }, [href, label, trackingEvent, utmContent]);
 
-  const target = entryParams ? buildTrackedHref(href, entryParams, utmContent) : href;
+  const target = entryParams
+    ? buildTrackedHref(href, entryParams, utmContent)
+    : clientParams
+      ? buildTrackedHref(href, clientParams, utmContent)
+      : href;
   const external = isExternalHref(href);
 
   if (external) {
@@ -59,12 +63,7 @@ export function TrackedLink({
         rel="noopener noreferrer"
         className={className}
         aria-label={ariaLabel}
-        onClick={(event) => {
-          handleClick();
-          if (!entryParams) {
-            event.currentTarget.href = resolveHref();
-          }
-        }}
+        onClick={handleClick}
       >
         {children}
       </a>
@@ -72,17 +71,7 @@ export function TrackedLink({
   }
 
   return (
-    <Link
-      href={target}
-      className={className}
-      aria-label={ariaLabel}
-      onClick={(event) => {
-        handleClick();
-        if (!entryParams) {
-          event.currentTarget.setAttribute("href", resolveHref());
-        }
-      }}
-    >
+    <Link href={target} className={className} aria-label={ariaLabel} onClick={handleClick}>
       {children}
     </Link>
   );
