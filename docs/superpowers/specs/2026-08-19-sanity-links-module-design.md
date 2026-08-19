@@ -24,7 +24,7 @@ em `/links`, passam a aparecer também no rodapé, lidas do mesmo documento.
 
 | Onde | Arquivo | Conteúdo |
 |---|---|---|
-| Página `/links` | `src/lib/links.ts` | tagline + 13 botões (`linkItems`) + 3 redes (`socialItems`) |
+| Página `/links` | `src/lib/links.ts` | tagline + 12 botões (`linkItems`) + 3 redes (`socialItems`) |
 | Rodapé | `src/components/landing/Footer.tsx` | descrição da marca + 4 grupos × ~5 links (`navGroups`) |
 
 O spec anterior (`2026-06-09-links-page-design.md`) decidiu deliberadamente por
@@ -497,7 +497,7 @@ do formulário de contato continua funcionando sem alteração.
 ## Conteúdo inicial no Sanity
 
 Após a implementação, os três documentos precisam ser populados uma vez no
-Studio com o conteúdo que hoje está no código (13 botões, 3 redes, 4 grupos do
+Studio com o conteúdo que hoje está no código (12 botões, 3 redes, 4 grupos do
 rodapé). Enquanto não forem populados, o site segue renderizando o fallback —
 sem quebra e sem diferença visual.
 
