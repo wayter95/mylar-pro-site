@@ -5,9 +5,14 @@
 
 ## Objetivo
 
-Mover os links da página `/links` e do rodapé do site para módulos editáveis no
-Sanity Studio, para que novos links possam ser adicionados e os existentes
-alterados ou reordenados sem editar código nem fazer deploy.
+Duas entregas ligadas:
+
+1. **Conteúdo gerenciável** — mover os links da página `/links` e do rodapé para
+   módulos editáveis no Sanity Studio, para adicionar, alterar e reordenar links
+   sem editar código nem fazer deploy.
+2. **Rastreio de ponta a ponta** — propagar UTM e click ids da entrada até o
+   destino, contar o clique em GTM/GA4, Meta Pixel e Conversions API, e expor
+   redirects curtos `/go/*` cujo destino também vem do Sanity.
 
 O design visual atual não muda em nada. As redes sociais, hoje presentes apenas
 em `/links`, passam a aparecer também no rodapé, lidas do mesmo documento.
@@ -23,6 +28,9 @@ O spec anterior (`2026-06-09-links-page-design.md`) decidiu deliberadamente por
 config hardcoded, sem CMS. Esta é a reversão consciente daquela decisão: o Sanity
 agora existe no projeto (blog em produção), então o custo de usá-lo é baixo e o
 ganho — editar link sem deploy — é real.
+
+Do lado do rastreio, GTM, Meta Pixel, GA4 e Conversions API **já existem** (ver
+seção "Rastreio"); o que falta é UTM, click ids e evento de clique.
 
 O mega-menu do header (`src/lib/navigation.ts`) fica **fora do escopo**. Tem
 campos aninhados (badges, cards de destaque, cores de accent) que pedem um
@@ -87,8 +95,16 @@ Novos tipos em `src/sanity/schemaTypes/`, seguindo o padrão de `documents/categ
 | `documents/linksPage.ts` | document | `tagline` (string, obrigatório), `links[]` de `linkButton` |
 | `documents/siteFooter.ts` | document | `brandDescription` (text), `groups[]` (título + `footerLink[]`) |
 | `documents/socialLinks.ts` | document | `items[]` (label, href, ícone) |
-| `objects/linkButton.ts` | object | `label`, `href`, `icon` (dropdown), `variant` (`primary`/`secondary`) |
-| `objects/footerLink.ts` | object | `label`, `href` |
+| `objects/linkButton.ts` | object | `label`, `href`, `icon` (dropdown), `variant` (`primary`/`secondary`), `utmContent`, `trackingEvent`, `shortSlug` |
+| `objects/footerLink.ts` | object | `label`, `href`, `utmContent` |
+
+Os três campos de rastreio do `linkButton` são **opcionais** e ficam num grupo
+recolhido ("Rastreio") no Studio, para não poluir a edição do dia a dia:
+
+- `utmContent` — uma palavra, vira `utm_content` no destino (`demo`, `teste`)
+- `trackingEvent` — dropdown: vazio (`ClickLink`), `ClickDemo`, `ClickTrial`
+- `shortSlug` — preenchido com `demo`, cria `/go/demo`; validado como único no
+  documento e restrito a `[a-z0-9-]`
 
 Os três documentos são expostos como **singleton** por uma `structure`
 customizada em `src/sanity/lib/structure.ts`, registrada no `sanity.config.ts`.
@@ -134,6 +150,120 @@ Camadas de proteção, do Studio ao navegador:
 O `isExternalHref`, que já existe em `src/lib/links.ts`, continua decidindo entre
 `<a target="_blank">` e `<Link>`.
 
+## Rastreio: UTM, click ids e eventos
+
+### O que já existe
+
+`src/app/layout.tsx` já carrega, cada um atrás da sua env var:
+
+- **GTM** (`NEXT_PUBLIC_GTM_ID`)
+- **Meta Pixel** (`NEXT_PUBLIC_META_PIXEL_ID`)
+- **GA4 / gtag** (`NEXT_PUBLIC_GA_MEASUREMENT_ID`)
+
+E `src/lib/meta-conversions.ts` já implementa a **Conversions API** server-side
+com hash SHA-256, usada hoje pelo formulário de contato (`sendLeadEvent`).
+
+O que **não** existe: nenhum tratamento de `utm_*`, e nenhuma captura de
+`fbclid` / `gclid` / `_fbp` / `_fbc`.
+
+### Propagação de UTM, não UTM fixa por link
+
+A UTM de saída **não** é cadastrada inteira em cada link. A página lê os
+parâmetros `utm_*` da própria URL de entrada e os repassa ao destino,
+acrescentando apenas o `utm_content` específico do botão.
+
+No Sanity, cada link tem um campo `utmContent` (uma palavra: `demo`, `teste`,
+`blog`). A query string completa é montada em tempo de render.
+
+A razão é atribuição correta. Com UTM fixa, o botão "Agendar demonstração"
+carregaria `utm_source=instagram&utm_medium=bio` mesmo para quem chegou pelo
+LinkedIn ou pelos Stories — atribuindo ao Instagram uma visita que veio de outro
+lugar, justamente nas superfícies que se quer separar. Com propagação, um clique
+via Stories chega ao registro como `utm_medium=stories&utm_content=teste`.
+
+Quando não há UTM na entrada (alguém digitou o endereço, ou veio de busca
+orgânica), aplica-se um default por página: `utm_source=site`,
+`utm_medium=links-page`. O default é o comportamento de fallback, não sobrescreve
+UTM presente.
+
+### Click ids (mais importante que a UTM para mídia paga)
+
+`fbclid` e `gclid` são propagados junto com as UTMs. São eles — não a UTM — que
+a Meta e o Google Ads usam para casar o clique no anúncio com a conversão. Sem
+eles, a atribuição da campanha paga fica cega mesmo com UTM perfeita.
+
+O `fbclid` também é convertido no parâmetro `fbc` no formato que a Conversions
+API espera (`fb.1.<timestamp>.<fbclid>`), e o cookie `_fbp` (posto pelo próprio
+Pixel) é lido e enviado. Ambos melhoram muito a taxa de correspondência de
+eventos no Events Manager.
+
+### Eventos de clique: as três camadas
+
+As três disparam no mesmo clique, cada uma cobrindo o furo da outra:
+
+| Camada | Serve para | Cobre |
+|---|---|---|
+| `dataLayer` → GTM/GA4 | Google Ads: importar conversão, otimizar lance | Ajuste de gatilho sem deploy |
+| Meta Pixel (`fbq`) | Meta Ads: sinal rápido | — |
+| Conversions API | Meta Ads: mesmo evento, pelo servidor | Cliques perdidos por adblocker / ITP |
+
+**Deduplicação é obrigatória.** Pixel e Conversions API disparam com o **mesmo
+`event_id`**, e a Meta reconhece como um evento só. Sem isso a contagem dobra e o
+CPA fica falso. O `meta-conversions.ts` hoje gera o `event_id` internamente;
+passa a **aceitar um `eventId` de fora** para casar com o disparo do Pixel.
+
+### Nomes de evento
+
+Clique em botão **não** é `Lead`. O lead acontece quando a pessoa preenche o
+formulário (Cognizy ou registro). Marcar o clique como `Lead` inflaria a
+contagem e envenenaria a otimização da campanha.
+
+| Ação | Evento Meta | Evento dataLayer/GA4 |
+|---|---|---|
+| Clique num link da `/links` ou rodapé | `ClickLink` (customizado) | `link_click` |
+| Clique em "Agendar demonstração" | `ClickDemo` (customizado) | `click_demo` |
+| Clique em "Criar conta" / teste | `ClickTrial` (customizado) | `click_trial` |
+| Envio do formulário de contato | `Lead` (**já existe, não muda**) | — |
+
+Eventos customizados em vez de padrão (`InitiateCheckout`) mantêm nomes claros no
+Events Manager e não sequestram a semântica de um evento padrão que pode ser
+usado de verdade depois. O evento de destaque (`ClickDemo` / `ClickTrial`) é
+determinado por um campo `trackingEvent` opcional no link, no Sanity; sem ele,
+cai em `ClickLink`.
+
+### Redirects curtos `/go/*`
+
+Rota `src/app/go/[slug]/route.ts`. Cada link no Sanity ganha um campo opcional
+`shortSlug`; preenchê-lo com `demo` faz `/go/demo` redirecionar (HTTP 307) para o
+destino daquele link, com UTMs e click ids da requisição repassados.
+
+Vantagens: o clique é contado no **seu** servidor (imune a adblocker), e o
+destino pode ser trocado no Studio sem editar bio ou Stories já publicados.
+
+O destino vive num lugar só — o próprio link — em vez de um módulo de redirects
+separado, que duplicaria a URL da demo em dois documentos e permitiria que
+divergissem.
+
+Slug não encontrado → 307 para a `/links` (nunca 404 numa URL que já pode estar
+impressa ou publicada). O evento server-side é enviado antes do redirect, sem
+`await` bloqueando a resposta.
+
+### Consentimento (LGPD) — pendência declarada
+
+**O site não tem banner de consentimento de cookies.** GTM, Meta Pixel e GA4 já
+carregam sem consentimento hoje; este trabalho não cria essa exposição, mas a
+amplia ao adicionar envio server-side, que não passa por bloqueio do navegador.
+
+O evento de clique **não** envia e-mail nem telefone — só IP, user-agent e click
+ids, o mínimo para correspondência. Ainda assim, banner de consentimento com
+Consent Mode v2 do GTM é decisão jurídica e fica **fora deste escopo**,
+registrada aqui como pendência a decidir.
+
+### Fora de escopo, anotado
+
+**Google Ads Enhanced Conversions** — o equivalente do Google à Conversions API.
+Exige configuração no painel do Google Ads, não só código. Não implementado aqui.
+
 ## Revalidação (ISR)
 
 `next: { revalidate: 600 }` na chamada `fetch` do cliente Sanity, dentro das
@@ -147,6 +277,18 @@ Efeito: link editado no Studio aparece no site em até 10 minutos. Se um dia for
 preciso instantâneo, um webhook `/api/revalidate` se acrescenta por cima sem
 refazer nada disso.
 
+### Consequência do `searchParams` na `/links`
+
+Ler `searchParams` torna a rota `/links` **dinâmica** — ela passa a renderizar a
+cada request, e o `revalidate: 600` deixa de valer ali (segue valendo no rodapé,
+em todas as outras páginas).
+
+Isso é aceitável e até desejável nessa rota: é uma página só, leve, e é o ponto de
+entrada das campanhas — a UTM resolvida no servidor não depende de JS, o que a
+torna mais confiável exatamente onde importa. O `fetch` do Sanity continua com
+cache de 600s, então o Sanity **não** é consultado a cada visita; apenas o HTML é
+remontado.
+
 ## Componentes
 
 Nenhuma mudança visual. Os componentes passam a receber dados por props em vez
@@ -156,8 +298,18 @@ de importar do módulo de config.
 |---|---|
 | `components/links/LinkButton.tsx` | nenhuma (já recebe `LinkItem` por props) |
 | `components/links/SocialRow.tsx` | passa a receber `items: SocialItem[]` por prop |
-| `app/links/page.tsx` | busca no Sanity, aplica fallback, passa para baixo |
+| `app/links/page.tsx` | busca no Sanity, aplica fallback, lê `searchParams` para a UTM |
 | `components/landing/Footer.tsx` | vira `async`; busca no Sanity; **ganha a `SocialRow`** na barra inferior |
+
+O `LinkButton` passa a usar o `TrackedLink`, um client component fino que envolve
+o `<a>`/`<Link>` e dispara os eventos no `onClick`. O `LinkButton` já é
+`"use client"`, então não há mudança de fronteira servidor/cliente ali.
+
+O rodapé é um Server Component e **não** lê `searchParams` (não pode, sem tornar
+todas as 16 páginas dinâmicas). Os links do rodapé recebem UTM pelo cliente: o
+`TrackedLink` lê `window.location.search` no clique e monta o destino ali. A
+página `/links`, que é uma rota só e já é o ponto de entrada de campanha, resolve
+a UTM no servidor via `searchParams` — mais confiável, porque não depende de JS.
 
 O `Footer` é usado em 16 lugares, incluindo `FeatureLanding.tsx` e
 `PersonaLanding.tsx`. Todos são Server Components, e JSX de Server Component
@@ -180,13 +332,31 @@ yarn lint
 Mais a checagem manual de que `/links` e o rodapé renderizam idênticos ao atual
 com o Sanity vazio (caminho do fallback) e com o Sanity populado.
 
+O rastreio se verifica nas ferramentas das próprias plataformas, que é onde os
+erros de fato aparecem:
+
+| O que checar | Onde |
+|---|---|
+| `dataLayer.push` com nome, destino e `utm_content` | GTM Preview / console |
+| Evento do Pixel e seu `event_id` | Meta Pixel Helper (extensão) |
+| Evento server-side chegando | Events Manager → Test Events |
+| **Dedup Pixel × Conversions API** | Events Manager → o evento deve aparecer **uma vez**, com "Deduplicated" |
+| UTM propagada até o destino | abrir `/links?utm_source=teste&utm_medium=x` e inspecionar o `href` dos botões |
+| `fbclid`/`gclid` repassados | mesma checagem, com `?fbclid=abc123` |
+| Redirect e destino | `curl -sI localhost:3000/go/demo` → `307` + `location` correto |
+
+A verificação de deduplicação é a que não pode ser pulada: é o erro que passa
+despercebido em desenvolvimento e só aparece como CPA inflado no relatório da
+campanha.
+
 Se um runner de testes for desejado, é tarefa separada — os candidatos naturais
-seriam `safeLinkHref` (schemes aceitos/rejeitados), as funções de query (dado
-válido, inválido, Sanity não configurado) e `getIcon`.
+seriam `safeLinkHref` (schemes aceitos/rejeitados), o builder de UTM (propaga,
+aplica default, não sobrescreve), as funções de query (dado válido, inválido,
+Sanity não configurado) e `getIcon`.
 
 ## Arquivos
 
-**Novos (7):**
+**Novos (11):**
 
 ```
 src/sanity/schemaTypes/documents/linksPage.ts
@@ -196,9 +366,13 @@ src/sanity/schemaTypes/objects/linkButton.ts
 src/sanity/schemaTypes/objects/footerLink.ts
 src/sanity/lib/structure.ts
 src/lib/safe-link-href.ts
+src/lib/tracking/utm.ts              lê/propaga utm_* + fbclid/gclid; monta href
+src/lib/tracking/events.ts           dataLayer + fbq no clique, com event_id
+src/components/tracking/TrackedLink.tsx   client component que dispara no clique
+src/app/go/[slug]/route.ts           redirect curto + evento server-side
 ```
 
-**Alterados (10):**
+**Alterados (12):**
 
 ```
 sanity.config.ts                     structure customizada (singletons)
@@ -208,10 +382,17 @@ src/sanity/lib/validation.ts         schemas Zod dos 3 documentos
 src/sanity/types/content.ts          tipos dos 3 documentos
 src/lib/icons.ts                     + youtube, tiktok, getIcon()
 src/lib/links.ts                     listas mantidas como fallback
+src/lib/meta-conversions.ts          aceita eventId + eventName + fbc/fbp
+src/components/links/LinkButton.tsx  usa TrackedLink
 src/components/links/SocialRow.tsx   recebe items por prop
 src/components/landing/Footer.tsx    async + Sanity + SocialRow
-src/app/links/page.tsx               async + Sanity
+src/app/links/page.tsx               async + Sanity + lê searchParams
 ```
+
+O `meta-conversions.ts` é o único arquivo pré-existente com lógica de negócio
+alterado. A mudança é aditiva: `eventName` e `eventId` passam a ser parâmetros
+opcionais com os defaults atuais (`Lead`, `crypto.randomUUID()`), então a chamada
+do formulário de contato continua funcionando sem alteração.
 
 ## Conteúdo inicial no Sanity
 
@@ -219,3 +400,34 @@ Após a implementação, os três documentos precisam ser populados uma vez no
 Studio com o conteúdo que hoje está no código (13 botões, 3 redes, 4 grupos do
 rodapé). Enquanto não forem populados, o site segue renderizando o fallback —
 sem quebra e sem diferença visual.
+
+Ao popular, preencher o grupo "Rastreio" nos links que importam para a campanha:
+
+| Link | `utmContent` | `trackingEvent` | `shortSlug` |
+|---|---|---|---|
+| Agendar demonstração | `demo` | `ClickDemo` | `demo` |
+| Criar conta grátis | `teste` | `ClickTrial` | `teste` |
+| Acessar plataforma | `app` | — | — |
+| Apps (corretor/cliente) | `app-ios` / `app-android` | — | — |
+| WhatsApp | `whatsapp` | — | `whatsapp` |
+
+Os demais podem ficar sem nada — caem em `ClickLink` e sem `utm_content`.
+
+## Uso das UTMs na divulgação (fora do código)
+
+Para referência de quem publica, e para o rastreio fazer sentido de ponta a ponta:
+
+| Superfície | URL a publicar |
+|---|---|
+| Bio do Instagram | `mylarpro.com.br/links?utm_source=instagram&utm_medium=bio` |
+| Sticker de Stories | `mylarpro.com.br/links?utm_source=instagram&utm_medium=stories&utm_campaign=<tema>` |
+| LinkedIn orgânico | `mylarpro.com.br/links?utm_source=linkedin&utm_medium=organic` |
+| Anúncios Meta | parâmetros de URL configurados no próprio anúncio, `utm_medium=paid` |
+
+O `utm_medium` diferente por superfície é o que permite saber se o resultado veio
+da bio ou dos Stories — sem isso tudo colapsa em "instagram" e a comparação fica
+impossível.
+
+Pendência de produto, não de código: campo "como nos conheceu" no formulário de
+demo e no registro. É o que captura quem vê no Instagram e depois chega pelo
+Google — caso que nenhuma UTM alcança, e que é a maioria em B2B.
