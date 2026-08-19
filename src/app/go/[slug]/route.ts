@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, after, type NextRequest } from "next/server";
 
 import { buildTrackedHref } from "@/lib/tracking/build-href";
 import { extractTrackingParams } from "@/lib/tracking/params";
@@ -44,19 +44,18 @@ export async function GET(
     link.utmContent,
   );
 
-  void sendConversionEvent({
+  const eventPayload = {
     eventName: link.trackingEvent ?? "ClickLink",
     eventId: crypto.randomUUID(),
     eventSourceUrl: request.url,
     userAgent: request.headers.get("user-agent"),
     clientIp: clientIpFrom(request),
-    fbc: fbcFrom(
-      trackingParams.fbclid,
-      request.cookies.get("_fbc")?.value,
-    ),
+    fbc: fbcFrom(trackingParams.fbclid, request.cookies.get("_fbc")?.value),
     fbp: request.cookies.get("_fbp")?.value,
     customData: { link_label: link.label, short_slug: slug },
-  });
+  };
+
+  after(() => sendConversionEvent(eventPayload));
 
   return NextResponse.redirect(destination, 307);
 }
