@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icons } from "@/lib/icons";
 import { MOTIVOS_CONTATO } from "@/lib/contact";
@@ -220,6 +221,19 @@ export function ContactForm() {
                   </motion.p>
                 )}
               </AnimatePresence>
+
+              <p className="text-xs leading-relaxed text-slate-500">
+                Ao enviar, você concorda que a MyLar Pro use seus dados para
+                responder a este contato, conforme a nossa{" "}
+                <Link
+                  href="/privacy-policy"
+                  className="underline underline-offset-2 transition hover:text-slate-700"
+                >
+                  Política de Privacidade
+                </Link>
+                . Você pode solicitar acesso ou exclusão dos seus dados a
+                qualquer momento.
+              </p>
 
               <motion.button
                 type="submit"

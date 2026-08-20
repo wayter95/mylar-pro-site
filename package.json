@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:links": "node scripts/seed-links.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
