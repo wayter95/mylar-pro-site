@@ -131,7 +131,7 @@ export function CookieBanner() {
               Usamos cookies para entender como o site é usado e medir nossos
               anúncios. Você escolhe o que permitir.{" "}
               <Link
-                href="/brokers/privacy-policy"
+                href="/privacy-policy"
                 className="underline underline-offset-4 transition hover:text-white"
               >
                 Política de privacidade

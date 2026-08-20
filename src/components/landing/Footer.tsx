@@ -41,8 +41,8 @@ const navGroups: FooterGroup[] = [
     links: [
       { label: "Preços", href: "/plans" },
       { label: "Contato", href: "/contact" },
-      { label: "Política de privacidade", href: "/brokers/privacy-policy" },
-      { label: "Termos de uso", href: "/brokers/terms-of-use" },
+      { label: "Política de privacidade", href: "/privacy-policy" },
+      { label: "Termos de uso", href: "/terms-of-use" },
     ],
   },
 ];
