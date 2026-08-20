@@ -3,6 +3,7 @@ import {
   getContactEmailHtml,
   getContactEmailText,
 } from "@/lib/email-templates/contact";
+import { hasMarketingConsentFromHeaders } from "@/lib/consent/server";
 import { sendLeadEvent } from "@/lib/meta-conversions";
 import sgMail from "@sendgrid/mail";
 import { NextResponse } from "next/server";
@@ -249,14 +250,16 @@ export async function POST(request: Request) {
     // Meta Conversions API (server-side) — não bloqueia a resposta
     const userAgent = request.headers.get("user-agent") ?? undefined;
     const eventSourceUrl = request.headers.get("referer") ?? undefined;
-    sendLeadEvent({
-      email: contactData.email,
-      nome: contactData.nome,
-      telefone: contactData.telefone,
-      eventSourceUrl,
-      userAgent,
-      clientIp: ip,
-    }).catch(() => {});
+    if (hasMarketingConsentFromHeaders(request.headers)) {
+      sendLeadEvent({
+        email: contactData.email,
+        nome: contactData.nome,
+        telefone: contactData.telefone,
+        eventSourceUrl,
+        userAgent,
+        clientIp: ip,
+      }).catch(() => {});
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

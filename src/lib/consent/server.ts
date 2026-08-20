@@ -14,3 +14,28 @@ export function readConsentFromRequest(
 export function hasMarketingConsent(request: CookieReader): boolean {
   return readConsentFromRequest(request)?.marketing === true;
 }
+
+export function readConsentFromCookieHeader(
+  header: string | null,
+): ConsentValue | null {
+  if (!header) {
+    return null;
+  }
+
+  const entry = header
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(`${CONSENT_COOKIE_NAME}=`));
+
+  if (!entry) {
+    return null;
+  }
+
+  return parseConsent(
+    decodeURIComponent(entry.slice(CONSENT_COOKIE_NAME.length + 1)),
+  );
+}
+
+export function hasMarketingConsentFromHeaders(headers: Headers): boolean {
+  return readConsentFromCookieHeader(headers.get("cookie"))?.marketing === true;
+}

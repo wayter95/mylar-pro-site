@@ -141,7 +141,6 @@ Specific purposes include: responding to contacts and commercial inquiries, send
 • SendGrid (envio de e-mails transacionais gerados a partir do formulário de contato).
 • Google (Google Analytics e Google Ads / Google Tag Manager), somente após consentimento na categoria Analíticos e/ou Marketing.
 • Meta / Facebook (Meta Pixel e Conversions API), somente após consentimento na categoria Marketing.
-• Sanity (plataforma de conteúdo utilizada para gerenciar páginas e o blog do Site).
 
 Não vendemos, alugamos ou cedemos seus dados pessoais a terceiros para fins de marketing fora do escopo descrito nesta Política.
 
@@ -152,7 +151,6 @@ Parte dos dados pode ser processada ou armazenada em servidores fora do Brasil (
 • SendGrid (delivery of transactional emails generated from the contact form).
 • Google (Google Analytics and Google Ads / Google Tag Manager), only after consent to the Analytics and/or Marketing category.
 • Meta / Facebook (Meta Pixel and Conversions API), only after consent to the Marketing category.
-• Sanity (content platform used to manage the Site's pages and blog).
 
 We do not sell, rent, or transfer your personal data to third parties for marketing purposes outside the scope described in this Policy.
 
