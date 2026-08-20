@@ -60,5 +60,16 @@ export async function GET(
     after(() => sendConversionEvent(eventPayload));
   }
 
-  return NextResponse.redirect(destination, 307);
+  const isNonBrowsableScheme = /^(mailto:|tel:)/i.test(destination);
+
+  if (isNonBrowsableScheme) {
+    return NextResponse.redirect(new URL("/links", request.url), 307);
+  }
+
+  try {
+    const destinationUrl = new URL(destination, request.url);
+    return NextResponse.redirect(destinationUrl, 307);
+  } catch {
+    return NextResponse.redirect(new URL("/links", request.url), 307);
+  }
 }
