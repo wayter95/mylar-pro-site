@@ -10,9 +10,14 @@ export const TRACKED_PARAMS = [
 
 export type TrackingParams = Record<string, string>;
 
-export const DEFAULT_SOURCE: TrackingParams = {
+export const LINKS_PAGE_SOURCE: TrackingParams = {
   utm_source: "site",
   utm_medium: "links-page",
+};
+
+export const SHORT_LINK_SOURCE: TrackingParams = {
+  utm_source: "site",
+  utm_medium: "short-link",
 };
 
 function firstValue(value: string | string[] | undefined): string | undefined {

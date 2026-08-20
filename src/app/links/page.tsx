@@ -5,7 +5,10 @@ import { LinkButton } from "@/components/links/LinkButton";
 import { SocialRow } from "@/components/links/SocialRow";
 import { AnimateIn, AnimateInStagger } from "@/components/landing/AnimateIn";
 import { getLinksPage, getSocialLinks } from "@/sanity/lib/queries";
-import { extractTrackingParams } from "@/lib/tracking/params";
+import {
+  extractTrackingParams,
+  LINKS_PAGE_SOURCE,
+} from "@/lib/tracking/params";
 
 export const metadata: Metadata = {
   title: "Links",
@@ -85,7 +88,7 @@ export default async function LinksPage({
               utmContent={item.utmContent}
               trackingEvent={item.trackingEvent}
               entryParams={entryParams}
-              applyDefaultSource
+              defaultSource={LINKS_PAGE_SOURCE}
             />
           ))}
         </AnimateInStagger>

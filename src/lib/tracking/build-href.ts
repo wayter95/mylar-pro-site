@@ -1,4 +1,4 @@
-import { DEFAULT_SOURCE, type TrackingParams } from "@/lib/tracking/params";
+import { type TrackingParams } from "@/lib/tracking/params";
 
 const nonQueryableSchemes = ["mailto:", "tel:"];
 
@@ -9,7 +9,7 @@ function acceptsQuery(href: string): boolean {
 }
 
 export type BuildTrackedHrefOptions = {
-  applyDefaultSource?: boolean;
+  defaultSource?: TrackingParams;
 };
 
 export function buildTrackedHref(
@@ -25,7 +25,7 @@ export function buildTrackedHref(
   }
 
   const merged: TrackingParams = {
-    ...(options?.applyDefaultSource ? DEFAULT_SOURCE : {}),
+    ...(options?.defaultSource ?? {}),
     ...params,
   };
 

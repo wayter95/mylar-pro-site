@@ -1,7 +1,10 @@
 import { NextResponse, after, type NextRequest } from "next/server";
 
 import { buildTrackedHref } from "@/lib/tracking/build-href";
-import { extractTrackingParams } from "@/lib/tracking/params";
+import {
+  extractTrackingParams,
+  SHORT_LINK_SOURCE,
+} from "@/lib/tracking/params";
 import { sendConversionEvent } from "@/lib/meta-conversions";
 import { hasMarketingConsent } from "@/lib/consent/server";
 import { getLinkByShortSlug } from "@/sanity/lib/queries";
@@ -39,11 +42,9 @@ export async function GET(
   }
 
   const trackingParams = extractTrackingParams(request.nextUrl.searchParams);
-  const destination = buildTrackedHref(
-    link.href,
-    trackingParams,
-    link.utmContent,
-  );
+  const destination = buildTrackedHref(link.href, trackingParams, link.utmContent, {
+    defaultSource: SHORT_LINK_SOURCE,
+  });
 
   const eventPayload = {
     eventName: link.trackingEvent ?? "ClickLink",
