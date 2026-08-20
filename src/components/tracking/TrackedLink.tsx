@@ -16,6 +16,7 @@ type Props = {
   utmContent?: string;
   trackingEvent?: string;
   entryParams?: TrackingParams;
+  applyDefaultSource?: boolean;
   ariaLabel?: string;
 };
 
@@ -27,6 +28,7 @@ export function TrackedLink({
   utmContent,
   trackingEvent,
   entryParams,
+  applyDefaultSource,
   ariaLabel,
 }: Props) {
   const [clientParams, setClientParams] = useState<TrackingParams | null>(null);
@@ -48,10 +50,11 @@ export function TrackedLink({
     });
   }, [href, label, trackingEvent, utmContent]);
 
+  const trackedHrefOptions = { applyDefaultSource };
   const target = entryParams
-    ? buildTrackedHref(href, entryParams, utmContent)
+    ? buildTrackedHref(href, entryParams, utmContent, trackedHrefOptions)
     : clientParams
-      ? buildTrackedHref(href, clientParams, utmContent)
+      ? buildTrackedHref(href, clientParams, utmContent, trackedHrefOptions)
       : href;
   const external = isExternalHref(href);
 

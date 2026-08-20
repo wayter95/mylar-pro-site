@@ -85,6 +85,7 @@ export default async function LinksPage({
               utmContent={item.utmContent}
               trackingEvent={item.trackingEvent}
               entryParams={entryParams}
+              applyDefaultSource
             />
           ))}
         </AnimateInStagger>

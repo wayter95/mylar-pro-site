@@ -22,6 +22,7 @@ type Props = LinkItem & {
   utmContent?: string;
   trackingEvent?: string;
   entryParams?: TrackingParams;
+  applyDefaultSource?: boolean;
 };
 
 export function LinkButton({
@@ -32,6 +33,7 @@ export function LinkButton({
   utmContent,
   trackingEvent,
   entryParams,
+  applyDefaultSource,
 }: Props) {
   const Icon = getIcon(icon);
 
@@ -44,6 +46,7 @@ export function LinkButton({
         utmContent={utmContent}
         trackingEvent={trackingEvent}
         entryParams={entryParams}
+        applyDefaultSource={applyDefaultSource}
       >
         <Icon className="size-5 shrink-0" />
         <span className="flex-1 text-left">{label}</span>

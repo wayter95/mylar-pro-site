@@ -8,10 +8,15 @@ function acceptsQuery(href: string): boolean {
   );
 }
 
+export type BuildTrackedHrefOptions = {
+  applyDefaultSource?: boolean;
+};
+
 export function buildTrackedHref(
   href: string,
   params: TrackingParams,
   utmContent?: string,
+  options?: BuildTrackedHrefOptions,
 ): string {
   const trimmedHref = href.trim();
 
@@ -20,12 +25,16 @@ export function buildTrackedHref(
   }
 
   const merged: TrackingParams = {
-    ...DEFAULT_SOURCE,
+    ...(options?.applyDefaultSource ? DEFAULT_SOURCE : {}),
     ...params,
   };
 
   if (utmContent) {
     merged.utm_content = utmContent;
+  }
+
+  if (Object.keys(merged).length === 0) {
+    return trimmedHref;
   }
 
   const isAbsolute = /^https?:\/\//i.test(trimmedHref);
