@@ -3,6 +3,8 @@ import {
   getContactEmailHtml,
   getContactEmailText,
 } from "@/lib/email-templates/contact";
+import { clientIpFromHeaders } from "@/lib/client-ip";
+import { hasMarketingConsentFromHeaders } from "@/lib/consent/server";
 import { sendLeadEvent } from "@/lib/meta-conversions";
 import sgMail from "@sendgrid/mail";
 import { NextResponse } from "next/server";
@@ -17,14 +19,6 @@ const MIN_FORM_TIME_MS = 3000;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX = 3;
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
-
-function getClientIP(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const realIP = request.headers.get("x-real-ip");
-  if (forwarded) return forwarded.split(",")[0]?.trim() ?? "unknown";
-  if (realIP) return realIP;
-  return "unknown";
-}
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
@@ -58,7 +52,7 @@ export async function POST(request: Request) {
 
     sgMail.setApiKey(apiKey);
 
-    const ip = getClientIP(request);
+    const ip = clientIpFromHeaders(request.headers) ?? "unknown";
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: "Muitos envios. Tente novamente em alguns minutos." },
@@ -249,14 +243,16 @@ export async function POST(request: Request) {
     // Meta Conversions API (server-side) — não bloqueia a resposta
     const userAgent = request.headers.get("user-agent") ?? undefined;
     const eventSourceUrl = request.headers.get("referer") ?? undefined;
-    sendLeadEvent({
-      email: contactData.email,
-      nome: contactData.nome,
-      telefone: contactData.telefone,
-      eventSourceUrl,
-      userAgent,
-      clientIp: ip,
-    }).catch(() => {});
+    if (hasMarketingConsentFromHeaders(request.headers)) {
+      sendLeadEvent({
+        email: contactData.email,
+        nome: contactData.nome,
+        telefone: contactData.telefone,
+        eventSourceUrl,
+        userAgent,
+        clientIp: ip,
+      }).catch(() => {});
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

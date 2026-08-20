@@ -1,11 +1,11 @@
-import { Icons } from "@/lib/icons";
-import { socialItems } from "@/lib/links";
+import { getIcon } from "@/lib/icons";
+import type { SocialItem } from "@/lib/links";
 
-export function SocialRow() {
+export function SocialRow({ items }: { items: SocialItem[] }) {
   return (
     <div className="flex items-center justify-center gap-4">
-      {socialItems.map((social) => {
-        const Icon = Icons[social.icon];
+      {items.map((social) => {
+        const Icon = getIcon(social.icon);
         return (
           <a
             key={social.label}

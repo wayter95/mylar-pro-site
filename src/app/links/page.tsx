@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { linkItems, profile } from "@/lib/links";
+import { linkItems, profile, socialItems, type LinkItem, type SocialItem } from "@/lib/links";
 import { LinkButton } from "@/components/links/LinkButton";
 import { SocialRow } from "@/components/links/SocialRow";
 import { AnimateIn, AnimateInStagger } from "@/components/landing/AnimateIn";
+import { getLinksPage, getSocialLinks } from "@/sanity/lib/queries";
+import {
+  extractTrackingParams,
+  LINKS_PAGE_SOURCE,
+} from "@/lib/tracking/params";
 
 export const metadata: Metadata = {
   title: "Links",
@@ -16,7 +21,39 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LinksPage() {
+export default async function LinksPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [content, socials, resolvedSearchParams] = await Promise.all([
+    getLinksPage(),
+    getSocialLinks(),
+    searchParams,
+  ]);
+
+  const entryParams = extractTrackingParams(resolvedSearchParams);
+
+  const tagline = content?.tagline ?? profile.tagline;
+  const links = content
+    ? content.links
+    : linkItems.map((item) => ({
+        label: item.label,
+        href: item.href,
+        icon: item.icon as string,
+        variant: item.variant,
+        utmContent: undefined,
+        trackingEvent: undefined,
+        shortSlug: undefined,
+      }));
+  const socialRow: SocialItem[] = socials
+    ? socials.map((social) => ({
+        label: social.label,
+        href: social.href,
+        icon: social.icon as SocialItem["icon"],
+      }))
+    : socialItems;
+
   return (
     <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-slate-950 px-4 py-16">
       <div className="pointer-events-none absolute inset-0">
@@ -36,18 +73,28 @@ export default function LinksPage() {
             priority
           />
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
-            {profile.tagline}
+            {tagline}
           </p>
         </AnimateIn>
 
         <AnimateInStagger className="mt-10 flex flex-col gap-3">
-          {linkItems.map((item) => (
-            <LinkButton key={item.label} {...item} />
+          {links.map((item) => (
+            <LinkButton
+              key={item.label}
+              label={item.label}
+              href={item.href}
+              icon={item.icon as LinkItem["icon"]}
+              variant={item.variant}
+              utmContent={item.utmContent}
+              trackingEvent={item.trackingEvent}
+              entryParams={entryParams}
+              defaultSource={LINKS_PAGE_SOURCE}
+            />
           ))}
         </AnimateInStagger>
 
         <div className="mt-10">
-          <SocialRow />
+          <SocialRow items={socialRow} />
         </div>
 
         <p className="mt-10 text-center text-xs text-slate-500">

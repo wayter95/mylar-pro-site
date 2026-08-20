@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { safeUrl } from "@/lib/safe-url";
+import { safeLinkHref } from "@/lib/safe-link-href";
 
 const safeUrlSchema = z
   .string()
@@ -180,3 +181,55 @@ export const postSchema = postPreviewSchema.extend({
 });
 
 export const categoryListSchema = z.array(categorySchema);
+
+const safeLinkHrefSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .refine((value) => safeLinkHref(value) !== null, {
+    message: "Use an internal path, HTTP(S) URL, mailto: or tel:.",
+  });
+
+export const linkButtonSchema = z.object({
+  label: z.string().trim().min(1),
+  href: safeLinkHrefSchema,
+  icon: z.string().trim().min(1),
+  variant: z.enum(["primary", "secondary"]),
+  utmContent: optionalText,
+  trackingEvent: z
+    .enum(["ClickLink", "ClickDemo", "ClickTrial"])
+    .nullish()
+    .transform((value) => value ?? undefined),
+  shortSlug: optionalText,
+});
+
+export const footerLinkSchema = z.object({
+  label: z.string().trim().min(1),
+  href: safeLinkHrefSchema,
+  utmContent: optionalText,
+});
+
+export const socialLinkItemSchema = z.object({
+  label: z.string().trim().min(1),
+  href: safeLinkHrefSchema,
+  icon: z.string().trim().min(1),
+});
+
+export const footerGroupSchema = z.object({
+  title: z.string().trim().min(1),
+  links: z.array(footerLinkSchema),
+});
+
+export const linksPageSchema = z.object({
+  tagline: z.string().trim().min(1),
+  links: z.array(linkButtonSchema),
+});
+
+export const siteFooterSchema = z.object({
+  brandDescription: z.string().trim().min(1),
+  groups: z.array(footerGroupSchema),
+});
+
+export const socialLinksSchema = z.object({
+  items: z.array(socialLinkItemSchema),
+});

@@ -31,42 +31,52 @@ export type LeadEventPayload = {
   clientIp?: string | null;
 };
 
-/**
- * Envia evento Lead para a Meta Conversions API (server-side).
- * Não lança erro; falhas são apenas logadas para não afetar o fluxo principal.
- */
-export async function sendLeadEvent(payload: LeadEventPayload): Promise<void> {
+export type ConversionEventPayload = {
+  eventName: string;
+  eventId: string;
+  eventSourceUrl?: string;
+  userAgent?: string | null;
+  clientIp?: string | null;
+  fbc?: string;
+  fbp?: string;
+  userData?: Record<string, string>;
+  customData?: Record<string, string>;
+};
+
+export async function sendConversionEvent(
+  payload: ConversionEventPayload,
+): Promise<void> {
   if (!pixelId || !accessToken) {
     return;
   }
 
-  const eventId = crypto.randomUUID();
-  const eventTime = Math.floor(Date.now() / 1000);
+  const userData: Record<string, string> = { ...payload.userData };
 
-  const userData: Record<string, string> = {
-    em: sha256(payload.email),
-  };
-  if (payload.telefone?.trim()) {
-    const ph = sha256Phone(payload.telefone.trim());
-    if (ph) userData.ph = ph;
-  }
   if (payload.clientIp && payload.clientIp !== "unknown") {
     userData.client_ip_address = payload.clientIp;
   }
   if (payload.userAgent) {
     userData.client_user_agent = payload.userAgent;
   }
+  if (payload.fbc) {
+    userData.fbc = payload.fbc;
+  }
+  if (payload.fbp) {
+    userData.fbp = payload.fbp;
+  }
 
   const body = {
     data: [
       {
-        event_name: "Lead",
-        event_time: eventTime,
-        event_id: eventId,
+        event_name: payload.eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: payload.eventId,
         action_source: "website",
         user_data: userData,
-        custom_data: payload.nome ? { nome: payload.nome } : undefined,
-        ...(payload.eventSourceUrl && { event_source_url: payload.eventSourceUrl }),
+        ...(payload.customData && { custom_data: payload.customData }),
+        ...(payload.eventSourceUrl && {
+          event_source_url: payload.eventSourceUrl,
+        }),
       },
     ],
     access_token: accessToken,
@@ -84,6 +94,34 @@ export async function sendLeadEvent(payload: LeadEventPayload): Promise<void> {
       console.error("[Meta Conversions API] Erro:", res.status, data);
     }
   } catch (err) {
-    console.error("[Meta Conversions API] Falha ao enviar evento Lead:", err);
+    console.error(
+      `[Meta Conversions API] Falha ao enviar evento ${payload.eventName}:`,
+      err,
+    );
   }
+}
+
+/**
+ * Envia evento Lead para a Meta Conversions API (server-side).
+ * Não lança erro; falhas são apenas logadas para não afetar o fluxo principal.
+ */
+export async function sendLeadEvent(payload: LeadEventPayload): Promise<void> {
+  const userData: Record<string, string> = {
+    em: sha256(payload.email),
+  };
+
+  if (payload.telefone?.trim()) {
+    const ph = sha256Phone(payload.telefone.trim());
+    if (ph) userData.ph = ph;
+  }
+
+  await sendConversionEvent({
+    eventName: "Lead",
+    eventId: crypto.randomUUID(),
+    eventSourceUrl: payload.eventSourceUrl,
+    userAgent: payload.userAgent,
+    clientIp: payload.clientIp,
+    userData,
+    ...(payload.nome && { customData: { nome: payload.nome } }),
+  });
 }

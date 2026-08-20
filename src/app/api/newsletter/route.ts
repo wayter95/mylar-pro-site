@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { clientIpFromHeaders } from "@/lib/client-ip";
+
 const FORM_URL =
   "https://api.cognizy.ai/api/public/forms/newsletter-mylar-pro/submit";
 
@@ -9,14 +11,6 @@ const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 15 * 60 * 1000; // 15 min
 
 const MIN_SUBMIT_TIME_MS = 2500; // humano leva pelo menos 2.5s para preencher
-
-function getIp(req: NextRequest): string {
-  return (
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown"
-  );
-}
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -33,7 +27,7 @@ function isRateLimited(ip: string): boolean {
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = getIp(req);
+    const ip = clientIpFromHeaders(req.headers) ?? "unknown";
 
     if (isRateLimited(ip)) {
       return NextResponse.json(

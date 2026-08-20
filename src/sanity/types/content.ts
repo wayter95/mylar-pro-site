@@ -145,3 +145,40 @@ export interface Post extends PostPreview {
   seo?: Seo;
   content: ArticleBlock[];
 }
+
+export interface LinkButtonItem {
+  label: string;
+  href: string;
+  icon: string;
+  variant: "primary" | "secondary";
+  utmContent?: string;
+  trackingEvent?: string;
+  shortSlug?: string;
+}
+
+export interface FooterLinkItem {
+  label: string;
+  href: string;
+  utmContent?: string;
+}
+
+export interface FooterGroup {
+  title: string;
+  links: FooterLinkItem[];
+}
+
+export interface SocialLinkItem {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+export interface LinksPageContent {
+  tagline: string;
+  links: LinkButtonItem[];
+}
+
+export interface SiteFooterContent {
+  brandDescription: string;
+  groups: FooterGroup[];
+}
