@@ -3,6 +3,7 @@ import {
   getContactEmailHtml,
   getContactEmailText,
 } from "@/lib/email-templates/contact";
+import { clientIpFromHeaders } from "@/lib/client-ip";
 import { hasMarketingConsentFromHeaders } from "@/lib/consent/server";
 import { sendLeadEvent } from "@/lib/meta-conversions";
 import sgMail from "@sendgrid/mail";
@@ -18,14 +19,6 @@ const MIN_FORM_TIME_MS = 3000;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX = 3;
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
-
-function getClientIP(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const realIP = request.headers.get("x-real-ip");
-  if (forwarded) return forwarded.split(",")[0]?.trim() ?? "unknown";
-  if (realIP) return realIP;
-  return "unknown";
-}
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
@@ -59,7 +52,7 @@ export async function POST(request: Request) {
 
     sgMail.setApiKey(apiKey);
 
-    const ip = getClientIP(request);
+    const ip = clientIpFromHeaders(request.headers) ?? "unknown";
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: "Muitos envios. Tente novamente em alguns minutos." },

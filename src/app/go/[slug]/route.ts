@@ -1,5 +1,6 @@
 import { NextResponse, after, type NextRequest } from "next/server";
 
+import { clientIpFromHeaders } from "@/lib/client-ip";
 import { buildTrackedHref } from "@/lib/tracking/build-href";
 import {
   extractTrackingParams,
@@ -8,17 +9,6 @@ import {
 import { sendConversionEvent } from "@/lib/meta-conversions";
 import { hasMarketingConsent } from "@/lib/consent/server";
 import { getLinkByShortSlug } from "@/sanity/lib/queries";
-
-function clientIpFrom(request: NextRequest): string | null {
-  const forwarded = request.headers.get("x-forwarded-for");
-
-  if (!forwarded) {
-    return request.headers.get("x-real-ip");
-  }
-
-  const parts = forwarded.split(",").map((part) => part.trim());
-  return parts[parts.length - 1] || null;
-}
 
 function fbcFrom(fbclid: string | undefined, cookieFbc: string | undefined) {
   if (cookieFbc) {
@@ -51,7 +41,7 @@ export async function GET(
     eventId: crypto.randomUUID(),
     eventSourceUrl: request.url,
     userAgent: request.headers.get("user-agent"),
-    clientIp: clientIpFrom(request),
+    clientIp: clientIpFromHeaders(request.headers),
     fbc: fbcFrom(trackingParams.fbclid, request.cookies.get("_fbc")?.value),
     fbp: request.cookies.get("_fbp")?.value,
     customData: { link_label: link.label, short_slug: slug },
