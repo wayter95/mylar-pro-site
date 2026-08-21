@@ -49,7 +49,11 @@ export const post = defineType({
     defineField({
       name: "publishedAt",
       title: "Data de publicação",
+      description:
+        "O artigo só aparece no site a partir desta data e hora. Use uma data futura para agendar a publicação.",
       type: "datetime",
+      options: { dateFormat: "DD/MM/YYYY", timeFormat: "HH:mm", timeStep: 15 },
+      initialValue: () => new Date().toISOString(),
       validation: (Rule) => Rule.required(),
     }),
     defineField({ name: "seo", title: "SEO", type: "seo" }),
@@ -73,12 +77,36 @@ export const post = defineType({
       ],
     }),
   ],
+  orderings: [
+    {
+      name: "publishedAtDesc",
+      title: "Data de publicação (mais recente)",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+  ],
   preview: {
-    select: { title: "title", subtitle: "excerpt", media: "coverImage.asset" },
-    prepare: ({ title, subtitle, media }) => ({
-      title: title || "Post sem título",
-      subtitle: subtitle || "Sem resumo",
-      media: media || DocumentTextIcon,
-    }),
+    select: {
+      title: "title",
+      excerpt: "excerpt",
+      media: "coverImage.asset",
+      publishedAt: "publishedAt",
+    },
+    prepare: ({ title, excerpt, media, publishedAt }) => {
+      const scheduled = publishedAt && new Date(publishedAt) > new Date();
+      const scheduledLabel = scheduled
+        ? `Agendado para ${new Date(publishedAt).toLocaleString("pt-BR", {
+            dateStyle: "short",
+            timeStyle: "short",
+          })}`
+        : null;
+
+      return {
+        title: scheduled
+          ? `🕒 ${title || "Post sem título"}`
+          : title || "Post sem título",
+        subtitle: scheduledLabel ?? excerpt ?? "Sem resumo",
+        media: media || DocumentTextIcon,
+      };
+    },
   },
 });

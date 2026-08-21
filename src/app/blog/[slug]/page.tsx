@@ -8,10 +8,12 @@ import { ArticleBlockRenderer } from "@/components/blog/blocks/ArticleBlockRende
 import { ArticleJsonLd } from "@/components/seo/ArticleJsonLd";
 import { isSanityConfigured } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
-import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
+import { getPostBySlug, getPublishedPostSlugs } from "@/sanity/lib/queries";
 import type { Post } from "@/sanity/types/content";
 
 const SITE_URL = "https://mylarpro.com.br";
+
+export const revalidate = 600;
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -54,8 +56,8 @@ export async function generateStaticParams() {
   }
 
   try {
-    const posts = await getAllPosts();
-    return posts.map((post) => ({ slug: post.slug }));
+    const slugs = await getPublishedPostSlugs();
+    return slugs.map((slug) => ({ slug }));
   } catch (error) {
     console.error("[blog/slug] generateStaticParams falhou:", error);
     return [];

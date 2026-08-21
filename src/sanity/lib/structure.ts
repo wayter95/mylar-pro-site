@@ -6,7 +6,43 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Conteúdo")
     .items([
-      S.documentTypeListItem("post").title("Posts"),
+      S.listItem()
+        .title("Posts")
+        .schemaType("post")
+        .child(
+          S.list()
+            .title("Posts")
+            .items([
+              S.listItem()
+                .title("Publicados")
+                .id("publishedPosts")
+                .child(
+                  S.documentTypeList("post")
+                    .title("Publicados")
+                    .filter(
+                      '_type == "post" && defined(publishedAt) && publishedAt <= now()',
+                    )
+                    .defaultOrdering([
+                      { field: "publishedAt", direction: "desc" },
+                    ]),
+                ),
+              S.listItem()
+                .title("Agendados")
+                .id("scheduledPosts")
+                .child(
+                  S.documentTypeList("post")
+                    .title("Agendados")
+                    .filter(
+                      '_type == "post" && defined(publishedAt) && publishedAt > now()',
+                    )
+                    .defaultOrdering([
+                      { field: "publishedAt", direction: "asc" },
+                    ]),
+                ),
+              S.divider(),
+              S.documentTypeListItem("post").title("Todos os posts"),
+            ]),
+        ),
       S.documentTypeListItem("category").title("Categorias"),
       S.documentTypeListItem("author").title("Autores"),
       S.divider(),

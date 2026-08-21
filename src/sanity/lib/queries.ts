@@ -62,12 +62,17 @@ const postFields = `
   }
 `;
 
-const allPostsQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) { ${postPreviewFields} }`;
-const recentPostsQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...$limit] { ${postPreviewFields} }`;
-const featuredPostQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0] { ${postPreviewFields} }`;
-const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] { ${postFields} }`;
+const publishedPost = `_type == "post" && defined(slug.current) && defined(publishedAt) && publishedAt <= now()`;
+
+const allPostsQuery = `*[${publishedPost}] | order(publishedAt desc) { ${postPreviewFields} }`;
+const recentPostsQuery = `*[${publishedPost}] | order(publishedAt desc)[0...$limit] { ${postPreviewFields} }`;
+const featuredPostQuery = `*[${publishedPost}] | order(publishedAt desc)[0] { ${postPreviewFields} }`;
+const postBySlugQuery = `*[${publishedPost} && slug.current == $slug][0] { ${postFields} }`;
 const categoriesQuery = `*[_type == "category" && defined(slug.current)] | order(title asc) { _id, title, "slug": slug.current, description }`;
-const relatedPostsQuery = `*[_type == "post" && _id in $ids && defined(slug.current)] | order(publishedAt desc) { ${postPreviewFields} }`;
+const relatedPostsQuery = `*[${publishedPost} && _id in $ids] | order(publishedAt desc) { ${postPreviewFields} }`;
+const postSlugsQuery = `*[${publishedPost}] { "slug": slug.current }`;
+
+const CONTENT_REVALIDATE_SECONDS = 600;
 
 function parseCmsData<T>(
   schema: {
@@ -97,33 +102,67 @@ function parseCmsData<T>(
 }
 
 export async function getAllPosts(): Promise<PostPreview[]> {
-  const data = await getSanityClient().fetch<unknown>(allPostsQuery);
+  const data = await getSanityClient().fetch<unknown>(
+    allPostsQuery,
+    {},
+    {
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
+    },
+  );
   return parseCmsData(postPreviewSchema.array(), data, "all posts");
 }
 
 export async function getRecentPosts(limit: number): Promise<PostPreview[]> {
-  const data = await getSanityClient().fetch<unknown>(recentPostsQuery, {
-    limit,
-  });
+  const data = await getSanityClient().fetch<unknown>(
+    recentPostsQuery,
+    { limit },
+    { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
+  );
   return parseCmsData(postPreviewSchema.array(), data, "recent posts");
 }
 
 export async function getFeaturedPost(): Promise<PostPreview | null> {
-  const data = await getSanityClient().fetch<unknown>(featuredPostQuery);
+  const data = await getSanityClient().fetch<unknown>(
+    featuredPostQuery,
+    {},
+    {
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
+    },
+  );
   return data === null
     ? null
     : parseCmsData(postPreviewSchema, data, "featured post");
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const data = await getSanityClient().fetch<unknown>(postBySlugQuery, {
-    slug,
-  });
+  const data = await getSanityClient().fetch<unknown>(
+    postBySlugQuery,
+    { slug },
+    { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
+  );
   return data === null ? null : parseCmsData(postSchema, data, `post "${slug}"`);
 }
 
+export async function getPublishedPostSlugs(): Promise<string[]> {
+  const data = await getSanityClient().fetch<Array<{ slug?: string }>>(
+    postSlugsQuery,
+    {},
+    { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
+  );
+
+  return data
+    .map((item) => item.slug)
+    .filter((slug): slug is string => typeof slug === "string");
+}
+
 export async function getCategories(): Promise<Category[]> {
-  const data = await getSanityClient().fetch<unknown>(categoriesQuery);
+  const data = await getSanityClient().fetch<unknown>(
+    categoriesQuery,
+    {},
+    {
+      next: { revalidate: CONTENT_REVALIDATE_SECONDS },
+    },
+  );
   return parseCmsData(categoryListSchema, data, "categories");
 }
 
@@ -132,13 +171,13 @@ export async function getRelatedPosts(ids: string[]): Promise<PostPreview[]> {
     return [];
   }
 
-  const data = await getSanityClient().fetch<unknown>(relatedPostsQuery, {
-    ids,
-  });
+  const data = await getSanityClient().fetch<unknown>(
+    relatedPostsQuery,
+    { ids },
+    { next: { revalidate: CONTENT_REVALIDATE_SECONDS } },
+  );
   return parseCmsData(postPreviewSchema.array(), data, "related posts");
 }
-
-const CONTENT_REVALIDATE_SECONDS = 600;
 
 const linksPageQuery = `*[_type == "linksPage"][0] {
   tagline,

@@ -13,6 +13,8 @@ import { PersonaCards } from "@/components/landing/PersonaCards";
 import { PricingTeaser } from "@/components/landing/PricingTeaser";
 import { BROKER_APP_URLS, HOME_APP_URLS } from "@/lib/features";
 
+export const revalidate = 600;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [

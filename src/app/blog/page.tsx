@@ -15,6 +15,8 @@ import type {
   SanityImage,
 } from "@/sanity/types/content";
 
+export const revalidate = 600;
+
 export const metadata: Metadata = {
   title: "Blog do Mylar Pro — Mercado imobiliário e novidades da plataforma",
   description:
