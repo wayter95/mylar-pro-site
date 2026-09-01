@@ -174,40 +174,40 @@ export const development: PersonaContent = {
     },
   ],
   comparison: {
-    headers: ["Essencial", "Intermediário", "Avançado"],
+    headers: ["Plano personalizado", "Enterprise"],
     groups: [
       {
         name: "Suíte completa",
         rows: [
-          ["Tudo de Imobiliária Avançado", true, true, true],
-          ["DRE + DIMOB + Conciliação", true, true, true],
-          ["BI avançado", true, true, true],
+          ["Tudo de Imobiliária Avançado", true, true],
+          ["DRE + DIMOB + Conciliação", true, true],
+          ["BI avançado", true, true],
         ],
       },
       {
         name: "Empreendimentos",
         rows: [
-          ["Torres, unidades e loteamentos", true, true, true],
-          ["Espelho de vendas em tempo real", true, true, true],
-          ["Tabela de preços com workflow", true, true, true],
-          ["Comissão por unidade ou lote", true, true, true],
+          ["Torres, unidades e loteamentos", true, true],
+          ["Espelho de vendas em tempo real", true, true],
+          ["Tabela de preços com workflow", true, true],
+          ["Comissão por unidade ou lote", true, true],
         ],
       },
       {
         name: "Marketing performance",
         rows: [
-          ["Meta Ads integrado", false, true, true],
-          ["Atribuição lead-to-deal", false, true, true],
-          ["Distribuição automática de leads", false, true, true],
+          ["Meta Ads integrado", true, true],
+          ["Atribuição lead-to-deal", true, true],
+          ["Distribuição automática de leads", true, true],
         ],
       },
       {
         name: "Enterprise",
         rows: [
-          ["Gerente de conta dedicado", false, false, true],
-          ["Suporte prioritário (SLA < 2h)", false, false, true],
-          ["Integração ERP Sienge", false, false, true],
-          ["Relatórios avançados de empreendimentos", false, false, true],
+          ["Gerente de conta dedicado", false, true],
+          ["Suporte prioritário (SLA < 2h)", false, true],
+          ["Integração ERP Sienge", false, true],
+          ["Relatórios avançados de empreendimentos", false, true],
         ],
       },
     ],

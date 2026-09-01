@@ -169,40 +169,40 @@ export const broker: PersonaContent = {
     },
   ],
   comparison: {
-    headers: ["Essencial", "Intermediário", "Avançado"],
+    headers: ["Intermediário", "Avançado"],
     groups: [
       {
         name: "Gestão de leads",
         rows: [
-          ["Pipeline de negociações", true, true, true],
-          ["Inbox unificado", true, true, true],
-          ["Lead scoring", false, false, true],
-          ["Split de comissão", false, false, true],
+          ["Pipeline de negociações", true, true],
+          ["Inbox unificado", true, true],
+          ["Lead scoring", false, true],
+          ["Split de comissão", false, true],
         ],
       },
       {
         name: "Catálogo & site",
         rows: [
-          ["Catálogo público", true, true, true],
-          ["Customização com marca", false, true, true],
-          ["Domínio próprio", false, false, true],
+          ["Catálogo público", true, true],
+          ["Customização com marca", true, true],
+          ["Domínio próprio", false, true],
         ],
       },
       {
         name: "Atendimento",
         rows: [
-          ["Agenda de visitas", true, true, true],
-          ["WhatsApp integrado", false, true, true],
-          ["Templates de mensagem", false, true, true],
-          ["App do Corretor", false, true, true],
+          ["Agenda de visitas", true, true],
+          ["WhatsApp integrado", true, true],
+          ["Templates de mensagem", true, true],
+          ["App do Corretor", true, true],
         ],
       },
       {
         name: "Contratos",
         rows: [
-          ["Modelos prontos", false, true, true],
-          ["Contratos personalizados", false, false, true],
-          ["Assinatura digital", false, false, true],
+          ["Modelos prontos", true, true],
+          ["Contratos personalizados", false, true],
+          ["Assinatura digital", false, true],
         ],
       },
     ],

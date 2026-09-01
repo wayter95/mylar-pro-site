@@ -72,10 +72,10 @@ export type PersonaPlan = {
 };
 
 export type PersonaComparison = {
-  headers: string[];
+  headers: [string, string];
   groups: {
     name: string;
-    rows: [string, boolean, boolean, boolean][];
+    rows: [string, boolean, boolean][];
   }[];
 };
 

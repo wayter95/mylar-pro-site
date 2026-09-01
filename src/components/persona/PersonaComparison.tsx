@@ -54,18 +54,17 @@ export function PersonaComparison({ comparison, accent }: Props) {
                 <Fragment key={group.name}>
                   <tr className="bg-slate-50">
                     <td
-                      colSpan={4}
+                      colSpan={3}
                       className="px-6 py-3 text-xs font-bold tracking-wider text-slate-500 uppercase"
                     >
                       {group.name}
                     </td>
                   </tr>
-                  {group.rows.map(([label, a, b, c]) => (
+                  {group.rows.map(([label, a, b]) => (
                     <tr key={label} className="border-t border-slate-100">
                       <td className="px-6 py-3 text-slate-700">{label}</td>
                       <Cell value={a} />
                       <Cell value={b} />
-                      <Cell value={c} />
                     </tr>
                   ))}
                 </Fragment>
