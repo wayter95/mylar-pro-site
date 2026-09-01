@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { PlanLimitCards } from "@/components/persona/PlanLimitCards";
 import { PersonaSwitcher } from "@/components/persona/PersonaSwitcher";
+import { CustomPlanCta } from "@/components/plans/CustomPlanCta";
 import { Icons } from "@/lib/icons";
 import { REGISTER_URL } from "@/lib/personas";
 import type { PersonaPlan } from "@/lib/personas/types";
@@ -24,7 +25,24 @@ function formatMonthly(price: number) {
 
 export function PersonaPricing({ plans, personaLabel, accent }: Props) {
   if (!plans || plans.length === 0) {
-    return null;
+    return (
+      <section
+        id="planos"
+        className="relative overflow-hidden border-t border-slate-200 bg-[#F8F9FB] py-20 lg:py-28"
+        style={{ "--persona-accent": accent } as CSSProperties}
+      >
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <PricingHeader
+            personaLabel={personaLabel}
+            accent={accent}
+            subtitle="Operações de lançamento têm formato próprio. Em vez de preço de tabela, desenhamos o plano junto com você."
+          />
+          <div className="mt-16 lg:mt-20">
+            <CustomPlanCta accent={accent} personaLabel={personaLabel} />
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -34,43 +52,14 @@ export function PersonaPricing({ plans, personaLabel, accent }: Props) {
       style={{ "--persona-accent": accent } as CSSProperties}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Editorial header */}
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-slate-300" />
-              <span
-                className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
-                style={{ color: accent }}
-              >
-                Planos
-              </span>
-            </div>
-            <h2 className="mt-5 text-3xl leading-[1.02] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.75rem]">
-              Para{" "}
-              <span className="text-slate-400">{personaLabel.toLowerCase()}</span>
-              <br />
-              em cada estágio.
-            </h2>
-          </div>
-          <div>
-            <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
-              Três níveis que escalam com sua operação. 30 dias grátis com{" "}
-              <span className="font-semibold text-slate-800">todas as funcionalidades</span>{" "}
-              liberadas — você escolhe o plano depois de usar de verdade.
-            </p>
-            <div className="mt-5">
-              <PersonaSwitcher
-                accent={accent}
-                variant="compact"
-                prefix="Mostrando planos de"
-              />
-            </div>
-          </div>
-        </div>
+        <PricingHeader
+          personaLabel={personaLabel}
+          accent={accent}
+          subtitle="Dois níveis que escalam com sua operação. 30 dias grátis com todas as funcionalidades liberadas, você escolhe o plano depois de usar de verdade."
+        />
 
         {/* Plans */}
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:mt-20 lg:grid-cols-3">
+        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:mt-20 lg:grid-cols-2">
           {plans.map((plan, i) => (
             <PlanColumn
               key={plan.name}
@@ -88,6 +77,48 @@ export function PersonaPricing({ plans, personaLabel, accent }: Props) {
         </p>
       </div>
     </section>
+  );
+}
+
+function PricingHeader({
+  personaLabel,
+  accent,
+  subtitle,
+}: {
+  personaLabel: string;
+  accent: string;
+  subtitle: string;
+}) {
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:gap-16">
+      <div>
+        <div className="flex items-center gap-3">
+          <span className="h-px w-8 bg-slate-300" />
+          <span
+            className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
+            style={{ color: accent }}
+          >
+            Planos
+          </span>
+        </div>
+        <h2 className="mt-5 text-3xl leading-[1.02] font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[2.75rem]">
+          Para{" "}
+          <span className="text-slate-400">{personaLabel.toLowerCase()}</span>
+          <br />
+          em cada estágio.
+        </h2>
+      </div>
+      <div>
+        <p className="text-base leading-relaxed text-slate-600 lg:text-lg">{subtitle}</p>
+        <div className="mt-5">
+          <PersonaSwitcher
+            accent={accent}
+            variant="compact"
+            prefix="Mostrando planos de"
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 

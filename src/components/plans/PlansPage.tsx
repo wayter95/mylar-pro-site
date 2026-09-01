@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { PersonaComparison } from "@/components/persona/PersonaComparison";
 import { PersonaFaq } from "@/components/persona/PersonaFaq";
+import { CustomPlanCta } from "@/components/plans/CustomPlanCta";
 import { PlanCard } from "@/components/plans/PlanCard";
 import { Icons } from "@/lib/icons";
 import { PERSONA_ORDER, personasRecord } from "@/lib/personas";
@@ -124,7 +125,7 @@ export function PlansPage({ plansBySlug }: Props) {
       <section className="border-t border-slate-200 bg-[#F8F9FB] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {plans && plans.length > 0 ? (
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:grid-cols-3">
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:grid-cols-2">
               {plans.map((plan, i) => (
                 <PlanCard
                   key={plan.name}
@@ -136,21 +137,7 @@ export function PlansPage({ plansBySlug }: Props) {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center">
-              <p className="text-base font-semibold text-slate-900">
-                Planos sob consulta para {persona.label.toLowerCase()}.
-              </p>
-              <p className="mt-2 text-sm text-slate-500">
-                Fale com nosso time para montar a proposta ideal.
-              </p>
-              <a
-                href="/contact"
-                className="mt-6 inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-              >
-                Falar com vendas
-                <Icons.arrowRight className="size-4" />
-              </a>
-            </div>
+            <CustomPlanCta accent={accent} personaLabel={persona.label} />
           )}
 
           <div

@@ -9,11 +9,11 @@ import type { PersonaPlan, PersonaSlug } from "@/lib/personas/types";
 export const metadata: Metadata = {
   title: "Planos e preços — Mylar Pro",
   description:
-    "Compare os planos do Mylar Pro para corretor, imobiliária e lançamentos. Mensal ou anual, com 30 dias grátis, sem cartão e sem multa de fidelidade.",
+    "Compare os planos do Mylar Pro para corretor e imobiliária. Incorporadoras têm plano personalizado. Mensal ou anual, com 30 dias grátis, sem cartão e sem multa de fidelidade.",
   openGraph: {
     title: "Planos e preços — Mylar Pro",
     description:
-      "Escolha o plano que cresce com você. Corretor, imobiliária ou lançamentos — mensal ou anual.",
+      "Escolha o plano que cresce com você. Corretor ou imobiliária, mensal ou anual. Incorporadoras com plano sob medida.",
   },
 };
 

@@ -336,10 +336,9 @@ function HubComparisonTable({
 }: {
   fromPrices?: Partial<Record<PersonaSlug, number>>;
 }) {
-  const priceValues = PERSONA_ORDER.map((slug) => fromPrices?.[slug]);
-  const hasAllPrices = priceValues.every(
-    (price): price is number => typeof price === "number",
-  );
+  const hasSelfServicePrices =
+    typeof fromPrices?.broker === "number" &&
+    typeof fromPrices?.["real-estate"] === "number";
 
   const rows: {
     label: string;
@@ -371,12 +370,15 @@ function HubComparisonTable({
     },
   ];
 
-  if (hasAllPrices) {
+  if (hasSelfServicePrices) {
     rows.push({
       label: "A partir de",
-      values: priceValues.map(
-        (price) => `R$ ${(price as number).toLocaleString("pt-BR")}/mês`,
-      ) as [string, string, string],
+      values: PERSONA_ORDER.map((slug) => {
+        const price = fromPrices?.[slug];
+        return typeof price === "number"
+          ? `R$ ${price.toLocaleString("pt-BR")}/mês`
+          : "Sob consulta";
+      }) as [string, string, string],
     });
   }
 

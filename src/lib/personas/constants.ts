@@ -61,7 +61,7 @@ export const PERSONA_HUB_CARDS: PersonaHubCard[] = [
     slug: "development",
     label: "Lançamentos & Empreendimentos",
     description:
-      "Para incorporadoras, construtoras e loteadoras. Espelho de vendas vertical e horizontal, Meta Ads e BI executivo em uma stack só.",
+      "Para incorporadoras, construtoras e loteadoras, com plano personalizado. Espelho de vendas vertical e horizontal, Meta Ads e BI executivo em uma stack só.",
     highlights: [
       "Torres, unidades e loteamentos",
       "Meta Ads + atribuição lead-to-deal",
