@@ -199,7 +199,7 @@ export const broker: PersonaContent = {
           ["WhatsApp integrado", true, true],
           ["Templates de mensagem", true, true],
           ["Atendente de IA (Mila)", true, true],
-          ["App do Corretor", false, true],
+          ["App do Corretor", true, true],
         ],
       },
       {
