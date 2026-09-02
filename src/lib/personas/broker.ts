@@ -169,7 +169,7 @@ export const broker: PersonaContent = {
     },
   ],
   comparison: {
-    headers: ["Intermediário", "Avançado"],
+    headers: ["Essencial", "Avançado"],
     groups: [
       {
         name: "Gestão de leads",

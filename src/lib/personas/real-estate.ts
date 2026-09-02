@@ -170,7 +170,7 @@ export const realEstate: PersonaContent = {
     },
   ],
   comparison: {
-    headers: ["Intermediário", "Avançado"],
+    headers: ["Essencial", "Avançado"],
     groups: [
       {
         name: "CRM & catálogo",
