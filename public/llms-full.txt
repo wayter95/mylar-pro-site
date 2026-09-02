@@ -39,11 +39,11 @@ Venda empreendimentos com a precisão de quem opera VGV bilionário. Espelho de 
 FAQ:
 - Posso testar antes de fechar contrato? Sim. Oferecemos 30 dias de trial com TODAS as funcionalidades liberadas — incluindo módulo de empreendimentos, Meta Ads e BI executivo. Ótimo para validar internamente antes do contrato corporativo. Para pilotos formais em lançamentos específicos, veja a pergunta abaixo.
 - Como funciona o piloto antes do contrato completo? Selecionamos 1 empreendimento (geralmente o próximo lançamento) e rodamos a plataforma por 60-90 dias com Customer Success dedicado. Sucesso comprovado vira contrato corporativo para o portfólio inteiro.
-- Vocês integram com o Sienge? Sim, temos integração nativa com o Sienge no plano Avançado. Outras integrações podem ser avaliadas sob demanda.
+- Vocês integram com o Sienge? Sim, temos integração nativa com o Sienge, incluída no plano personalizado. Outras integrações podem ser avaliadas sob demanda.
 - Como funciona a integração com Meta Ads? Conectamos sua conta de Business Manager via OAuth oficial. Leads dos Lead Ads entram automaticamente com UTMs, ID de campanha, criativo e custo. Atribuição vai até a venda assinada, calculando CAC real por anúncio.
-- Quem é o ponto focal no nosso onboarding? Você tem um Customer Success Manager dedicado no plano Avançado, com SLA de resposta em 2h em horário comercial. Reuniões mensais de QBR (Quarterly Business Review).
+- Quem é o ponto focal no nosso onboarding? Você tem um Customer Success Manager dedicado, com SLA de resposta em 2h em horário comercial. Reuniões mensais de QBR (Quarterly Business Review).
 - É compatível com LGPD? Sim. O tratamento de dados no Mylar Pro é conduzido em conformidade com a LGPD, com Encarregado (DPO) designado, base legal por finalidade e exportação e exclusão de dados sob demanda.
-- E se precisarmos de customização para um lançamento específico? Plano Avançado inclui sessões de produto customizadas. Para roadmap dedicado, oferecemos contrato Enterprise sob medida — fale com nosso time comercial.
+- E se precisarmos de customização para um lançamento específico? O plano personalizado inclui sessões de produto customizadas. Para roadmap dedicado, montamos um contrato Enterprise sob medida com o time comercial.
 
 ---
 
@@ -96,12 +96,12 @@ FAQ:
 
 ## Planos e preços — https://mylarpro.com.br/plans
 
-Três linhas de planos, cada uma com tiers Essencial, Intermediário e Avançado:
-- Corretor: para o corretor autônomo.
-- Imobiliária: para equipes de locação e vendas.
-- Lançamentos: para incorporadoras, construtoras e loteadoras (inclui módulo de empreendimentos).
+Dois perfis contratam direto na plataforma, cada um com dois planos:
+- Corretor (autônomo, 1 usuário e 1 corretor): Intermediário R$ 297/mês com até 100 imóveis (CRM e pipeline, negociações, agenda, inbox unificado com WhatsApp e templates, catálogo público personalizável, App do Corretor, atendente de IA Mila e MyLar Score); Avançado R$ 397/mês com até 200 imóveis (adiciona módulo de contratos com modelos, assinatura digital, automações de CRM, propostas formais, lead scoring, split de comissão e domínio próprio).
+- Imobiliária: Intermediário R$ 497/mês com 5 usuários, 10 corretores e 500 imóveis (tudo do Corretor Avançado mais portal do cliente, cobrança automática por boleto e PIX, reajuste de aluguel, régua de cobrança, chamados, chaves, vistorias, quadros Kanban, repasses e NFS-e); Avançado R$ 697/mês com 10 usuários, 20 corretores e 1.000 imóveis (adiciona anúncios pagos no Facebook e Instagram com ROI por campanha, pagamento programado de comissões, respostas rápidas em chamados, conciliação bancária, DRE, DIMOB e BI).
+- Lançamentos (incorporadoras, construtoras e loteadoras): plano personalizado montado com o time comercial, inclui o módulo de empreendimentos.
 
-Cobrança mensal ou anual (anual com desconto). 30 dias grátis com todas as funcionalidades, sem cartão de crédito e sem multa de fidelidade.
+Cobrança mensal ou anual. O plano anual equivale a 10 mensalidades pelos 12 meses (2 meses grátis). 30 dias grátis com todas as funcionalidades, sem cartão de crédito e sem multa de fidelidade.
 
 ---
 

@@ -223,7 +223,7 @@ export const development: PersonaContent = {
     },
     {
       q: "Vocês integram com o Sienge?",
-      a: "Sim, temos integração nativa com o Sienge no plano Avançado. Outras integrações podem ser avaliadas sob demanda.",
+      a: "Sim, temos integração nativa com o Sienge, incluída no plano personalizado. Outras integrações podem ser avaliadas sob demanda.",
     },
     {
       q: "Como funciona a integração com Meta Ads?",
@@ -231,7 +231,7 @@ export const development: PersonaContent = {
     },
     {
       q: "Quem é o ponto focal no nosso onboarding?",
-      a: "Você tem um Customer Success Manager dedicado no plano Avançado, com SLA de resposta em 2h em horário comercial. Reuniões mensais de QBR (Quarterly Business Review).",
+      a: "Você tem um Customer Success Manager dedicado, com SLA de resposta em 2h em horário comercial. Reuniões mensais de QBR (Quarterly Business Review).",
     },
     {
       q: "É compatível com LGPD?",
@@ -239,7 +239,7 @@ export const development: PersonaContent = {
     },
     {
       q: "E se precisarmos de customização para um lançamento específico?",
-      a: "Plano Avançado inclui sessões de produto customizadas. Para roadmap dedicado, oferecemos contrato Enterprise sob medida — fale com nosso time comercial.",
+      a: "O plano personalizado inclui sessões de produto customizadas. Para roadmap dedicado, montamos um contrato Enterprise sob medida com o time comercial.",
     },
   ],
 };

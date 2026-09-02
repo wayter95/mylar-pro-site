@@ -112,7 +112,7 @@ export const propertyCatalog: FeatureContent = {
     },
     {
       q: "Tem limite de imóveis no catálogo?",
-      a: "O limite é o do seu plano (50 a ilimitado, conforme o tier). Sem limite de visitantes em nenhum plano.",
+      a: "O limite é o do seu plano: 100 ou 200 imóveis para corretor, 500 ou 1.000 para imobiliária e sob medida para incorporadoras. Sem limite de visitantes em nenhum plano.",
     },
     {
       q: "Posso ter mais de um site (matriz e filial, ou hotsite por empreendimento)?",
