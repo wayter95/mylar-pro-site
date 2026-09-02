@@ -1,8 +1,8 @@
 import { Icons } from "@/lib/icons";
 
-type Props = { accent: string; personaLabel: string };
+type Props = { accent: string };
 
-export function CustomPlanCta({ accent, personaLabel }: Props) {
+export function CustomPlanCta({ accent }: Props) {
   return (
     <div
       className="rounded-2xl border border-slate-200 bg-white p-8 text-center lg:p-12"
@@ -15,7 +15,7 @@ export function CustomPlanCta({ accent, personaLabel }: Props) {
         Plano personalizado
       </span>
       <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-        Para {personaLabel.toLowerCase()}, montamos o plano com você.
+        Para incorporadoras, construtoras e loteadoras, montamos o plano com você.
       </h3>
       <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
         Volume de unidades, integrações com ERP, número de corretores e suporte

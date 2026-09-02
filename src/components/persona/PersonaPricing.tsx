@@ -38,7 +38,7 @@ export function PersonaPricing({ plans, personaLabel, accent }: Props) {
             subtitle="Operações de lançamento têm formato próprio. Em vez de preço de tabela, desenhamos o plano junto com você."
           />
           <div className="mt-16 lg:mt-20">
-            <CustomPlanCta accent={accent} personaLabel={personaLabel} />
+            <CustomPlanCta accent={accent} />
           </div>
         </div>
       </section>

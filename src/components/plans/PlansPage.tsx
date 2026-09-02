@@ -137,7 +137,7 @@ export function PlansPage({ plansBySlug }: Props) {
               ))}
             </div>
           ) : (
-            <CustomPlanCta accent={accent} personaLabel={persona.label} />
+            <CustomPlanCta accent={accent} />
           )}
 
           <div
