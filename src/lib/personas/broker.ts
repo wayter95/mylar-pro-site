@@ -174,8 +174,11 @@ export const broker: PersonaContent = {
       {
         name: "Gestão de leads",
         rows: [
-          ["Pipeline de negociações", true, true],
-          ["Inbox unificado", true, true],
+          ["CRM e pipeline de leads", true, true],
+          ["Negociações com etapas, documentos e tarefas", true, true],
+          ["MyLar Score", true, true],
+          ["Automações de CRM", false, true],
+          ["Propostas formais", false, true],
           ["Lead scoring", false, true],
           ["Split de comissão", false, true],
         ],
@@ -192,15 +195,17 @@ export const broker: PersonaContent = {
         name: "Atendimento",
         rows: [
           ["Agenda de visitas", true, true],
+          ["Inbox unificado", true, true],
           ["WhatsApp integrado", true, true],
           ["Templates de mensagem", true, true],
-          ["App do Corretor", true, true],
+          ["Atendente de IA (Mila)", true, true],
+          ["App do Corretor", false, true],
         ],
       },
       {
         name: "Contratos",
         rows: [
-          ["Modelos prontos", true, true],
+          ["Modelos prontos", false, true],
           ["Contratos personalizados", false, true],
           ["Assinatura digital", false, true],
         ],
