@@ -119,7 +119,7 @@ export function Header() {
         animate={{
           backgroundColor: scrolled
             ? "rgba(2, 6, 23, 0.92)"
-            : "rgba(2, 6, 23, 0.6)",
+            : "rgba(2, 6, 23, 1)",
           borderColor: scrolled
             ? "rgba(255,255,255,0.08)"
             : "rgba(255,255,255,0.03)",
@@ -305,7 +305,7 @@ export function Header() {
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="overflow-hidden border-b border-white/5 bg-slate-950/98 backdrop-blur-2xl md:hidden"
           >
-            <nav className="flex flex-col gap-1 px-4 pt-2 pb-4">
+            <nav className="flex max-h-[calc(100dvh-3.5rem)] flex-col gap-1 overflow-y-auto overscroll-contain px-4 pt-2 pb-4">
               {navLinks.map((link, i) => {
                 const active = isActive(link);
                 return (
