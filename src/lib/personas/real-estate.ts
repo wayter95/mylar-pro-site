@@ -197,16 +197,25 @@ export const realEstate: PersonaContent = {
           ["Controle de chaves", true, true],
           ["Fornecedores", true, true],
           ["Quadros Kanban + automações", true, true],
+          ["Respostas rápidas em chamados", false, true],
         ],
       },
       {
         name: "Financeiro",
         rows: [
-          ["Repasses & comissões", true, true],
+          ["Repasses a proprietários", true, true],
+          ["Nota Fiscal (NFS-e)", true, true],
+          ["Pagamento programado de comissões", false, true],
           ["Conciliação bancária", false, true],
           ["DRE gerencial", false, true],
           ["DIMOB + Informe", false, true],
           ["BI avançado", false, true],
+        ],
+      },
+      {
+        name: "Marketing",
+        rows: [
+          ["Anúncios Meta (Facebook/Instagram) com ROI por campanha", false, true],
         ],
       },
     ],

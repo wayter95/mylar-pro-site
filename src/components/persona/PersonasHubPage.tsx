@@ -354,11 +354,11 @@ function HubComparisonTable({
     },
     {
       label: "Tamanho típico",
-      values: ["1 corretor", "5-40 agentes", "Incorporadora, construtora ou loteadora"],
+      values: ["1 corretor", "10 a 20 corretores", "Incorporadora, construtora ou loteadora"],
     },
     {
       label: "Carteira recomendada",
-      values: ["Até 200 imóveis", "300 a 1.000 imóveis", "Múltiplos empreendimentos e quadras"],
+      values: ["Até 200 imóveis", "500 a 1.000 imóveis", "Múltiplos empreendimentos e quadras"],
     },
     {
       label: "Destaques exclusivos",
