@@ -10,8 +10,8 @@ export const sitePrivacyPolicy: LegalContent = {
     en: "Institutional and marketing website for the Mylar Pro platform, at mylarpro.com.br.",
   },
   lastUpdated: {
-    pt: "19 de agosto de 2026",
-    en: "August 19, 2026",
+    pt: "16 de setembro de 2026",
+    en: "September 16, 2026",
   },
   intro: {
     pt: `Esta Política de Privacidade descreve como a My Lar ("Mylar Pro", "nós") coleta, utiliza, armazena e compartilha dados pessoais no site institucional disponível em mylarpro.com.br (o "Site"). Ao navegar ou utilizar os formulários do Site, você ("visitante", "usuário") concorda com as práticas aqui descritas.
@@ -129,6 +129,57 @@ Specific purposes include: responding to contacts and commercial inquiries, send
       },
     },
     {
+      id: "google-calendar",
+      title: {
+        pt: "Integração com o Google Calendar e uso de dados de usuário do Google",
+        en: "Google Calendar integration and use of Google user data",
+      },
+      body: {
+        pt: `A plataforma Mylar Pro oferece uma integração opcional com o Google Calendar. Esta seção descreve, de forma específica, quais dados de usuário do Google acessamos e para que os usamos.
+
+A integração é opcional e desativada por padrão. Ela só é ativada quando o usuário da plataforma clica em conectar e concede autorização na tela de consentimento do próprio Google.
+
+Escopo solicitado: solicitamos exclusivamente o escopo https://www.googleapis.com/auth/calendar.events. Não solicitamos acesso ao Gmail, ao Google Drive, aos contatos, à lista de calendários nem a qualquer outro serviço do Google.
+
+Finalidade única: usamos esse acesso apenas para criar, no calendário do próprio usuário, os eventos que ele agenda dentro do Mylar Pro — visitas a imóveis, reuniões e compromissos. Os dados enviados ao Google limitam-se a título, descrição, data e hora, local e link de reunião do compromisso criado pelo próprio usuário.
+
+Uso limitado (Limited Use): o uso e a transferência de informações recebidas das APIs do Google pelo Mylar Pro obedecem à Política de Dados de Usuário dos Serviços de API do Google (Google API Services User Data Policy), incluindo seus requisitos de Uso Limitado (Limited Use).
+
+Declaramos expressamente que os dados de usuário do Google obtidos por meio desta integração NÃO são utilizados para nenhuma das finalidades a seguir:
+
+• Não são usados para publicidade, remarketing ou personalização de anúncios.
+• Não são vendidos, alugados nem cedidos a terceiros, corretores de dados ou intermediários de informação.
+• Não são usados para treinar modelos de inteligência artificial ou de aprendizado de máquina, generalizados ou não, incluindo a assistente Mila.
+• Não são usados para analytics, métricas de produto, perfilamento ou qualquer finalidade comercial alheia à criação do evento no calendário do próprio usuário.
+• Não são lidos ou acessados por seres humanos, salvo nas exceções previstas na própria política do Google: consentimento expresso do usuário, necessidade para fins de segurança (como investigação de abuso), cumprimento de obrigação legal, ou dados agregados e anonimizados para operação interna.
+
+As finalidades de marketing, publicidade e medição de campanhas descritas nas demais seções desta Política referem-se exclusivamente a dados de navegação no site institucional mylarpro.com.br e jamais a dados obtidos das APIs do Google.
+
+Armazenamento e revogação: armazenamos apenas os tokens de acesso e de atualização necessários para manter a integração ativa, além do identificador do evento criado. Não armazenamos cópia do conteúdo do calendário do usuário. O usuário pode desconectar a integração a qualquer momento dentro da plataforma, o que revoga o token junto ao Google e encerra o acesso, ou revogá-la diretamente em https://myaccount.google.com/permissions.`,
+        en: `The Mylar Pro platform offers an optional Google Calendar integration. This section specifically describes which Google user data we access and what we use it for.
+
+The integration is optional and disabled by default. It is only enabled when the platform user clicks to connect and grants authorization on Google's own consent screen.
+
+Requested scope: we request exclusively the https://www.googleapis.com/auth/calendar.events scope. We do not request access to Gmail, Google Drive, contacts, the calendar list, or any other Google service.
+
+Sole purpose: we use this access only to create, in the user's own calendar, the events they schedule within Mylar Pro — property viewings, meetings, and appointments. The data sent to Google is limited to the title, description, date and time, location, and meeting link of the appointment created by the user themselves.
+
+Limited Use: Mylar Pro's use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including its Limited Use requirements.
+
+We expressly state that Google user data obtained through this integration is NOT used for any of the following purposes:
+
+• It is not used for advertising, remarketing, or ad personalization.
+• It is not sold, rented, or transferred to third parties, data brokers, or information resellers.
+• It is not used to train artificial intelligence or machine learning models, generalized or otherwise, including the Mila assistant.
+• It is not used for analytics, product metrics, profiling, or any commercial purpose unrelated to creating the event in the user's own calendar.
+• It is not read or accessed by humans, except for the exceptions provided in Google's own policy: express user consent, necessity for security purposes (such as investigating abuse), compliance with a legal obligation, or aggregated and anonymized data for internal operations.
+
+The marketing, advertising, and campaign measurement purposes described in the other sections of this Policy refer exclusively to browsing data on the mylarpro.com.br institutional website and never to data obtained from Google APIs.
+
+Storage and revocation: we store only the access and refresh tokens required to keep the integration active, along with the identifier of the created event. We do not store a copy of the user's calendar content. Users may disconnect the integration at any time within the platform, which revokes the token with Google and terminates access, or revoke it directly at https://myaccount.google.com/permissions.`,
+      },
+    },
+    {
       id: "sharing",
       title: {
         pt: "Compartilhamento com terceiros",
@@ -144,6 +195,8 @@ Specific purposes include: responding to contacts and commercial inquiries, send
 
 Não vendemos, alugamos ou cedemos seus dados pessoais a terceiros para fins de marketing fora do escopo descrito nesta Política.
 
+O compartilhamento com Google Analytics, Google Ads e Meta descrito acima refere-se exclusivamente a dados de navegação no site institucional, coletados mediante consentimento no banner de cookies. Esses fluxos não envolvem, em nenhuma hipótese, dados obtidos das APIs do Google por meio da integração com o Google Calendar, cujo tratamento é regido pela seção "Integração com o Google Calendar e uso de dados de usuário do Google" desta Política.
+
 Parte dos dados pode ser processada ou armazenada em servidores fora do Brasil (Estados Unidos, União Europeia), especialmente pelos provedores acima. Nesses casos, adotamos as salvaguardas exigidas pela LGPD (art. 33) para transferência internacional de dados.`,
         en: `Your data may be shared with the following operators, each under their own policies and, where applicable, under data protection agreements:
 
@@ -153,6 +206,8 @@ Parte dos dados pode ser processada ou armazenada em servidores fora do Brasil (
 • Meta / Facebook (Meta Pixel and Conversions API), only after consent to the Marketing category.
 
 We do not sell, rent, or transfer your personal data to third parties for marketing purposes outside the scope described in this Policy.
+
+The sharing with Google Analytics, Google Ads, and Meta described above refers exclusively to browsing data on the institutional website, collected upon consent in the cookie banner. These flows never involve data obtained from Google APIs through the Google Calendar integration, whose processing is governed by the "Google Calendar integration and use of Google user data" section of this Policy.
 
 Part of the data may be processed or stored on servers outside Brazil (United States, European Union), particularly by the providers listed above. In such cases, we adopt the safeguards required by LGPD (Article 33) for international data transfers.`,
       },
