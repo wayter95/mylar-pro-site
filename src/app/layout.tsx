@@ -9,6 +9,8 @@ import "../styles/globals.css";
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GOOGLE_ADS_ID = "AW-18477108312";
+const GTAG_LOADER_ID = GA_MEASUREMENT_ID || GOOGLE_ADS_ID;
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
@@ -140,22 +142,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* End Meta Pixel Code */}
 
         {/* Google tag (gtag.js) */}
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_LOADER_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            ${GA_MEASUREMENT_ID ? `gtag('config', '${GA_MEASUREMENT_ID}');` : ""}
+            gtag('config', '${GOOGLE_ADS_ID}');
+          `}
+        </Script>
         {/* End Google tag */}
 
         <ConsentProvider>
