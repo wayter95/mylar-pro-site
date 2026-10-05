@@ -10,8 +10,8 @@ export const sitePrivacyPolicy: LegalContent = {
     en: "Institutional and marketing website for the Mylar Pro platform, at mylarpro.com.br.",
   },
   lastUpdated: {
-    pt: "16 de setembro de 2026",
-    en: "September 16, 2026",
+    pt: "26 de setembro de 2026",
+    en: "September 26, 2026",
   },
   intro: {
     pt: `Esta Política de Privacidade descreve como a My Lar ("Mylar Pro", "nós") coleta, utiliza, armazena e compartilha dados pessoais no site institucional disponível em mylarpro.com.br (o "Site"). Ao navegar ou utilizar os formulários do Site, você ("visitante", "usuário") concorda com as práticas aqui descritas.
@@ -153,7 +153,7 @@ Declaramos expressamente que os dados de usuário do Google obtidos por meio des
 • Não são usados para analytics, métricas de produto, perfilamento ou qualquer finalidade comercial alheia à criação do evento no calendário do próprio usuário.
 • Não são lidos ou acessados por seres humanos, salvo nas exceções previstas na própria política do Google: consentimento expresso do usuário, necessidade para fins de segurança (como investigação de abuso), cumprimento de obrigação legal, ou dados agregados e anonimizados para operação interna.
 
-As finalidades de marketing, publicidade e medição de campanhas descritas nas demais seções desta Política referem-se exclusivamente a dados de navegação no site institucional mylarpro.com.br e jamais a dados obtidos das APIs do Google.
+As finalidades de marketing, publicidade e medição de campanhas descritas nas demais seções desta Política referem-se exclusivamente a dados de navegação no site institucional mylarpro.com.br e jamais a dados obtidos das APIs do Google por meio da integração com o Google Calendar.
 
 Armazenamento e revogação: armazenamos apenas os tokens de acesso e de atualização necessários para manter a integração ativa, além do identificador do evento criado. Não armazenamos cópia do conteúdo do calendário do usuário. O usuário pode desconectar a integração a qualquer momento dentro da plataforma, o que revoga o token junto ao Google e encerra o acesso, ou revogá-la diretamente em https://myaccount.google.com/permissions.`,
         en: `The Mylar Pro platform offers an optional Google Calendar integration. This section specifically describes which Google user data we access and what we use it for.
@@ -174,9 +174,68 @@ We expressly state that Google user data obtained through this integration is NO
 • It is not used for analytics, product metrics, profiling, or any commercial purpose unrelated to creating the event in the user's own calendar.
 • It is not read or accessed by humans, except for the exceptions provided in Google's own policy: express user consent, necessity for security purposes (such as investigating abuse), compliance with a legal obligation, or aggregated and anonymized data for internal operations.
 
-The marketing, advertising, and campaign measurement purposes described in the other sections of this Policy refer exclusively to browsing data on the mylarpro.com.br institutional website and never to data obtained from Google APIs.
+The marketing, advertising, and campaign measurement purposes described in the other sections of this Policy refer exclusively to browsing data on the mylarpro.com.br institutional website and never to data obtained from Google APIs through the Google Calendar integration.
 
 Storage and revocation: we store only the access and refresh tokens required to keep the integration active, along with the identifier of the created event. We do not store a copy of the user's calendar content. Users may disconnect the integration at any time within the platform, which revokes the token with Google and terminates access, or revoke it directly at https://myaccount.google.com/permissions.`,
+      },
+    },
+    {
+      id: "google-ads",
+      title: {
+        pt: "Integração com o Google Ads e uso de dados de usuário do Google",
+        en: "Google Ads integration and use of Google user data",
+      },
+      body: {
+        pt: `A plataforma Mylar Pro oferece uma integração opcional com o Google Ads, para que a imobiliária cliente acompanhe e gerencie os próprios anúncios. Esta seção descreve, de forma específica, quais dados de usuário do Google acessamos por meio dessa integração e para que os usamos.
+
+A integração é opcional e desativada por padrão. Ela só é ativada quando um usuário autorizado da imobiliária clica em conectar, concede autorização na tela de consentimento do próprio Google e escolhe a conta de anúncios a ser usada.
+
+Escopos solicitados: https://www.googleapis.com/auth/adwords, para ler e gerenciar a conta de anúncios escolhida, e https://www.googleapis.com/auth/datamanager, para enviar ao Google as conversões da imobiliária (leads, leads qualificados e vendas). Por meio desta integração não solicitamos acesso ao Gmail, ao Google Drive, aos contatos, ao calendário nem a qualquer outro serviço do Google.
+
+Dados acessados: identificação da conta de anúncios (número, nome, moeda, fuso horário e a conta de administrador que a gerencia, quando houver); campanhas, grupos de anúncios, anúncios, palavras-chave e situação de veiculação e de aprovação; métricas de desempenho (gasto, impressões, cliques e conversões) e termos de busca que acionaram os anúncios; e as configurações necessárias para a medição, como a marcação automática e as ações de conversão.
+
+O que fazemos na conta, sempre por ação ou confirmação do usuário: criar campanhas de pesquisa e alterá-las (situação, orçamento, prazo, textos, palavras-chave, região e estratégia de lances), criar as ações de conversão da plataforma e ligar a marcação automática. Nenhuma alteração que aumente o gasto é feita sem confirmação expressa do usuário, e o gasto é cobrado pelo Google diretamente na conta de anúncios da imobiliária.
+
+Finalidade: usamos esses dados somente para mostrar, dentro da plataforma, o desempenho dos anúncios da própria imobiliária (gasto, leads, custo por lead e retorno por venda), ligar cada lead à campanha que o trouxe, gerenciar as campanhas a pedido do usuário e preparar sugestões de melhoria que o próprio usuário decide aplicar ou dispensar.
+
+Envio de conversões: quando a imobiliária mantém ligado o envio de conversões, a plataforma envia ao Google, pela Data Manager API, os eventos de lead, lead qualificado e venda ligados a um clique em anúncio do Google, com o identificador do clique, a data do evento e, na venda, o valor da comissão. Se a imobiliária tiver aceitado os termos de dados de clientes do Google, o envio inclui o e-mail e o telefone do lead convertidos em código irreversível (hash SHA-256) antes de sair da plataforma. A imobiliária é a controladora dos dados dos seus leads e pode desligar o envio a qualquer momento.
+
+Inteligência artificial: nas funcionalidades que o próprio usuário vê e aciona (assistente Mila, redação de títulos, descrições e palavras-chave, análise das campanhas e sugestões), dados das campanhas obtidos das APIs do Google podem ser enviados ao provedor de inteligência artificial exclusivamente para gerar a resposta solicitada. Esses dados não são usados para treinar modelos de inteligência artificial ou de aprendizado de máquina, generalizados ou não.
+
+Uso limitado (Limited Use): o uso e a transferência de informações recebidas das APIs do Google pelo Mylar Pro obedecem à Política de Dados de Usuário dos Serviços de API do Google (Google API Services User Data Policy), incluindo seus requisitos de Uso Limitado (Limited Use). Os dados de usuário do Google obtidos por meio desta integração:
+
+• São usados apenas para oferecer e melhorar as funcionalidades de anúncios visíveis ao usuário descritas nesta seção.
+• Não são vendidos, alugados nem cedidos a terceiros, corretores de dados ou intermediários de informação.
+• Não são usados para exibir anúncios ao próprio usuário, incluindo remarketing ou publicidade personalizada, nem combinados com dados de outras imobiliárias para publicidade, perfilamento ou avaliação de crédito.
+• Não são transferidos a terceiros, salvo aos prestadores necessários para oferecer essas funcionalidades (como infraestrutura e o provedor de inteligência artificial descrito acima), para cumprir obrigação legal ou em caso de fusão, aquisição ou venda de ativos, com aviso prévio ao usuário.
+• Não são lidos ou acessados por seres humanos, salvo com consentimento expresso do usuário, para fins de segurança (como investigação de abuso), para cumprir obrigação legal, ou de forma agregada e anonimizada para operação interna.
+
+Armazenamento e revogação: armazenamos o token de atualização de forma criptografada, os identificadores da conta e das campanhas e as métricas diárias necessárias para os relatórios da imobiliária. Ao desconectar a integração dentro da plataforma, o token é revogado junto ao Google e a leitura da conta é interrompida; as campanhas já criadas continuam na conta de anúncios da imobiliária. O acesso também pode ser revogado diretamente em https://myaccount.google.com/permissions.`,
+        en: `The Mylar Pro platform offers an optional Google Ads integration so that client real estate agencies can track and manage their own ads. This section specifically describes which Google user data we access through this integration and what we use it for.
+
+The integration is optional and disabled by default. It is only enabled when an authorized user of the agency clicks to connect, grants authorization on Google's own consent screen, and selects the ad account to be used.
+
+Requested scopes: https://www.googleapis.com/auth/adwords, to read and manage the selected ad account, and https://www.googleapis.com/auth/datamanager, to send the agency's conversions (leads, qualified leads, and sales) to Google. Through this integration we do not request access to Gmail, Google Drive, contacts, the calendar, or any other Google service.
+
+Data accessed: ad account identification (number, name, currency, time zone, and the manager account that manages it, if any); campaigns, ad groups, ads, keywords, and serving and approval status; performance metrics (spend, impressions, clicks, and conversions) and the search terms that triggered the ads; and the settings required for measurement, such as auto-tagging and conversion actions.
+
+What we do in the account, always by user action or confirmation: create search campaigns and change them (status, budget, end date, texts, keywords, area, and bidding strategy), create the platform's conversion actions, and turn on auto-tagging. No change that increases spend is made without the user's express confirmation, and spend is billed by Google directly to the agency's ad account.
+
+Purpose: we use this data only to show, within the platform, the performance of the agency's own ads (spend, leads, cost per lead, and return per sale), link each lead to the campaign that brought it, manage campaigns at the user's request, and prepare improvement suggestions that the user decides to apply or dismiss.
+
+Conversion uploads: when the agency keeps conversion uploads turned on, the platform sends Google, through the Data Manager API, the lead, qualified lead, and sale events linked to a Google ad click, with the click identifier, the event date, and, for sales, the commission value. If the agency has accepted Google's customer data terms, the upload includes the lead's email and phone number converted into an irreversible code (SHA-256 hash) before leaving the platform. The agency is the controller of its leads' data and may turn uploads off at any time.
+
+Artificial intelligence: in features the user sees and triggers (the Mila assistant, writing headlines, descriptions, and keywords, campaign analysis, and suggestions), campaign data obtained from Google APIs may be sent to the artificial intelligence provider solely to generate the requested response. This data is not used to train artificial intelligence or machine learning models, generalized or otherwise.
+
+Limited Use: Mylar Pro's use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including its Limited Use requirements. Google user data obtained through this integration:
+
+• Is used only to provide and improve the user-facing advertising features described in this section.
+• Is not sold, rented, or transferred to third parties, data brokers, or information resellers.
+• Is not used to serve ads to the user, including retargeting or personalized advertising, nor combined with data from other agencies for advertising, profiling, or credit assessment.
+• Is not transferred to third parties, except to the service providers needed to deliver these features (such as infrastructure and the artificial intelligence provider described above), to comply with the law, or as part of a merger, acquisition, or sale of assets with prior notice to the user.
+• Is not read or accessed by humans, except with the user's express consent, for security purposes (such as investigating abuse), to comply with a legal obligation, or in aggregated and anonymized form for internal operations.
+
+Storage and revocation: we store the refresh token in encrypted form, the account and campaign identifiers, and the daily metrics needed for the agency's reports. When the integration is disconnected within the platform, the token is revoked with Google and reading of the account stops; campaigns already created remain in the agency's ad account. Access can also be revoked directly at https://myaccount.google.com/permissions.`,
       },
     },
     {
