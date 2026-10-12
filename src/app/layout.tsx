@@ -9,8 +9,8 @@ import "../styles/globals.css";
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-const GOOGLE_ADS_ID = "AW-18477108312";
-const GTAG_LOADER_ID = GA_MEASUREMENT_ID || GOOGLE_ADS_ID;
+const GOOGLE_ADS_IDS = ["AW-18477108312", "AW-18507695581"];
+const GTAG_LOADER_ID = GA_MEASUREMENT_ID || GOOGLE_ADS_IDS[0];
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
@@ -152,7 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             ${GA_MEASUREMENT_ID ? `gtag('config', '${GA_MEASUREMENT_ID}');` : ""}
-            gtag('config', '${GOOGLE_ADS_ID}');
+            ${GOOGLE_ADS_IDS.map((id) => `gtag('config', '${id}');`).join("\n            ")}
           `}
         </Script>
         {/* End Google tag */}
