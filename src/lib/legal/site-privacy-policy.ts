@@ -10,8 +10,8 @@ export const sitePrivacyPolicy: LegalContent = {
     en: "Institutional and marketing website for the Mylar Pro platform, at mylarpro.com.br.",
   },
   lastUpdated: {
-    pt: "26 de setembro de 2026",
-    en: "September 26, 2026",
+    pt: "22 de outubro de 2026",
+    en: "October 22, 2026",
   },
   intro: {
     pt: `Esta Política de Privacidade descreve como a My Lar ("Mylar Pro", "nós") coleta, utiliza, armazena e compartilha dados pessoais no site institucional disponível em mylarpro.com.br (o "Site"). Ao navegar ou utilizar os formulários do Site, você ("visitante", "usuário") concorda com as práticas aqui descritas.
@@ -139,7 +139,7 @@ Specific purposes include: responding to contacts and commercial inquiries, send
 
 A integração é opcional e desativada por padrão. Ela só é ativada quando o usuário da plataforma clica em conectar e concede autorização na tela de consentimento do próprio Google.
 
-Escopo solicitado: solicitamos exclusivamente o escopo https://www.googleapis.com/auth/calendar.events. Não solicitamos acesso ao Gmail, ao Google Drive, aos contatos, à lista de calendários nem a qualquer outro serviço do Google.
+Escopo solicitado: solicitamos exclusivamente o escopo https://www.googleapis.com/auth/calendar.events.owned, que se limita aos eventos dos calendários de propriedade do próprio usuário. Não solicitamos acesso ao Gmail, ao Google Drive, aos contatos, à lista de calendários nem a qualquer outro serviço do Google.
 
 Finalidade única: usamos esse acesso apenas para criar, no calendário do próprio usuário, os eventos que ele agenda dentro do Mylar Pro — visitas a imóveis, reuniões e compromissos. Os dados enviados ao Google limitam-se a título, descrição, data e hora, local e link de reunião do compromisso criado pelo próprio usuário.
 
@@ -160,7 +160,7 @@ Armazenamento e revogação: armazenamos apenas os tokens de acesso e de atualiz
 
 The integration is optional and disabled by default. It is only enabled when the platform user clicks to connect and grants authorization on Google's own consent screen.
 
-Requested scope: we request exclusively the https://www.googleapis.com/auth/calendar.events scope. We do not request access to Gmail, Google Drive, contacts, the calendar list, or any other Google service.
+Requested scope: we request exclusively the https://www.googleapis.com/auth/calendar.events.owned scope, which is limited to events on calendars the user owns. We do not request access to Gmail, Google Drive, contacts, the calendar list, or any other Google service.
 
 Sole purpose: we use this access only to create, in the user's own calendar, the events they schedule within Mylar Pro — property viewings, meetings, and appointments. The data sent to Google is limited to the title, description, date and time, location, and meeting link of the appointment created by the user themselves.
 
