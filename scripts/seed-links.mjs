@@ -136,7 +136,7 @@ const linkItems = [
   },
   {
     label: "WhatsApp",
-    href: "https://wa.me/5561981896419",
+    href: "https://wa.me/5534974007168",
     icon: "whatsapp",
     variant: "secondary",
     utmContent: "whatsapp",
@@ -150,7 +150,7 @@ const linkItems = [
   },
   {
     label: "Telefone",
-    href: "tel:+5561981896419",
+    href: "tel:+5534974007168",
     icon: "phone",
     variant: "secondary",
   },

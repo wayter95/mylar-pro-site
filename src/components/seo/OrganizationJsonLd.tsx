@@ -11,7 +11,7 @@ const ORGANIZATION_JSON_LD = {
   email: "contato@mylarapp.com",
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+55-61-98189-6419",
+    telephone: "+55-34-97400-7168",
     contactType: "sales",
     availableLanguage: "Portuguese",
   },
