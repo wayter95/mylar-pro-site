@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T17:22:43+00:00",
+  "title": "Design System: MyLar Pro Site",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Ciano MyLar",
+        "canonical": "#2facde",
+        "tonalRamp": [
+          "#06222d",
+          "#0b3d51",
+          "#125c79",
+          "#1a7ea6",
+          "#2facde",
+          "#6cc6e9",
+          "#a9dff3",
+          "#e7f8fc"
+        ]
+      },
+      "primary-dark": {
+        "role": "primary",
+        "displayName": "Ciano Fundo",
+        "canonical": "#2599bb"
+      },
+      "primary-soft": {
+        "role": "primary",
+        "displayName": "Ciano Névoa",
+        "canonical": "#e7f8fc"
+      },
+      "support-teal": {
+        "role": "secondary",
+        "displayName": "Verde-água de Apoio",
+        "canonical": "#37d6c0",
+        "tonalRamp": [
+          "#062b26",
+          "#0c4f47",
+          "#13786b",
+          "#1ea593",
+          "#37d6c0",
+          "#74e3d3",
+          "#b0efe6",
+          "#e6faf7"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Noite",
+        "canonical": "#020617",
+        "tonalRamp": [
+          "#020617",
+          "#0f172a",
+          "#1e293b",
+          "#334155",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "night-raised": {
+        "role": "neutral",
+        "displayName": "Noite Elevada",
+        "canonical": "#0f172a"
+      },
+      "campaign-ground": {
+        "role": "neutral",
+        "displayName": "Fundo de Campanha",
+        "canonical": "#061219"
+      },
+      "campaign-ink": {
+        "role": "neutral",
+        "displayName": "Tinta de Campanha",
+        "canonical": "#0b1a22"
+      },
+      "on-primary-ink": {
+        "role": "neutral",
+        "displayName": "Tinta sobre Ciano",
+        "canonical": "#052330"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#0f172a"
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Tinta Suave",
+        "canonical": "#64748b"
+      },
+      "text-on-dark-muted": {
+        "role": "neutral",
+        "displayName": "Névoa sobre Escuro",
+        "canonical": "#94a3b8"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Linha",
+        "canonical": "#e2e8f0"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Superfície",
+        "canonical": "#f8fafc"
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Fundo",
+        "canonical": "#fafafa"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#f7f8f6"
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Branco",
+        "canonical": "#ffffff"
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Sucesso",
+        "canonical": "#10b981"
+      },
+      "warning": {
+        "role": "tertiary",
+        "displayName": "Aviso",
+        "canonical": "#f7c948"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título da abertura de cada página."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Título de seção."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título de cartão e de bloco."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Parágrafos de abertura e de seção."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Texto de cartões, formulários e notas."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Selos de seção no site institucional, em maiúsculas."
+      }
+    },
+    "shadows": [
+      {
+        "name": "primary-glow",
+        "value": "0 14px 28px -12px rgba(47, 172, 222, 0.4)",
+        "purpose": "Brilho sob o botão principal em fundo escuro."
+      },
+      {
+        "name": "primary-glow-hover",
+        "value": "0 20px 36px -12px rgba(47, 172, 222, 0.5)",
+        "purpose": "Hover do botão principal."
+      },
+      {
+        "name": "field",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.05)",
+        "purpose": "Campos de formulário em superfície clara."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-entrance",
+        "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "purpose": "Entrada de blocos no site institucional, entre 0.4s e 0.55s."
+      },
+      {
+        "name": "ease-campaign",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Troca de passo e entrada da folha de resultado em campanhas."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal do site institucional, sobre fundo escuro.",
+      "html": "<button class=\"ds-btn-primary\">Começar 30 dias grátis</button>",
+      "css": ".ds-btn-primary { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; background: #2facde; color: #ffffff; font-size: 16px; font-weight: 600; padding: 14px 28px; border: none; border-radius: 12px; box-shadow: 0 14px 28px -12px rgba(47,172,222,0.4); transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -12px rgba(47,172,222,0.5); } .ds-btn-primary:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Botão principal de campanha",
+      "kind": "button",
+      "refersTo": "button-primary-campaign",
+      "description": "Ação principal em páginas de campanha, com texto em tinta escura.",
+      "html": "<button class=\"ds-btn-campaign\">Continuar</button>",
+      "css": ".ds-btn-campaign { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; background: #2facde; color: #052330; font-size: 16px; font-weight: 700; padding: 14px 28px; border: none; border-radius: 12px; transition: background 0.15s; cursor: pointer; } .ds-btn-campaign:hover { background: #54c0ea; } .ds-btn-campaign:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Botão de contorno",
+      "kind": "button",
+      "refersTo": "button-outline-light",
+      "description": "Ação secundária em superfície clara.",
+      "html": "<button class=\"ds-btn-outline\">Ver todos os recursos</button>",
+      "css": ".ds-btn-outline { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; background: #ffffff; color: #0f172a; font-size: 14px; font-weight: 700; padding: 12px 20px; border: 1px solid #cbd5e1; border-radius: 12px; transition: color 0.15s, border-color 0.15s; cursor: pointer; } .ds-btn-outline:hover { color: #2facde; border-color: #2facde; } .ds-btn-outline:focus-visible { outline: 2px solid #0b1a22; outline-offset: 2px; }"
+    },
+    {
+      "name": "Cartão",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cartão de conteúdo em seções claras.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Leads e distribuição</h3><p class=\"ds-card-text\">Cada contato entra em um só lugar e chega ao corretor certo.</p></div>",
+      "css": ".ds-card { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 28px; max-width: 360px; } .ds-card-title { margin: 0; color: #0f172a; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; } .ds-card-text { margin: 10px 0 0; color: #64748b; font-size: 14px; line-height: 1.5; }"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de formulário em superfície clara.",
+      "html": "<input class=\"ds-input\" placeholder=\"Seu e-mail\" />",
+      "css": ".ds-input { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; display: block; width: 280px; background: #ffffff; color: #0f172a; font-size: 14px; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: border-color 0.15s, box-shadow 0.15s; } .ds-input::placeholder { color: #94a3b8; } .ds-input:focus { outline: none; border-color: rgba(47,172,222,0.4); box-shadow: 0 0 0 3px rgba(47,172,222,0.1); }"
+    },
+    {
+      "name": "Superfície de escolha",
+      "kind": "custom",
+      "refersTo": "choice-surface",
+      "description": "Bloco clicável que é a ação da primeira tela em campanhas.",
+      "html": "<button class=\"ds-choice\"><span class=\"ds-choice-title\">Respondo por uma imobiliária</span><span class=\"ds-choice-text\">Olhamos atendimento, equipe, carteira e gestão.</span></button>",
+      "css": ".ds-choice { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; display: flex; flex-direction: column; gap: 16px; width: 320px; text-align: left; background: #0c2029; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 28px; transition: border-color 0.3s, background 0.3s; cursor: pointer; } .ds-choice:hover { border-color: #2facde; background: #0e3442; } .ds-choice:focus-visible { outline: 2px solid #2facde; outline-offset: 4px; } .ds-choice-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; } .ds-choice-text { font-size: 15px; line-height: 1.6; color: #cbd5e1; }"
+    },
+    {
+      "name": "Linha de opção",
+      "kind": "custom",
+      "refersTo": "option-row",
+      "description": "Resposta de uma pergunta em campanhas, clicável na linha inteira.",
+      "html": "<button class=\"ds-option\"><span>No mesmo dia</span><span class=\"ds-option-mark\"></span></button>",
+      "css": ".ds-option { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 320px; background: #0c2029; color: #ffffff; font-size: 18px; font-weight: 600; text-align: left; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 20px; transition: border-color 0.2s, background 0.2s; cursor: pointer; } .ds-option:hover { border-color: rgba(255,255,255,0.4); } .ds-option:focus-visible { outline: 2px solid #2facde; outline-offset: 2px; } .ds-option-mark { width: 24px; height: 24px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.3); border-radius: 9999px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "A operação à vista",
+    "overview": "**Creative North Star: \"A operação à vista\"**\n\nO site trata a imobiliária como algo que se enxerga inteiro de uma vez. As aberturas são escuras e calmas, quase noite, e sobre esse fundo o ciano aparece só onde há algo a fazer ou a notar. Abaixo da abertura, o conteúdo passa para superfícies claras e organizadas, com cartões brancos de borda fina, como telas de trabalho postas lado a lado.\n\nOs componentes são firmes e diretos: cantos arredondados, cor cheia no botão principal, pouca decoração. O tom é de credibilidade com proximidade. Nada que passe imagem de empresa começando, e nada de empresa grande e fria.",
+    "keyCharacteristics": [
+      "Abertura escura em azul quase preto, corpo claro.",
+      "Um único acento, o ciano, reservado para ação e destaque.",
+      "Plus Jakarta Sans em toda a interface, pesada e apertada nos títulos.",
+      "Cartões planos com borda fina; a sombra aparece como resposta a hover e foco.",
+      "Movimento curto de entrada, sem efeitos espalhados."
+    ],
+    "rules": [
+      {
+        "name": "A Regra do Ciano com Função",
+        "body": "O ciano marca ação ou o ponto de atenção da tela. Não entra como cor de fundo de seção nem como decoração.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra da Tinta sobre Ciano",
+        "body": "Em superfícies novas, o texto sobre o ciano usa a tinta escura (`on-primary-ink`), que dá contraste suficiente. O site institucional ainda usa texto branco no botão principal.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Peso",
+        "body": "A hierarquia vem de peso e tamanho. Texto em gradiente existe em títulos antigos do site e não deve entrar em telas novas.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Plano em Repouso",
+        "body": "Superfícies ficam planas em repouso. Borda ou sombra, nunca as duas como decoração no mesmo cartão.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do abrir páginas em fundo escuro e passar para superfícies claras no corpo.",
+      "Do reservar o ciano para ação e para o ponto de atenção.",
+      "Do usar Plus Jakarta Sans em peso 800 nos títulos, com espaçamento entre -0.02em e -0.03em.",
+      "Do manter cartões planos com borda fina de 1px e cantos de 20px.",
+      "Do usar texto em tinta escura sobre ciano em telas novas.",
+      "Do deixar o conteúdo visível mesmo quando a animação de entrada não roda."
+    ],
+    "donts": [
+      "Don't escrever travessão em textos de página.",
+      "Don't usar texto em gradiente em telas novas.",
+      "Don't colocar ilustração ou elemento 3D que não signifique o que o texto diz.",
+      "Don't aplicar visual de empresa grande e fria, nem de empresa começando.",
+      "Don't mostrar nota numérica ou barra proporcional onde não há medida real."
+    ]
+  }
+}
