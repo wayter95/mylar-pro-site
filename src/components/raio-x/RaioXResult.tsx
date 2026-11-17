@@ -64,10 +64,12 @@ function buildSlots(): { label: string; slots: Slot[] }[] {
 export function RaioXResult({
   answers,
   contact,
+  submitted,
   onRestart,
 }: {
   answers: Answers;
   contact: Contact;
+  submitted: boolean;
   onRestart: () => void;
 }) {
   const [variant, setVariant] = useState<Variant>("reading");
@@ -80,7 +82,10 @@ export function RaioXResult({
       <div className="z-10 bg-[#0b1a22] text-white sm:sticky sm:top-0">
         <div className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3 sm:px-8">
           <p className="text-sm text-slate-300">
-            <strong className="font-bold text-white">Protótipo.</strong> Nada é enviado nem agendado.
+            <strong className="font-bold text-white">Protótipo.</strong>{" "}
+            {submitted
+              ? "Suas respostas foram registradas. O agendamento ainda é só exemplo."
+              : "Exemplo preenchido: nada foi enviado nem agendado."}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <div role="group" aria-label="Versão da tela final" className="flex rounded-lg bg-white/10 p-1">

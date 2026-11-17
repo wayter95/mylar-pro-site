@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Icons } from "@/lib/icons";
+import { extractTrackingParams } from "@/lib/tracking/params";
 import {
   buildPath,
   type Answers,
@@ -109,6 +110,11 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
   const [contact, setContact] = useState<Contact>(showExample ? SAMPLE_CONTACT : EMPTY_CONTACT);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [startedAt, setStartedAt] = useState(0);
+  const [honeypot, setHoneypot] = useState("");
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   const path = buildPath(answers);
@@ -127,10 +133,13 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
     setContact(EMPTY_CONTACT);
     setQuestionIndex(0);
     setErrors({});
+    setSubmitError("");
+    setSubmitted(false);
     setStage("intro");
   }
 
   function chooseProfile(profile: Profile) {
+    setStartedAt(Date.now());
     setAnswers({ profile });
     setStage("contact");
   }
@@ -193,7 +202,7 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
     setQuestionIndex(questionIndex - 1);
   }
 
-  function submitClosing() {
+  async function submitClosing() {
     const next: Record<string, string> = {};
     if (!isValidEmail(contact.email)) next.email = "Confira o e-mail, parece faltar alguma parte.";
     if (contact.brand.trim().length < 2) next.brand = "Informe o nome que seus clientes conhecem.";
@@ -203,13 +212,48 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
     }
     setErrors(next);
     if (focusFirstInvalid(next, CLOSING_FIELD_IDS)) return;
-    setStage("result");
+
+    setSending(true);
+    setSubmitError("");
+    try {
+      const response = await fetch("/api/raio-x", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers,
+          contact,
+          origin: {
+            tracking: extractTrackingParams(new URLSearchParams(window.location.search)),
+            landingPage: window.location.pathname,
+            referrer: document.referrer,
+          },
+          finalScreen: "Leitura inicial",
+          _honeypot: honeypot,
+          _formLoadTime: startedAt,
+        }),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        setSubmitError(
+          result?.error ?? "Não foi possível registrar suas respostas. Tente novamente.",
+        );
+        return;
+      }
+
+      setSubmitted(true);
+      setStage("result");
+    } catch {
+      setSubmitError("Sem conexão no momento. Confira sua internet e tente de novo.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (stage === "result") {
     return (
       <div className="rx-root">
-        <RaioXResult answers={answers} contact={contact} onRestart={restart} />
+        <RaioXResult answers={answers} contact={contact} submitted={submitted} onRestart={restart} />
       </div>
     );
   }
@@ -460,8 +504,26 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
                   .
                 </p>
 
-                <button type="submit" className={`${PRIMARY_BUTTON_CLASS} mt-8`}>
-                  Enviar respostas
+                <div className="absolute -left-[9999px]" aria-hidden="true">
+                  <label htmlFor="rx-company-url">Não preencha este campo</label>
+                  <input
+                    id="rx-company-url"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(event) => setHoneypot(event.target.value)}
+                  />
+                </div>
+
+                {submitError && (
+                  <p role="alert" className="mt-6 text-base font-medium text-amber-300">
+                    {submitError}
+                  </p>
+                )}
+
+                <button type="submit" disabled={sending} className={`${PRIMARY_BUTTON_CLASS} mt-8`}>
+                  {sending ? "Enviando suas respostas" : "Enviar respostas"}
                   <Icons.arrowRight className="size-5" aria-hidden="true" />
                 </button>
               </form>
