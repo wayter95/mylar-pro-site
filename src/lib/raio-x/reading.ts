@@ -1,4 +1,4 @@
-import { buildPath, optionLabel, type Answers, type QuestionId } from "./questions";
+import { answerLabels, buildPath, type Answers, type QuestionId } from "./questions";
 
 export type DimensionState = "read" | "partial" | "pending" | "research";
 
@@ -48,19 +48,27 @@ const TOLD_FIELDS: { id: QuestionId; label: string }[] = [
   { id: "listings", label: "Imóveis ativos" },
   { id: "leads", label: "Contatos por mês" },
   { id: "goal", label: "Objetivo em 90 dias" },
-  { id: "pain", label: "Maior dificuldade" },
+  { id: "source", label: "Canais de origem" },
+  { id: "pain", label: "Maiores dificuldades" },
 ];
 
 function responsePhrase(answers: Answers): string {
   return RESPONSE_PHRASE[answers.response ?? ""] ?? "em um prazo não informado";
 }
 
+function joinList(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")} e ${items[items.length - 1]}`;
+}
+
 function registryPhrase(answers: Answers): string {
-  return REGISTRY_PHRASE[answers.registry ?? ""] ?? "em local não informado";
+  const phrases = (answers.registry ?? []).map((value) => REGISTRY_PHRASE[value]).filter(Boolean);
+  return joinList(phrases) || "em local não informado";
 }
 
 function sourcePhrase(answers: Answers): string {
-  return SOURCE_PHRASE[answers.source ?? ""] ?? "um canal";
+  const phrases = (answers.source ?? []).map((value) => SOURCE_PHRASE[value]).filter(Boolean);
+  return joinList(phrases) || "um canal";
 }
 
 function worksAlone(answers: Answers): boolean {
@@ -74,13 +82,12 @@ function hasSmallService(answers: Answers): boolean {
 function toldSummary(answers: Answers): { label: string; value: string }[] {
   const path = buildPath(answers);
   const fronts = path.find((question) => question.id === "fronts");
-  const singleFront =
-    fronts && answers.fronts?.length === 1 ? optionLabel(fronts, answers.fronts[0]) : "";
+  const singleFront = fronts && answers.fronts?.length === 1 ? answerLabels(fronts, answers)[0] : "";
 
   return TOLD_FIELDS.map(({ id, label }) => {
     const question = path.find((item) => item.id === id);
-    const value = question ? optionLabel(question, answers[id] as string | undefined) : "";
-    return { label, value: id === "mainFront" && !value ? singleFront : value };
+    const value = question ? joinList(answerLabels(question, answers)) : "";
+    return { label, value: id === "mainFront" && !value ? (singleFront ?? "") : value };
   }).filter((item) => item.value);
 }
 
@@ -123,7 +130,7 @@ function managementDimension(answers: Answers): DimensionReading {
 
 function attention(answers: Answers): { title: string; body: string; action: string } {
   const response = answers.response ?? "";
-  const registry = answers.registry ?? "";
+  const registry = answers.registry ?? [];
   const leads = answers.leads ?? "";
   const wantsMoreLeads = answers.goal === "moreLeads";
 
@@ -158,7 +165,12 @@ function attention(answers: Answers): { title: string; body: string; action: str
     };
   }
 
-  if (registry === "whatsapp" && answers.profile === "agency" && answers.team !== "1-2") {
+  if (
+    registry.includes("whatsapp") &&
+    !registry.includes("crm") &&
+    answers.profile === "agency" &&
+    answers.team !== "1-2"
+  ) {
     return {
       title: "Contatos no WhatsApp de cada corretor",
       body: "Com os contatos no aparelho de cada pessoa, a imobiliária não enxerga quem foi atendido nem quem aguarda retorno.",
@@ -167,7 +179,7 @@ function attention(answers: Answers): { title: string; body: string; action: str
     };
   }
 
-  if (registry === "none") {
+  if (registry.includes("none")) {
     return {
       title: "Contatos sem um lugar fixo",
       body: "Sem um lugar único para registrar quem entrou em contato, os retornos dependem da memória de quem atendeu.",
@@ -188,7 +200,7 @@ function attention(answers: Answers): { title: string; body: string; action: str
   if (leads === "0-20") {
     return {
       title: "Poucos contatos entrando",
-      body: `Chegam até 20 contatos por mês, a maior parte por ${sourcePhrase(answers)}. Com esse volume, vale saber o destino de cada um antes de decidir onde investir.`,
+      body: `Chegam até 20 contatos por mês, por ${sourcePhrase(answers)}. Com esse volume, vale saber o destino de cada um antes de decidir onde investir.`,
       action: "Liste os últimos 20 contatos e marque o que aconteceu com cada um.",
     };
   }

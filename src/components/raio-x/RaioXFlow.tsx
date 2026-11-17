@@ -7,6 +7,7 @@ import { Icons } from "@/lib/icons";
 import { extractTrackingParams } from "@/lib/tracking/params";
 import {
   buildPath,
+  toggleSelection,
   type Answers,
   type Profile,
   type Question,
@@ -36,11 +37,11 @@ const SAMPLE_ANSWERS: Answers = {
   team: "6-10",
   listings: "151-500",
   leads: "51-150",
-  source: "portals",
-  registry: "whatsapp",
+  source: ["portals", "referral"],
+  registry: ["whatsapp", "sheet"],
   response: "sameDay",
   goal: "moreLeads",
-  pain: "coldLeads",
+  pain: ["coldLeads", "noStandard"],
 };
 
 const SAMPLE_CONTACT: Contact = {
@@ -173,14 +174,17 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
     window.setTimeout(() => advanceFrom(updated, currentId), 220);
   }
 
-  function toggleMulti(value: string) {
+  function toggleMulti(current: Question, value: string) {
     setAnswers((previous) => {
-      const current = previous.fronts ?? [];
-      const fronts = current.includes(value)
-        ? current.filter((item) => item !== value)
-        : [...current, value];
-      const mainFront = fronts.includes(previous.mainFront ?? "") ? previous.mainFront : undefined;
-      return { ...previous, fronts, mainFront };
+      const selected = toggleSelection(current, (previous[current.id] as string[] | undefined) ?? [], value);
+      const updated = { ...previous, [current.id]: selected };
+      if (current.id === "fronts" && !selected.includes(previous.mainFront ?? "")) {
+        updated.mainFront = undefined;
+      }
+      if (current.id === "registry" && !selected.includes("crm")) {
+        updated.crmName = undefined;
+      }
+      return updated;
     });
   }
 
@@ -227,7 +231,7 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
             landingPage: window.location.pathname,
             referrer: document.referrer,
           },
-          finalScreen: "Leitura inicial",
+          finalScreen: "Confirmação",
           _honeypot: honeypot,
           _formLoadTime: startedAt,
         }),
@@ -383,7 +387,7 @@ export function RaioXFlow({ showExample = false }: { showExample?: boolean }) {
                 answers={answers}
                 headingRef={headingRef}
                 onSingle={(value) => answerSingle(question.id, value)}
-                onToggle={toggleMulti}
+                onToggle={(value) => toggleMulti(question, value)}
                 onText={(value) => setAnswers({ ...answers, crmName: value })}
                 onContinue={() => advanceFrom(answers, question.id)}
               />
@@ -609,8 +613,12 @@ function QuestionStep({
   onText: (value: string) => void;
   onContinue: () => void;
 }) {
-  const selectedMulti = answers.fronts ?? [];
-  const selectedSingle = answers[question.id] as string | undefined;
+  const answer = answers[question.id];
+  const selectedMulti = Array.isArray(answer) ? answer : [];
+  const selectedSingle = typeof answer === "string" ? answer : undefined;
+  const limitReached = Boolean(
+    question.maxSelections && selectedMulti.length >= question.maxSelections,
+  );
 
   return (
     <div>
@@ -669,13 +677,16 @@ function QuestionStep({
                 key={option.value}
                 type="button"
                 aria-pressed={selected}
+                aria-disabled={limitReached && !selected}
                 onClick={() =>
                   question.kind === "multi" ? onToggle(option.value) : onSingle(option.value)
                 }
                 className={`flex items-center justify-between gap-4 rounded-xl border px-5 py-4 text-left transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2facde] ${
                   selected
                     ? "border-[#2facde] bg-[#2facde]/15"
-                    : "border-white/15 bg-white/[0.04] hover:border-white/40 hover:bg-white/[0.07]"
+                    : limitReached
+                      ? "cursor-not-allowed border-white/10 bg-white/[0.02] text-slate-400"
+                      : "border-white/15 bg-white/[0.04] hover:border-white/40 hover:bg-white/[0.07]"
                 }`}
               >
                 <span>

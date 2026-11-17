@@ -1,8 +1,9 @@
 import { TRACKED_PARAMS } from "@/lib/tracking/params";
 import {
+  MULTI_QUESTION_IDS,
   PROFILE_LABEL,
+  answerLabels,
   buildPath,
-  optionLabel,
   type Answers,
   type Question,
   type QuestionId,
@@ -45,9 +46,13 @@ function findQuestion(path: Question[], id: QuestionId): Question | undefined {
   return path.find((question) => question.id === id);
 }
 
-function singleLabel(path: Question[], answers: Answers, id: QuestionId): string {
+function labelsFor(path: Question[], answers: Answers, id: QuestionId): string {
   const question = findQuestion(path, id);
-  return question ? optionLabel(question, answers[id] as string | undefined) : "";
+  return question ? answerLabels(question, answers).join(", ") : "";
+}
+
+function stringList(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
 }
 
 export function validateSubmission(input: unknown): { data?: RaioXSubmission; error?: string } {
@@ -64,22 +69,11 @@ export function validateSubmission(input: unknown): { data?: RaioXSubmission; er
   }
 
   const answers: Answers = { profile };
-  const fronts = Array.isArray(rawAnswers.fronts)
-    ? rawAnswers.fronts.filter((item): item is string => typeof item === "string")
-    : [];
-  answers.fronts = fronts;
+  for (const id of MULTI_QUESTION_IDS) {
+    answers[id] = stringList(rawAnswers[id]);
+  }
 
-  const singleIds: QuestionId[] = [
-    "mainFront",
-    "team",
-    "listings",
-    "leads",
-    "source",
-    "registry",
-    "response",
-    "goal",
-    "pain",
-  ];
+  const singleIds: QuestionId[] = ["mainFront", "team", "listings", "leads", "response", "goal"];
   for (const id of singleIds) {
     const value = rawAnswers[id];
     if (typeof value === "string") (answers as Record<string, unknown>)[id] = value;
@@ -92,8 +86,10 @@ export function validateSubmission(input: unknown): { data?: RaioXSubmission; er
     const allowed = question.options?.map((option) => option.value) ?? [];
 
     if (question.kind === "multi") {
-      if (fronts.length === 0 || fronts.some((value) => !allowed.includes(value))) {
-        return { error: "Responda com o que você trabalha hoje." };
+      const values = stringList(answers[question.id]);
+      const overLimit = question.maxSelections ? values.length > question.maxSelections : false;
+      if (values.length === 0 || overLimit || values.some((value) => !allowed.includes(value))) {
+        return { error: `Falta responder: ${question.title}` };
       }
       continue;
     }
@@ -144,7 +140,7 @@ export function validateSubmission(input: unknown): { data?: RaioXSubmission; er
         landingPage: cleanText(rawOrigin.landingPage),
         referrer: cleanText(rawOrigin.referrer),
       },
-      finalScreen: cleanText(raw.finalScreen) || "Leitura inicial",
+      finalScreen: cleanText(raw.finalScreen) || "Confirmação",
     },
   };
 }
@@ -156,10 +152,8 @@ export function buildCognizyPayload(
   const { answers, contact, origin } = submission;
   const path = buildPath(answers);
   const frontsQuestion = findQuestion(path, "fronts");
-  const frontLabels = frontsQuestion
-    ? (answers.fronts ?? []).map((value) => optionLabel(frontsQuestion, value)).filter(Boolean)
-    : [];
-  const mainFront = singleLabel(path, answers, "mainFront") || frontLabels[0] || "";
+  const frontLabels = frontsQuestion ? answerLabels(frontsQuestion, answers) : [];
+  const mainFront = labelsFor(path, answers, "mainFront") || frontLabels[0] || "";
   const nameParts = contact.name.split(/\s+/).filter(Boolean);
   const reading = buildReading(answers);
   const profileLabel = answers.profile ? PROFILE_LABEL[answers.profile] : "";
@@ -171,13 +165,14 @@ export function buildCognizyPayload(
   const contextLines = [
     `Raio X: ${profileLabel} em ${contact.city}.`,
     `Frentes: ${frontLabels.join(", ")}${frontLabels.length > 1 ? ` (principal: ${mainFront})` : ""}.`,
-    `Quem atende: ${singleLabel(path, answers, "team")}.`,
-    `Imóveis ativos: ${singleLabel(path, answers, "listings")}.`,
-    `Contatos por mês: ${singleLabel(path, answers, "leads")}, a maior parte por ${singleLabel(path, answers, "source")}.`,
-    `Registro dos contatos: ${singleLabel(path, answers, "registry")}${answers.crmName ? ` (${answers.crmName})` : ""}.`,
-    `Primeira resposta: ${singleLabel(path, answers, "response")}.`,
-    `Objetivo em 90 dias: ${singleLabel(path, answers, "goal")}.`,
-    `Maior dificuldade: ${singleLabel(path, answers, "pain")}.`,
+    `Quem atende: ${labelsFor(path, answers, "team")}.`,
+    `Imóveis ativos: ${labelsFor(path, answers, "listings")}.`,
+    `Contatos por mês: ${labelsFor(path, answers, "leads")}.`,
+    `Canais de origem: ${labelsFor(path, answers, "source")}.`,
+    `Registro dos contatos: ${labelsFor(path, answers, "registry")}${answers.crmName ? ` (${answers.crmName})` : ""}.`,
+    `Primeira resposta: ${labelsFor(path, answers, "response")}.`,
+    `Objetivo em 90 dias: ${labelsFor(path, answers, "goal")}.`,
+    `Maiores dificuldades: ${labelsFor(path, answers, "pain")}.`,
     `Ponto de atenção da leitura inicial: ${reading.attention.title}.`,
   ];
   if (originParts.length > 0) contextLines.push(`Origem: ${originParts.join("; ")}.`);
@@ -196,15 +191,15 @@ export function buildCognizyPayload(
     "rx-perfil": profileLabel,
     operations: frontLabels.join(", "),
     "rx-frente-principal": mainFront,
-    "team-size": singleLabel(path, answers, "team"),
-    "rx-imoveis-ativos": singleLabel(path, answers, "listings"),
-    "rx-contatos-mes": singleLabel(path, answers, "leads"),
-    "rx-origem-contatos": singleLabel(path, answers, "source"),
-    "rx-registro-contatos": singleLabel(path, answers, "registry"),
+    "team-size": labelsFor(path, answers, "team"),
+    "rx-imoveis-ativos": labelsFor(path, answers, "listings"),
+    "rx-contatos-mes": labelsFor(path, answers, "leads"),
+    "rx-origem-contatos": labelsFor(path, answers, "source"),
+    "rx-registro-contatos": labelsFor(path, answers, "registry"),
     "sistema-atual": answers.crmName ?? "",
-    "rx-tempo-resposta": singleLabel(path, answers, "response"),
-    "rx-objetivo-90d": singleLabel(path, answers, "goal"),
-    "rx-dificuldade": singleLabel(path, answers, "pain"),
+    "rx-tempo-resposta": labelsFor(path, answers, "response"),
+    "rx-objetivo-90d": labelsFor(path, answers, "goal"),
+    "rx-dificuldade": labelsFor(path, answers, "pain"),
     context: contextLines.join("\n"),
     origem: "Raio X",
     "rx-tela-final": submission.finalScreen,

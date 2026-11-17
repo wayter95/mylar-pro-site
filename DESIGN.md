@@ -229,7 +229,7 @@ Bloco largo e clicável que é a própria ação da tela: título em peso 800, u
 Resposta de uma pergunta: linha inteira clicável, com o texto à esquerda e um marcador à direita, redondo para escolha única e quadrado para múltipla. Selecionada, ganha borda em ciano e fundo ciano a 15%.
 
 ### Folha de resultado (campanhas)
-Documento em papel claro que entra sobre o fundo escuro. Linhas separadas por fios de 1px, traço cheio para o que já tem informação e tracejado para o que falta. Sem notas numéricas nem barras proporcionais.
+Documento em papel claro que entra sobre o fundo escuro. Linhas separadas por fios de 1px, passos numerados só quando a ordem importa, e um resumo do que a pessoa informou em pares de rótulo e valor. Sem notas numéricas nem barras proporcionais.
 
 ## Do's and Don'ts
 

@@ -20,19 +20,19 @@ export type Answers = {
   team?: string;
   listings?: string;
   leads?: string;
-  source?: string;
-  registry?: string;
+  source?: string[];
+  registry?: string[];
   crmName?: string;
   response?: string;
   goal?: string;
-  pain?: string;
-  painNote?: string;
+  pain?: string[];
 };
 
 export type Option = {
   value: string;
   label: string;
   hint?: string;
+  exclusive?: boolean;
 };
 
 export type Question = {
@@ -43,7 +43,12 @@ export type Question = {
   options?: Option[];
   placeholder?: string;
   optional?: boolean;
+  maxSelections?: number;
 };
+
+export type MultiQuestionId = "fronts" | "source" | "registry" | "pain";
+
+export const MULTI_QUESTION_IDS: MultiQuestionId[] = ["fronts", "source", "registry", "pain"];
 
 const FRONT_OPTIONS: Option[] = [
   { value: "sale", label: "Venda" },
@@ -138,8 +143,9 @@ function leadsQuestion(): Question {
 function sourceQuestion(): Question {
   return {
     id: "source",
-    kind: "single",
-    title: "De onde vem a maior parte desses contatos?",
+    kind: "multi",
+    title: "De onde vêm esses contatos?",
+    help: "Marque todos os canais que trazem contatos hoje.",
     options: [
       { value: "referral", label: "Indicação" },
       { value: "portals", label: "Portais de imóveis" },
@@ -154,8 +160,9 @@ function sourceQuestion(): Question {
 function registryQuestion(profile: Profile): Question {
   return {
     id: "registry",
-    kind: "single",
+    kind: "multi",
     title: "Onde esses contatos ficam registrados?",
+    help: "Marque todos os lugares que você usa.",
     options: [
       {
         value: "whatsapp",
@@ -163,7 +170,7 @@ function registryQuestion(profile: Profile): Question {
       },
       { value: "sheet", label: "Em planilha ou caderno" },
       { value: "crm", label: "Em um CRM ou sistema" },
-      { value: "none", label: "Não há um lugar fixo" },
+      { value: "none", label: "Não há um lugar fixo", exclusive: true },
     ],
   };
 }
@@ -229,8 +236,10 @@ function painQuestion(profile: Profile): Question {
 
   return {
     id: "pain",
-    kind: "single",
-    title: "Qual é a maior dificuldade hoje?",
+    kind: "multi",
+    title: "Quais são as maiores dificuldades hoje?",
+    help: "Escolha até duas.",
+    maxSelections: 2,
     options,
   };
 }
@@ -253,7 +262,7 @@ export function buildPath(answers: Answers): Question[] {
     registryQuestion(profile),
   );
 
-  if (answers.registry === "crm") {
+  if (answers.registry?.includes("crm")) {
     path.push(crmNameQuestion());
   }
 
@@ -264,6 +273,24 @@ export function buildPath(answers: Answers): Question[] {
 
 export function optionLabel(question: Question, value: string | undefined): string {
   return question.options?.find((option) => option.value === value)?.label ?? "";
+}
+
+export function answerLabels(question: Question, answers: Answers): string[] {
+  const value = answers[question.id];
+  const values = Array.isArray(value) ? value : value ? [value] : [];
+  return values.map((item) => optionLabel(question, item)).filter(Boolean);
+}
+
+export function toggleSelection(question: Question, current: string[], value: string): string[] {
+  if (current.includes(value)) return current.filter((item) => item !== value);
+
+  const option = question.options?.find((item) => item.value === value);
+  if (option?.exclusive) return [value];
+
+  const exclusiveValues = question.options?.filter((item) => item.exclusive).map((item) => item.value) ?? [];
+  const kept = current.filter((item) => !exclusiveValues.includes(item));
+  if (question.maxSelections && kept.length >= question.maxSelections) return kept;
+  return [...kept, value];
 }
 
 export const PROFILE_LABEL: Record<Profile, string> = {

@@ -33,11 +33,6 @@
   animation: rx-row-in 520ms var(--rx-ease) backwards;
 }
 
-.rx-bar-fill {
-  transform-origin: left center;
-  animation: rx-bar-in 700ms var(--rx-ease) backwards;
-}
-
 .rx-progress {
   transition: transform 500ms var(--rx-ease);
   transform-origin: left center;
@@ -52,12 +47,8 @@
 
 @keyframes rx-sheet-in {
   from {
-    clip-path: inset(0 0 100% 0);
-    transform: translateY(-12px);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-    transform: translateY(0);
+    opacity: 0.4;
+    transform: translateY(28px);
   }
 }
 
@@ -68,17 +59,10 @@
   }
 }
 
-@keyframes rx-bar-in {
-  from {
-    transform: scaleX(0.12);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .rx-step,
   .rx-sheet,
-  .rx-row,
-  .rx-bar-fill {
+  .rx-row {
     animation: none;
   }
 
